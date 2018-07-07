@@ -1,0 +1,30 @@
+language: node_js
+cache:
+  yarn: true
+# 设置只监听哪个分支
+branches:
+  only:
+    - writing
+# 缓存，可以节省集成的时间，这里我用了yarn，如果不用可以删除
+cache:
+  apt: true
+  yarn: true
+  directories:
+    - node_modules
+node_js:
+  -   "8"
+before_install:
+  - git config --global user.name "Jogiter"
+  - git config --global user.email "jogiter.g@gmail.com"
+install:
+  - yarn
+script:
+  - hexo clean
+  - hexo g
+after_success:
+  - cd ./public
+  - git init
+  - git add --all .
+  - git commit -m "Travis CI Auto Builder"
+  # 这里的 REPO_TOKEN 即之前在 travis 项目的环境变量里添加的
+  - git push --quiet --force https://$GITHUB_TOKEN@github.com/Jogiter/jogiter.github.io.git master
