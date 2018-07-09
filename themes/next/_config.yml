@@ -126,8 +126,9 @@ scheme: Gemini
 # Key is the link label showing to end users.
 # Value before `||` delimeter is the target permalink.
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
-#social:
-  #GitHub: https://github.com/yourname || github
+social:
+  GitHub: https://github.com/Jogiter || github
+  新浪微博: https://weibo.com/2409083451
   #E-Mail: mailto:yourname@gmail.com || envelope
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
@@ -145,11 +146,13 @@ social_icons:
 
 # Blog rolls
 links_icon: link
-links_title: Links
-links_layout: block
+links_title: 友情链接
+links_layout: inline
 #links_layout: inline
-#links:
+links:
   #Title: http://example.com/
+  国学网: http://www.confucianism.com.cn/
+  邪恶的小爪子: https://winnie0517.github.io/
 
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
