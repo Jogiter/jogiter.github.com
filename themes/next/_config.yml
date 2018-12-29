@@ -246,8 +246,8 @@ post_wordcount:
 
 # Reward
 reward_comment: 您的支持将鼓励我继续创作！
-wechatpay: http://onimggj6c.bkt.clouddn.com/wechat.png
-alipay: http://onimggj6c.bkt.clouddn.com/alipay.png
+wechatpay: https://img.jogiter.cn/wechat.png
+alipay: https://img.jogiter.cn/alipay.png
 #bitcoin: /images/bitcoin.png
 
 # Declare license on posts
