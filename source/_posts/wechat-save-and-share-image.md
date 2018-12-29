@@ -11,6 +11,8 @@ categories:
 
 参考 [一次 H5 「保存页面为图片」 的踩坑之旅](https://juejin.im/post/5a17c5e26fb9a04527254689) 可以完成 90% 的工作量。项目主要用到的是 [html2canvas](https://html2canvas.hertzen.com/configuration)。
 
+[online demo](https://blog.jogiter.cn/test/html2canvas/)
+
 ## [Discover the different features supported by html2canvas](http://html2canvas.hertzen.com/features)
 
 **Unsupported CSS properties**
