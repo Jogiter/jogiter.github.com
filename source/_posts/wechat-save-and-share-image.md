@@ -150,3 +150,4 @@ ctx.stroke();
 - [浏览器的同源策略](https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy)
 - [将图像转换为 base64](https://stackoverflow.com/questions/6150289/how-to-convert-image-into-base64-string-using-javascript)
 - [CanvasRenderingContext2D](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D)
+- [canvas 的优化](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas)
