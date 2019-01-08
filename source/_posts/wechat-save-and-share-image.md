@@ -146,6 +146,10 @@ ctx.lineTo(200, 200);
 ctx.stroke();
 ```
 
+**3.移动端 zoom 适配问题**
+
+项目中遇到了重构用了 `zoom` 来自适应，但是根据 [Discover the different features supported by html2canvas](http://html2canvas.hertzen.com/features) 目前是不支持 `zoom` 属性的。可以使用 `transform: scale(0.5, 0.5)` 来替换 `zoom`
+
 ## 阅读链接
 
 - [html2canvas](https://html2canvas.hertzen.com/configuration)
