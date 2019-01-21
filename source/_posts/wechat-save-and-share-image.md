@@ -100,14 +100,19 @@ var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
 var img = new Image();
-img.src = "https://mdn.mozillademos.org/files/222/Canvas_createpattern.png";
+// ios 会报错: The operation is insecure.
+img.crossOrigin = 'anonymous';
 img.onload = function() {
   ctx.mozImageSmoothingEnabled = false;
   ctx.webkitImageSmoothingEnabled = false;
   ctx.msImageSmoothingEnabled = false;
   ctx.imageSmoothingEnabled = false;
+
+  // 浏览器为了达到抗锯齿的效果会做额外的运算。为了避免这种情况，请保证在你调用 drawImage() 函数时，
+  // 用 Math.floor() 函数对所有的坐标点取整。
   ctx.drawImage(img, 0, 0, 400, 200);
 };
+img.src = "https://mdn.mozillademos.org/files/222/Canvas_createpattern.png";
 ```
 
 **2.解决 Retina 屏下的 图片模糊问题**
@@ -140,6 +145,10 @@ ctx.moveTo(100, 100);
 ctx.lineTo(200, 200);
 ctx.stroke();
 ```
+
+**3.移动端 zoom 适配问题**
+
+项目中遇到了重构用了 `zoom` 来自适应，但是根据 [Discover the different features supported by html2canvas](http://html2canvas.hertzen.com/features) 目前是不支持 `zoom` 属性的。可以使用 `transform: scale(0.5, 0.5)` 来替换 `zoom`
 
 ## 阅读链接
 
