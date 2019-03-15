@@ -28,6 +28,7 @@ categories:
   - 查看信息
   - tags
   - Liscense
+  - git-flow
 
 
 ## 起步
@@ -455,6 +456,35 @@ $ git checkout -b [branch] [tag]
 
 >更多内容请阅读[阮一峰的网络日志-开源许可证教程](http://www.ruanyifeng.com/blog/2017/10/open-source-license-tutorial.html)
 
+### git-flow
+
+**什么是 git-flow？**
+
+一旦安装安装 git-flow，你将会拥有一些扩展命令。这些命令会在一个预定义的顺序下自动执行多个操作。是的，这就是我们的工作流程！
+
+git-flow 并不是要替代 Git，它仅仅是非常聪明有效地把标准的 Git 命令用脚本组合了起来。
+
+
+**安装**
+
+|platform|command|
+|:----|:----|
+|macOS|`$ brew install git-flow-avh`|
+|Macports|`$ port install git-flow-avh`|
+|Linux|`$ apt-get install git-flow`|
+|Windows (Cygwin)|`$ wget -q -O - --no-check-certificate https://raw.github.com/petervanderdoes/gitflow-avh/develop/contrib/gitflow-installer.sh install stable | bash`|
+
+```sh
+# git version 2.14.2 ~ 2.16.1 之间的版本
+git update
+
+# git version 大于 2.16.1(2)
+git update-git-for-windows
+```
+
+**git-flow-commands**
+
+![git-flow-commands](https://img.jogiter.cn/tech/git-flow-commands.png)
 
 ##   阅读链接
 
@@ -462,3 +492,5 @@ $ git checkout -b [branch] [tag]
 + [Git book中文版本](http://gitbook.liuhui998.com/index.html)
 + [Git book官方中文版](http://git-scm.com/book/zh/v2)
 + [git - 简明指南](http://rogerdudler.github.io/git-guide/index.zh.html)
++ [git-flow](https://www.git-tower.com/learn/git/ebook/cn/command-line/advanced-topics/git-flow)
++ [git-flow 备忘清单](https://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html)
