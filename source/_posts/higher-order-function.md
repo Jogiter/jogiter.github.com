@@ -350,3 +350,7 @@ fib(100) // 573147844013817200000
 fib(1000) // 7.0330367711422765e+208
 fib(100000) // Infinity
 ```
+
+**参考：**
+
+- [ECMAScript 6 入门](http://es6.ruanyifeng.com/#docs/function#%E5%B0%BE%E8%B0%83%E7%94%A8%E4%BC%98%E5%8C%96)
