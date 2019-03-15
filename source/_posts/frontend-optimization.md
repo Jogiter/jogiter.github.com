@@ -4,7 +4,8 @@ date: 2018-05-04 16:12:21
 tags:
   - optimize
   - translation
-categories: 前端优化
+categories:
+  - tool
 ---
 
 

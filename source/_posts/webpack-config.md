@@ -4,7 +4,8 @@ date: 2018-4-12 15:03:25
 tags:
   - webpack
   - vue
-categories: JavaScript
+categories:
+  - JavaScript
 ---
 
 ## 常用的 webpack 插件

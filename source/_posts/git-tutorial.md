@@ -3,7 +3,8 @@ title: git 教程
 date: 2018-03-20 14:56:59
 tags:
   - git
-categories: 工具
+categories:
+  - tool
 ---
 
 # git 教程

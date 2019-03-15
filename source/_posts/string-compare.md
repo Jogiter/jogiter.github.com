@@ -2,7 +2,8 @@
 title: string-compare
 date: 2018-06-25 09:56:04
 tags: js-tips
-categories: JavaScript
+categories:
+  - JavaScript
 ---
 
 # js 字符串比较大小

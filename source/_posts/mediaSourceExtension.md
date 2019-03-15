@@ -4,7 +4,8 @@ date: 2018-07-05 18:53:21
 type: "tags"
 tags:
   - video
-categories: HTML5
+categories:
+  - JavaScript
 ---
 
 ## demo
@@ -233,7 +234,7 @@ firefox 会限制 fragment 的大小。firefox 需要 fragment 小于 20M。chro
 + [LET'S MAKE A NETFLIX](http://nickdesaulniers.github.io/netfix/#/)
 + [caniuse: createObjectURL](https://caniuse.com/#search=createObjectURL)
 + [autoplay-policy-changes](https://developers.google.com/web/updates/2017/09/autoplay-policy-changes) 谷歌 66 版本自动播放政策更改
-+ [prevent-html5-video-from-being-downloaded-right-click-saved](https://stackoverflow.com/questions/9756837/prevent-html5-video-from-being-downloaded-right-click-saved) 
++ [prevent-html5-video-from-being-downloaded-right-click-saved](https://stackoverflow.com/questions/9756837/prevent-html5-video-from-being-downloaded-right-click-saved)
 + [谷歌浏览器中更改自动播放策略](chrome://flags/#autoplay-policy)
 + [Postbird-demo](http://postbird.gitee.io/postbirdmp4toblob/)
 + [axiomatic-systems/Bento4](https://github.com/axiomatic-systems/Bento4) 全功能MP4格式和MPEG DASH库和工具

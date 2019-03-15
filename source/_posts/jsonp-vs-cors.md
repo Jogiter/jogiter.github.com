@@ -2,7 +2,8 @@
 title: jsonp-vs-cors
 date: 2018-05-29 21:21:58
 tags: ajax
-categories: JavaScript
+categories:
+  - JavaScript
 ---
 
 ## jsonp vs cors

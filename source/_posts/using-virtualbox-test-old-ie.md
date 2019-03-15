@@ -4,7 +4,8 @@ date: 2018-05-31 18:31:36
 tags:
   - test
   - ie8
-categories: 工具
+categories:
+  - tool
 ---
 
 ## 使用 virtualbox 安装老版本 ie 进行测试
