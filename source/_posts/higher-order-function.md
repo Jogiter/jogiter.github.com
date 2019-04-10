@@ -223,6 +223,29 @@ betterShowMsg('dreamapple')(22)('apple'); // My name is dreamapple, I'm 22 years
 
 >更多内容请参阅[高阶柯里化函数](https://segmentfault.com/a/1190000006096034#articleHeader1)
 
+新增面试题目：
+
+Q1: 完成一个 sum 函数，使调用后输出 6。
+
+```js
+sum(1)(2)(3).valueOf()
+
+// 答案
+function add(a, b, c) {
+  return {
+    valueOf() {
+      return a + b + c
+    }
+  }
+}
+
+// 使用上面的 betterCurryingHelper 函数
+var sum = betterCurryingHelper(add)
+
+sum(1)(2)(3).valueOf()
+```
+
+
 **javascript中有趣的反柯里化**
 
 ```js

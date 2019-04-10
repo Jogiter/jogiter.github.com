@@ -21,6 +21,90 @@ categories:
 
 <iframe src="https://player.bilibili.com/player.html?aid=37759434&cid=66380541&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width: 100%; min-height: 500px;"></iframe>
 
+## tests
+
+Q1:
+
+```js
+setTimeout(function() {
+    setTimeout(function() { console.log(1) }, 100)
+    console.log(2)
+    setTimeout(function() { console.log(3) }, 0)
+}, 0)
+
+setTimeout(function () {
+    console.log(4)
+}, 100)
+
+console.log(5)
+// 输出顺序: 5 2 3 4 1
+```
+
+Q2:
+
+```js
+console.log('script start')
+let promise1 = new Promise(function (resolve) {
+    console.log('promise1')
+    resolve()
+    console.log('promise1 end')
+}).then(function () {
+    console.log('promise2')
+})
+setTimeout(function(){
+    console.log('settimeout')
+})
+console.log('script end')
+// 输出顺序: script start->promise1->promise1 end->script end->promise2->settimeout
+```
+
+Q3:
+
+```js
+async function async1(){
+   console.log('async1 start');
+    await async2();
+    console.log('async1 end')
+}
+async function async2(){
+    console.log('async2')
+}
+
+console.log('script start');
+async1();
+console.log('script end')
+// 输出顺序：script start->async1 start->async2->script end->async1 end
+```
+
+Q4:
+
+```js
+function* generator(i) {
+  console.log('inside before')
+  yield i;
+  yield i + 10;
+  console.log('inside after')
+}
+
+var gen = generator(10);
+console.log('outside before')
+console.log(gen.next().value);
+console.log(gen.next().value);
+console.log('outside after')
+gen.next();
+
+/**
+ * outside before
+ * inside before
+ * 10
+ * 20
+ * outside after
+ * inside after // 如果不加最后一个gen.next(); 就不会有这一行
+ */
+```
+
+>[Daily-Interview-Question#33](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/33)
+
 ## task and microtask
 
 + macrotasks: `setTimeout`, `setInterval`, `setImmediate`, `I/O`, `UI渲染`
