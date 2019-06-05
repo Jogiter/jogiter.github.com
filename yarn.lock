@@ -1398,8 +1398,8 @@ markdown@~0.5.0:
     nopt "~2.1.1"
 
 marked@^0.3.9:
-  version "0.3.17"
-  resolved "https://registry.npmjs.org/marked/-/marked-0.3.17.tgz#607f06668b3c6b1246b28f13da76116ac1aa2d2b"
+  version "0.3.19"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.19.tgz#5d47f709c4c9fc3c216b6d46127280f40b39d790"
 
 micromatch@^2.1.5:
   version "2.3.11"
