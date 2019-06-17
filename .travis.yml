@@ -5,14 +5,9 @@ cache:
 branches:
   only:
     - writing
-# 缓存，可以节省集成的时间，这里我用了yarn，如果不用可以删除
-cache:
-  apt: true
-  yarn: true
-  directories:
-    - node_modules
+cache: false
 node_js:
-  -   "8"
+  - "8"
 before_install:
   - git config --global user.name "Jogiter"
   - git config --global user.email "jogiter.g@gmail.com"
