@@ -30,7 +30,7 @@ warn --- http address - http://localhost:4873/ - verdaccio/3.0.0
 ```sh
 server {
   listen       80;
-  server_name  concierge11.klook.io;
+  server_name  host;
   
   location ~ ^/verdaccio/(.*)$ {
     proxy_pass http://127.0.0.1:4873/$1;
@@ -93,14 +93,14 @@ $ which verdaccio
 
 ```bash
 $ npm install -g nrm
-$ nrm add knpm http://concierge11.klook.io/verdaccio/
+$ nrm add knpm http://host/verdaccio/
 $ nrm use knpm
 ```
 
 ### 发布和安装私有包
 
 ```bash
-$ npm publish @klook/util
+$ npm publish @private/util
 $ npm install @vue/cli
 ```
 
@@ -143,10 +143,10 @@ $ npm install -g --build-from-source \
 
 2. `mysql` 数据库操作：
 
-a. 创建数据库 `klook-npm`：
+a. 创建数据库 `private-npm`：
 
 ```sql
-create database klook-npm
+create database private-npm
 ```
 
 b. 创建表：[Get all the sqls here](https://github.com/cnpm/cnpmjs.org/blob/master/docs/db.sql)
@@ -168,16 +168,16 @@ module.exports = {
   enableCluster: true, // enable cluster mode
   enablePrivate: true, // enable private mode, only admin can publish, other use just can sync package from source npm
   database: {
-      db: 'klook-npm',
-      username: 'root',
-      password: 'sees7&chanting',
+      db: 'private-npm',
+      username: '',
+      password: '',
 
       // the sql dialect of the database
       // - currently supported: 'mysql', 'sqlite', 'postgres', 'mariadb'
       dialect: 'mysql',
 
       // custom host; default: 127.0.0.1
-      host: 'l-testing-contains-main-56.cbw4mscvt9bw.ap-southeast-1.rds.amazonaws.com',
+      host: '',
 
       // custom port; default: 3306
       port: 3306,
@@ -251,7 +251,7 @@ $ vim nginx.conf
 
     server {
       listen       80;
-      server_name  concierge11.klook.io;
+      server_name  host;
       
       location ~ ^/knpm/(.*)$ {
         proxy_pass http://127.0.0.1:7001/$1;
@@ -273,7 +273,7 @@ $ vim nginx.conf
 6. 本地环境设置 `registry`
 
 ```sh
-$ cnpm set registry http://concierge11.klook.io/knpm/
+$ cnpm set registry http://host/knpm/
 ```
 
 发布和安装包
