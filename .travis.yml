@@ -1,16 +1,15 @@
 language: node_js
-cache:
-  yarn: true
 # 设置只监听哪个分支
 branches:
   only:
     - writing
-cache: false
+cache: yarn
 node_js:
   - "8"
 before_install:
   - git config --global user.name "Jogiter"
   - git config --global user.email "jogiter.g@gmail.com"
+  - yarn global add hexo-cli
 install:
   - yarn
 script:
@@ -23,3 +22,7 @@ after_success:
   - git commit -m "Travis CI Auto Builder"
   # 这里的 REPO_TOKEN 即之前在 travis 项目的环境变量里添加的
   - git push --quiet --force https://$GITHUB_TOKEN@github.com/Jogiter/jogiter.github.io.git master
+notifications:
+  email:
+    recipients:
+      - jogiter.g@gmail.com
