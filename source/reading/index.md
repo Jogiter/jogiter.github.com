@@ -43,6 +43,7 @@ date:
   + Bootstrap
   + [eslint]()
     + [typescript-eslint](https://github.com/typescript-eslint/typescript-eslint)
+  + [Git Commit Message](https://juejin.im/post/5afc5242f265da0b7f44bee4#heading-10)
 + 框架
   + [Vue](https://cn.vuejs.org/)
     + [vux](https://github.com/airyland/vux) Vue UI Components based on WeUI
