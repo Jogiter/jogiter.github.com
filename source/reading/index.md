@@ -16,6 +16,7 @@ date:
     + [阿里巴巴矢量图标库](https://www.iconfont.cn/?spm=a313x.7781069.1998910419.d4d0a486a)
     + [Font-Awesome](https://github.com/FortAwesome/Font-Awesome)
     + [SVG icons for popular brands](https://github.com/simple-icons/simple-icons)
+    + [Font Awesome(CN)](http://fontawesome.dashgame.com/)
 + Javascript
   + [awesome frontend libraries](https://github.com/JingwenTian/awesome-frontend)
   + [Awesome Javascript](https://github.com/wwsun/awesome-javascript)
@@ -76,3 +77,11 @@ date:
   + [JavaScript Weekly](http://javascriptweekly.com/)
   + [Mobile Web Weekly](http://mobilewebweekly.co/)
   + [node weekly](http://nodeweekly.com/)
++ blockchain
+  + Eth
+    + [Status](https://embark.status.im/) The all-in-one developer platform for building and deploying decentralized applications.
+    + [dosnetwork](https://dosnetwork.github.io/docs/#/) Decentralized Oracle Service provides blockchains with real world data and computation power
+    + [CelerX](https://portal.celerx.app/#/user/login) game developer protal
+    + [Amberdata](https://amberdata.io/docs) 使用注册Key可直接使用amberdata API : UAKdf91e18f372e7c083b67f5e9116165f9
+    + [web3](https://github.com/ethereum/web3.js/tree/v1.2.1) Ethereum JavaScript API
+    + [Solidity](https://solidity-cn.readthedocs.io/zh/develop/installing-solidity.html)
