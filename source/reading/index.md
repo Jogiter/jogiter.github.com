@@ -6,6 +6,9 @@ date:
 + HTML
   + [Html 学习](http://zh.html.net/tutorials/html/)
   + [Html 参考手册](http://w3school.com.cn/html/index.asp)
+  + video
+    + [plyr](https://github.com/sampotts/plyr) A simple HTML5, YouTube and Vimeo player
+    + [videojs](https://github.com/videojs/video.js) open source HTML5 & Flash video player
 + CSS
   + [CSS学习](http://www.w3school.com.cn/css/)
   + [CSS参考手册](http://css.doyoe.com/) 可下载chm离线版
@@ -17,6 +20,8 @@ date:
     + [Font-Awesome](https://github.com/FortAwesome/Font-Awesome)
     + [SVG icons for popular brands](https://github.com/simple-icons/simple-icons)
     + [Font Awesome(CN)](http://fontawesome.dashgame.com/)
+  + css frameworks
+    + [bulma](https://github.com/jgthms/bulma/) Modern CSS framework based on Flexbox
 + Javascript
   + [awesome frontend libraries](https://github.com/JingwenTian/awesome-frontend)
   + [Awesome Javascript](https://github.com/wwsun/awesome-javascript)
@@ -25,6 +30,8 @@ date:
   + [Javascript 参考手册](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript) 来自火狐开发者网络
   + [jQuery API](http://jquery.cuishifeng.cn/)
   + [ECMAScript 6入门](http://es6.ruanyifeng.com/)
++ Common
+  + [regex](https://github.com/ziishaned/learn-regex) Learn regex the easy way
 + Typescript
   + official
     + [typescript](https://www.typescriptlang.org/docs/home.html)
@@ -49,6 +56,7 @@ date:
   + [Vue](https://cn.vuejs.org/)
     + [vux](https://github.com/airyland/vux) Vue UI Components based on WeUI
     + [awesome-vue](https://github.com/vuejs/awesome-vue)
+      + [vue-promised](https://github.com/posva/vue-promised)
 + 工具
   + 兼容检测
     + [Can I Use](http://caniuse.com/) 浏览器js/css特性兼容性查询
@@ -78,6 +86,7 @@ date:
   + [Mobile Web Weekly](http://mobilewebweekly.co/)
   + [node weekly](http://nodeweekly.com/)
 + blockchain
+  + [JSON-RPC node](https://github.com/tedeh/jayson) a simple but featureful JSON-RPC 2.0/1.0 client and server for node.js
   + Eth
     + [Status](https://embark.status.im/) The all-in-one developer platform for building and deploying decentralized applications.
     + [dosnetwork](https://dosnetwork.github.io/docs/#/) Decentralized Oracle Service provides blockchains with real world data and computation power
