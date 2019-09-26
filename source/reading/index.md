@@ -49,14 +49,20 @@ date:
 + 开发规范
   + AirBNB
   + Bootstrap
-  + [eslint]()
+  + [eslint](http://eslint.cn/docs/rules/)
     + [typescript-eslint](https://github.com/typescript-eslint/typescript-eslint)
   + [Git Commit Message](https://juejin.im/post/5afc5242f265da0b7f44bee4#heading-10)
 + 框架
+  + Plugins
+    + [nprogress](https://github.com/rstacruz/nprogress) progress bars
+    + [better-scroll](https://github.com/ustbhuangyi/better-scroll) inspired by iscroll。支持 swipe、 IOS Picker 等功能。
+    + [scrollama](https://github.com/russellgoldenberg/scrollama) Scrollytelling with IntersectionObserver
   + [Vue](https://cn.vuejs.org/)
     + [vux](https://github.com/airyland/vux) Vue UI Components based on WeUI
     + [awesome-vue](https://github.com/vuejs/awesome-vue)
       + [vue-promised](https://github.com/posva/vue-promised)
+      + [vue-lazyload](https://github.com/hilongjw/vue-lazyload#usage)
+      + [vue-awesome-swiper](https://github.com/surmon-china/vue-awesome-swiper)
 + 工具
   + 兼容检测
     + [Can I Use](http://caniuse.com/) 浏览器js/css特性兼容性查询
