@@ -63,7 +63,7 @@ function isBiggerVersion(v1, v2) {
   function _bigger(longer, shorter) {
     var l = ~~(longer[0] || 0);
     var s = ~~(shorter[0] || 0);
-    if (s > l) {
+    if (s >= l) {
       return false;
     }
     if (s < l) {
@@ -84,6 +84,12 @@ function isBiggerVersion(v1, v2) {
 下面是测试：
 
 ```js
+{
+  let v1 = "9.1.21";
+  let v2 = v1;
+  console.log(isBiggerVersion(v1, v2)); // false
+}
+
 {
   let v1 = "9.1.21";
   let v2 = "10.1.1.28";
