@@ -365,8 +365,8 @@ han: false
 
 # Disqus
 disqus:
-  enable: false
-  shortname:
+  enable: true
+  shortname: blog-jogiter-cn
   count: true
 
 # Hypercomments
