@@ -63,6 +63,7 @@ date:
       + [vue-promised](https://github.com/posva/vue-promised)
       + [vue-lazyload](https://github.com/hilongjw/vue-lazyload#usage)
       + [vue-awesome-swiper](https://github.com/surmon-china/vue-awesome-swiper)
+      + [awesome image slide](https://deulos.github.io/vue-flux/) Image slider which comes with 20 cool transitions
 + 工具
   + 兼容检测
     + [Can I Use](http://caniuse.com/) 浏览器js/css特性兼容性查询
