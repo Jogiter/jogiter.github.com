@@ -177,6 +177,14 @@ onShareAppMessage() {
 }
 ```
 
+## 如何在小程序中引用 [iconfont](https://www.iconfont.cn/)
+
+1. 将平台中项目的 `https://at.alicdn.com/t/{font_path}.css` 的内容拷贝到本地项目中
+2. 在 `src/App.vue` 的 `style` 中引用 `@import "./static/css/icon.css";`
+3. 使用：`<text class="icon icon-user"></text>`
+
+>fontfamily：`icon` 和 prefix：`icon-`  可在平台中自行修改
+
 ## 遇到奇怪的错误时，首先请尝试以下方法
 
 1、关闭微信开发者工具，然后重新打开。
