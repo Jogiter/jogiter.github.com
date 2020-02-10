@@ -5,7 +5,7 @@ branches:
     - writing
 cache: yarn
 node_js:
-  - "8"
+  - "12"
 before_install:
   - git config --global user.name "Jogiter"
   - git config --global user.email "jogiter.g@gmail.com"
