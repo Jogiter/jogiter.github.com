@@ -63,7 +63,7 @@ footer:
     version: true
   # -------------------------------------------------------------
   # Any custom text can be defined here.
-  #custom_text: Hosted by <a target="_blank" href="https://pages.github.com">GitHub Pages</a>
+  custom_text: ICP 证 <a target="_blank" href="http://www.beian.miit.gov.cn">粤ICP备18022983号-1</a>
 
 # ---------------------------------------------------------------
 # SEO Settings
