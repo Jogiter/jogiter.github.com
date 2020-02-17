@@ -9,10 +9,30 @@ tags:
 ## 阅读链接
 
 - 官网
-  - [uniapp](https://uniapp.dcloud.io/)
+  - [uniapp 官网](https://uniapp.dcloud.io/)
   - [微信公众平台：小程序](https://mp.weixin.qq.com/)
   - [微信官方文档：小程序](https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/)
-  - [ColorUI](https://github.com/weilanwl/ColorUI)
+  - [ColorUI 组件库](https://github.com/weilanwl/ColorUI)
+  - [使用微信小程序第三方 SDK 及资源汇总](https://ask.dcloud.net.cn/article/35070)
+    - 通用 SDK
+      - [个推统计](http://docs.getui.com/geshu/start/wx_mp/)
+      - [又拍云存储](http://docs.upyun.com/api/small_program/)
+      - [七牛云存储](https://github.com/gpake/qiniu-wxapp-sdk/blob/master/README.md)
+      - [腾讯地图](https://lbs.qq.com/qqmap_wx_jssdk/)
+      - [百度地图](http://lbsyun.baidu.com/index.php?title=wxjsapi)
+      - [高德地图](https://lbs.amap.com/api/wx/summary)
+      - [网易云信 IM](http://netease.im/wechatApplets)
+      - [环信 IM](http://docs.easemob.com/im/applet/intro)
+      - [融云 IM](https://www.rongcloud.cn/docs/mini_program.html)
+      - [极光 IM](https://docs.jiguang.cn/jmessage/client/im_sdk_wxapplet/)
+      - [腾讯云会话](https://cloud.tencent.com/document/product/619/11449)
+      - [阿拉丁](https://www.aldwx.com/)
+      - [神策数据](https://www.sensorsdata.cn/)
+      - [诸葛IO](https://zhugeio.com/)
+      - [GrowingIO](https://docs.growingio.com/docs/sdk-integration/mina-sdk)
+      - [讯飞 AI](https://www.xfyun.cn/solutions/miniAppSolution)
+      - [leancloud serverless开发](https://leancloud.cn/docs/sdk_setup-js.html#hash1778723680)
+      - [bomb serverless开发](https://ask.dcloud.net.cn/question/54795)
 - Vue 开发常用功能
   - I18n
   - Vuex
