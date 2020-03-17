@@ -22,6 +22,9 @@ date:
     + [Font Awesome(CN)](http://fontawesome.dashgame.com/)
   + css frameworks
     + [bulma](https://github.com/jgthms/bulma/) Modern CSS framework based on Flexbox
+    + [tailwindcss](https://github.com/tailwindcss/tailwindcss)
+      + [tailwind-cheat-sheet](https://nerdcave.com/tailwind-cheat-sheet)
+      + [awesome-tailwindcss](https://github.com/aniftyco/awesome-tailwindcss)
 + Javascript
   + [awesome frontend libraries](https://github.com/JingwenTian/awesome-frontend)
   + [Awesome Javascript](https://github.com/wwsun/awesome-javascript)
@@ -59,6 +62,9 @@ date:
     + [scrollama](https://github.com/russellgoldenberg/scrollama) Scrollytelling with IntersectionObserver
   + [Vue](https://cn.vuejs.org/)
     + [vux](https://github.com/airyland/vux) Vue UI Components based on WeUI
+    + Style guide
+      + [vue-patterns](https://github.com/learn-vuejs/vue-patterns)
+      + [vuejs-component-style-guide](https://github.com/pablohpsilva/vuejs-component-style-guide)
     + [awesome-vue](https://github.com/vuejs/awesome-vue)
       + [vue-promised](https://github.com/posva/vue-promised)
       + [vue-lazyload](https://github.com/hilongjw/vue-lazyload#usage)
