@@ -98,6 +98,14 @@ date:
   + [JavaScript Weekly](http://javascriptweekly.com/)
   + [Mobile Web Weekly](http://mobilewebweekly.co/)
   + [node weekly](http://nodeweekly.com/)
++ AI
+  + Machine Learning
+    + [github:topics](https://github.com/topics/machine-learning)
+    + [tensorflow](https://github.com/tensorflow/tensorflow) An Open Source Machine Learning Framework for Everyone
+      + [tfjs](https://github.com/tensorflow/tfjs) A WebGL accelerated JavaScript library for training and deploying ML models
+        + [tensorflow:js-doc](https://www.tensorflow.org/js/guide/)
+        + [tensorflow:js-api](https://js.tensorflow.org/api/latest/?hl=zh_cn)
+        + [tfjs-examples](https://github.com/tensorflow/tfjs-examples)
 + blockchain
   + [JSON-RPC node](https://github.com/tedeh/jayson) a simple but featureful JSON-RPC 2.0/1.0 client and server for node.js
   + Eth
@@ -107,3 +115,7 @@ date:
     + [Amberdata](https://amberdata.io/docs) 使用注册Key可直接使用amberdata API : UAKdf91e18f372e7c083b67f5e9116165f9
     + [web3](https://github.com/ethereum/web3.js/tree/v1.2.1) Ethereum JavaScript API
     + [Solidity](https://solidity-cn.readthedocs.io/zh/develop/installing-solidity.html)
++ Cloud-compute
+  + serverless
++ BigData
+  + ...
