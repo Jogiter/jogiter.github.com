@@ -86,6 +86,7 @@ date:
   + 测试 & 性能优化
     + [fiddler](http://www.telerik.com/fiddler) 免费的抓包、模拟xhr、测试工具
     + [chrome DevTools](https://developer.chrome.com/devtools/docs/remote-debugging#reverse-port-forwarding)
+    + [debug-on-mobile-safari](https://www.kenst.com/2019/03/how-to-debug-problems-on-mobile-safari/) for macos
     + [Lighthouse](https://lighthouseapp.com/)
   + 文档生成
     + [docute](https://github.com/egoist/docute) Effortlessly documentation done right
