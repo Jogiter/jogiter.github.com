@@ -25,6 +25,7 @@ date:
     + [tailwindcss](https://github.com/tailwindcss/tailwindcss)
       + [tailwind-cheat-sheet](https://nerdcave.com/tailwind-cheat-sheet)
       + [awesome-tailwindcss](https://github.com/aniftyco/awesome-tailwindcss)
+  + [darkmode](https://github.com/sandoche/Darkmode.js) Add a dark-mode / night-mode to your website in a few seconds
 + Javascript
   + [awesome frontend libraries](https://github.com/JingwenTian/awesome-frontend)
   + [Awesome Javascript](https://github.com/wwsun/awesome-javascript)
