@@ -92,6 +92,14 @@ date:
   + 文档生成
     + [docute](https://github.com/egoist/docute) Effortlessly documentation done right
     + [vuepress](https://github.com/vuejs/vuepress) Vue驱动的静态站点生成器
+  + 视频相关
+    + [ffmpeg](https://ffmpeg.org) 用于记录，转换和流式传输音频和视频的跨平台解决方案
+    + [videojs-docs](https://docs.videojs.com/tutorial-text-tracks.html) open source HTML5 & Flash video player
+    + [webvtt](https://w3c.github.io/webvtt/) The Web Video Text Tracks Format
+    + [srt-to-vtt](https://github.com/mafintosh/srt-to-vtt) Transform stream that converts srt files to vtt files
+    + [youtube-dl](https://github.com/ytdl-org/youtube-dl) Command-line program to download videos from YouTube.com and other video sites
+    + [Youtube Video Downloader Mp4](https://ymp4.download/) Download videos from Youtube to mp4 & mp3 files
+    + [downsub](https://downsub.com/) 免费.可以直接从Youtube, VIU, Viki, Vlive 等下载字幕。我们支持下载所有字幕格式, 例如：SRT, TXT, VTT
 + 社区
   + [玩林](http://www.iwan0.com/)
   + [cnode前端资源教程](https://cnodejs.org/topic/56ef3edd532839c33a99d00e)
@@ -108,6 +116,11 @@ date:
         + [tensorflow:js-doc](https://www.tensorflow.org/js/guide/)
         + [tensorflow:js-api](https://js.tensorflow.org/api/latest/?hl=zh_cn)
         + [tfjs-examples](https://github.com/tensorflow/tfjs-examples)
+  + AI 平台
+    + [Google AI](https://cloud.google.com/products/ai) 创新型机器学习产品与服务，依托于值得信赖的平台。
+    + [百度：视频翻译](http://fanyi-video.baidu.com/ai) 不需要开发基础即可使用。良好的 UI 界面。
+    + [阿里巴巴：视频 AI](https://retina.aliyun.com/) 仍在测试搭建中
+    + [讯飞开放平台](https://console.xfyun.cn/services/) 提供了基础的 API，需要有开发才能投入使用。
 + blockchain
   + [JSON-RPC node](https://github.com/tedeh/jayson) a simple but featureful JSON-RPC 2.0/1.0 client and server for node.js
   + Eth

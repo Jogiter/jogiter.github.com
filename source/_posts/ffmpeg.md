@@ -2,6 +2,9 @@
 title: ffmpeg
 date: 2020-05-21 18:28:02
 tags:
+  - video
+  - audio
+  - tool
 categories:
   - tool
 ---
@@ -154,10 +157,6 @@ ffmpeg -ss 00:00:15 -t 00:00:10 -i ./videos/tennis.mp4 -vn -acodec copy output.a
 ffmpeg -ss 00:00:15 -t 00:00:10 -i ./videos/tennis.mp4 -vn -f mp3 output.mp3
 ```
 
-1、H264文件封装成FMP4
-./bin/ffmpeg.exe -i ./videos/www.mp4 -g 52 -f mp4 -movflags frag_keyframe+empty_moov tennis-backend.mp4
-
-
 ## ffmpeg filter过滤器
 
 ```sh
@@ -205,6 +204,13 @@ ffmpeg -i input.mp4 -vf delogo=0:0:220:90:100:1 output.mp4
 
 ```sh
 ffmpeg -i input.mp4 -vf transpose=1 output.mp4
+```
+
+**添加字幕**
+
+```sh
+ffmpeg -i input.mp4 -vf subtitles=en.vtt vvt.mp4
+ffmpeg -i input.mp4 -vf subtitles=en.srt srt.mp4
 ```
 
 ## 阅读链接
