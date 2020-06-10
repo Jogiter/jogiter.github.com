@@ -1,23 +1,19 @@
 /**
- * label.js | global hexo script.
- *
- * Usage:
- *
- * {% label [class]@Text %}
- *
- * [class] : default | primary | success | info | warning | danger.
- *           If not defined, default class will be selected.
+ * label.js | https://theme-next.js.org/docs/tag-plugins/label
  */
 
-function postLabel (args) {
-  args = args.join(' ').split('@');
-  var classes = args[0] || 'default';
-  var text = args[1] || '';
+/* global hexo */
 
-  classes = classes.trim();
+'use strict';
+
+function postLabel(args) {
+  args = args.join(' ').split('@');
+  const classes = args[0] || 'default';
+  const text    = args[1] || '';
+
   !text && hexo.log.warn('Label text must be defined!');
 
-  return '<span class="label ' + classes + '">' + text + '</span>';
+  return `<mark class="label ${classes.trim()}">${text}</mark>`;
 }
 
-hexo.extend.tag.register('label', postLabel, { ends: false });
+hexo.extend.tag.register('label', postLabel, {ends: false});
