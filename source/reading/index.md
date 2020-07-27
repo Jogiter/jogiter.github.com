@@ -46,10 +46,13 @@ date:
     + [vue-class-component](https://github.com/vuejs/vue-class-component)
     + [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator)
     + [typescript-starter](https://github.com/bitjson/typescript-starter)
+    + [deno](https://github.com/denoland/deno) A secure JavaScript and TypeScript runtime
   + awesome
     + [awesome-typescript](https://github.com/dzharii/awesome-typescript)
     + [https://github.com/DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)
     + [https://microsoft.github.io/TypeSearch/](https://microsoft.github.io/TypeSearch/)
+    + [tsdx](https://github.com/formium/tsdx) Zero-config CLI for TypeScript package development
+    + [TypeDoc](http://typedoc.org/) A documentation generator for TypeScript projects
 + 开发规范
   + AirBNB
   + Bootstrap
