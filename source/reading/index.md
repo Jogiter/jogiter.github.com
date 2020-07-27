@@ -53,6 +53,7 @@ date:
     + [https://microsoft.github.io/TypeSearch/](https://microsoft.github.io/TypeSearch/)
     + [tsdx](https://github.com/formium/tsdx) Zero-config CLI for TypeScript package development
     + [TypeDoc](http://typedoc.org/) A documentation generator for TypeScript projects
+    + [utility-types](https://github.com/piotrwitek/utility-types) Collection of utility types, complementing TypeScript built-in mapped types and aliases (think "lodash" for static types).
 + 开发规范
   + AirBNB
   + Bootstrap
