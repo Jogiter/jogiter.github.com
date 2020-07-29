@@ -6,6 +6,8 @@
     "version": "3.9.0"
   },
   "scripts": {
+    "create": "hexo new",
+    "help": "hexo -h",
     "test": "hexo clean && hexo g -w",
     "build": "hexo clean && hexo g",
     "dev": "hexo clean && hexo g && hexo server",
