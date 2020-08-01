@@ -34,6 +34,16 @@ date:
   + [Javascript 参考手册](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript) 来自火狐开发者网络
   + [jQuery API](http://jquery.cuishifeng.cn/)
   + [ECMAScript 6入门](http://es6.ruanyifeng.com/)
++ Nodejs
+  + [nodejs](https://github.com/nodejs/node) Node.js JavaScript runtime
+  + [pem](https://github.com/Dexus/pem) Create private keys and certificates with node.js
+  + [eventemitter3](https://github.com/primus/eventemitter3) faster EventEmitter.
+  + [sheetjs](https://github.com/SheetJS/sheetjs) SheetJS Community Edition -- Spreadsheet Data Toolkit
+  + [node-cron](https://github.com/kelektiv/node-cron) Cron for NodeJS.
+  + [joi](https://github.com/sideway/joi) The most powerful data validation library for JS
+  + [rxdb](https://github.com/pubkey/rxdb) A realtime Database for JavaScript Applications
+  + [deno](https://github.com/denoland/deno) A secure JavaScript and TypeScript runtime
+  + [rome](https://github.com/romefrontend/rome) Frontend Toolchain. A linter, compiler, bundler, and more for JavaScript, TypeScript, HTML, Markdown, and CSS.
 + Common
   + [regex](https://github.com/ziishaned/learn-regex) Learn regex the easy way
 + Typescript
@@ -75,6 +85,7 @@ date:
       + [vue-lazyload](https://github.com/hilongjw/vue-lazyload#usage)
       + [vue-awesome-swiper](https://github.com/surmon-china/vue-awesome-swiper)
       + [awesome image slide](https://deulos.github.io/vue-flux/) Image slider which comes with 20 cool transitions
+    + [snabbdom](https://github.com/snabbdom/snabbdom) A virtual DOM library with focus on simplicity, modularity, powerful features and performance.
 + 工具
   + 兼容检测
     + [Can I Use](http://caniuse.com/) 浏览器js/css特性兼容性查询
