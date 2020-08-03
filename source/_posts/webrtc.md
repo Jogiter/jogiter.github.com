@@ -266,16 +266,16 @@ a=mid:data
 a=sctpmap:5000 webrtc-datachannel 1024
 ```
 
->参考[SDP协议详细总结](https://www.jianshu.com/p/3dbdd10a4038)
+- 参考[SDP协议详细总结](https://www.jianshu.com/p/3dbdd10a4038)
+- 规范: [RFC 4566: SDP: Session Description Protocol](https://tools.ietf.org/html/rfc4566)
 
 ### WebRTC 中的 SDP 连接流程
 
-查看 sdp 交换 [demo](https://webrtc.github.io/samples/src/content/peerconnection/constraints/)
+WebRTC 连接过程图如下：
 
-1. 在创建 PeerConnectionA 后，就会去创建一个 offerSDP，并设置为 localSDP。通过 signaling 发送 PeerB。
-2. peerB 收到 peerA 的SDP 后，把收到的 SDP 设置为 RemoteSDP。
-3. 在设置完成后，PeerB 再生成 AnswerSDP，设置为 localSDP，通过 signaling 通道发送给 PeerA。
-4. PeerA 收到后AnswerSDP 后，设置为 RemoteSDP
+![webrtc-complete-diagram](https://mdn.mozillademos.org/files/6119/webrtc-complete-diagram.png)
+
+查看 sdp 交换 [demo](https://webrtc.github.io/samples/src/content/peerconnection/constraints/)
 
 ```ts
 // https://github.com/webrtc/samples/blob/gh-pages/src/content/peerconnection/constraints/js/main.js#L144-L190
@@ -327,7 +327,13 @@ localPeerConnection.createOffer().then(
 
 + MDN
   + [Navigator.getUserMedia](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getUserMedia)
-  + [WebRTC](https://developer.mozilla.org/en-US/docs/Glossary/WebRTC)
+  + [WebRTC API](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API) 入门指南
+    + [WebRTC protocols](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Protocols)
+    + [WebRTC connectivity](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Connectivity)
+    + [Lifetime of a WebRTC session](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Session_lifetime)
+  + [WebRTC codecs](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/WebRTC_codecs)
+    + [Video codecs](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Video_codecs)
+    + [Audio codecs](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Audio_codecs)
 + Github
   + [search: webrtc](https://github.com/search?p=2&q=webrtc&type=Repositories)
   + [WebRTC/samples](https://github.com/webrtc/samples) WebRTC Web demos and samples
