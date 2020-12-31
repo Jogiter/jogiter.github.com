@@ -8,6 +8,7 @@ tags:
 ## 学习链接
 
 - [typescript-official](https://www.typescriptlang.org/docs/handbook/intro.html) 官方英文文档。（中文文档更新较慢。建议阅读官网文档）
+  - [utility-types](https://www.typescriptlang.org/docs/handbook/utility-types.html#parameterstype) 内置的工具类型
 - [tsdoc](https://github.com/microsoft/tsdoc) 标准的文档注释
 - [typedoc](https://github.com/TypeStrong/typedoc) ts 文档生成器
 - [deno](https://github.com/denoland/deno) runtime for ts
