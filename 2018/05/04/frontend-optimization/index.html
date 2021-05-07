@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jogiter.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="如何使用 chrome 优化资源加载时间使用 Network 面板测量您的网站网络性能。 Network 面板记录页面上每个网络操作的相关信息，包括详细的耗时数据、HTTP 请求与响应标头和 Cookie，等等。 TL;DR  使用 Network 面板记录和分析网络活动。 整体或单独查看资源的加载信息。 过滤和排序资源的显示方式。 保存、复制和清除网络记录。 根据需求自定义 Network 面板">
+<meta name="keywords" content="translation,optimize">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何使用 chrome 优化资源加载时间">
+<meta property="og:url" content="https://jogiter.github.io/2018/05/04/frontend-optimization/index.html">
+<meta property="og:site_name" content="悲劇的藝術">
+<meta property="og:description" content="如何使用 chrome 优化资源加载时间使用 Network 面板测量您的网站网络性能。 Network 面板记录页面上每个网络操作的相关信息，包括详细的耗时数据、HTTP 请求与响应标头和 Cookie，等等。 TL;DR  使用 Network 面板记录和分析网络活动。 整体或单独查看资源的加载信息。 过滤和排序资源的显示方式。 保存、复制和清除网络记录。 根据需求自定义 Network 面板">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/panes.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/record-on.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/record-off.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/filmstrip-disabled.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/filmstrip-enabled.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/filmstrip.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/filmstrip-timeline-overlay.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/filmstrip-zoom.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/domcontentloaded.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/load.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/network-headers.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/timing-tab.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/timeline-view-hover.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/network-headers.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/view-header-source.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/view-url-encoded.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/preview-png.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/response-json.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/cookies.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/websocket-frames.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/initiators-dependencies.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/timeline-sort-fields.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/filters.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/multiple-content-type-filters.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/resource-name-filtering.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/larger-than.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/filter-autocomplete.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/copy-save-menu.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/copy-as-curl.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/large-resource-rows-button.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/large-resource-rows.png">
+<meta property="og:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/add-remove-columns.png">
+<meta property="og:updated_time" content="2021-05-07T12:45:44.352Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何使用 chrome 优化资源加载时间">
+<meta name="twitter:description" content="如何使用 chrome 优化资源加载时间使用 Network 面板测量您的网站网络性能。 Network 面板记录页面上每个网络操作的相关信息，包括详细的耗时数据、HTTP 请求与响应标头和 Cookie，等等。 TL;DR  使用 Network 面板记录和分析网络活动。 整体或单独查看资源的加载信息。 过滤和排序资源的显示方式。 保存、复制和清除网络记录。 根据需求自定义 Network 面板">
+<meta name="twitter:image" content="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/panes.png">
+
+<link rel="canonical" href="https://jogiter.github.io/2018/05/04/frontend-optimization/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>如何使用 chrome 优化资源加载时间 | 悲劇的藝術</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">悲劇的藝術</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">O'caption, My caption!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-reading">
+
+    <a href="/reading" rel="section"><i class="fa fa-sitemap fa-fw"></i>reading</a>
+
+  </li>
+        <li class="menu-item menu-item-book">
+
+    <a href="/book" rel="section"><i class="fa fa-book fa-fw"></i>book</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jogiter.github.io/2018/05/04/frontend-optimization/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jogiter">
+      <meta itemprop="description" content="Life exists, and identity">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="悲劇的藝術">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何使用 chrome 优化资源加载时间
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-04 16:12:21" itemprop="dateCreated datePublished" datetime="2018-05-04T16:12:21+00:00">2018-05-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-07 12:45:44" itemprop="dateModified" datetime="2021-05-07T12:45:44+00:00">2021-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="如何使用-chrome-优化资源加载时间"><a href="#如何使用-chrome-优化资源加载时间" class="headerlink" title="如何使用 chrome 优化资源加载时间"></a><a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/resource-loading#view-network-timing-details-for-a-specific-resource" target="_blank" rel="noopener">如何使用 chrome 优化资源加载时间</a></h2><p>使用 Network 面板测量您的网站网络性能。</p>
+<p>Network 面板记录页面上每个网络操作的相关信息，包括详细的耗时数据、HTTP 请求与响应标头和 Cookie，等等。</p>
+<p>TL;DR</p>
+<ul>
+<li>使用 Network 面板记录和分析网络活动。</li>
+<li>整体或单独查看资源的加载信息。</li>
+<li>过滤和排序资源的显示方式。</li>
+<li>保存、复制和清除网络记录。</li>
+<li>根据需求自定义 Network 面板。</li>
+</ul>
+<h3 id="Network-面板概览"><a href="#Network-面板概览" class="headerlink" title="Network 面板概览"></a>Network 面板概览</h3><p>Network 面板由五个窗格组成：</p>
+<ol>
+<li><strong>Controls</strong>。使用这些选项可以控制 Network 面板的外观和功能。</li>
+<li><strong>Filters</strong>。 使用这些选项可以控制在 Requests Table 中显示哪些资源。提示：按住 Cmd (Mac) 或 Ctrl (Windows/Linux) 并点击过滤器可以同时选择多个过滤器。</li>
+<li><strong>Overview</strong>。 此图表显示了资源检索时间的时间线。如果您看到多条竖线堆叠在一起，则说明这些资源被同时检索。</li>
+<li><strong>Requests Table</strong>。 此表格列出了检索的每一个资源。 默认情况下，此表格按时间顺序排序，最早的资源在顶部。点击资源的名称可以显示更多信息。 提示：右键点击 Timeline 以外的任何一个表格标题可以添加或移除信息列。</li>
+<li><strong>Summary</strong>。 此窗格可以一目了然地告诉您请求总数、传输的数据量和加载时间。</li>
+</ol>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/panes.png" alt="panes"></p>
+<p>默认情况下，Requests Table 会显示以下列。您可以添加和移除列。</p>
+<ul>
+<li><strong>Name</strong>。资源的名称。</li>
+<li><strong>Status</strong>。HTTP 状态代码。</li>
+<li><strong>Type</strong>。已请求资源的 MIME 类型。</li>
+<li><strong>Initiator</strong>。发起请求的对象或进程。值为以下选项之一：</li>
+<li><strong>Parser</strong>。Chrome 的 HTML 解析器发起请求。</li>
+<li><strong>Redirect</strong>。HTTP 重定向发起请求。</li>
+<li><strong>Script</strong>。脚本发起请求。</li>
+<li><strong>Other</strong>。某些其他进程或操作发起请求，例如用户通过链接或者在地址栏中输入网址导航到页面。</li>
+<li><strong>Size</strong>。响应标头（通常为数百字节）加响应正文（由服务器提供）的组合大小。</li>
+<li><strong>Time</strong>。从请求开始至在响应中接收到最终字节的总持续时间。</li>
+<li><strong>Timeline</strong>。Timeline 列可以显示所有网络请求的可视瀑布。 点击此列的标题可以显示一个包含更多排序字段的菜单。</li>
+</ul>
+<h3 id="记录网络活动"><a href="#记录网络活动" class="headerlink" title="记录网络活动"></a>记录网络活动</h3><p>在 Network 面板打开时，DevTools 在默认情况下会记录所有网络活动。 要记录活动，只需在面板打开时重新加载页面，或者等待当前加载页面上的网络活动。</p>
+<p>您可以通过 record 按钮指示 DevTools 是否记录。 显示红色 (<img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/record-on.png" alt="记录按钮打开">) 表明 DevTools 正在记录。 显示灰色 (<img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/record-off.png" alt="记录按钮关闭">) 表明 DevTools 未在记录。 点击此按钮可以开始或停止记录，也可以按键盘快捷键 Cmd/Ctrl+e。</p>
+<h3 id="在记录期间捕捉屏幕截图"><a href="#在记录期间捕捉屏幕截图" class="headerlink" title="在记录期间捕捉屏幕截图"></a>在记录期间捕捉屏幕截图</h3><p><strong>Network</strong> 面板可以在页面加载期间捕捉屏幕截图。此功能称为<strong>幻灯片</strong>。</p>
+<p>点击摄影机图标可以启用幻灯片。图标为灰色时，幻灯片处于停用状态 (<img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/filmstrip-disabled.png" alt="已停用幻灯片">)。如果图标为蓝色，则说明已启用 (<img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/filmstrip-enabled.png" alt="已启用幻灯片">)。</p>
+<p>重新加载页面可以捕捉屏幕截图。屏幕截图显示在概览上方。</p>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/filmstrip.png" alt="filmstrip"></p>
+<p>将鼠标悬停在一个屏幕截图上时，<strong>Timeline</strong> 将显示一条黄色竖线，指示帧的捕捉时间。</p>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/filmstrip-timeline-overlay.png" alt="filmstrip-timeline-overlay"></p>
+<p>双击屏幕截图可查看放大版本。在屏幕截图处于放大状态时，使用键盘的向左和向右箭头可以在屏幕截图之间导航。</p>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/filmstrip-zoom.png" alt="filmstrip-zoom"></p>
+<h3 id="查看-DOMContentLoaded-和-load-事件信息"><a href="#查看-DOMContentLoaded-和-load-事件信息" class="headerlink" title="查看 DOMContentLoaded 和 load 事件信息"></a>查看 DOMContentLoaded 和 load 事件信息</h3><p><strong>Network</strong> 面板突出显示两种事件：<strong>DOMContentLoaded</strong> 和 <strong>load</strong>。</p>
+<p>解析页面的初始标记时会触发 <code>DOMContentLoaded</code>。 此事件将在 <strong>Network</strong> 面板上的两个地方显示：</p>
+<ol>
+<li><strong>Overview</strong> 窗格中的蓝色竖线表示事件。</li>
+<li>在 <strong>Summary</strong> 窗格中，您可以看到事件的确切时间。</li>
+</ol>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/domcontentloaded.png" alt="domcontentloaded"></p>
+<p>页面完全加载时将触发 <code>load</code>。此事件显示在三个地方：</p>
+<ol>
+<li><strong>Overview</strong> 窗格中的红色竖线表示事件。</li>
+<li><strong>Requests Table</strong> 中的红色竖线也表示事件。</li>
+<li>在 <strong>Summary</strong> 窗格中，您可以看到事件的确切时间。</li>
+</ol>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/load.png" alt="load"></p>
+<h3 id="查看单个资源的详细信息"><a href="#查看单个资源的详细信息" class="headerlink" title="查看单个资源的详细信息"></a>查看单个资源的详细信息</h3><p>点击资源名称（位于 <strong>Requests Table</strong> 的 <strong>Name</strong> 列下）可以查看与该资源有关的更多信息。</p>
+<p>可用标签会因您所选择资源类型的不同而不同，但下面四个标签最常见：</p>
+<ul>
+<li><strong>Headers</strong>。与资源关联的 HTTP 标头。</li>
+<li><strong>Preview</strong>。JSON、图像和文本资源的预览。</li>
+<li><strong>Response</strong>。HTTP 响应数据（如果存在）。</li>
+<li><strong>Timing</strong>。资源请求生命周期的精细分解。</li>
+</ul>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/network-headers.png" alt="network-headers"></p>
+<h4 id="查看网络耗时"><a href="#查看网络耗时" class="headerlink" title="查看网络耗时"></a>查看网络耗时</h4><p>点击 <strong>Timing</strong> 标签可以查看单个资源请求生命周期的精细分解。</p>
+<p>生命周期按照以下类别显示花费的时间：</p>
+<ul>
+<li>Queuing</li>
+<li>Stalled</li>
+<li>如果适用：DNS lookup、initial connection、SSL handshake</li>
+<li>Request sent</li>
+<li>Waiting (TTFB)</li>
+<li>Content Download</li>
+</ul>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/timing-tab.png" alt="timing-tab"></p>
+<p>将鼠标悬停到 <strong>Timeline</strong> 图表内的资源上时，您也可以看到相同的信息。</p>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/timeline-view-hover.png" alt="timeline-view-hover"></p>
+<p>相关指南：</p>
+<ul>
+<li><a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing" target="_blank" rel="noopener">了解 Resource Timing</a></li>
+</ul>
+<h4 id="查看-HTTP-标头"><a href="#查看-HTTP-标头" class="headerlink" title="查看 HTTP 标头"></a>查看 HTTP 标头</h4><p>点击 <strong>Headers</strong> 可以显示该资源的标头。</p>
+<p><strong>Headers</strong> 标签可以显示资源的请求网址、HTTP 方法以及响应状态代码。 此外，该标签还会列出 HTTP 响应和请求标头、它们的值以及任何查询字符串参数。</p>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/network-headers.png" alt="network-headers"></p>
+<p>点击每一部分旁边的 <code>view source</code> 或 <code>view parsed</code> 链接，您能够以源格式或者解析格式查看响应标头、请求标头或者查询字符串参数。</p>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/view-header-source.png" alt="view-header-source"></p>
+<p>您也可以点击相应部分旁边的 <code>view URL encoded</code> 或 <code>view decoded</code> 链接，以网址编码或解码格式查看查询字符串参数。</p>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/view-url-encoded.png" alt="view-url-encoded"></p>
+<h4 id="预览资源"><a href="#预览资源" class="headerlink" title="预览资源"></a>预览资源</h4><p>点击 <strong>Preview</strong> 标签可以查看该资源的预览。<strong>Preview</strong> 标签可能显示一些有用的信息，也可能不显示，具体取决于您所选择资源的类型。</p>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/preview-png.png" alt="preview-png"></p>
+<h4 id="查看-HTTP-响应内容"><a href="#查看-HTTP-响应内容" class="headerlink" title="查看 HTTP 响应内容"></a>查看 HTTP 响应内容</h4><p>点击 <strong>Response</strong> 标签可以查看资源未格式化的 HTTP 响应内容。 <strong>Preview</strong> 标签可能包含一些有用的信息，也可能不包含，具体取决于您所选择资源的类型。</p>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/response-json.png" alt="response-json"></p>
+<h4 id="查看-Cookie"><a href="#查看-Cookie" class="headerlink" title="查看 Cookie"></a>查看 Cookie</h4><p>点击 <strong>Cookies</strong> 标签可以查看在资源的 HTTP 请求和响应标头中传输的 Cookie 表。 只有传输 Cookie 时，此标签才可用。</p>
+<p>下面是 Cookie 表中每一列的说明：</p>
+<ul>
+<li><strong>Name</strong>。Cookie 的名称。</li>
+<li><strong>Value</strong>。Cookie 的值。</li>
+<li><strong>Domain</strong>。Cookie 所属的域。</li>
+<li><strong>Path</strong>。Cookie 来源的网址路径。</li>
+<li><strong>Expires / Max-Age</strong>。Cookie 的 expires 或 max-age 属性的值。</li>
+<li><strong>Size</strong>。Cookie 的大小（以字节为单位）。</li>
+<li><strong>HTTP</strong>。指示 Cookie 应仅由浏览器在 HTTP 请求中设置，而无法通过 JavaScript 访问。</li>
+<li><strong>Secure</strong>。如果存在此属性，则指示 Cookie 应仅通过安全连接传输。</li>
+</ul>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/cookies.png" alt="cookies"></p>
+<h4 id="查看-WebSocket-框架"><a href="#查看-WebSocket-框架" class="headerlink" title="查看 WebSocket 框架"></a>查看 WebSocket 框架</h4><p>点击 <strong>Frames</strong> 标签可以查看 <code>WebSocket</code> 连接信息。</p>
+<p>只有选定资源发起 WebSocket 连接时，此标签才会显示。</p>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/websocket-frames.png" alt="websocket-frames"></p>
+<p>下表对 <strong>Frames</strong> 标签上表格中的每一列进行了说明：</p>
+<ul>
+<li>Data。消息负载。如果消息为纯文本，将在此处显示。 对于二进制操作码，此字段将显示操作码的名称和代码。 支持以下操作码：</li>
+<li>延续框架</li>
+<li>二进制框架</li>
+<li>连接关闭框架</li>
+<li>Ping 框架</li>
+<li>Pong 框架</li>
+<li>Length。消息负载的长度（以字节为单位）。</li>
+<li>Time。消息创建时的时间戳。</li>
+</ul>
+<p>消息根据其类型进行彩色编码：</p>
+<ul>
+<li>传出文本消息为浅绿色。</li>
+<li>传入文本消息为白色。</li>
+<li>WebSocket 操作码为浅黄色。</li>
+<li>错误为浅红色。</li>
+</ul>
+<p>有关当前实现的说明：</p>
+<ul>
+<li>要在每条新消息到达后刷新 Frames 表，请点击左侧的资源名称。</li>
+<li>Frames 表格仅保留最后 100 条 WebSocket 消息。</li>
+</ul>
+<h3 id="查看资源发起者和依赖项"><a href="#查看资源发起者和依赖项" class="headerlink" title="查看资源发起者和依赖项"></a>查看资源发起者和依赖项</h3><p>按住 <strong>Shift</strong> 并将鼠标悬停在资源上，可以查看其发起者和依赖项。 本部分将您悬停的资源称为目标。</p>
+<p>目标上方的第一个绿色编码资源为目标的发起者。 如果上方存在第二个也是绿色编码的资源，那么该资源将是发起者的发起者。 目标下方红色编码的任何资源都是目标的依赖项。</p>
+<p>下方的屏幕截图中，目标是 <code>dn/</code>。此目标的发起者为以 <code>rs=AA2Y</code> 开头的脚本。 发起者 (<code>rs=AA2Y</code>) 的发起者为 <code>google.com</code>。 最后，<code>dn.js</code> 是目标 (<code>dn/</code>) 的依赖项。</p>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/initiators-dependencies.png" alt="initiators-dependencies"></p>
+<p>请记住，对于具有大量资源的页面，您可能无法看到所有的发起者或依赖项。</p>
+<h3 id="排序请求"><a href="#排序请求" class="headerlink" title="排序请求"></a>排序请求</h3><p>默认情况下，<strong>Requests Table</strong> 中的资源按照每个请求的开始时间排序，最早的请求位于顶部。</p>
+<p>点击列标头可以按照该标头下每个资源的值对表格排序。 再次点击相同的标头可以将排序顺序更改为升序或降序。</p>
+<p><strong>Timeline</strong> 列与其他列不同。点击此列时，它将显示一个由多个排序字段组成的菜单：</p>
+<ul>
+<li><strong>Timeline</strong>。按每个网络请求的开始时间排序。这是默认排序方式，与按 Start Time 选项排序相同。</li>
+<li><strong>Start Time</strong>。按每个网络请求的开始时间排序（与按 Timeline 选项排序相同）。</li>
+<li><strong>Response Time</strong>。按每个请求的响应时间排序。</li>
+<li><strong>End Time</strong>。按每个请求完成的时间排序。</li>
+<li><strong>Duration</strong>。按每个请求的总时间排序。选择此过滤器可以确定哪些资源的加载时间最长。</li>
+<li><strong>Latency</strong>。按请求开始与响应开始之间的时间排序。 选择此过滤器可以确定哪些资源至第一字节 (TTFB) 的时间最长。</li>
+</ul>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/timeline-sort-fields.png" alt="timeline-sort-fields"></p>
+<h3 id="过滤请求"><a href="#过滤请求" class="headerlink" title="过滤请求"></a>过滤请求</h3><p><strong>Network</strong> 面板提供了多种方式来过滤要显示哪些资源。 点击 <strong>Filter</strong> 按钮 (<img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/filters.png" alt="Filter 按钮">) 可以隐藏或显示 <strong>Filters</strong> 窗格。</p>
+<p>使用内容类型按钮可以仅显示选定内容类型的资源。</p>
+<p>注：按住 Cmd (Mac) 或 Ctrl (Windows/Linux) 并点击过滤器可以同时启用多个过滤器。</p>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/multiple-content-type-filters.png" alt="multiple-content-type-filters"></p>
+<p><strong>Filter</strong> 文本字段看似非常强大。如果您在其中输入任意字符串，<strong>Network</strong> 面板仅会显示文件名与给定字符串匹配的资源。</p>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/resource-name-filtering.png" alt="resource-name-filtering"></p>
+<p><strong>Filter</strong> 文本字段还支持各种关键词，这样，您可以按照各种属性对资源排序，例如使用 <code>larger-than</code> 关键字按文件大小进行排序。</p>
+<p>下文列表说明了所有关键字。</p>
+<ul>
+<li><code>domain</code>。仅显示来自指定域的资源。您可以使用通配符字符 (<em>) 来包含多个域。 例如，</em>.com 将显示来自以 .com 结尾的所有域名的资源。 DevTools 会使用它遇到的所有域填充自动填充下拉菜单。</li>
+<li><code>has-response-header</code>。显示包含指定 HTTP 响应标头的资源。 DevTools 会使用它遇到的所有响应标头填充自动填充下拉菜单。</li>
+<li><code>is</code>。使用 is:running 可以查找 WebSocket 资源。</li>
+<li><code>larger-than</code>。显示大于指定大小的资源（以字节为单位）。 将值设为 1000 等同于设置为 1k。</li>
+<li><code>method</code>。显示通过指定 HTTP 方法类型检索的资源。 DevTools 会使用它遇到的所有 HTTP 方法填充下拉菜单。</li>
+<li><code>mime-type</code>。显示指定 MIME 类型的资源。DevTools 会使用它遇到的所有 MIME 类型填充下拉菜单。</li>
+<li><code>mixed-content</code>。显示所有混合内容资源 (mixed-content:all)，或者仅显示当前显示的资源 (mixed-content:displayed)。</li>
+<li><code>scheme</code>。显示通过未保护 HTTP (scheme:http) 或受保护 HTTPS (scheme:https) 检索的资源。</li>
+<li><code>set-cookie-domain</code>。显示具有 Set-Cookie 标头并带有与指定值匹配的 Domain 属性的资源。 DevTools 会使用它遇到的所有 Cookie 域填充自动填充下拉菜单。</li>
+<li><code>set-cookie-name</code>。显示具有 Set-Cookie 标头并且名称与指定值匹配的资源。 DevTools 会使用它遇到的所有 Cookie 名称填充自动填充下拉菜单。</li>
+<li><code>set-cookie-value</code>。显示具有 Set-Cookie 标头并且值与指定值匹配的资源。 DevTools 会使用它遇到的所有 Cookie 值填充自动填充下拉菜单。</li>
+<li><code>status-code</code>。仅显示 HTTP 状态代码与指定代码匹配的资源。 DevTools 会使用它遇到的所有状态代码填充自动填充下拉菜单。</li>
+</ul>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/larger-than.png" alt="larger-than"></p>
+<p>上面的一些关键字都提及自动填充下拉菜单。要触发自动填充菜单，请在键入关键字时后面加一个冒号。 例如，在下面的屏幕截图中，输入 <code>domain:</code> 触发了自动填充下拉菜单。</p>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/filter-autocomplete.png" alt="filter-autocomplete"></p>
+<h3 id="复制、保存和清除网络信息"><a href="#复制、保存和清除网络信息" class="headerlink" title="复制、保存和清除网络信息"></a>复制、保存和清除网络信息</h3><p>在 <strong>Requests Table</strong> 中点击右键可以复制、保存或删除网络信息。 某些选项取决于上下文，因此，如果您希望操作单个资源，则需要右键点击该资源所在的行。</p>
+<p>下面的列表说明了每一个选项。</p>
+<ul>
+<li><strong>Copy Response</strong>。将选定资源的 HTTP 响应复制到系统剪贴板。</li>
+<li><strong>Copy as cURL</strong>。以 cURL 命令字符串的形式将选定资源的网络请求复制到系统剪贴板。请参阅以 cURL 命令形式复制请求。</li>
+<li><strong>Copy All as HAR</strong>。以 HAR 数据形式将所有资源复制到系统剪贴板。HAR 文件包含用于说明网络“瀑布”的 JSON 数据结构。多款第三方 工具 可以依据 HAR 文件中的数据重建网络瀑布。请参阅网页性能工具： HTTP 归档 (HAR)，了解更多信息。</li>
+<li><strong>Save as HAR with Content</strong>。将所有网络数据及每一个页面资源保存到 HAR 文件。 二进制资源（包括图像）以 Base64 编码文本的形式编码。</li>
+<li><strong>Clear Browser Cache</strong>。清除浏览器缓存。提示：您也可以从 Network Conditions 抽屉式导航栏中启用或停用浏览器缓存。</li>
+<li><strong>Clear Browser Cookies</strong>。清除浏览器的 Cookie。</li>
+<li><strong>Open in Sources Panel</strong>。在 Sources 面板中打开选定资源。</li>
+<li><strong>Open Link in New Tab</strong>。在新标签中打开选定资源。您也可以在 Network 表中双击资源名称。</li>
+<li><strong>Copy Link Address</strong>。将资源网址复制到系统剪贴板。</li>
+<li><strong>Save</strong>。保存选定的文本资源。仅在文本资源上显示。</li>
+<li><strong>Replay XHR</strong>。重新发送选定的 XMLHTTPRequest。仅在 XHR 资源上显示。</li>
+</ul>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/copy-save-menu.png" alt="copy-save-menu"></p>
+<p>以 cURL 命令形式复制一个或所有请求<br>cURL 是一种用于进行 HTTP 事务的命令行工具。</p>
+<p>在 Requests Table 中右键点击某个资源，将鼠标悬停在 <strong>Copy</strong> 上，然后选择 <strong>Copy as cURL</strong>，复制 Network 面板检测到的所有资源的 cURL 请求的字符串。</p>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/copy-as-curl.png" alt="copy-as-curl"></p>
+<p>选择 <strong>Copy as cURL</strong>，复制 Network 面板检测到的所有资源的 cURL 请求的字符串。</p>
+<p>当您复制全部时，过滤将被忽略（例如，如果您过滤 Network 面板仅显示 CSS 资源，然后按 <strong>Copy All as cURL</strong>，您将获取所有检测到的资源，而不只是 CSS）。</p>
+<h3 id="自定义-Network-面板"><a href="#自定义-Network-面板" class="headerlink" title="自定义 Network 面板"></a>自定义 Network 面板</h3><p>默认情况下，<strong>Requests Table</strong> 会使用小行显示资源。点击 <strong>Use large resource rows</strong> 按钮 (<img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/large-resource-rows-button.png" alt="large resource rows 按钮">) 可以增大每一行的大小。</p>
+<p>大行可以让某些列显示两个文本字段：主要字段和次要字段。 列标头指示次要字段的含义。</p>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/large-resource-rows.png" alt="large-resource-rows"></p>
+<p>添加和移除表格列</p>
+<p>右键点击 <strong>Requests Table</strong> 中的任一标题可以添加或移除列。</p>
+<p><img src="https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/add-remove-columns.png" alt="add-remove-columns"></p>
+<h4 id="导航时保留网络日志。"><a href="#导航时保留网络日志。" class="headerlink" title="导航时保留网络日志。"></a>导航时保留网络日志。</h4><p>默认情况下，每当您重新加载当前页面或者加载不同的页面时，网络活动记录会被丢弃。启用 <strong>Preserve log</strong> 复选框可以在这些情况下保存网络日志。 新记录将附加到 <strong>Requests Table</strong> 的底部。</p>
+<h3 id="其他资源"><a href="#其他资源" class="headerlink" title="其他资源"></a>其他资源</h3><p>要详细了解如何优化您的应用的网络性能，请参阅下面的资源：</p>
+<ul>
+<li>使用 <a href="https://developers.google.com/speed/pagespeed/insights" target="_blank" rel="noopener">PageSpeed Insights</a> 确定可以应用到您网站的性能最佳做法，以及使用 <a href="https://developers.google.com/speed/pagespeed/optimization" target="_blank" rel="noopener">PageSpeed 优化工具</a>将应用这些最佳做法的流程自动化。</li>
+<li><a href="https://www.igvita.com/posa/high-performance-networking-in-google-chrome/" target="_blank" rel="noopener">Google Chrome 中的高性能网络</a>讨论了 Chrome 网络内部机制，以及您如何充分利用它们让您的网站更快。</li>
+<li><a href="https://developers.google.com/speed/articles/gzip" target="_blank" rel="noopener">gzip 压缩的工作原理</a>提供了 gzip 压缩的高级概览，并介绍了这种压缩为什么是一种不错的方法。</li>
+<li><a href="https://developers.google.com/speed/docs/best-practices/rules_intro" target="_blank" rel="noopener">网页性能最佳做法</a>提供了更多用于优化您的网页或应用的网络性能的提示。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    赞赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://img.jogiter.cn/wechat.png" alt="Jogiter 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://img.jogiter.cn/alipay.png" alt="Jogiter 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/translation/" rel="tag"># translation</a>
+              <a href="/tags/optimize/" rel="tag"># optimize</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/04/12/webpack-config/" rel="prev" title="webpack.config">
+      <i class="fa fa-chevron-left"></i> webpack.config
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/05/29/jsonp-vs-cors/" rel="next" title="jsonp-vs-cors">
+      jsonp-vs-cors <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何使用-chrome-优化资源加载时间"><span class="nav-number">1.</span> <span class="nav-text">如何使用 chrome 优化资源加载时间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Network-面板概览"><span class="nav-number">1.1.</span> <span class="nav-text">Network 面板概览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#记录网络活动"><span class="nav-number">1.2.</span> <span class="nav-text">记录网络活动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在记录期间捕捉屏幕截图"><span class="nav-number">1.3.</span> <span class="nav-text">在记录期间捕捉屏幕截图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看-DOMContentLoaded-和-load-事件信息"><span class="nav-number">1.4.</span> <span class="nav-text">查看 DOMContentLoaded 和 load 事件信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看单个资源的详细信息"><span class="nav-number">1.5.</span> <span class="nav-text">查看单个资源的详细信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查看网络耗时"><span class="nav-number">1.5.1.</span> <span class="nav-text">查看网络耗时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看-HTTP-标头"><span class="nav-number">1.5.2.</span> <span class="nav-text">查看 HTTP 标头</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#预览资源"><span class="nav-number">1.5.3.</span> <span class="nav-text">预览资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看-HTTP-响应内容"><span class="nav-number">1.5.4.</span> <span class="nav-text">查看 HTTP 响应内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看-Cookie"><span class="nav-number">1.5.5.</span> <span class="nav-text">查看 Cookie</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看-WebSocket-框架"><span class="nav-number">1.5.6.</span> <span class="nav-text">查看 WebSocket 框架</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看资源发起者和依赖项"><span class="nav-number">1.6.</span> <span class="nav-text">查看资源发起者和依赖项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排序请求"><span class="nav-number">1.7.</span> <span class="nav-text">排序请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过滤请求"><span class="nav-number">1.8.</span> <span class="nav-text">过滤请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制、保存和清除网络信息"><span class="nav-number">1.9.</span> <span class="nav-text">复制、保存和清除网络信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义-Network-面板"><span class="nav-number">1.10.</span> <span class="nav-text">自定义 Network 面板</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#导航时保留网络日志。"><span class="nav-number">1.10.1.</span> <span class="nav-text">导航时保留网络日志。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他资源"><span class="nav-number">1.11.</span> <span class="nav-text">其他资源</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jogiter</p>
+  <div class="site-description" itemprop="description">Life exists, and identity</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Jogiter" title="GitHub → https://github.com/Jogiter" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2409083451" title="Weibo → https://weibo.com/2409083451" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.confucianism.com.cn/" title="http://www.confucianism.com.cn/" rel="noopener" target="_blank">国学网</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://winnie0517.github.io/" title="https://winnie0517.github.io/" rel="noopener" target="_blank">邪恶的小爪子</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">粤ICP备18022983号-1 </a>
+      <img src="http://www.beian.miit.gov.cn" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jogiter</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

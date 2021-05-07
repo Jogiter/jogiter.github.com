@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jogiter.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Mac 电脑初始化 Mac 终端 oh-my-zsh 配置 theme: pure   vscode Settings Sync 自动同步 vscode 的插件等设置。    Homebrew替代镜像源123456789# 进入 homebrew 根目录cd &quot;$(brew --repo)&quot;# 替换 brew 远程库git remote set-url origin git://mirrors.u">
+<meta property="og:type" content="article">
+<meta property="og:title" content="macbook 开发环境配置">
+<meta property="og:url" content="https://jogiter.github.io/2020/07/29/macbook-开发环境配置/index.html">
+<meta property="og:site_name" content="悲劇的藝術">
+<meta property="og:description" content="Mac 电脑初始化 Mac 终端 oh-my-zsh 配置 theme: pure   vscode Settings Sync 自动同步 vscode 的插件等设置。    Homebrew替代镜像源123456789# 进入 homebrew 根目录cd &quot;$(brew --repo)&quot;# 替换 brew 远程库git remote set-url origin git://mirrors.u">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://images0.cnblogs.com/blog/282019/201409/091222268402433">
+<meta property="og:image" content="https://images0.cnblogs.com/blog/282019/201409/091222046992263">
+<meta property="og:updated_time" content="2021-05-07T12:45:44.352Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="macbook 开发环境配置">
+<meta name="twitter:description" content="Mac 电脑初始化 Mac 终端 oh-my-zsh 配置 theme: pure   vscode Settings Sync 自动同步 vscode 的插件等设置。    Homebrew替代镜像源123456789# 进入 homebrew 根目录cd &quot;$(brew --repo)&quot;# 替换 brew 远程库git remote set-url origin git://mirrors.u">
+<meta name="twitter:image" content="https://images0.cnblogs.com/blog/282019/201409/091222268402433">
+
+<link rel="canonical" href="https://jogiter.github.io/2020/07/29/macbook-开发环境配置/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>macbook 开发环境配置 | 悲劇的藝術</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">悲劇的藝術</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">O'caption, My caption!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-reading">
+
+    <a href="/reading" rel="section"><i class="fa fa-sitemap fa-fw"></i>reading</a>
+
+  </li>
+        <li class="menu-item menu-item-book">
+
+    <a href="/book" rel="section"><i class="fa fa-book fa-fw"></i>book</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jogiter.github.io/2020/07/29/macbook-开发环境配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jogiter">
+      <meta itemprop="description" content="Life exists, and identity">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="悲劇的藝術">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          macbook 开发环境配置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-29 19:01:30" itemprop="dateCreated datePublished" datetime="2020-07-29T19:01:30+00:00">2020-07-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-07 12:45:44" itemprop="dateModified" datetime="2021-05-07T12:45:44+00:00">2021-05-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Mac-电脑初始化"><a href="#Mac-电脑初始化" class="headerlink" title="Mac 电脑初始化"></a>Mac 电脑初始化</h1><ul>
+<li><a href="https://www.jianshu.com/p/64344229778a" target="_blank" rel="noopener">Mac 终端 oh-my-zsh 配置</a><ul>
+<li><a href="https://github.com/sindresorhus/pure" target="_blank" rel="noopener">theme: pure</a></li>
+</ul>
+</li>
+<li><a href="https://code.visualstudio.com/docs/?dv=osx" target="_blank" rel="noopener">vscode</a><ul>
+<li><a href="https://code.visualstudio.com/docs/editor/settings-sync" target="_blank" rel="noopener">Settings Sync</a> 自动同步 vscode 的插件等设置。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Homebrew替代镜像源"><a href="#Homebrew替代镜像源" class="headerlink" title="Homebrew替代镜像源"></a>Homebrew替代镜像源</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入 homebrew 根目录</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">"<span class="variable">$(brew --repo)</span>"</span></span><br><span class="line"><span class="comment"># 替换 brew 远程库</span></span><br><span class="line">git remote <span class="built_in">set</span>-url origin git://mirrors.ustc.edu.cn/brew.git</span><br><span class="line"><span class="built_in">cd</span> <span class="string">"<span class="variable">$(brew --repo)</span>/Library/Taps/homebrew/homebrew-core"</span></span><br><span class="line"><span class="comment"># 替换 home-brew 远程库</span></span><br><span class="line">git remote <span class="built_in">set</span>-url origin git://mirrors.ustc.edu.cn/homebrew-core.git</span><br><span class="line"><span class="comment"># 更新 brew</span></span><br><span class="line">brew update</span><br></pre></td></tr></table></figure>
+<h4 id="国内源"><a href="#国内源" class="headerlink" title="国内源"></a>国内源</h4><ul>
+<li>中科大: <a href="https://links.jianshu.com/go?to=https%3A%2F%2Fmirrors.ustc.edu.cn%2Fbrew.git" target="_blank" rel="noopener">https://mirrors.ustc.edu.cn/brew.git</a></li>
+<li>清华大学: <a href="https://links.jianshu.com/go?to=https%3A%2F%2Fmirrors.tuna.tsinghua.edu.cn%2Fhelp%2Fhomebrew%2F" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/</a></li>
+</ul>
+<h2 id="管理多个-SSH-Key"><a href="#管理多个-SSH-Key" class="headerlink" title="管理多个 SSH Key"></a>管理多个 SSH Key</h2><h3 id="生成并添加第一个ssh-key"><a href="#生成并添加第一个ssh-key" class="headerlink" title="生成并添加第一个ssh key"></a>生成并添加第一个ssh key</h3><p>第一次使用ssh生成key，默认会在用户~（根目录）下生成 id_rsa, id_rsa.pub 2个文件；所以需要添加多个ssh key时也会生成对应的私钥和公钥。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"youremail@yourcompany.com"</span></span><br></pre></td></tr></table></figure>
+<p>在Git Bash中执行这条命令一路回车，会在 ~/.ssh/ 目录下生成 id_rsa 和 id_rsa.pub 两个文件，用文本编辑器将 id_rsa_pub 中的内容复制一下粘贴到github(gitlab)上。</p>
+<h3 id="生成并添加第二个ssh-key"><a href="#生成并添加第二个ssh-key" class="headerlink" title="生成并添加第二个ssh key"></a>生成并添加第二个ssh key</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"youremail@gmail.com"</span></span><br></pre></td></tr></table></figure>
+<p>注意不要一路回车，要给这个文件起一个名字， 比如叫 id_rsa_github, 所以相应的也会生成一个 id_rsa_github.pub 文件。</p>
+<p><img src="https://images0.cnblogs.com/blog/282019/201409/091222268402433" alt="img"></p>
+<p>目录结构如下：<br><img src="https://images0.cnblogs.com/blog/282019/201409/091222046992263" alt="img"></p>
+<h2 id="添加私钥"><a href="#添加私钥" class="headerlink" title="添加私钥"></a>添加私钥</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-add ~/.ssh/id_rsa</span><br><span class="line">$ ssh-add ~/.ssh/id_rsa_github</span><br></pre></td></tr></table></figure>
+<p>如果执行ssh-add时提示”Could not open a connection to your authentication agent”，可以现执行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-agent bash</span><br></pre></td></tr></table></figure>
+<p>然后再运行ssh-add命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可以通过 ssh-add -l 来确私钥列表</span></span><br><span class="line">$ ssh-add -l</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以通过 ssh-add -D 来清空私钥列表</span></span><br><span class="line">$ ssh-add -D</span><br></pre></td></tr></table></figure>
+<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>在 ~/.ssh 目录下新建一个config文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch config</span><br></pre></td></tr></table></figure>
+<p>添加内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># gitlab</span></span><br><span class="line">Host gitlab.com</span><br><span class="line">    HostName gitlab.com</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    IdentityFile ~/.ssh/id_rsa</span><br><span class="line"></span><br><span class="line"><span class="comment"># github</span></span><br><span class="line">Host github.com</span><br><span class="line">    HostName github.com</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    IdentityFile ~/.ssh/id_rsa_github</span><br></pre></td></tr></table></figure>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<p>输出<br>Hi user! You’ve successfully authenticated, but GitHub does not provide shell access. 就表示成功的连上github了</p>
+<h2 id="NPM-镜像的坑"><a href="#NPM-镜像的坑" class="headerlink" title="NPM 镜像的坑"></a>NPM 镜像的坑</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">npm i -g nrm</span><br><span class="line">nrm use taobao</span><br><span class="line"></span><br><span class="line">npm config <span class="built_in">set</span> disturl https://npm.taobao.org/mirrors/node/</span><br><span class="line">npm config <span class="built_in">set</span> sass_binary_site https://npm.taobao.org/mirrors/node-sass/</span><br><span class="line">npm config <span class="built_in">set</span> sharp_dist_base_url https://npm.taobao.org/mirrors/sharp-libvips/</span><br><span class="line">npm config <span class="built_in">set</span> electron_mirror https://npm.taobao.org/mirrors/electron/</span><br><span class="line">npm config <span class="built_in">set</span> puppeteer_download_host https://npm.taobao.org/mirrors/</span><br><span class="line">npm config <span class="built_in">set</span> phantomjs_cdnurl https://npm.taobao.org/mirrors/phantomjs/</span><br><span class="line">npm config <span class="built_in">set</span> sentrycli_cdnurl https://npm.taobao.org/mirrors/sentry-cli/</span><br><span class="line">npm config <span class="built_in">set</span> sqlite3_binary_site https://npm.taobao.org/mirrors/sqlite3/</span><br><span class="line">npm config <span class="built_in">set</span> python_mirror https://npm.taobao.org/mirrors/python/</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    赞赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://img.jogiter.cn/wechat.png" alt="Jogiter 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://img.jogiter.cn/alipay.png" alt="Jogiter 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/29/webrtc/" rel="prev" title="webrtc">
+      <i class="fa fa-chevron-left"></i> webrtc
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/03/lerna-with-tsdx/" rel="next" title="lerna with tsdx">
+      lerna with tsdx <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mac-电脑初始化"><span class="nav-number">1.</span> <span class="nav-text">Mac 电脑初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Homebrew替代镜像源"><span class="nav-number">1.1.</span> <span class="nav-text">Homebrew替代镜像源</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#国内源"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">国内源</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管理多个-SSH-Key"><span class="nav-number">1.2.</span> <span class="nav-text">管理多个 SSH Key</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成并添加第一个ssh-key"><span class="nav-number">1.2.1.</span> <span class="nav-text">生成并添加第一个ssh key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成并添加第二个ssh-key"><span class="nav-number">1.2.2.</span> <span class="nav-text">生成并添加第二个ssh key</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加私钥"><span class="nav-number">1.3.</span> <span class="nav-text">添加私钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改配置文件"><span class="nav-number">1.4.</span> <span class="nav-text">修改配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">1.5.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NPM-镜像的坑"><span class="nav-number">1.6.</span> <span class="nav-text">NPM 镜像的坑</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jogiter</p>
+  <div class="site-description" itemprop="description">Life exists, and identity</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Jogiter" title="GitHub → https://github.com/Jogiter" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2409083451" title="Weibo → https://weibo.com/2409083451" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.confucianism.com.cn/" title="http://www.confucianism.com.cn/" rel="noopener" target="_blank">国学网</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://winnie0517.github.io/" title="https://winnie0517.github.io/" rel="noopener" target="_blank">邪恶的小爪子</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">粤ICP备18022983号-1 </a>
+      <img src="http://www.beian.miit.gov.cn" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jogiter</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

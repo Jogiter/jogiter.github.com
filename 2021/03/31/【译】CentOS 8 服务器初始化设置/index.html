@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jogiter.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="【译】CentOS 8 服务器初始化设置首次创建新的 CentOS 8服务器时，您应在基本设置的早期阶段执行一些配置步骤。这将提高服务器的安全性和可用性，并为后续操作奠定坚实的基础。 步骤1-以root身份登录要登录服务器，您需要知道服务器的公共IP地址。您还需要密码。 如果尚未连接到服务器，请立即使用以下命令以root用户身份登录（用服务器的公共IP地址替换命令中的 your_server_ip">
+<meta name="keywords" content="deployment">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【译】CentOS 8 服务器初始化设置">
+<meta property="og:url" content="https://jogiter.github.io/2021/03/31/【译】CentOS 8 服务器初始化设置/index.html">
+<meta property="og:site_name" content="悲劇的藝術">
+<meta property="og:description" content="【译】CentOS 8 服务器初始化设置首次创建新的 CentOS 8服务器时，您应在基本设置的早期阶段执行一些配置步骤。这将提高服务器的安全性和可用性，并为后续操作奠定坚实的基础。 步骤1-以root身份登录要登录服务器，您需要知道服务器的公共IP地址。您还需要密码。 如果尚未连接到服务器，请立即使用以下命令以root用户身份登录（用服务器的公共IP地址替换命令中的 your_server_ip">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-05-07T12:45:44.352Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【译】CentOS 8 服务器初始化设置">
+<meta name="twitter:description" content="【译】CentOS 8 服务器初始化设置首次创建新的 CentOS 8服务器时，您应在基本设置的早期阶段执行一些配置步骤。这将提高服务器的安全性和可用性，并为后续操作奠定坚实的基础。 步骤1-以root身份登录要登录服务器，您需要知道服务器的公共IP地址。您还需要密码。 如果尚未连接到服务器，请立即使用以下命令以root用户身份登录（用服务器的公共IP地址替换命令中的 your_server_ip">
+
+<link rel="canonical" href="https://jogiter.github.io/2021/03/31/【译】CentOS 8 服务器初始化设置/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>【译】CentOS 8 服务器初始化设置 | 悲劇的藝術</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">悲劇的藝術</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">O'caption, My caption!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-reading">
+
+    <a href="/reading" rel="section"><i class="fa fa-sitemap fa-fw"></i>reading</a>
+
+  </li>
+        <li class="menu-item menu-item-book">
+
+    <a href="/book" rel="section"><i class="fa fa-book fa-fw"></i>book</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jogiter.github.io/2021/03/31/【译】CentOS 8 服务器初始化设置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jogiter">
+      <meta itemprop="description" content="Life exists, and identity">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="悲劇的藝術">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【译】CentOS 8 服务器初始化设置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-31 11:13:00" itemprop="dateCreated datePublished" datetime="2021-03-31T11:13:00+00:00">2021-03-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-07 12:45:44" itemprop="dateModified" datetime="2021-05-07T12:45:44+00:00">2021-05-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="【译】CentOS-8-服务器初始化设置"><a href="#【译】CentOS-8-服务器初始化设置" class="headerlink" title="【译】CentOS 8 服务器初始化设置"></a>【译】CentOS 8 服务器初始化设置</h1><p>首次创建新的 CentOS 8服务器时，您应在基本设置的早期阶段执行一些配置步骤。这将提高服务器的安全性和可用性，并为后续操作奠定坚实的基础。</p>
+<h2 id="步骤1-以root身份登录"><a href="#步骤1-以root身份登录" class="headerlink" title="步骤1-以root身份登录"></a>步骤1-以root身份登录</h2><p>要登录服务器，您需要知道服务器的公共IP地址。您还需要密码。</p>
+<p>如果尚未连接到服务器，请立即使用以下命令以root用户身份登录（用服务器的公共IP地址替换命令中的 <code>your_server_ip</code>）：</p>
+<blockquote>
+<p>$ ssh root@<code>your_server_ip</code></p>
+</blockquote>
+<p><strong>关于root</strong></p>
+<p>在 <code>root</code> 用户在 <code>Linux</code> 环境中管理用户，具有非常广阔的特权。由于 <code>root</code> 帐户具有更高的特权，因此不建议您定期使用它。这是因为 <code>root</code> 帐户固有的部分能力是即使在偶然的情况下也可以进行具有破坏性的更改的功能。</p>
+<p>因此，下一步是建立一个替代用户帐户，以减少对日常工作的影响范围。必要时，该帐户仍将能够获得更多的特权。</p>
+<h2 id="步骤2-创建新用户"><a href="#步骤2-创建新用户" class="headerlink" title="步骤2-创建新用户"></a>步骤2-创建新用户</h2><p>以 <code>root</code> 用户身份登录后，您可以创建一个新的用户帐户，从现在开始我们将使用该帐户登录。</p>
+<p>本示例创建一个名为 <code>sammy</code> 的新用户，但您应将其替换为您喜欢的任何用户名：</p>
+<blockquote>
+<p>$ adduser <code>sammy</code></p>
+</blockquote>
+<p>接下来，为 <code>sammy</code> 用户设置一个强密码：</p>
+<blockquote>
+<p>$ passwd <code>sammy</code></p>
+</blockquote>
+<p>系统将提示您输入两次密码。这样做之后，您的用户就可以使用了，但是首先我们将赋予该用户其他使用 <code>sudo</code> 命令的特权。这将使我们能够在必要时以 <code>root</code> 用户身份运行命令。</p>
+<h2 id="步骤3-授予管理权限"><a href="#步骤3-授予管理权限" class="headerlink" title="步骤3-授予管理权限"></a>步骤3-授予管理权限</h2><p>现在，我们有了一个具有常规帐户特权的新用户帐户。但是，有时我们可能需要执行管理任务。</p>
+<p>为了避免注销普通用户并以 <code>root</code> 帐户重新登录，我们可以为普通帐户设置所谓的“超级用户”或 <code>root</code> 特权。这将使我们的普通用户可以通过 <code>sudo</code> 在每个命令前加上单词来以管理特权运行命令。</p>
+<p>要将这些特权添加到新用户，我们需要将新用户添加到 <code>wheel</code> 组。默认情况下，在CentOS 8上，允许属于 <code>wheel</code> 组的用户使用该sudo命令。</p>
+<p>以 <code>root</code> 身份运行此命令，将您的新用户添加到 <code>wheel</code> 组（用新的用户名替换突出显示的单词）：</p>
+<blockquote>
+<p>$ usermod -aG wheel <code>sammy</code></p>
+</blockquote>
+<p>现在，以普通用户身份登录后，您可以 <code>sudo</code> 在命令之前键入以超级用户权限执行操作。</p>
+<h2 id="步骤4-—设置基本防火墙"><a href="#步骤4-—设置基本防火墙" class="headerlink" title="步骤4 —设置基本防火墙"></a>步骤4 —设置基本防火墙</h2><p>防火墙为您的服务器提供了基本的安全性。这些应用程序负责拒绝到服务器上每个端口的流量，但您明确批准的端口 <code>/</code> 服务除外。CentOS 有一项称为 <code>firewalld</code> 执行此功能的服务。名为的工具 <code>firewall-cmd</code> 用于配置 <code>firewalld</code> 防火墙策略。</p>
+<p>首次安装firewalld：</p>
+<blockquote>
+<p>$ dnf install firewalld -y</p>
+</blockquote>
+<p>默认 <code>firewalld</code> 配置允许 <code>ssh</code> 连接，因此我们可以立即打开防火墙：</p>
+<blockquote>
+<p>$ systemctl start firewalld</p>
+</blockquote>
+<p>检查服务的状态以确保其已启动：</p>
+<blockquote>
+<p>$ systemctl status firewalld</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Output</span><br><span class="line">● firewalld.service - firewalld - dynamic firewall daemon</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/firewalld.service; enabled; vendor preset: enabled)</span><br><span class="line">   Active: active (running) since Thu 2020-02-06 16:39:40 UTC; 3s ago</span><br><span class="line">     Docs: man:firewalld(1)</span><br><span class="line"> Main PID: 13180 (firewalld)</span><br><span class="line">    Tasks: 2 (<span class="built_in">limit</span>: 5059)</span><br><span class="line">   Memory: 22.4M</span><br><span class="line">   CGroup: /system.slice/firewalld.service</span><br><span class="line">           └─13180 /usr/libexec/platform-python -s /usr/sbin/firewalld --nofork --nopid</span><br></pre></td></tr></table></figure>
+<p>请注意，它都是 <code>active</code> 和 <code>enabled</code>，这意味着如果重新引导服务器，它将默认启动。</p>
+<p>现在该服务已启动并正在运行，我们可以使用该 <code>firewall-cmd</code> 实用工具来获取和设置防火墙的策略信息。</p>
+<p>首先，让我们列出已经允许的服务：</p>
+<blockquote>
+<p>$ firewall-cmd –permanent –list-all</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Output</span><br><span class="line">public (active)</span><br><span class="line">  target: default</span><br><span class="line">  icmp-block-inversion: no</span><br><span class="line">  interfaces: eth0 eth1</span><br><span class="line">  sources:</span><br><span class="line">  services: cockpit dhcpv6-client ssh</span><br><span class="line">  ports:</span><br><span class="line">  protocols:</span><br><span class="line">  masquerade: no</span><br><span class="line">  forward-ports:</span><br><span class="line">  <span class="built_in">source</span>-ports:</span><br><span class="line">  icmp-blocks:</span><br><span class="line">  rich rules:</span><br></pre></td></tr></table></figure>
+<p>要查看可以按名称启用的其他服务，请键入：</p>
+<blockquote>
+<p>$ firewall-cmd –get-services</p>
+</blockquote>
+<p>要添加应允许的服务，请使用 <code>--add-service</code> 标志：</p>
+<blockquote>
+<p>$ firewall-cmd –permanent –add-service=http</p>
+</blockquote>
+<p>这将添加 <code>http</code> 服务，并允许传入 <code>TCP</code> 流量到 <code>port 80</code>。重新加载防火墙后，配置将更新：</p>
+<blockquote>
+<p>$ firewall-cmd –reload</p>
+</blockquote>
+<p>请记住，您将必须为以后可能配置的任何其他服务显式打开防火墙（带有服务或端口）。</p>
+<h2 id="步骤5-—为普通用户启用外部访问"><a href="#步骤5-—为普通用户启用外部访问" class="headerlink" title="步骤5 —为普通用户启用外部访问"></a>步骤5 —为普通用户启用外部访问</h2><p>现在我们有了一个常规的非 <code>root</code> 用户来日常使用，我们需要确保可以使用它来SSH进入我们的服务器。</p>
+<blockquote>
+<p>注意：在确认您可以登录并sudo与新用户一起使用之前，建议您保持root身份登录。这样，如果遇到问题，您可以进行故障排除并以root身份进行任何必要的更改。如果您正在使用DigitalOcean Droplet，并且根SSH连接遇到问题，则可以使用DigitalOcean Console登录到Droplet。</p>
+</blockquote>
+<p>为新用户配置 <code>SSH</code> 访问的过程取决于服务器的根帐户是使用密码还是 <code>SSH</code> 密钥进行身份验证。</p>
+<p><strong>如果 <code>root</code> 帐户使用密码身份验证</strong></p>
+<p>如果您使用 <code>password</code> 登录到 <code>root</code> 帐户，那么将为SSH启用密码身份验证。您可以通过打开新的终端会话并使用带有新用户名的SSH SSH到您的新用户帐户：</p>
+<blockquote>
+<p>$ ssh <code>sammy</code>@<code>your_server_ip</code></p>
+</blockquote>
+<p>输入普通用户的密码后，您将登录。请记住，如果您需要运行具有管理特权的命令，请sudo像下面这样键入：</p>
+<blockquote>
+<p>$ sudo command_to_run</p>
+</blockquote>
+<p>sudo首次使用每个会话时（此后定期），系统将提示您输入常规用户密码。</p>
+<p>为了增强服务器的安全性，<strong>强烈建议您设置SSH密钥，而不要使用密码身份验证</strong>。遵循我们[在CentOS 8上设置 SSH 密钥]的指南，以了解如何配置基于密钥的身份验证。</p>
+<p><strong>如果根帐户使用SSH密钥身份验证</strong></p>
+<p>如果您使用 <code>SSH</code> 密钥登录到根帐户，则将禁用 <code>SSH</code> 的密码身份验证。您需要将公共密钥的副本添加到新用户的文件中才能成功登录。<code>~/.ssh/authorized_keys</code></p>
+<p>由于您的公钥已经在服务器上根帐户的 <code>~/.ssh/authorized_keys</code> 文件中，因此我们可以将该文件和目录结构复制到我们的新用户帐户中。</p>
+<p>复制具有正确所有权和权限的文件的最简单方法是使用 <code>rsync</code> 命令。这将复制 <code>root</code> 用户的 <code>.ssh</code> 目录，保留权限，并修改文件所有者，所有操作都在一个命令中。确保更改以下命令中突出显示的部分，以匹配普通用户的名称：</p>
+<blockquote>
+<p>注意：该rsync命令将以尾斜杠结尾的源和目标与不以尾斜杠结尾的源和目标区别对待。在rsync下面使用时，请确保源目录（<code>~/.ssh</code>）不包含斜杠（请检查以确保您未使用~/.ssh/）。</p>
+</blockquote>
+<p>如果你不小心一个斜线添加到命令，<code>rsync</code>将复制的内容中的根帐户的 <code>~/.ssh</code> 目录到 <code>sudo</code> 用户的主目录，而不是复制整个 <code>~/.ssh</code> 目录结构。这些文件将位于错误的位置，并且 <code>SSH</code> 将无法找到和使用它们。</p>
+<blockquote>
+<p>$ rsync –archive –chown=sammy:sammy ~/.ssh /home/sammy</p>
+</blockquote>
+<p>现在，回到本地计算机上的新终端，与您的非root用户打开新的SSH会话：</p>
+<blockquote>
+<p>$ ssh <code>sammy</code>@<code>your_server_ip</code></p>
+</blockquote>
+<p>您应该不使用密码登录到新用户帐户。请记住，如果您需要运行具有管理特权的命令，请在命令 <code>sudo</code> 之前输入，如下所示：</p>
+<blockquote>
+<p>$ sudo command_to_run</p>
+</blockquote>
+<p><code>sudo</code> 首次使用每个会话时（此后定期），系统将提示您输入常规用户密码。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>至此，您已经为服务器奠定了坚实的基础。您现在可以在服务器上安装所需的任何软件。</p>
+<blockquote>
+<p>原文链接: <a href="https://www.digitalocean.com/community/tutorials/initial-server-setup-with-centos-8" target="_blank" rel="noopener">https://www.digitalocean.com/community/tutorials/initial-server-setup-with-centos-8</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    赞赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://img.jogiter.cn/wechat.png" alt="Jogiter 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://img.jogiter.cn/alipay.png" alt="Jogiter 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/deployment/" rel="tag"># deployment</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/03/lerna-with-tsdx/" rel="prev" title="lerna with tsdx">
+      <i class="fa fa-chevron-left"></i> lerna with tsdx
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/31/【译】：在-centeros8-上部署Node-js应用程序/" rel="next" title="【译】：在 centeros8 上部署Node.js应用程序">
+      【译】：在 centeros8 上部署Node.js应用程序 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#【译】CentOS-8-服务器初始化设置"><span class="nav-number">1.</span> <span class="nav-text">【译】CentOS 8 服务器初始化设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤1-以root身份登录"><span class="nav-number">1.1.</span> <span class="nav-text">步骤1-以root身份登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤2-创建新用户"><span class="nav-number">1.2.</span> <span class="nav-text">步骤2-创建新用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤3-授予管理权限"><span class="nav-number">1.3.</span> <span class="nav-text">步骤3-授予管理权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤4-—设置基本防火墙"><span class="nav-number">1.4.</span> <span class="nav-text">步骤4 —设置基本防火墙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤5-—为普通用户启用外部访问"><span class="nav-number">1.5.</span> <span class="nav-text">步骤5 —为普通用户启用外部访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">1.6.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jogiter</p>
+  <div class="site-description" itemprop="description">Life exists, and identity</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Jogiter" title="GitHub → https://github.com/Jogiter" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2409083451" title="Weibo → https://weibo.com/2409083451" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.confucianism.com.cn/" title="http://www.confucianism.com.cn/" rel="noopener" target="_blank">国学网</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://winnie0517.github.io/" title="https://winnie0517.github.io/" rel="noopener" target="_blank">邪恶的小爪子</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">粤ICP备18022983号-1 </a>
+      <img src="http://www.beian.miit.gov.cn" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jogiter</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jogiter.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="ffmpeg 是用于记录，转换和流式传输音频和视频的跨平台解决方案， ffmpeg 下载和安装选择对应的版本进行安装：download。 window: 在命令行中添加 ffmpeg 命令 右键【此电脑】&amp;gt;【属性】&amp;gt;【高级】&amp;gt;【环境变量】。选择 ‘Path’，添加 D:\ffmpeg\bin  1ffmpeg -version ffmpeg参数中文详细解释window 执行 ./">
+<meta name="keywords" content="video,audio,tool">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ffmpeg">
+<meta property="og:url" content="https://jogiter.github.io/2020/05/21/ffmpeg/index.html">
+<meta property="og:site_name" content="悲劇的藝術">
+<meta property="og:description" content="ffmpeg 是用于记录，转换和流式传输音频和视频的跨平台解决方案， ffmpeg 下载和安装选择对应的版本进行安装：download。 window: 在命令行中添加 ffmpeg 命令 右键【此电脑】&amp;gt;【属性】&amp;gt;【高级】&amp;gt;【环境变量】。选择 ‘Path’，添加 D:\ffmpeg\bin  1ffmpeg -version ffmpeg参数中文详细解释window 执行 ./">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img.jogiter.cn/blog/win10_env_Pah.png">
+<meta property="og:updated_time" content="2021-05-07T12:45:44.352Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ffmpeg">
+<meta name="twitter:description" content="ffmpeg 是用于记录，转换和流式传输音频和视频的跨平台解决方案， ffmpeg 下载和安装选择对应的版本进行安装：download。 window: 在命令行中添加 ffmpeg 命令 右键【此电脑】&amp;gt;【属性】&amp;gt;【高级】&amp;gt;【环境变量】。选择 ‘Path’，添加 D:\ffmpeg\bin  1ffmpeg -version ffmpeg参数中文详细解释window 执行 ./">
+<meta name="twitter:image" content="https://img.jogiter.cn/blog/win10_env_Pah.png">
+
+<link rel="canonical" href="https://jogiter.github.io/2020/05/21/ffmpeg/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ffmpeg | 悲劇的藝術</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">悲劇的藝術</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">O'caption, My caption!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-reading">
+
+    <a href="/reading" rel="section"><i class="fa fa-sitemap fa-fw"></i>reading</a>
+
+  </li>
+        <li class="menu-item menu-item-book">
+
+    <a href="/book" rel="section"><i class="fa fa-book fa-fw"></i>book</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jogiter.github.io/2020/05/21/ffmpeg/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jogiter">
+      <meta itemprop="description" content="Life exists, and identity">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="悲劇的藝術">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ffmpeg
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-21 18:28:02" itemprop="dateCreated datePublished" datetime="2020-05-21T18:28:02+00:00">2020-05-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-07 12:45:44" itemprop="dateModified" datetime="2021-05-07T12:45:44+00:00">2021-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>ffmpeg 是用于记录，转换和流式传输音频和视频的跨平台解决方案，</p>
+<h2 id="ffmpeg-下载和安装"><a href="#ffmpeg-下载和安装" class="headerlink" title="ffmpeg 下载和安装"></a>ffmpeg 下载和安装</h2><p>选择对应的版本进行安装：<a href="https://ffmpeg.org/download.html" target="_blank" rel="noopener">download</a>。</p>
+<p><strong>window: 在命令行中添加 <code>ffmpeg</code> 命令</strong></p>
+<p>右键【此电脑】&gt;【属性】&gt;【高级】&gt;【环境变量】。选择 ‘Path’，添加 <code>D:\ffmpeg\bin</code></p>
+<p><img src="https://img.jogiter.cn/blog/win10_env_Pah.png" alt="win10_env_Pah"></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -version</span><br></pre></td></tr></table></figure>
+<h2 id="ffmpeg参数中文详细解释"><a href="#ffmpeg参数中文详细解释" class="headerlink" title="ffmpeg参数中文详细解释"></a>ffmpeg参数中文详细解释</h2><p>window 执行 <code>./bin/ffmpeg -h</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line">-L                  show license</span><br><span class="line">-version            show version</span><br><span class="line">-buildconf          show build configuration</span><br><span class="line">-formats            show available formats</span><br><span class="line">-muxers             show available muxers</span><br><span class="line">-demuxers           show available demuxers</span><br><span class="line">-devices            show available devices</span><br><span class="line">-codecs             show available codecs</span><br><span class="line">-decoders           show available decoders</span><br><span class="line">-encoders           show available encoders</span><br><span class="line">-bsfs               show available bit stream filters</span><br><span class="line">-protocols          show available protocols</span><br><span class="line">-filters            show available filters</span><br><span class="line">-pix_fmts           show available pixel formats</span><br><span class="line">-layouts            show standard channel layouts</span><br><span class="line">-sample_fmts        show available audio sample formats</span><br><span class="line">-colors             show available color names</span><br><span class="line">-sources device     list sources of the input device</span><br><span class="line">-sinks device       list sinks of the output device</span><br><span class="line">-hwaccels           show available HW acceleration methods</span><br><span class="line"></span><br><span class="line">Global options (affect whole program instead of just one file:</span><br><span class="line">-loglevel loglevel  <span class="built_in">set</span> logging level</span><br><span class="line">-v loglevel         <span class="built_in">set</span> logging level</span><br><span class="line">-report             generate a report</span><br><span class="line">-max_alloc bytes    <span class="built_in">set</span> maximum size of a single allocated block</span><br><span class="line">-y                  overwrite output files</span><br><span class="line">-n                  never overwrite output files</span><br><span class="line">-ignore_unknown     Ignore unknown stream types</span><br><span class="line">-filter_threads     number of non-complex filter threads</span><br><span class="line">-filter_complex_threads  number of threads <span class="keyword">for</span> -filter_complex</span><br><span class="line">-stats              <span class="built_in">print</span> progress report during encoding</span><br><span class="line">-max_error_rate maximum error rate  ratio of errors (0.0: no errors, 1.0: 100% errors) above <span class="built_in">which</span> ffmpeg returns an error instead of success.</span><br><span class="line">-bits_per_raw_sample number  <span class="built_in">set</span> the number of bits per raw sample</span><br><span class="line">-vol volume         change audio volume (256=normal)</span><br><span class="line"></span><br><span class="line">Per-file main options:</span><br><span class="line">-f fmt              force format</span><br><span class="line">-c codec            codec name</span><br><span class="line">-codec codec        codec name</span><br><span class="line">-pre preset         preset name</span><br><span class="line">-map_metadata outfile[,metadata]:infile[,metadata]  <span class="built_in">set</span> metadata information of outfile from infile</span><br><span class="line">-t duration         record or transcode <span class="string">"duration"</span> seconds of audio/video</span><br><span class="line">-to time_stop       record or transcode stop time</span><br><span class="line">-fs limit_size      <span class="built_in">set</span> the <span class="built_in">limit</span> file size <span class="keyword">in</span> bytes</span><br><span class="line">-ss time_off        <span class="built_in">set</span> the start time offset</span><br><span class="line">-sseof time_off     <span class="built_in">set</span> the start time offset relative to EOF</span><br><span class="line">-seek_timestamp     <span class="built_in">enable</span>/<span class="built_in">disable</span> seeking by timestamp with -ss</span><br><span class="line">-timestamp time     <span class="built_in">set</span> the recording timestamp (<span class="string">'now'</span> to <span class="built_in">set</span> the current time)</span><br><span class="line">-metadata string=string  add metadata</span><br><span class="line">-program title=string:st=number...  add program with specified streams</span><br><span class="line">-target <span class="built_in">type</span>        specify target file <span class="built_in">type</span> (<span class="string">"vcd"</span>, <span class="string">"svcd"</span>, <span class="string">"dvd"</span>, <span class="string">"dv"</span> or <span class="string">"dv50"</span> with optional prefixes <span class="string">"pal-"</span>, <span class="string">"ntsc-"</span> or <span class="string">"film-"</span>)</span><br><span class="line">-apad               audio pad</span><br><span class="line">-frames number      <span class="built_in">set</span> the number of frames to output</span><br><span class="line">-filter filter_graph  <span class="built_in">set</span> stream filtergraph</span><br><span class="line">-filter_script filename  <span class="built_in">read</span> stream filtergraph description from a file</span><br><span class="line">-reinit_filter      reinit filtergraph on input parameter changes</span><br><span class="line">-discard            discard</span><br><span class="line">-disposition        disposition</span><br><span class="line"></span><br><span class="line">Video options:</span><br><span class="line">-vframes number     <span class="built_in">set</span> the number of video frames to output</span><br><span class="line">-r rate             <span class="built_in">set</span> frame rate (Hz value, fraction or abbreviation)</span><br><span class="line">-s size             <span class="built_in">set</span> frame size (WxH or abbreviation)</span><br><span class="line">-aspect aspect      <span class="built_in">set</span> aspect ratio (4:3, 16:9 or 1.3333, 1.7777)</span><br><span class="line">-bits_per_raw_sample number  <span class="built_in">set</span> the number of bits per raw sample</span><br><span class="line">-vn                 <span class="built_in">disable</span> video</span><br><span class="line">-vcodec codec       force video codec (<span class="string">'copy'</span> to copy stream)</span><br><span class="line">-timecode hh:mm:ss[:;.]ff  <span class="built_in">set</span> initial TimeCode value.</span><br><span class="line">-pass n             select the pass number (1 to 3)</span><br><span class="line">-vf filter_graph    <span class="built_in">set</span> video filters</span><br><span class="line">-ab bitrate         audio bitrate (please use -b:a)</span><br><span class="line">-b bitrate          video bitrate (please use -b:v)</span><br><span class="line">-dn                 <span class="built_in">disable</span> data</span><br><span class="line"></span><br><span class="line">Audio options:</span><br><span class="line">-aframes number     <span class="built_in">set</span> the number of audio frames to output</span><br><span class="line">-aq quality         <span class="built_in">set</span> audio quality (codec-specific)</span><br><span class="line">-ar rate            <span class="built_in">set</span> audio sampling rate (<span class="keyword">in</span> Hz)</span><br><span class="line">-ac channels        <span class="built_in">set</span> number of audio channels</span><br><span class="line">-an                 <span class="built_in">disable</span> audio</span><br><span class="line">-acodec codec       force audio codec (<span class="string">'copy'</span> to copy stream)</span><br><span class="line">-vol volume         change audio volume (256=normal)</span><br><span class="line">-af filter_graph    <span class="built_in">set</span> audio filters</span><br><span class="line"></span><br><span class="line">Subtitle options:</span><br><span class="line">-s size             <span class="built_in">set</span> frame size (WxH or abbreviation)</span><br><span class="line">-sn                 <span class="built_in">disable</span> subtitle</span><br><span class="line">-scodec codec       force subtitle codec (<span class="string">'copy'</span> to copy stream)</span><br><span class="line">-stag fourcc/tag    force subtitle tag/fourcc</span><br><span class="line">-fix_sub_duration   fix subtitles duration</span><br><span class="line">-canvas_size size   <span class="built_in">set</span> canvas size (WxH or abbreviation)</span><br><span class="line">-spre preset        <span class="built_in">set</span> the subtitle options to the indicated preset</span><br></pre></td></tr></table></figure>
+<p>中文参考可参考 <a href="https://blog.csdn.net/leixiaohua1020/article/details/12751349" target="_blank" rel="noopener">ffmpeg参数中文详细解释</a></p>
+<h2 id="ffmpeg-常用命令总结"><a href="#ffmpeg-常用命令总结" class="headerlink" title="ffmpeg 常用命令总结"></a>ffmpeg 常用命令总结</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 视频格式转换</span></span><br><span class="line">ffmpeg -i input.mp4 output.ts</span><br><span class="line"></span><br><span class="line"><span class="comment"># 视频剪切</span></span><br><span class="line">ffmpeg -ss 00:00:15 -t 00:00:05 -i input.mp4 -vcodec copy -acodec copy output.mp4</span><br><span class="line"></span><br><span class="line"><span class="comment"># 视频切片</span></span><br><span class="line">ffmpeg -re -i ./videos/tennis.mp4 -c copy -f segment -segment_format mp4 segment_%d.mp4</span><br><span class="line"></span><br><span class="line"><span class="comment"># 抓取视频的一些帧，存为图片。'-r' 表示每一秒几帧 '-q:v' 表示存储 jpeg 的图像质量，一般 2 是高质量。</span></span><br><span class="line">ffmpeg -i input.mp4 -ss 00:00:20 -t 10 -r 1 -q:v 2 -f image2 pic-%03d.jpeg</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取音频</span></span><br><span class="line"><span class="comment"># '-vn':不处理视频</span></span><br><span class="line">ffmpeg -i input.mp4 -vn -acodec copy output.mp3</span><br><span class="line"></span><br><span class="line"><span class="comment"># '-ss':从第15秒开始 '-t':截取10秒的音频</span></span><br><span class="line">ffmpeg -ss 00:00:15 -t 00:00:10 -i input.mp4 -vn output.mp3</span><br><span class="line"></span><br><span class="line"><span class="comment"># '-acodec copy': 不对音频重新编码</span></span><br><span class="line">ffmpeg -ss 00:00:15 -t 00:00:10 -i ./videos/tennis.mp4 -vn -acodec copy output.aac</span><br><span class="line"></span><br><span class="line"><span class="comment"># '-f mp3': 强制转换成 mp3 格式</span></span><br><span class="line">ffmpeg -ss 00:00:15 -t 00:00:10 -i ./videos/tennis.mp4 -vn -f mp3 output.mp3</span><br></pre></td></tr></table></figure>
+<h2 id="ffmpeg-filter过滤器"><a href="#ffmpeg-filter过滤器" class="headerlink" title="ffmpeg filter过滤器"></a>ffmpeg filter过滤器</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># show available filters</span></span><br><span class="line">ffmpeg -filters</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><a href="https://blog.csdn.net/newchenxf/article/details/51364105" target="_blank" rel="noopener">ffmpeg filter过滤器 基础实例及全面解析</a></p>
+</blockquote>
+<p><strong>将输入的1920x1080缩小到960x540输出</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -vf scale=960:540 output.mp4</span><br></pre></td></tr></table></figure>
+<p><strong>为视频添加logo</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 左上角</span></span><br><span class="line">ffmpeg -i input.mp4 -i logo.png -filter_complex overlay output.mp4</span><br><span class="line"><span class="comment"># 右上角</span></span><br><span class="line">ffmpeg -i input.mp4 -i logo.png -filter_complex overlay=W-w output.mp4</span><br><span class="line"><span class="comment"># 左下角</span></span><br><span class="line">ffmpeg -i input.mp4 -i logo.png -filter_complex overlay=0:H-h output.mp4</span><br><span class="line"><span class="comment"># 右下角</span></span><br><span class="line">ffmpeg -i input.mp4 -i logo.png -filter_complex overlay=W-w:H-h output.mp4</span><br></pre></td></tr></table></figure>
+<p><strong>去掉视频的logo</strong></p>
+<p>用 ffmpeg 的 <a href="https://ffmpeg.org/ffmpeg-filters.html#delogo" target="_blank" rel="noopener">delogo</a> 过滤器。</p>
+<blockquote>
+<p>语法：-vf delogo=x:y:w:h[:t[:show]]</p>
+</blockquote>
+<ul>
+<li>x:y 离左上角的坐标。</li>
+<li>w:h logo 的宽和高。</li>
+<li>t: 矩形边缘的厚度，默认值 4。</li>
+<li>show：若设置为1有一个绿色的矩形，默认值0。</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -vf delogo=0:0:220:90:100:1 output.mp4</span><br></pre></td></tr></table></figure>
+<p><strong>旋转视频</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -vf transpose=1 output.mp4</span><br></pre></td></tr></table></figure>
+<p><strong>添加字幕</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -vf subtitles=en.vtt vvt.mp4</span><br><span class="line">ffmpeg -i input.mp4 -vf subtitles=en.srt srt.mp4</span><br></pre></td></tr></table></figure>
+<h2 id="阅读链接"><a href="#阅读链接" class="headerlink" title="阅读链接"></a>阅读链接</h2><ul>
+<li><a href="https://ffmpeg.org/documentation.html" target="_blank" rel="noopener">ffmpeg document</a></li>
+<li><a href="https://blog.csdn.net/leixiaohua1020/article/details/15811977" target="_blank" rel="noopener">雷霄骅：FFMPEG视音频编解码零基础学习方法</a></li>
+<li><a href="https://blog.csdn.net/langzijing/article/details/85256846" target="_blank" rel="noopener">ffmpeg常用命令总结</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/26374202" target="_blank" rel="noopener">使用 MediaSource 搭建流式播放器</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    赞赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://img.jogiter.cn/wechat.png" alt="Jogiter 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://img.jogiter.cn/alipay.png" alt="Jogiter 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/video/" rel="tag"># video</a>
+              <a href="/tags/audio/" rel="tag"># audio</a>
+              <a href="/tags/tool/" rel="tag"># tool</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/08/11/使用-uni-app-开发小程序/" rel="prev" title="使用 uni-app 开发小程序">
+      <i class="fa fa-chevron-left"></i> 使用 uni-app 开发小程序
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/03/Nodejs-权威指南/" rel="next" title="Nodejs 权威指南">
+      Nodejs 权威指南 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ffmpeg-下载和安装"><span class="nav-number">1.</span> <span class="nav-text">ffmpeg 下载和安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ffmpeg参数中文详细解释"><span class="nav-number">2.</span> <span class="nav-text">ffmpeg参数中文详细解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ffmpeg-常用命令总结"><span class="nav-number">3.</span> <span class="nav-text">ffmpeg 常用命令总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ffmpeg-filter过滤器"><span class="nav-number">4.</span> <span class="nav-text">ffmpeg filter过滤器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阅读链接"><span class="nav-number">5.</span> <span class="nav-text">阅读链接</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jogiter</p>
+  <div class="site-description" itemprop="description">Life exists, and identity</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Jogiter" title="GitHub → https://github.com/Jogiter" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2409083451" title="Weibo → https://weibo.com/2409083451" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.confucianism.com.cn/" title="http://www.confucianism.com.cn/" rel="noopener" target="_blank">国学网</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://winnie0517.github.io/" title="https://winnie0517.github.io/" rel="noopener" target="_blank">邪恶的小爪子</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">粤ICP备18022983号-1 </a>
+      <img src="http://www.beian.miit.gov.cn" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jogiter</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

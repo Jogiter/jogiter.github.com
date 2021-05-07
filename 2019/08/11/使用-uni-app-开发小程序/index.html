@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jogiter.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="阅读链接 官网 uniapp 官网 微信公众平台：小程序 微信官方文档：小程序 ColorUI 组件库 使用微信小程序第三方 SDK 及资源汇总 通用 SDK 个推统计 又拍云存储 七牛云存储 腾讯地图 百度地图 高德地图 网易云信 IM 环信 IM 融云 IM 极光 IM 腾讯云会话 阿拉丁 神策数据 诸葛IO GrowingIO 讯飞 AI leancloud serverless开发 bom">
+<meta name="keywords" content="mp,小程序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 uni-app 开发小程序">
+<meta property="og:url" content="https://jogiter.github.io/2019/08/11/使用-uni-app-开发小程序/index.html">
+<meta property="og:site_name" content="悲劇的藝術">
+<meta property="og:description" content="阅读链接 官网 uniapp 官网 微信公众平台：小程序 微信官方文档：小程序 ColorUI 组件库 使用微信小程序第三方 SDK 及资源汇总 通用 SDK 个推统计 又拍云存储 七牛云存储 腾讯地图 百度地图 高德地图 网易云信 IM 环信 IM 融云 IM 极光 IM 腾讯云会话 阿拉丁 神策数据 诸葛IO GrowingIO 讯飞 AI leancloud serverless开发 bom">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://res.wx.qq.com/wxdoc/dist/assets/img/api-login.2fcc9f35.jpg">
+<meta property="og:updated_time" content="2021-05-07T12:45:44.352Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 uni-app 开发小程序">
+<meta name="twitter:description" content="阅读链接 官网 uniapp 官网 微信公众平台：小程序 微信官方文档：小程序 ColorUI 组件库 使用微信小程序第三方 SDK 及资源汇总 通用 SDK 个推统计 又拍云存储 七牛云存储 腾讯地图 百度地图 高德地图 网易云信 IM 环信 IM 融云 IM 极光 IM 腾讯云会话 阿拉丁 神策数据 诸葛IO GrowingIO 讯飞 AI leancloud serverless开发 bom">
+<meta name="twitter:image" content="https://res.wx.qq.com/wxdoc/dist/assets/img/api-login.2fcc9f35.jpg">
+
+<link rel="canonical" href="https://jogiter.github.io/2019/08/11/使用-uni-app-开发小程序/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>使用 uni-app 开发小程序 | 悲劇的藝術</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">悲劇的藝術</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">O'caption, My caption!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-reading">
+
+    <a href="/reading" rel="section"><i class="fa fa-sitemap fa-fw"></i>reading</a>
+
+  </li>
+        <li class="menu-item menu-item-book">
+
+    <a href="/book" rel="section"><i class="fa fa-book fa-fw"></i>book</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jogiter.github.io/2019/08/11/使用-uni-app-开发小程序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jogiter">
+      <meta itemprop="description" content="Life exists, and identity">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="悲劇的藝術">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用 uni-app 开发小程序
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-11 12:58:06" itemprop="dateCreated datePublished" datetime="2019-08-11T12:58:06+00:00">2019-08-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-07 12:45:44" itemprop="dateModified" datetime="2021-05-07T12:45:44+00:00">2021-05-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="阅读链接"><a href="#阅读链接" class="headerlink" title="阅读链接"></a>阅读链接</h2><ul>
+<li>官网<ul>
+<li><a href="https://uniapp.dcloud.io/" target="_blank" rel="noopener">uniapp 官网</a></li>
+<li><a href="https://mp.weixin.qq.com/" target="_blank" rel="noopener">微信公众平台：小程序</a></li>
+<li><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/" target="_blank" rel="noopener">微信官方文档：小程序</a></li>
+<li><a href="https://github.com/weilanwl/ColorUI" target="_blank" rel="noopener">ColorUI 组件库</a></li>
+<li><a href="https://ask.dcloud.net.cn/article/35070" target="_blank" rel="noopener">使用微信小程序第三方 SDK 及资源汇总</a><ul>
+<li>通用 SDK<ul>
+<li><a href="http://docs.getui.com/geshu/start/wx_mp/" target="_blank" rel="noopener">个推统计</a></li>
+<li><a href="http://docs.upyun.com/api/small_program/" target="_blank" rel="noopener">又拍云存储</a></li>
+<li><a href="https://github.com/gpake/qiniu-wxapp-sdk/blob/master/README.md" target="_blank" rel="noopener">七牛云存储</a></li>
+<li><a href="https://lbs.qq.com/qqmap_wx_jssdk/" target="_blank" rel="noopener">腾讯地图</a></li>
+<li><a href="http://lbsyun.baidu.com/index.php?title=wxjsapi" target="_blank" rel="noopener">百度地图</a></li>
+<li><a href="https://lbs.amap.com/api/wx/summary" target="_blank" rel="noopener">高德地图</a></li>
+<li><a href="http://netease.im/wechatApplets" target="_blank" rel="noopener">网易云信 IM</a></li>
+<li><a href="http://docs.easemob.com/im/applet/intro" target="_blank" rel="noopener">环信 IM</a></li>
+<li><a href="https://www.rongcloud.cn/docs/mini_program.html" target="_blank" rel="noopener">融云 IM</a></li>
+<li><a href="https://docs.jiguang.cn/jmessage/client/im_sdk_wxapplet/" target="_blank" rel="noopener">极光 IM</a></li>
+<li><a href="https://cloud.tencent.com/document/product/619/11449" target="_blank" rel="noopener">腾讯云会话</a></li>
+<li><a href="https://www.aldwx.com/" target="_blank" rel="noopener">阿拉丁</a></li>
+<li><a href="https://www.sensorsdata.cn/" target="_blank" rel="noopener">神策数据</a></li>
+<li><a href="https://zhugeio.com/" target="_blank" rel="noopener">诸葛IO</a></li>
+<li><a href="https://docs.growingio.com/docs/sdk-integration/mina-sdk" target="_blank" rel="noopener">GrowingIO</a></li>
+<li><a href="https://www.xfyun.cn/solutions/miniAppSolution" target="_blank" rel="noopener">讯飞 AI</a></li>
+<li><a href="https://leancloud.cn/docs/sdk_setup-js.html#hash1778723680" target="_blank" rel="noopener">leancloud serverless开发</a></li>
+<li><a href="https://ask.dcloud.net.cn/question/54795" target="_blank" rel="noopener">bomb serverless开发</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Vue 开发常用功能<ul>
+<li>I18n</li>
+<li>Vuex<ul>
+<li>在 <code>lang=ts</code> 条件下，配合 <a href="https://github.com/ktsn/vuex-class" target="_blank" rel="noopener">vuex-class</a>使用 mapAction，mapState。</li>
+</ul>
+</li>
+<li>Typescript</li>
+<li>vue<ul>
+<li>支持过滤器</li>
+<li>不支持指令</li>
+<li>不知此路由，小程序中没有路由</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="如何创建新页面"><a href="#如何创建新页面" class="headerlink" title="如何创建新页面"></a>如何创建新页面</h2><ol>
+<li>在 <code>src/pages</code> 目录创建新的页面</li>
+<li>在 <code>src/pages.json</code> 中添加页面路径</li>
+</ol>
+<h2 id="ts-环境如何引入-uni-ui-组件"><a href="#ts-环境如何引入-uni-ui-组件" class="headerlink" title="ts 环境如何引入 uni-ui 组件"></a>ts 环境如何引入 uni-ui 组件</h2><ul>
+<li>uni-ui 目前支持编译到：H5、App、小程序</li>
+<li>本页面介绍使用 npm 的安装使用方式，也可下载相关组件直接使用，组件下载地址见上表</li>
+<li>uni-ui 不支持使用 Vue.use() 的方式安装</li>
+<li>uni-ui 依赖 scss，若是 HBuilderX 中创建的 uni-app 项目，需要在 HBuilderX 中安装 scss 插件；如果是使用 cli 创建的 uni-app 项目，需要安装 <code>node-sass</code> 和 <code>sass-loader</code></li>
+</ul>
+<p><strong>install</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install @dcloudio/uni-ui</span><br><span class="line"></span><br><span class="line"><span class="comment"># cli 创建的项目需要安装 `node-sass` 和 `sass-loader`</span></span><br><span class="line">npm install -D node-sass sass-loader</span><br></pre></td></tr></table></figure>
+<p><strong>using</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">uni-load-more</span></span></span><br><span class="line"><span class="tag">      <span class="attr">:status</span>=<span class="string">"loadStatus"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">:content-text</span>=<span class="string">"loadContentText"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">v-show</span>=<span class="string">"hasMore"</span></span></span><br><span class="line"><span class="tag">    /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">lang</span>=<span class="string">"ts"</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> uniLoadMore <span class="keyword">from</span> <span class="string">'@dcloudio/uni-ui/lib/uni-load-more/uni-load-more.vue'</span>;</span></span><br><span class="line"></span><br><span class="line">  @Component(&#123;</span><br><span class="line">    components: &#123;</span><br><span class="line">      uniLoadMore</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">component</span> <span class="keyword">extends</span> <span class="title">Vue</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 下拉加载功能实现（uni 自带的生命周期）</span></span></span><br><span class="line">    onReachBottom() &#123;</span><br><span class="line"><span class="javascript">      <span class="keyword">if</span> (<span class="keyword">this</span>.hasMore) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.loadStatus = <span class="string">'loading'</span>;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// load more</span></span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="vuex-module-处理"><a href="#vuex-module-处理" class="headerlink" title="vuex module 处理"></a>vuex module 处理</h2><p><code>store/index.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span>;</span><br><span class="line"><span class="keyword">import</span> destination <span class="keyword">from</span> <span class="string">'./destination'</span>;</span><br><span class="line"></span><br><span class="line">Vue.use(Vuex);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  modules: &#123;</span><br><span class="line">    destination</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>store/destination.ts</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  namespaced: <span class="literal">true</span>,</span><br><span class="line">  state: &#123;&#125;,</span><br><span class="line">  mutation: &#123;&#125;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><code>page.vue</code></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Vue, Component, Prop, Watch &#125; <span class="keyword">from</span> <span class="string">'vue-property-decorator'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; State, Mutation, Action, <span class="keyword">namespace</span> &#125; <span class="keyword">from</span> <span class="string">'vuex-class'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">namespace</span>(<span class="string">'destination'</span>);</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> Page <span class="keyword">extends</span> Vue &#123;</span><br><span class="line">  <span class="meta">@store</span>.State cityInfo!: CityInfo.Response;</span><br><span class="line">  <span class="meta">@store</span>.Action getCityInfo!: <span class="function">(<span class="params">data: CityInfo.Param</span>) =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="小屏幕下的样式处理"><a href="#小屏幕下的样式处理" class="headerlink" title="小屏幕下的样式处理"></a>小屏幕下的样式处理</h2><h3 id="rpx-与-px-的换算"><a href="#rpx-与-px-的换算" class="headerlink" title="rpx 与 px 的换算"></a>rpx 与 px 的换算</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> systemInfo = wx.getSystemInfoSync();</span><br><span class="line"><span class="comment">// 用 px 计算 rpx</span></span><br><span class="line"><span class="number">1</span> rpx = systemInfo.windowWidth / <span class="number">750</span>;</span><br><span class="line"><span class="comment">// 用 rpx 计算 px</span></span><br><span class="line"><span class="number">1</span> px = <span class="number">750</span> / systemInfo.windowWidth;</span><br></pre></td></tr></table></figure>
+<h3 id="UI-稿-以-375-为标准尺寸-上面标注，屏幕宽度-320-时，大小为-64x64。则在-css-中需要写多少？"><a href="#UI-稿-以-375-为标准尺寸-上面标注，屏幕宽度-320-时，大小为-64x64。则在-css-中需要写多少？" class="headerlink" title="UI 稿(以 375 为标准尺寸)上面标注，屏幕宽度=320 时，大小为 64x64。则在 css 中需要写多少？"></a>UI 稿(以 375 为标准尺寸)上面标注，屏幕宽度=320 时，大小为 64x64。则在 css 中需要写多少？</h3><blockquote>
+<p>64 / (320 / 375) = 75</p>
+</blockquote>
+<ul>
+<li><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxss.html#%E5%B0%BA%E5%AF%B8%E5%8D%95%E4%BD%8D" target="_blank" rel="noopener">小程序 WXSS</a></li>
+<li><a href="https://klook.slab.com/posts/admin-web-%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA-size%E4%BC%98%E5%8C%96-tradeoff%E5%88%86%E6%9E%90-e4ml1xqz" target="_blank" rel="noopener">klook 图片优化分析</a></li>
+<li><a href="https://cloudinary.com/documentation/image_transformations#img_trans_overview" target="_blank" rel="noopener">cloudinary</a></li>
+</ul>
+<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><p>登录流程时序</p>
+<p><img src="https://res.wx.qq.com/wxdoc/dist/assets/img/api-login.2fcc9f35.jpg" alt="login"></p>
+<p><strong>API：</strong></p>
+<ul>
+<li><a href="https://developers.weixin.qq.com/miniprogram/dev/api/open-api/login/wx.login.html" target="_blank" rel="noopener">wx.login</a>：调用接口获取登录凭证（code）。</li>
+<li><a href="https://developers.weixin.qq.com/miniprogram/dev/api/open-api/login/wx.checkSession.html" target="_blank" rel="noopener">wx.checkSession</a>：检查登录态是否过期。</li>
+<li><a href="https://developers.weixin.qq.com/miniprogram/dev/api/open-api/user-info/wx.getUserInfo.html" target="_blank" rel="noopener">wx.getUserInfo</a>：获取用户信息。不包含 openid 等敏感信息。</li>
+</ul>
+<p><strong>示例：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">image</span> <span class="attr">class</span>=<span class="string">"logo"</span> <span class="attr">:src</span>=<span class="string">"userInfo.avatarUrl ? userInfo.avatarUrl : '../../static/user-default.png'"</span>&gt;</span><span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">text</span>&gt;</span>&#123;&#123;userInfo.nickName&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-if</span>=<span class="string">"!isAuthorized"</span> <span class="attr">open-type</span>=<span class="string">"getUserInfo"</span> @<span class="attr">getuserinfo</span>=<span class="string">"getUserInfo"</span>&gt;</span>登录<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">lang</span>=<span class="string">"ts"</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> &#123; Vue, Component &#125; <span class="keyword">from</span> <span class="string">'vue-property-decorator'</span>;</span></span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">Index</span> <span class="keyword">extends</span> <span class="title">Vue</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">    isAuthorized = <span class="literal">false</span>;</span></span><br><span class="line">    userInfo: any = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    WXgetUserInfo() &#123;</span><br><span class="line">        wx.getUserInfo(&#123;</span><br><span class="line"><span class="javascript">            success: <span class="function">(<span class="params">res: any</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">this</span>.isAuthorized = <span class="literal">true</span>;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">this</span>.userInfo = res.userInfo;</span></span><br><span class="line">            &#125;,</span><br><span class="line"><span class="javascript">            fail: <span class="function">(<span class="params">e: any</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">                <span class="comment">// 需要用户点击页面的按钮触发授权，才可以获取用户信息。</span></span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(<span class="string">'需要用户点击页面的按钮触发授权，才可以获取用户信息。'</span>);</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    onLoad() &#123;</span><br><span class="line">      wx.checkSession(&#123;</span><br><span class="line"><span class="javascript">          success: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">              <span class="comment">//session_key 未过期，并且在本生命周期一直有效</span></span></span><br><span class="line"><span class="javascript">              <span class="keyword">this</span>.WXgetUserInfo();</span></span><br><span class="line">          &#125;,</span><br><span class="line"><span class="javascript">          fail: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">              <span class="comment">// session_key 已经失效，需要重新执行登录流程</span></span></span><br><span class="line">              wx.login(&#123;</span><br><span class="line"><span class="javascript">                  success: <span class="function">(<span class="params">res: any</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">                      <span class="keyword">const</span> &#123; code &#125; = res;</span></span><br><span class="line">                      if (code) &#123;</span><br><span class="line"><span class="javascript">                          <span class="built_in">console</span>.log(<span class="string">'登录成功！'</span> + code)</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">                          <span class="comment">// 获取用户信息</span></span></span><br><span class="line"><span class="javascript">                          <span class="keyword">this</span>.WXgetUserInfo(code);</span></span><br><span class="line"><span class="javascript">                      &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="javascript">                          <span class="built_in">console</span>.log(<span class="string">'登录失败！'</span> + res.errMsg)</span></span><br><span class="line">                      &#125;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;)</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>获取用户登录信息后，使用 <code>code</code> 调用 <code>auth.code2Session</code> 换取 用户唯一标识 <code>openid</code>。将其存储在数据库的用户信息表中。</p>
+<h3 id="获取用户的敏感信息，如手机号"><a href="#获取用户的敏感信息，如手机号" class="headerlink" title="获取用户的敏感信息，如手机号"></a>获取用户的敏感信息，如手机号</h3><p><strong>API：</strong></p>
+<ul>
+<li><a href="https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html" target="_blank" rel="noopener">auth.code2Session</a>：使用 code 换取 openid 和 session_key 等信息。<strong>本接口应在服务器端调用</strong><ul>
+<li>method：<code>GET</code></li>
+<li>url：<code>https://api.weixin.qq.com/sns/jscode2session?appid=APPID&amp;secret=SECRET&amp;js_code=JSCODE&amp;grant_type=authorization_code</code></li>
+<li>params：<ul>
+<li>appid(string)：小程序 appId</li>
+<li>secret(string)：小程序 appSecret</li>
+<li>js_code(string)：登录时获取的 code</li>
+<li>grant_type(string)：授权类型，此处只需填写 authorization_code</li>
+</ul>
+</li>
+<li>response：<ul>
+<li>openid(string): 用户唯一标识</li>
+<li>session_key(string): 会话密钥</li>
+<li>unionid(string)：用户在开放平台的唯一标识符，在满足 UnionID 下发条件的情况下会返回，详见 <a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/union-id.html" target="_blank" rel="noopener">UnionID 机制说明</a>。</li>
+<li>errcode(number)：错误码</li>
+<li>errmsg(string)：错误信息</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>示例：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">wx.login(&#123;</span><br><span class="line">    success: <span class="function">(<span class="params">res: any</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; code &#125; = res;</span><br><span class="line">        <span class="keyword">if</span> (code) &#123;</span><br><span class="line">            <span class="comment">// 获取用户信息</span></span><br><span class="line">            wx.getUserInfo(&#123;</span><br><span class="line">                withCredentials: <span class="literal">true</span>, <span class="comment">// encryptedData, iv 等敏感信息</span></span><br><span class="line">                success: <span class="function">(<span class="params">res: any</span>) =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">const</span> &#123; encryptedData, iv &#125; = res;</span><br><span class="line">                    <span class="comment">// todo: 将 encryptedData, iv 和 code 传递到开发者服务器，获取用户手机号等信息</span></span><br><span class="line">                &#125;,</span><br><span class="line">                fail: <span class="function">(<span class="params">e: any</span>) =&gt;</span> &#123;</span><br><span class="line">                    <span class="comment">// 需要用户点击页面的按钮触发授权，才可以获取用户信息。</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'登录失败！'</span> + res.errMsg)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>如上述步骤获取 <code>encryptedData</code>, <code>iv</code> 和 <code>code</code> 后，参考加密数据解密算法的官网示例代码，<a href="https://res.wx.qq.com/wxdoc/dist/assets/media/aes-sample.eae1f364.zip" target="_blank" rel="noopener">点此下载</a>。根据示例即可获取用户手机号等敏感信息。</p>
+<h2 id="分享"><a href="#分享" class="headerlink" title="分享"></a>分享</h2><ul>
+<li><a href="https://juejin.im/post/5b4418fee51d4519115cde19" target="_blank" rel="noopener">小程序分享，看这篇就够了</a></li>
+</ul>
+<p>小程序如果想对外分享，必须在 page 里面定义 <code>onShareAppMessage</code> 函数，来配置页面分享转发相关的信息。</p>
+<ul>
+<li>只有定义了此事件处理函数，右上角菜单才会显示 “转发” 按钮</li>
+<li>用户点击转发按钮的时候会调用</li>
+<li>此事件需要 return 一个 Object，用于自定义转发内容</li>
+</ul>
+<p>注意事项：</p>
+<ul>
+<li>转发后不添加 <code>imageUrl</code> 的话，将<strong>截图</strong>作为转发的默认图片。</li>
+<li>from 字段可以通过在转发成功后调取的 <code>success</code> 、 <code>complete</code> 来进行对 <code>menu</code> 和 <code>button</code> 的不同操作</li>
+<li>如果有携带 <code>shareTicket</code> 值，会在 <code>success</code> 回调产生，返回结果在 <code>shareTickets</code> 字段中，是一个数组，可以做一定处理</li>
+</ul>
+<h3 id="异步设置分享内容"><a href="#异步设置分享内容" class="headerlink" title="异步设置分享内容"></a>异步设置分享内容</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">shareText = <span class="string">''</span>;</span><br><span class="line">image = <span class="string">''</span>;</span><br><span class="line">onReady() &#123;</span><br><span class="line">    <span class="comment">// 分享的标题和图片是异步获取时</span></span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.shareText=<span class="string">'修改内容'</span>,</span><br><span class="line">        <span class="keyword">this</span>.image=<span class="string">'https://dummyimage.com/343x147/ed4040/fff'</span>;</span><br><span class="line">    &#125;, <span class="number">2000</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 定义了生命周期的方法，才会在</span></span><br><span class="line">onShareAppMessage() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        title: <span class="keyword">this</span>.shareText ? <span class="keyword">this</span>.shareText : <span class="string">"欢迎体验uni-app"</span>,</span><br><span class="line">        path: <span class="string">'/pages/destination/index'</span>,</span><br><span class="line">        imageUrl:<span class="keyword">this</span>.image ? <span class="keyword">this</span>.image : <span class="string">'https://img-cdn-qiniu.dcloud.net.cn/uniapp/app/share-logo@3.png'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="如何在小程序中引用-iconfont"><a href="#如何在小程序中引用-iconfont" class="headerlink" title="如何在小程序中引用 iconfont"></a>如何在小程序中引用 <a href="https://www.iconfont.cn/" target="_blank" rel="noopener">iconfont</a></h2><ol>
+<li>将平台中项目的 <code>https://at.alicdn.com/t/{font_path}.css</code> 的内容拷贝到本地项目中</li>
+<li>在 <code>src/App.vue</code> 的 <code>style</code> 中引用 <code>@import &quot;./static/css/icon.css&quot;;</code></li>
+<li>使用： <code>&lt;text class=&quot;icon icon-user&quot;&gt;&lt;/text&gt;</code></li>
+</ol>
+<blockquote>
+<p>fontfamily： <code>icon</code> 和 prefix： <code>icon-</code> 可在平台中自行修改</p>
+</blockquote>
+<h2 id="遇到奇怪的错误时，首先请尝试以下方法"><a href="#遇到奇怪的错误时，首先请尝试以下方法" class="headerlink" title="遇到奇怪的错误时，首先请尝试以下方法"></a>遇到奇怪的错误时，首先请尝试以下方法</h2><p>1、关闭微信开发者工具，然后重新打开。<br>2、执行 <code>rm -rf dist</code> ，删掉打包后的目录，然后重新执行打包命令。</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    赞赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://img.jogiter.cn/wechat.png" alt="Jogiter 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://img.jogiter.cn/alipay.png" alt="Jogiter 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/mp/" rel="tag"># mp</a>
+              <a href="/tags/小程序/" rel="tag"># 小程序</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/08/11/Typescript-guides/" rel="prev" title="Typescript guides">
+      <i class="fa fa-chevron-left"></i> Typescript guides
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/21/ffmpeg/" rel="next" title="ffmpeg">
+      ffmpeg <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#阅读链接"><span class="nav-number">1.</span> <span class="nav-text">阅读链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何创建新页面"><span class="nav-number">2.</span> <span class="nav-text">如何创建新页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ts-环境如何引入-uni-ui-组件"><span class="nav-number">3.</span> <span class="nav-text">ts 环境如何引入 uni-ui 组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vuex-module-处理"><span class="nav-number">4.</span> <span class="nav-text">vuex module 处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小屏幕下的样式处理"><span class="nav-number">5.</span> <span class="nav-text">小屏幕下的样式处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rpx-与-px-的换算"><span class="nav-number">5.1.</span> <span class="nav-text">rpx 与 px 的换算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UI-稿-以-375-为标准尺寸-上面标注，屏幕宽度-320-时，大小为-64x64。则在-css-中需要写多少？"><span class="nav-number">5.2.</span> <span class="nav-text">UI 稿(以 375 为标准尺寸)上面标注，屏幕宽度=320 时，大小为 64x64。则在 css 中需要写多少？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登录"><span class="nav-number">6.</span> <span class="nav-text">登录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取用户的敏感信息，如手机号"><span class="nav-number">6.1.</span> <span class="nav-text">获取用户的敏感信息，如手机号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分享"><span class="nav-number">7.</span> <span class="nav-text">分享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异步设置分享内容"><span class="nav-number">7.1.</span> <span class="nav-text">异步设置分享内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何在小程序中引用-iconfont"><span class="nav-number">8.</span> <span class="nav-text">如何在小程序中引用 iconfont</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到奇怪的错误时，首先请尝试以下方法"><span class="nav-number">9.</span> <span class="nav-text">遇到奇怪的错误时，首先请尝试以下方法</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jogiter</p>
+  <div class="site-description" itemprop="description">Life exists, and identity</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Jogiter" title="GitHub → https://github.com/Jogiter" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2409083451" title="Weibo → https://weibo.com/2409083451" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.confucianism.com.cn/" title="http://www.confucianism.com.cn/" rel="noopener" target="_blank">国学网</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://winnie0517.github.io/" title="https://winnie0517.github.io/" rel="noopener" target="_blank">邪恶的小爪子</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">粤ICP备18022983号-1 </a>
+      <img src="http://www.beian.miit.gov.cn" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jogiter</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

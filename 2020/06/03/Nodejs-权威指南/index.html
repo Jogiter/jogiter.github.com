@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jogiter.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Nodejs 介绍为了实现高性能，Nodejs 中采用了如下两种机制：  非阻塞性 I/O 事件环   更多详细内容阅读深入剖析Nodejs的异步IO  高并发在 Web 应用程序中，一个主要的瓶颈是服务器所支持的最大同时连接用户量。Java、PhP 或 ASP.Net 等服务器语言中，每一个客户端连接会创建一个新的线程，每个线程需要耗费大约 2M 的内存，理论上，具有 8G 内存的服务器可以同时">
+<meta name="keywords" content="book,nodejs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nodejs 权威指南">
+<meta property="og:url" content="https://jogiter.github.io/2020/06/03/Nodejs-权威指南/index.html">
+<meta property="og:site_name" content="悲劇的藝術">
+<meta property="og:description" content="Nodejs 介绍为了实现高性能，Nodejs 中采用了如下两种机制：  非阻塞性 I/O 事件环   更多详细内容阅读深入剖析Nodejs的异步IO  高并发在 Web 应用程序中，一个主要的瓶颈是服务器所支持的最大同时连接用户量。Java、PhP 或 ASP.Net 等服务器语言中，每一个客户端连接会创建一个新的线程，每个线程需要耗费大约 2M 的内存，理论上，具有 8G 内存的服务器可以同时">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-05-07T12:45:44.348Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nodejs 权威指南">
+<meta name="twitter:description" content="Nodejs 介绍为了实现高性能，Nodejs 中采用了如下两种机制：  非阻塞性 I/O 事件环   更多详细内容阅读深入剖析Nodejs的异步IO  高并发在 Web 应用程序中，一个主要的瓶颈是服务器所支持的最大同时连接用户量。Java、PhP 或 ASP.Net 等服务器语言中，每一个客户端连接会创建一个新的线程，每个线程需要耗费大约 2M 的内存，理论上，具有 8G 内存的服务器可以同时">
+
+<link rel="canonical" href="https://jogiter.github.io/2020/06/03/Nodejs-权威指南/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Nodejs 权威指南 | 悲劇的藝術</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">悲劇的藝術</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">O'caption, My caption!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-reading">
+
+    <a href="/reading" rel="section"><i class="fa fa-sitemap fa-fw"></i>reading</a>
+
+  </li>
+        <li class="menu-item menu-item-book">
+
+    <a href="/book" rel="section"><i class="fa fa-book fa-fw"></i>book</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jogiter.github.io/2020/06/03/Nodejs-权威指南/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jogiter">
+      <meta itemprop="description" content="Life exists, and identity">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="悲劇的藝術">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Nodejs 权威指南
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-03 14:54:23" itemprop="dateCreated datePublished" datetime="2020-06-03T14:54:23+00:00">2020-06-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-07 12:45:44" itemprop="dateModified" datetime="2021-05-07T12:45:44+00:00">2021-05-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Nodejs-介绍"><a href="#Nodejs-介绍" class="headerlink" title="Nodejs 介绍"></a>Nodejs 介绍</h2><p>为了实现高性能，Nodejs 中采用了如下两种机制：</p>
+<ul>
+<li>非阻塞性 I/O</li>
+<li>事件环</li>
+</ul>
+<blockquote>
+<p>更多详细内容阅读<a href="https://www.cnblogs.com/liuchuanfeng/p/6703993.html" target="_blank" rel="noopener">深入剖析Nodejs的异步IO</a></p>
+</blockquote>
+<h2 id="高并发"><a href="#高并发" class="headerlink" title="高并发"></a>高并发</h2><p>在 Web 应用程序中，一个主要的瓶颈是服务器所支持的最大同时连接用户量。Java、PhP 或 ASP.Net 等服务器语言中，每一个客户端连接会创建一个新的线程，每个线程需要耗费大约 2M 的内存，理论上，具有 8G 内存的服务器可以同时连接的最大用户数是 4000 个左右。Nodejs 修改了客户端到服务器的连接方法：它并不为每个客户端请求创建一个新线程，而是为每一个客户端连接触发一个在 Nodejs 内部进行处理的事件。因此可以同时处理多达几万个用户的客户端连接。</p>
+<h2 id="Nodejs-中的模块"><a href="#Nodejs-中的模块" class="headerlink" title="Nodejs 中的模块"></a>Nodejs 中的模块</h2><p>Nodejs 中，不在 V8 引擎中的，不需要引用任何模块就可以直接使用的这些类、函数和对象如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">类、函数及对象名</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Buffer 类</td>
+<td style="text-align:left">用于为二进制数据的存储提供一个缓存区</td>
+</tr>
+<tr>
+<td style="text-align:left">setTimeout 函数</td>
+<td style="text-align:left">用于在指定时间到达时执行的一个指定函数</td>
+</tr>
+<tr>
+<td style="text-align:left">clearTimeout 函数</td>
+<td style="text-align:left">用于取消在 setTimeout 函数内指定的函数的执行</td>
+</tr>
+<tr>
+<td style="text-align:left">setInterval 函数</td>
+<td style="text-align:left">用于指定每隔多少时间执行一个指定函数</td>
+</tr>
+<tr>
+<td style="text-align:left">clearInterval 函数</td>
+<td style="text-align:left">用于取消在 setInterval 函数内指定的函数的执行</td>
+</tr>
+<tr>
+<td style="text-align:left">require 函数</td>
+<td style="text-align:left">用于加载模块</td>
+</tr>
+<tr>
+<td style="text-align:left">module 对象</td>
+<td style="text-align:left">用于访问模块的信息</td>
+</tr>
+<tr>
+<td style="text-align:left">process 对象</td>
+<td style="text-align:left">用于访问进程的信息</td>
+</tr>
+</tbody>
+</table>
+<p><strong>exports 与 module.exports 的区别</strong></p>
+<p><code>exports</code> 是 <code>module.exports</code> 的引用。<code>require</code> 引用的只是 <code>module.exports</code> 这个对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">module</span> = &#123;</span><br><span class="line">    exports:&#123;</span><br><span class="line">        name:<span class="string">"我是module的exports属性"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> exports = <span class="built_in">module</span>.exports;  <span class="comment">//exports是对module.exports的引用，也就是exports现在指向的内存地址和module.exports指向的内存地址是一样的</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>.exports);    <span class="comment">//  &#123; name: '我是module的exports属性' &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(exports);   <span class="comment">//  &#123; name: '我是module的exports属性' &#125;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">exports.name = <span class="string">"我想改一下名字"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>.exports);    <span class="comment">//  &#123; name: '我想改一下名字' &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(exports);   <span class="comment">//  &#123; name: '我想改一下名字' &#125;</span></span><br><span class="line"><span class="comment">//看到没，引用的结果就是a和b都操作同一内存地址下的数据</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//这个时候我在某个文件定义了一个想导出的模块</span></span><br><span class="line"><span class="keyword">var</span> Circle = &#123;</span><br><span class="line">    name:<span class="string">"我是一个圆"</span>,</span><br><span class="line">    func:<span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x*x*<span class="number">3.14</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">exports = Circle;  <span class="comment">//   看清楚了，Circle这个Object在内存中指向了新的地址，所以exports也指向了这个新的地址，和原来的地址没有半毛钱关系了</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>.exports);    <span class="comment">//  &#123; name: '我想改一下名字' &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(exports);   <span class="comment">// &#123; name: '我是一个圆', func: [Function] &#125;</span></span><br></pre></td></tr></table></figure>
+<p>详细解释参见<a href="https://www.zhihu.com/question/26621212" target="_blank" rel="noopener">Node.js模块里exports与module.exports的区别?</a></p>
+<p><strong>从 node_modules 目录加载模块</strong></p>
+<p>在完整路径的文件 <code>/home/demo/project/app.js</code> 中执行下面的函数。指定文件名，而不指定路径</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'bar.js'</span>)</span><br></pre></td></tr></table></figure>
+<p>Nodejs 的搜索路径如下：</p>
+<ul>
+<li>/home/demo/project/node_modules/bar.js</li>
+<li>/home/demo/node_modules/bar.js</li>
+<li>/home/node_modules/bar.js</li>
+<li>/node_modules/bar.js</li>
+<li>$NODE_PATH/bar.js (从系统的环境变量指定的目录中寻找)</li>
+</ul>
+<h2 id="EventEmiter-类"><a href="#EventEmiter-类" class="headerlink" title="EventEmiter 类"></a>EventEmiter 类</h2><p>在 Nodejs 中，所有可能触发事件的对象都是一个继承了 EventEmitter 类的子类的实例对象。</p>
+<p>EventEmiter 类的各个方法</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法名与参数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">addListener(event, listener)</td>
+<td style="text-align:left">对指定事件绑定事件处理函数</td>
+</tr>
+<tr>
+<td style="text-align:left">on(event, listener)</td>
+<td style="text-align:left">addListener 的别名</td>
+</tr>
+<tr>
+<td style="text-align:left">once(event, listener)</td>
+<td style="text-align:left">对指定事件绑定只执行一次的事件处理函数</td>
+</tr>
+<tr>
+<td style="text-align:left">removeListener(event, listener)</td>
+<td style="text-align:left">对指定事件解除事件处理函数</td>
+</tr>
+<tr>
+<td style="text-align:left">removeAllListener([event])</td>
+<td style="text-align:left">对指定事件解除所有事件处理函数</td>
+</tr>
+<tr>
+<td style="text-align:left">emit(event, [arg1], [arg2], […])</td>
+<td style="text-align:left">手动触发指定事件</td>
+</tr>
+<tr>
+<td style="text-align:left">setMaxListener(n)</td>
+<td style="text-align:left">指定事件处理函数的最大数量</td>
+</tr>
+<tr>
+<td style="text-align:left">listeners(event)</td>
+<td style="text-align:left">获取指定事件的所有事件处理函数</td>
+</tr>
+</tbody>
+</table>
+<h2 id="使用-openssl-创建-CA"><a href="#使用-openssl-创建-CA" class="headerlink" title="使用 openssl 创建 CA"></a>使用 openssl 创建 CA</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建私钥</span></span><br><span class="line">openssl genrsa -out private.pem 1024</span><br><span class="line"><span class="comment"># 创建证书签名请求</span></span><br><span class="line">openssl req -new -key private.pem -out certrequest.crs</span><br><span class="line"><span class="comment"># 获取证书  x509 表示证书服务国际电信联盟制定的数字证书标准</span></span><br><span class="line">openssl x509 -req -<span class="keyword">in</span> certrequest.crs -signkey private.pem -out certificate.pem</span><br><span class="line"><span class="comment"># 创建 pfx 文件（用来存储和传输用户或服务器私钥、公钥和证书而制定的格式）</span></span><br><span class="line">openssl pkcs12 -<span class="built_in">export</span> -<span class="keyword">in</span> certificate.pem -inkey private.pem -out certificate.pfx</span><br></pre></td></tr></table></figure>
+<h2 id="crypto"><a href="#crypto" class="headerlink" title="crypto"></a>crypto</h2><p><code>OpenSSL</code> 类库是一个经过严格测试的可靠的加密和解密算法的实现工具。在 <code>Nodejs</code> 中， <code>OpenSSL</code> 类库被封装在 <code>crypto</code> 模块中。</p>
+<ul>
+<li>Cipher 类：用于加密数据</li>
+<li>Decipher 类：用于解密数据</li>
+<li>Sign 类：用于生成签名</li>
+<li>Verify 类：用于验证签名</li>
+</ul>
+<h2 id="process"><a href="#process" class="headerlink" title="process"></a>process</h2><p><strong>进程对象的属性</strong></p>
+<ul>
+<li>execPath: <code>node.exe</code> 所在的绝对路径</li>
+<li>version: Nodejs 的版本号</li>
+<li>versions: Nodejs 及其依赖的版本号</li>
+<li>platform: 运行 Nodejs 的平台。例如 <code>darwin</code>、<code>freebsd</code>、<code>linux</code>、<code>sunos</code>、<code>win32</code>。</li>
+<li>argv：包含了运行 Nodejs 应用程序时的所有命令行参数的数组。<code>node app.js one two</code> 的 argv 内容为：[‘node’, ‘app.js’, ‘one’, ‘’, ‘two’]</li>
+<li>env: 包含了运行 Nodejs 应用程序的操作系统的环境信息。</li>
+<li>pid：当前进程的 PID。</li>
+<li>arch：运行应用程序的处理器架构。例如 <code>arm</code>、<code>ia32</code>、<code>x64</code>。</li>
+<li>memoryUsage()：获取进程的内存使用量</li>
+<li>nextTick(callback): 用于将一个函数推迟到代码中的下一个同步方法执行完毕时或异步方法的回调函数开始执行时调用。</li>
+<li>chdir(directory)：修改应用程序中使用的当前工作目录</li>
+<li>cwd()：返回当前目录</li>
+<li>exit([code])：退出进程。默认值为 <code>0</code>，表示正常退出。</li>
+<li>kill(pid, [signal])：向一个进程发送信号。默认值为 <code>SIGTERM</code>，表示中止改进程。</li>
+<li>uptime()：返回应用程序当前的运行时间。</li>
+<li>hrtime()：主要用于测试一段代码的运行时间，时间精度可以精确到毫秒。</li>
+</ul>
+<p><strong>nextTick 方法</strong></p>
+<p>使用场景1：指定一个函数在一个同步方法执行完毕时立即调用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"><span class="keyword">const</span> finish = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'文件读取完毕。'</span>)</span><br><span class="line"></span><br><span class="line">process.nextTick(finish)</span><br><span class="line"><span class="built_in">console</span>.log(fs.readFileSync(<span class="string">'./package.json'</span>).toString())</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &#123;</span></span><br><span class="line"><span class="comment"> *   "name": "demo",</span></span><br><span class="line"><span class="comment"> *   "version": "0.0.0"</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> * 文件读取完毕。</span></span><br><span class="line"><span class="comment"> * /</span></span><br></pre></td></tr></table></figure>
+<p>使用场景2：指定两个耗时的操作同步进行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"><span class="keyword">const</span> file = <span class="string">'./crash.mp3'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">beginAnotherTask</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> rs = fs.createReadStream(file)</span><br><span class="line">    rs.on(<span class="string">'data'</span>, data =&gt; <span class="built_in">console</span>.log(<span class="string">`读取到<span class="subst">$&#123;data.length&#125;</span>字节`</span>))</span><br><span class="line">  &#125;</span><br><span class="line">  process.nextTick(beginAnotherTask)</span><br><span class="line"><span class="comment">//   beginAnotherTask()</span></span><br><span class="line"><span class="comment">// 不使用 nextTick 运行的结果也一样</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> rs = fs.createReadStream(file)</span><br><span class="line">rs.on(<span class="string">'data'</span>, data =&gt; <span class="built_in">console</span>.log(<span class="string">`从 <span class="subst">$&#123;file&#125;</span> 中读取到<span class="subst">$&#123;data.length&#125;</span>字节`</span>))</span><br><span class="line">foo()</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 从 crash.mp3 中读取到65536字节</span></span><br><span class="line"><span class="comment"> * 读取到65536字节</span></span><br><span class="line"><span class="comment"> * 从 crash.mp3 中读取到65536字节</span></span><br><span class="line"><span class="comment"> * 读取到65536字节</span></span><br><span class="line"><span class="comment"> * 从 crash.mp3 中读取到65536字节</span></span><br><span class="line"><span class="comment"> * 读取到65536字节</span></span><br><span class="line"><span class="comment"> * 从 crash.mp3 中读取到65536字节</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h3 id="child-process"><a href="#child-process" class="headerlink" title="child_process"></a>child_process</h3><p>在主进程运行之后，可以通过 <code>child_process</code> 模块开启多个子进程。在多个子进程之间可以共享内存空间。可以通过子进程之间的互相通信来交换信息，多个子进程之间也可以通过共享端口的方式将请求分配给多个子进程来执行。</p>
+<p><strong>spawn</strong>：开启一个运行某个命令的子进程</p>
+<blockquote>
+<p>child_process.spawn(command, [args], [options])</p>
+</blockquote>
+<p>options:</p>
+<ul>
+<li>cwd；指定子进程的当前工作目录。</li>
+<li>stdio：一个字符串或者一个存放了[标准输入文件描述符、标准输出文件描述符、标准错误输出文件描述符]三个元素的数组。用于设置子进程的标准输入/输出。</li>
+<li>env：子进程指定环境变量的对象。不指定时没有可以使用的环境变量，而不是使用 process.env 中的环境变量。</li>
+<li>detached：布尔值。如果为 <code>true</code>，当父进程不存在时，子进程也可以独立存在。默认为 <code>false</code>。</li>
+</ul>
+<p><strong>示例：允许父进程首先退出</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"><span class="keyword">const</span> &#123; spawn &#125; = <span class="built_in">require</span>(<span class="string">'child_process'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> out = fs.openSync(<span class="string">'./msg.txt'</span>, <span class="string">'w'</span>)</span><br><span class="line"><span class="keyword">const</span> sp = spawn(<span class="string">'node'</span>, [<span class="string">'write.js'</span>], &#123;</span><br><span class="line">  detached: <span class="literal">true</span>,</span><br><span class="line">  stdio: [<span class="string">'ignore'</span>, out, <span class="string">'ignore'</span>]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">sp.unref()</span><br><span class="line"></span><br><span class="line"><span class="comment">// write.js</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt;= <span class="number">1e6</span>; i++) &#123;</span><br><span class="line">  process.stdout.write(i.toString() + <span class="string">'\r\n'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>会发现应用程序退出了，但是 <code>msg.txt</code> 文件尺寸仍在不断增大。</p>
+<p><strong>fork</strong>：开启一个专用于运行 Nodejs 中某个模块文件的子进程。</p>
+<blockquote>
+<p>child_process.fork(modulePath, [args], [options])</p>
+</blockquote>
+<p>options:</p>
+<ul>
+<li>cwd；指定子进程的当前工作目录。</li>
+<li>env：子进程指定环境变量的对象。不指定时没有可以使用的环境变量，而不是使用 process.env 中的环境变量。</li>
+<li>encoding：指定标准输出及标准错误输出数据的编码格式。</li>
+<li>silent：默认为 <code>false</code>：表示子进程与父进程共享标准输入/输出。</li>
+</ul>
+<p><strong>在多个子进程中运行 http 服务器</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// server.js</span></span><br><span class="line"><span class="keyword">const</span> cluster = <span class="built_in">require</span>(<span class="string">'cluster'</span>)</span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (cluster.isMaster) &#123;</span><br><span class="line">  cluster.fork()</span><br><span class="line">  cluster.fork()</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (req.url !== <span class="string">'./favicon.ico'</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> sum = <span class="number">0</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5e5</span>; i++) &#123;</span><br><span class="line">        sum += i</span><br><span class="line">      &#125;</span><br><span class="line">      res.writeHead(<span class="number">200</span>)</span><br><span class="line">      res.</span><br><span class="line">      res.write(<span class="string">`客户端请求在子进程<span class="subst">$&#123;cluster.worker.id&#125;</span>中被处理`</span>)</span><br><span class="line">      res.end(<span class="string">`sum=<span class="subst">$&#123;sum&#125;</span>`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;).listen(<span class="number">1337</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// client.js</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">  hostname: <span class="string">'localhost'</span>,</span><br><span class="line">  port: <span class="number">1337</span>,</span><br><span class="line">  path: <span class="string">'/'</span>,</span><br><span class="line">  method: <span class="string">'GET'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  <span class="keyword">let</span> req = http.request(options, res =&gt; &#123;</span><br><span class="line">    res.on(<span class="string">'data'</span>, chunk =&gt; &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`响应内容：<span class="subst">$&#123;chunk&#125;</span>`</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">  req.end()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最终的运行结果:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">响应内容：客户端请求在子进程<span class="number">1</span>中被处理</span><br><span class="line">响应内容：sum=<span class="number">124999750000</span></span><br><span class="line">响应内容：客户端请求在子进程<span class="number">2</span>中被处理</span><br><span class="line">响应内容：sum=<span class="number">124999750000</span></span><br><span class="line">响应内容：客户端请求在子进程<span class="number">2</span>中被处理</span><br><span class="line">响应内容：sum=<span class="number">124999750000</span></span><br><span class="line">响应内容：客户端请求在子进程<span class="number">1</span>中被处理</span><br><span class="line">响应内容：sum=<span class="number">124999750000</span></span><br><span class="line">响应内容：客户端请求在子进程<span class="number">2</span>中被处理</span><br><span class="line">响应内容：sum=<span class="number">124999750000</span></span><br><span class="line">响应内容：客户端请求在子进程<span class="number">1</span>中被处理</span><br><span class="line">响应内容：sum=<span class="number">124999750000</span></span><br><span class="line">响应内容：客户端请求在子进程<span class="number">2</span>中被处理</span><br><span class="line">响应内容：sum=<span class="number">124999750000</span></span><br><span class="line">响应内容：客户端请求在子进程<span class="number">1</span>中被处理</span><br><span class="line">响应内容：sum=<span class="number">124999750000</span></span><br><span class="line">响应内容：客户端请求在子进程<span class="number">2</span>中被处理</span><br><span class="line">响应内容：sum=<span class="number">124999750000</span></span><br><span class="line">响应内容：客户端请求在子进程<span class="number">1</span>中被处理</span><br><span class="line">响应内容：sum=<span class="number">124999750000</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    赞赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://img.jogiter.cn/wechat.png" alt="Jogiter 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://img.jogiter.cn/alipay.png" alt="Jogiter 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/book/" rel="tag"># book</a>
+              <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/21/ffmpeg/" rel="prev" title="ffmpeg">
+      <i class="fa fa-chevron-left"></i> ffmpeg
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/25/tdd/" rel="next" title="tdd">
+      tdd <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nodejs-介绍"><span class="nav-number">1.</span> <span class="nav-text">Nodejs 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高并发"><span class="nav-number">2.</span> <span class="nav-text">高并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nodejs-中的模块"><span class="nav-number">3.</span> <span class="nav-text">Nodejs 中的模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EventEmiter-类"><span class="nav-number">4.</span> <span class="nav-text">EventEmiter 类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-openssl-创建-CA"><span class="nav-number">5.</span> <span class="nav-text">使用 openssl 创建 CA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#crypto"><span class="nav-number">6.</span> <span class="nav-text">crypto</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#process"><span class="nav-number">7.</span> <span class="nav-text">process</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#child-process"><span class="nav-number">7.1.</span> <span class="nav-text">child_process</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jogiter</p>
+  <div class="site-description" itemprop="description">Life exists, and identity</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Jogiter" title="GitHub → https://github.com/Jogiter" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2409083451" title="Weibo → https://weibo.com/2409083451" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.confucianism.com.cn/" title="http://www.confucianism.com.cn/" rel="noopener" target="_blank">国学网</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://winnie0517.github.io/" title="https://winnie0517.github.io/" rel="noopener" target="_blank">邪恶的小爪子</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">粤ICP备18022983号-1 </a>
+      <img src="http://www.beian.miit.gov.cn" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jogiter</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

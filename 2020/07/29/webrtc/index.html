@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jogiter.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="MediaWebRTC 简介WebRTC (Web Real-Time Communications) 是一项实时通讯技术，它允许网络应用或者站点，在不借助中间媒介的情况下，建立浏览器之间点对点（Peer-to-Peer）的连接，实现视频流和（或）音频流或者其他任意数据的传输。WebRTC包含的这些标准使用户在无需安装任何插件或者第三方的软件的情况下，创建点对点（Peer-to-Peer）的数据分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webrtc">
+<meta property="og:url" content="https://jogiter.github.io/2020/07/29/webrtc/index.html">
+<meta property="og:site_name" content="悲劇的藝術">
+<meta property="og:description" content="MediaWebRTC 简介WebRTC (Web Real-Time Communications) 是一项实时通讯技术，它允许网络应用或者站点，在不借助中间媒介的情况下，建立浏览器之间点对点（Peer-to-Peer）的连接，实现视频流和（或）音频流或者其他任意数据的传输。WebRTC包含的这些标准使用户在无需安装任何插件或者第三方的软件的情况下，创建点对点（Peer-to-Peer）的数据分">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://mdn.mozillademos.org/files/6119/webrtc-complete-diagram.png">
+<meta property="og:updated_time" content="2021-05-07T12:45:44.352Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webrtc">
+<meta name="twitter:description" content="MediaWebRTC 简介WebRTC (Web Real-Time Communications) 是一项实时通讯技术，它允许网络应用或者站点，在不借助中间媒介的情况下，建立浏览器之间点对点（Peer-to-Peer）的连接，实现视频流和（或）音频流或者其他任意数据的传输。WebRTC包含的这些标准使用户在无需安装任何插件或者第三方的软件的情况下，创建点对点（Peer-to-Peer）的数据分">
+<meta name="twitter:image" content="https://mdn.mozillademos.org/files/6119/webrtc-complete-diagram.png">
+
+<link rel="canonical" href="https://jogiter.github.io/2020/07/29/webrtc/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>webrtc | 悲劇的藝術</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">悲劇的藝術</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">O'caption, My caption!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-reading">
+
+    <a href="/reading" rel="section"><i class="fa fa-sitemap fa-fw"></i>reading</a>
+
+  </li>
+        <li class="menu-item menu-item-book">
+
+    <a href="/book" rel="section"><i class="fa fa-book fa-fw"></i>book</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jogiter.github.io/2020/07/29/webrtc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jogiter">
+      <meta itemprop="description" content="Life exists, and identity">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="悲劇的藝術">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          webrtc
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-29 18:56:44" itemprop="dateCreated datePublished" datetime="2020-07-29T18:56:44+00:00">2020-07-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-07 12:45:44" itemprop="dateModified" datetime="2021-05-07T12:45:44+00:00">2021-05-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Media"><a href="#Media" class="headerlink" title="Media"></a>Media</h1><h2 id="WebRTC-简介"><a href="#WebRTC-简介" class="headerlink" title="WebRTC 简介"></a>WebRTC 简介</h2><p><strong>WebRTC</strong> (Web Real-Time Communications) 是一项实时通讯技术，它允许网络应用或者站点，在不借助中间媒介的情况下，建立浏览器之间点对点（Peer-to-Peer）的连接，实现视频流和（或）音频流或者其他任意数据的传输。WebRTC包含的这些标准使用户在无需安装任何插件或者第三方的软件的情况下，创建点对点（Peer-to-Peer）的数据分享和电话会议成为可能。</p>
+<h3 id="UDP-User-Data-Protocol"><a href="#UDP-User-Data-Protocol" class="headerlink" title="UDP(User Data Protocol)"></a>UDP(User Data Protocol)</h3><p>1、UDP是一个非连接的协议，传输数据之前源端和终端不建立连接， 当它想传送时就简单地去抓取来自应用程序的数据，并尽可能快地把它扔到网络上。 在发送端，UDP传送数据的速度仅仅是受应用程序生成数据的速度、 计算机的能力和传输带宽的限制； 在接收端，UDP把每个消息段放在队列中，应用程序每次从队列中读一个消息段。</p>
+<p>2、 由于传输数据不建立连接，因此也就不需要维护连接状态，包括收发状态等， 因此一台服务机可同时向多个客户机传输相同的消息。</p>
+<p>3、UDP信息包的标题很短，只有8个字节，相对于TCP的20个字节信息包的额外开销很小。</p>
+<p>4、吞吐量不受拥挤控制算法的调节，只受应用软件生成数据的速率、传输带宽、 源端和终端主机性能的限制。</p>
+<p>5、UDP使用尽最大努力交付，即不保证可靠交付， 因此主机不需要维持复杂的链接状态表（这里面有许多参数）。</p>
+<p>6、UDP是面向报文的。发送方的UDP对应用程序交下来的报文， 在添加首部后就向下交付给IP层。既不拆分，也不合并，而是保留这些报文的边界， 因此，应用程序需要选择合适的报文大小。</p>
+<blockquote>
+<p>参考<a href="https://zhuanlan.zhihu.com/p/24860273" target="_blank" rel="noopener">TCP和UDP的区别</a></p>
+</blockquote>
+<h3 id="SDP-Session-Description-Protocol"><a href="#SDP-Session-Description-Protocol" class="headerlink" title="SDP(Session Description Protocol)"></a>SDP(Session Description Protocol)</h3><p>描述会话的协议。主要用于两个会话实体之间的媒体协商。</p>
+<p>什么叫会话呢，比如一次网络电话、一次电话会议、一次视频聊天，这些都可以称之为一次会话。</p>
+<p>那为什么要去发这个描述文本呢，主要是为了解决参与会话的各成员之间能力不对等的问题，如果参加本次通话的成员都支持高质量的通话，但是我们没有去进行协议，为了兼容性，使用的都是普通质量的通话格式，这样就很浪费资源了。所以SDP的作用还是很有必要的。</p>
+<p><strong>SDP协议结构</strong></p>
+<p>SDP 是浏览器提供的基于字符串的二进制数据对象。这种字符串的形式是一些列的键值对，由换行符分隔：</p>
+<blockquote>
+<p><key>=<value>\n</value></key></p>
+</blockquote>
+<ul>
+<li><code>key</code> 是一个单字符，用来表明值的类型</li>
+<li><code>value</code> 是有结构的一组文本</li>
+<li>不同的键值对由换行符分隔</li>
+</ul>
+<p>SDP 涵盖了一个指定用户的描述、时间配置和对媒体的限制。</p>
+<p>SDP的 文本信息包括：</p>
+<ul>
+<li>会话名称和意图</li>
+<li>会话持续时间</li>
+<li>构成会话的媒体</li>
+<li>有关接收媒体的信息</li>
+</ul>
+<p><strong>会话名称和意图描述</strong></p>
+<p>Session description</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">v= (protocol version)</span><br><span class="line">o= (owner/creator and session identifier).</span><br><span class="line">s= (session name)</span><br><span class="line">i=* (session information)</span><br><span class="line">u=* (URI <span class="keyword">of</span> description)</span><br><span class="line">e=* (email address)</span><br><span class="line">p=* (phone number)</span><br><span class="line">c=* (connection information - notrequired <span class="keyword">if</span> included <span class="keyword">in</span> all media)</span><br><span class="line">b=* (bandwidth information)</span><br><span class="line">z=* (time zone adjustments)</span><br><span class="line">k=* (encryption key)</span><br><span class="line">a=* (zero or more session attributelines)</span><br></pre></td></tr></table></figure>
+<p>Time description</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t= (time the session is active)</span><br><span class="line">r=* (zero or more repeat <span class="built_in">times</span>)</span><br></pre></td></tr></table></figure>
+<p>Media description</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">m= (media name and transport address)</span><br><span class="line">i=* (media title)</span><br><span class="line">c=* (connection information - optionalif included at session-level)</span><br><span class="line">b=* (bandwidth information)</span><br><span class="line">k=* (encryption key)</span><br><span class="line">a=* (zero or more media attributelines)</span><br></pre></td></tr></table></figure>
+<p>对于媒体级描述而言只有m=是必须的。</p>
+<p><strong>各个字段的描述</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//sdp版本号，一直为0,rfc4566规定</span></span><br><span class="line">v=<span class="number">0</span></span><br><span class="line"><span class="comment">// o=&lt;username&gt; &lt;sessionid&gt; &lt;version&gt; &lt;network type&gt; &lt;address type&gt; &lt;address&gt;</span></span><br><span class="line">o=- <span class="number">7017624586836067756</span> <span class="number">2</span> IN IP4 <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line"><span class="comment">// s=&lt;sessionname&gt;</span></span><br><span class="line">s=-</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * t=&lt;start time&gt;  &lt;stop time&gt;</span></span><br><span class="line"><span class="comment"> * 两个值分别是会话的起始时间和结束时间，这里都是0代表没有限制</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">t=<span class="number">0</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">c=IN IP4 <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span></span><br><span class="line"><span class="comment">// c=&lt;networktype&gt; &lt;address type&gt; &lt;connection address&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * m=&lt;media&gt;&lt;port&gt; &lt;transport&gt; &lt;fmt list&gt;</span></span><br><span class="line"><span class="comment"> * 一个会话描述包括几个媒体描述。一个媒体描述以”m=”开始到下一个”m=”结束。</span></span><br><span class="line"><span class="comment"> * &lt;media&gt;：表示媒体类型。有"audio", "video","application"（例白板信息）, "data"（不向用户显示的数据） 和"control"（描述额外的控制通道）。</span></span><br><span class="line"><span class="comment"> * &lt;fmt list&gt;：媒体格式。对于音频和视频就是在RTP Audio/Video Profile定义的负载类型(payload type)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">m=audio <span class="number">9</span> UDP/TLS/RTP/SAVPF <span class="number">111</span> <span class="number">103</span> <span class="number">104</span> <span class="number">9</span> <span class="number">0</span> <span class="number">8</span> <span class="number">106</span> <span class="number">105</span> <span class="number">13</span> <span class="number">126</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * a=rtpmap:&lt;payload type&gt;&lt;encoding name&gt;/&lt;clock rate&gt;[/&lt;encodingparameters&gt;]</span></span><br><span class="line"><span class="comment"> * encodingparameters 默认缺省值为 1</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">a=rtpmap:<span class="number">103</span> ISAC/<span class="number">16000</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考<a href="https://www.jianshu.com/p/94b118b8fd97" target="_blank" rel="noopener">SDP协议</a></p>
+</blockquote>
+<p><strong>SDP 例子</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br></pre></td><td class="code"><pre><span class="line">v=<span class="number">0</span></span><br><span class="line"><span class="comment">//sdp版本号，一直为0,rfc4566规定</span></span><br><span class="line">o=- <span class="number">7017624586836067756</span> <span class="number">2</span> IN IP4 <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line"><span class="comment">// o=&lt;username&gt; &lt;sess-id&gt; &lt;sess-version&gt; &lt;nettype&gt; &lt;addrtype&gt; &lt;unicast-address&gt;</span></span><br><span class="line"><span class="comment">//username如何没有使用-代替，7017624586836067756是整个会话的编号，2代表会话版本，如果在会话</span></span><br><span class="line"><span class="comment">//过程中有改变编码之类的操作，重新生成sdp时,sess-id不变，sess-version加1</span></span><br><span class="line">s=-</span><br><span class="line"><span class="comment">//会话名，没有的话使用-代替</span></span><br><span class="line">t=<span class="number">0</span> <span class="number">0</span></span><br><span class="line"><span class="comment">//两个值分别是会话的起始时间和结束时间，这里都是0代表没有限制</span></span><br><span class="line">a=group:BUNDLE audio video data</span><br><span class="line"><span class="comment">//需要共用一个传输通道传输的媒体，如果没有这一行，音视频，数据就会分别单独用一个udp端口来发送</span></span><br><span class="line">a=msid-semantic: WMS h1aZ20mbQB0GSsq0YxLfJmiYWE9CBfGch97C</span><br><span class="line"><span class="comment">//WMS是WebRTC Media Stream简称，这一行定义了本客户端支持同时传输多个流，一个流可以包括多个track,</span></span><br><span class="line"><span class="comment">//一般定义了这个，后面a=ssrc这一行就会有msid,mslabel等属性</span></span><br><span class="line">m=audio <span class="number">9</span> UDP/TLS/RTP/SAVPF <span class="number">111</span> <span class="number">103</span> <span class="number">104</span> <span class="number">9</span> <span class="number">0</span> <span class="number">8</span> <span class="number">106</span> <span class="number">105</span> <span class="number">13</span> <span class="number">126</span></span><br><span class="line"><span class="comment">//m=audio说明本会话包含音频，9代表音频使用端口9来传输，但是在webrtc中一现在一般不使用，如果设置为0，代表不</span></span><br><span class="line"><span class="comment">//传输音频,UDP/TLS/RTP/SAVPF是表示用户来传输音频支持的协议，udp，tls,rtp代表使用udp来传输rtp包，并使用tls加密</span></span><br><span class="line"><span class="comment">//SAVPF代表使用srtcp的反馈机制来控制通信过程,后台111 103 104 9 0 8 106 105 13 126表示本会话音频支持的编码，后台几行会有详细补充说明</span></span><br><span class="line">c=IN IP4 <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span></span><br><span class="line"><span class="comment">//这一行表示你要用来接收或者发送音频使用的IP地址，webrtc使用ice传输，不使用这个地址</span></span><br><span class="line">a=rtcp:<span class="number">9</span> IN IP4 <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span></span><br><span class="line"><span class="comment">//用来传输rtcp地地址和端口，webrtc中不使用</span></span><br><span class="line">a=ice-ufrag:khLS</span><br><span class="line">a=ice-pwd:cxLzteJaJBou3DspNaPsJhlQ</span><br><span class="line"><span class="comment">//以上两行是ice协商过程中的安全验证信息</span></span><br><span class="line">a=fingerprint:sha<span class="number">-256</span> FA:<span class="number">14</span>:<span class="number">42</span>:<span class="number">3</span>B:C7:<span class="number">97</span>:<span class="number">1</span>B:E8:AE:<span class="number">0</span>C2:<span class="number">71</span>:<span class="number">03</span>:<span class="number">05</span>:<span class="number">05</span>:<span class="number">16</span>:<span class="number">8</span>F:B9:C7:<span class="number">98</span>:E9:<span class="number">60</span>:<span class="number">43</span>:<span class="number">4</span>B:<span class="number">5</span>B:<span class="number">2</span>C:<span class="number">28</span>:EE:<span class="number">5</span>C:<span class="number">8</span>F3:<span class="number">17</span></span><br><span class="line"><span class="comment">//以上这行是dtls协商过程中需要的认证信息</span></span><br><span class="line">a=setup:actpass</span><br><span class="line"><span class="comment">//以上这行代表本客户端在dtls协商过程中，可以做客户端也可以做服务端，参考rfc4145 rfc4572</span></span><br><span class="line">a=mid:audio</span><br><span class="line"><span class="comment">//在前面BUNDLE这一行中用到的媒体标识</span></span><br><span class="line">a=extmap:<span class="number">1</span> urn:ietf:params:rtp-hdrext:ssrc-audio-level</span><br><span class="line"><span class="comment">//上一行指出我要在rtp头部中加入音量信息，参考 rfc6464</span></span><br><span class="line">a=sendrecv</span><br><span class="line"><span class="comment">//上一行指出我是双向通信，另外几种类型是recvonly,sendonly,inactive</span></span><br><span class="line">a=rtcp-mux</span><br><span class="line"><span class="comment">//上一行指出rtp,rtcp包使用同一个端口来传输</span></span><br><span class="line"><span class="comment">//下面几行都是对m=audio这一行的媒体编码补充说明，指出了编码采用的编号，采样率，声道等</span></span><br><span class="line">a=rtpmap:<span class="number">111</span> opus/<span class="number">48000</span>/<span class="number">2</span></span><br><span class="line">a=rtcp-fb:<span class="number">111</span> transport-cc</span><br><span class="line"><span class="comment">//以上这行说明opus编码支持使用rtcp来控制拥塞，参考https://tools.ietf.org/html/draft-holmer-rmcat-transport-wide-cc-extensions-01</span></span><br><span class="line">a=fmtp:<span class="number">111</span> minptime=<span class="number">10</span>;useinbandfec=<span class="number">1</span></span><br><span class="line"><span class="comment">//对opus编码可选的补充说明,minptime代表最小打包时长是10ms，useinbandfec=1代表使用opus编码内置fec特性</span></span><br><span class="line">a=rtpmap:<span class="number">103</span> ISAC/<span class="number">16000</span></span><br><span class="line">a=rtpmap:<span class="number">104</span> ISAC/<span class="number">32000</span></span><br><span class="line">a=rtpmap:<span class="number">9</span> G722/<span class="number">8000</span></span><br><span class="line">a=rtpmap:<span class="number">0</span> PCMU/<span class="number">8000</span></span><br><span class="line">a=rtpmap:<span class="number">8</span> PCMA/<span class="number">8000</span></span><br><span class="line">a=rtpmap:<span class="number">106</span> CN/<span class="number">32000</span></span><br><span class="line">a=rtpmap:<span class="number">105</span> CN/<span class="number">16000</span></span><br><span class="line">a=rtpmap:<span class="number">13</span> CN/<span class="number">8000</span></span><br><span class="line">a=rtpmap:<span class="number">126</span> telephone-event/<span class="number">8000</span></span><br><span class="line">a=ssrc:<span class="number">18509423</span> cname:sTjtznXLCNH7nbRw</span><br><span class="line"><span class="comment">//cname用来标识一个数据源，ssrc当发生冲突时可能会发生变化，但是cname不会发生变化，也会出现在rtcp包中SDEC中，</span></span><br><span class="line"><span class="comment">//用于音视频同步</span></span><br><span class="line">a=ssrc:<span class="number">18509423</span> msid:h1aZ20mbQB0GSsq0YxLfJmiYWE9CBfGch97C <span class="number">15598</span>a91-caf9<span class="number">-4</span>fff-a28f<span class="number">-3082310</span>b2b7a</span><br><span class="line"><span class="comment">//以上这一行定义了ssrc和WebRTC中的MediaStream,AudioTrack之间的关系，msid后面第一个属性是stream-d,第二个是track-id</span></span><br><span class="line">a=ssrc:<span class="number">18509423</span> mslabel:h1aZ20mbQB0GSsq0YxLfJmiYWE9CBfGch97C</span><br><span class="line">a=ssrc:<span class="number">18509423</span> label:<span class="number">15598</span>a91-caf9<span class="number">-4</span>fff-a28f<span class="number">-3082310</span>b2b7a</span><br><span class="line">m=video <span class="number">9</span> UDP/TLS/RTP/SAVPF <span class="number">100</span> <span class="number">101</span> <span class="number">107</span> <span class="number">116</span> <span class="number">117</span> <span class="number">96</span> <span class="number">97</span> <span class="number">99</span> <span class="number">98</span></span><br><span class="line"><span class="comment">//参考上面m=audio,含义类似</span></span><br><span class="line">c=IN IP4 <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span></span><br><span class="line">a=rtcp:<span class="number">9</span> IN IP4 <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span></span><br><span class="line">a=ice-ufrag:khLS</span><br><span class="line">a=ice-pwd:cxLzteJaJBou3DspNaPsJhlQ</span><br><span class="line">a=fingerprint:sha<span class="number">-256</span> FA:<span class="number">14</span>:<span class="number">42</span>:<span class="number">3</span>B:C7:<span class="number">97</span>:<span class="number">1</span>B:E8:AE:<span class="number">0</span>C2:<span class="number">71</span>:<span class="number">03</span>:<span class="number">05</span>:<span class="number">05</span>:<span class="number">16</span>:<span class="number">8</span>F:B9:C7:<span class="number">98</span>:E9:<span class="number">60</span>:<span class="number">43</span>:<span class="number">4</span>B:<span class="number">5</span>B:<span class="number">2</span>C:<span class="number">28</span>:EE:<span class="number">5</span>C:<span class="number">8</span>F3:<span class="number">17</span></span><br><span class="line">a=setup:actpass</span><br><span class="line">a=mid:video</span><br><span class="line">a=extmap:<span class="number">2</span> urn:ietf:params:rtp-hdrext:toffset</span><br><span class="line">a=extmap:<span class="number">3</span> http:<span class="comment">//www.webrtc.org/experiments/rtp-hdrext/abs-send-time</span></span><br><span class="line">a=extmap:<span class="number">4</span> urn:<span class="number">3</span>gpp:video-orientation</span><br><span class="line">a=extmap:<span class="number">5</span> http:<span class="comment">//www.ietf.org/id/draft-hol ... de-cc-extensions-01</span></span><br><span class="line">a=extmap:<span class="number">6</span> http:<span class="comment">//www.webrtc.org/experiments/rtp-hdrext/playout-delay</span></span><br><span class="line">a=sendrecv</span><br><span class="line">a=rtcp-mux</span><br><span class="line">a=rtcp-rsize</span><br><span class="line">a=rtpmap:<span class="number">100</span> VP8/<span class="number">90000</span></span><br><span class="line">a=rtcp-fb:<span class="number">100</span> ccm fir</span><br><span class="line"><span class="comment">//ccm是codec control using RTCP feedback message简称，意思是支持使用rtcp反馈机制来实现编码控制，fir是Full Intra Request</span></span><br><span class="line"><span class="comment">//简称，意思是接收方通知发送方发送幅完全帧过来</span></span><br><span class="line">a=rtcp-fb:<span class="number">100</span> nack</span><br><span class="line"><span class="comment">//支持丢包重传，参考rfc4585</span></span><br><span class="line">a=rtcp-fb:<span class="number">100</span> nack pli</span><br><span class="line"><span class="comment">//支持关键帧丢包重传,参考rfc4585</span></span><br><span class="line">a=rtcp-fb:<span class="number">100</span> goog-remb</span><br><span class="line"><span class="comment">//支持使用rtcp包来控制发送方的码流</span></span><br><span class="line">a=rtcp-fb:<span class="number">100</span> transport-cc</span><br><span class="line"><span class="comment">//参考上面opus</span></span><br><span class="line">a=rtpmap:<span class="number">101</span> VP9/<span class="number">90000</span></span><br><span class="line">a=rtcp-fb:<span class="number">101</span> ccm fir</span><br><span class="line">a=rtcp-fb:<span class="number">101</span> nack</span><br><span class="line">a=rtcp-fb:<span class="number">101</span> nack pli</span><br><span class="line">a=rtcp-fb:<span class="number">101</span> goog-remb</span><br><span class="line">a=rtcp-fb:<span class="number">101</span> transport-cc</span><br><span class="line">a=rtpmap:<span class="number">107</span> H264/<span class="number">90000</span></span><br><span class="line">a=rtcp-fb:<span class="number">107</span> ccm fir</span><br><span class="line">a=rtcp-fb:<span class="number">107</span> nack</span><br><span class="line">a=rtcp-fb:<span class="number">107</span> nack pli</span><br><span class="line">a=rtcp-fb:<span class="number">107</span> goog-remb</span><br><span class="line">a=rtcp-fb:<span class="number">107</span> transport-cc</span><br><span class="line">a=fmtp:<span class="number">107</span> level-asymmetry-allowed=<span class="number">1</span>;packetization-mode=<span class="number">1</span>;profile-level-id=<span class="number">42e01</span>f</span><br><span class="line"><span class="comment">//h264编码可选的附加说明</span></span><br><span class="line">a=rtpmap:<span class="number">116</span> red/<span class="number">90000</span></span><br><span class="line"><span class="comment">//fec冗余编码，一般如果sdp中有这一行的话，rtp头部负载类型就是116，否则就是各编码原生负责类型</span></span><br><span class="line">a=rtpmap:<span class="number">117</span> ulpfec/<span class="number">90000</span></span><br><span class="line"><span class="comment">//支持ULP FEC，参考rfc5109</span></span><br><span class="line">a=rtpmap:<span class="number">96</span> rtx/<span class="number">90000</span></span><br><span class="line">a=fmtp:<span class="number">96</span> apt=<span class="number">100</span></span><br><span class="line"><span class="comment">//以上两行是VP8编码的重传包rtp类型</span></span><br><span class="line">a=rtpmap:<span class="number">97</span> rtx/<span class="number">90000</span></span><br><span class="line">a=fmtp:<span class="number">97</span> apt=<span class="number">101</span></span><br><span class="line">a=rtpmap:<span class="number">99</span> rtx/<span class="number">90000</span></span><br><span class="line">a=fmtp:<span class="number">99</span> apt=<span class="number">107</span></span><br><span class="line">a=rtpmap:<span class="number">98</span> rtx/<span class="number">90000</span></span><br><span class="line">a=fmtp:<span class="number">98</span> apt=<span class="number">116</span></span><br><span class="line">a=ssrc-group:FID <span class="number">3463951252</span> <span class="number">1461041037</span></span><br><span class="line"><span class="comment">//在webrtc中，重传包和正常包ssrc是不同的，上一行中前一个是正常rtp包的ssrc,后一个是重传包的ssrc</span></span><br><span class="line">a=ssrc:<span class="number">3463951252</span> cname:sTjtznXLCNH7nbRw</span><br><span class="line">a=ssrc:<span class="number">3463951252</span> msid:h1aZ20mbQB0GSsq0YxLfJmiYWE9CBfGch97C ead4b4e9-b650<span class="number">-4</span>ed5<span class="number">-86</span>f8<span class="number">-6</span>f5f5806346d</span><br><span class="line">a=ssrc:<span class="number">3463951252</span> mslabel:h1aZ20mbQB0GSsq0YxLfJmiYWE9CBfGch97C</span><br><span class="line">a=ssrc:<span class="number">3463951252</span> label:ead4b4e9-b650<span class="number">-4</span>ed5<span class="number">-86</span>f8<span class="number">-6</span>f5f5806346d</span><br><span class="line">a=ssrc:<span class="number">1461041037</span> cname:sTjtznXLCNH7nbRw</span><br><span class="line">a=ssrc:<span class="number">1461041037</span> msid:h1aZ20mbQB0GSsq0YxLfJmiYWE9CBfGch97C ead4b4e9-b650<span class="number">-4</span>ed5<span class="number">-86</span>f8<span class="number">-6</span>f5f5806346d</span><br><span class="line">a=ssrc:<span class="number">1461041037</span> mslabel:h1aZ20mbQB0GSsq0YxLfJmiYWE9CBfGch97C</span><br><span class="line">a=ssrc:<span class="number">1461041037</span> label:ead4b4e9-b650<span class="number">-4</span>ed5<span class="number">-86</span>f8<span class="number">-6</span>f5f5806346d</span><br><span class="line">m=application <span class="number">9</span> DTLS/SCTP <span class="number">5000</span></span><br><span class="line">c=IN IP4 <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span></span><br><span class="line">a=ice-ufrag:khLS</span><br><span class="line">a=ice-pwd:cxLzteJaJBou3DspNaPsJhlQ</span><br><span class="line">a=fingerprint:sha<span class="number">-256</span> FA:<span class="number">14</span>:<span class="number">42</span>:<span class="number">3</span>B:C7:<span class="number">97</span>:<span class="number">1</span>B:E8:AE:<span class="number">0</span>C2:<span class="number">71</span>:<span class="number">03</span>:<span class="number">05</span>:<span class="number">05</span>:<span class="number">16</span>:<span class="number">8</span>F:B9:C7:<span class="number">98</span>:E9:<span class="number">60</span>:<span class="number">43</span>:<span class="number">4</span>B:<span class="number">5</span>B:<span class="number">2</span>C:<span class="number">28</span>:EE:<span class="number">5</span>C:<span class="number">8</span>F3:<span class="number">17</span></span><br><span class="line">a=setup:actpass</span><br><span class="line">a=mid:data</span><br><span class="line">a=sctpmap:<span class="number">5000</span> webrtc-datachannel <span class="number">1024</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>参考<a href="https://www.jianshu.com/p/3dbdd10a4038" target="_blank" rel="noopener">SDP协议详细总结</a></li>
+<li>规范: <a href="https://tools.ietf.org/html/rfc4566" target="_blank" rel="noopener">RFC 4566: SDP: Session Description Protocol</a></li>
+</ul>
+<h3 id="WebRTC-中的-SDP-连接流程"><a href="#WebRTC-中的-SDP-连接流程" class="headerlink" title="WebRTC 中的 SDP 连接流程"></a>WebRTC 中的 SDP 连接流程</h3><p>WebRTC 连接过程图如下：</p>
+<p><img src="https://mdn.mozillademos.org/files/6119/webrtc-complete-diagram.png" alt="webrtc-complete-diagram"></p>
+<p>查看 sdp 交换 <a href="https://webrtc.github.io/samples/src/content/peerconnection/constraints/" target="_blank" rel="noopener">demo</a></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://github.com/webrtc/samples/blob/gh-pages/src/content/peerconnection/constraints/js/main.js#L144-L190</span></span><br><span class="line">localPeerConnection = <span class="keyword">new</span> RTCPeerConnection(<span class="literal">null</span>);</span><br><span class="line">remotePeerConnection = <span class="keyword">new</span> RTCPeerConnection(<span class="literal">null</span>);</span><br><span class="line">localStream.getTracks().forEach(<span class="function"><span class="params">track</span> =&gt;</span> localPeerConnection.addTrack(track, localStream));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'localPeerConnection creating offer'</span>);</span><br><span class="line">localPeerConnection.onnegotiationeeded = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'Negotiation needed - localPeerConnection'</span>);</span><br><span class="line">remotePeerConnection.onnegotiationeeded = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'Negotiation needed - remotePeerConnection'</span>);</span><br><span class="line">localPeerConnection.onicecandidate = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Candidate localPeerConnection'</span>);</span><br><span class="line">  remotePeerConnection</span><br><span class="line">      .addIceCandidate(e.candidate)</span><br><span class="line">      .then(onAddIceCandidateSuccess, onAddIceCandidateError);</span><br><span class="line">&#125;;</span><br><span class="line">remotePeerConnection.onicecandidate = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Candidate remotePeerConnection'</span>);</span><br><span class="line">  localPeerConnection</span><br><span class="line">      .addIceCandidate(e.candidate)</span><br><span class="line">      .then(onAddIceCandidateSuccess, onAddIceCandidateError);</span><br><span class="line">&#125;;</span><br><span class="line">remotePeerConnection.ontrack = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (remoteVideo.srcObject !== e.streams[<span class="number">0</span>]) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'remotePeerConnection got stream'</span>);</span><br><span class="line">    remoteVideo.srcObject = e.streams[<span class="number">0</span>];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">localPeerConnection.createOffer().then(</span><br><span class="line">    desc =&gt; &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'localPeerConnection offering'</span>);</span><br><span class="line">      localPeerConnection.setLocalDescription(desc);</span><br><span class="line">      remotePeerConnection.setRemoteDescription(desc);</span><br><span class="line">      remotePeerConnection.createAnswer().then(</span><br><span class="line">          desc2 =&gt; &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'remotePeerConnection answering'</span>);</span><br><span class="line">            remotePeerConnection.setLocalDescription(desc2);</span><br><span class="line">            localPeerConnection.setRemoteDescription(desc2);</span><br><span class="line">          &#125;,</span><br><span class="line">          err =&gt; <span class="built_in">console</span>.log(err)</span><br><span class="line">      );</span><br><span class="line">    &#125;,</span><br><span class="line">    err =&gt; <span class="built_in">console</span>.log(err)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>查看更多 <a href="https://github.com/webrtc/samples" target="_blank" rel="noopener">webrtc samples</a></p>
+</blockquote>
+<h2 id="阅读链接"><a href="#阅读链接" class="headerlink" title="阅读链接"></a>阅读链接</h2><ul>
+<li>MDN<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getUserMedia" target="_blank" rel="noopener">Navigator.getUserMedia</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API" target="_blank" rel="noopener">WebRTC API</a> 入门指南<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Protocols" target="_blank" rel="noopener">WebRTC protocols</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Connectivity" target="_blank" rel="noopener">WebRTC connectivity</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Session_lifetime" target="_blank" rel="noopener">Lifetime of a WebRTC session</a></li>
+</ul>
+</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Media/Formats/WebRTC_codecs" target="_blank" rel="noopener">WebRTC codecs</a><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Video_codecs" target="_blank" rel="noopener">Video codecs</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Audio_codecs" target="_blank" rel="noopener">Audio codecs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Github<ul>
+<li><a href="https://github.com/search?p=2&amp;q=webrtc&amp;type=Repositories" target="_blank" rel="noopener">search: webrtc</a></li>
+<li><a href="https://github.com/webrtc/samples" target="_blank" rel="noopener">WebRTC/samples</a> WebRTC Web demos and samples</li>
+<li><a href="https://github.com/muaz-khan/WebRTC-Experiment" target="_blank" rel="noopener"><a href="https://github.com/muaz-khan/WebRTC-Experiment" target="_blank" rel="noopener">WebRTC-Experiment</a></a> WebRTC, WebRTC and WebRTC. Everything here is all about WebRTC!!</li>
+<li><a href="https://github.com/peers/peerjs" target="_blank" rel="noopener">peerjs</a> Simple peer-to-peer with WebRTC</li>
+<li><a href="https://github.com/stephenlb/webrtc-sdk" target="_blank" rel="noopener">webrtc-sdk</a> WebRTC Simple Calling API + Mobile SDK - A simplified approach to RTCPeerConnection for mobile and web video calling apps.</li>
+</ul>
+</li>
+<li>Blog<ul>
+<li><a href="https://www.zhangxinxu.com/wordpress/2020/07/js-audio-clip-copy-upload/#comments" target="_blank" rel="noopener">JS纯前端实现audio音频剪裁剪切复制播放与上传</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    赞赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://img.jogiter.cn/wechat.png" alt="Jogiter 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://img.jogiter.cn/alipay.png" alt="Jogiter 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/25/tdd/" rel="prev" title="tdd">
+      <i class="fa fa-chevron-left"></i> tdd
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/29/macbook-开发环境配置/" rel="next" title="macbook 开发环境配置">
+      macbook 开发环境配置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Media"><span class="nav-number">1.</span> <span class="nav-text">Media</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#WebRTC-简介"><span class="nav-number">1.1.</span> <span class="nav-text">WebRTC 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP-User-Data-Protocol"><span class="nav-number">1.1.1.</span> <span class="nav-text">UDP(User Data Protocol)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SDP-Session-Description-Protocol"><span class="nav-number">1.1.2.</span> <span class="nav-text">SDP(Session Description Protocol)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebRTC-中的-SDP-连接流程"><span class="nav-number">1.1.3.</span> <span class="nav-text">WebRTC 中的 SDP 连接流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阅读链接"><span class="nav-number">1.2.</span> <span class="nav-text">阅读链接</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jogiter</p>
+  <div class="site-description" itemprop="description">Life exists, and identity</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Jogiter" title="GitHub → https://github.com/Jogiter" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2409083451" title="Weibo → https://weibo.com/2409083451" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.confucianism.com.cn/" title="http://www.confucianism.com.cn/" rel="noopener" target="_blank">国学网</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://winnie0517.github.io/" title="https://winnie0517.github.io/" rel="noopener" target="_blank">邪恶的小爪子</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">粤ICP备18022983号-1 </a>
+      <img src="http://www.beian.miit.gov.cn" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jogiter</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

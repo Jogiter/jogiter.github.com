@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jogiter.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="学习链接 typescript-official 官方英文文档。（中文文档更新较慢。建议阅读官网文档） utility-types 内置的工具类型   tsdoc 标准的文档注释 typedoc ts 文档生成器 deno runtime for ts utility-types ts 中的 lodash vue 中相关的库 vue-property-decorator Vue.js and Pr">
+<meta name="keywords" content="typescript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Typescript guides">
+<meta property="og:url" content="https://jogiter.github.io/2019/08/11/Typescript-guides/index.html">
+<meta property="og:site_name" content="悲劇的藝術">
+<meta property="og:description" content="学习链接 typescript-official 官方英文文档。（中文文档更新较慢。建议阅读官网文档） utility-types 内置的工具类型   tsdoc 标准的文档注释 typedoc ts 文档生成器 deno runtime for ts utility-types ts 中的 lodash vue 中相关的库 vue-property-decorator Vue.js and Pr">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-05-07T12:45:44.348Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Typescript guides">
+<meta name="twitter:description" content="学习链接 typescript-official 官方英文文档。（中文文档更新较慢。建议阅读官网文档） utility-types 内置的工具类型   tsdoc 标准的文档注释 typedoc ts 文档生成器 deno runtime for ts utility-types ts 中的 lodash vue 中相关的库 vue-property-decorator Vue.js and Pr">
+
+<link rel="canonical" href="https://jogiter.github.io/2019/08/11/Typescript-guides/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Typescript guides | 悲劇的藝術</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">悲劇的藝術</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">O'caption, My caption!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-reading">
+
+    <a href="/reading" rel="section"><i class="fa fa-sitemap fa-fw"></i>reading</a>
+
+  </li>
+        <li class="menu-item menu-item-book">
+
+    <a href="/book" rel="section"><i class="fa fa-book fa-fw"></i>book</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jogiter.github.io/2019/08/11/Typescript-guides/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jogiter">
+      <meta itemprop="description" content="Life exists, and identity">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="悲劇的藝術">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Typescript guides
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-11 12:55:51" itemprop="dateCreated datePublished" datetime="2019-08-11T12:55:51+00:00">2019-08-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-07 12:45:44" itemprop="dateModified" datetime="2021-05-07T12:45:44+00:00">2021-05-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="学习链接"><a href="#学习链接" class="headerlink" title="学习链接"></a>学习链接</h2><ul>
+<li><a href="https://www.typescriptlang.org/docs/handbook/intro.html" target="_blank" rel="noopener">typescript-official</a> 官方英文文档。（中文文档更新较慢。建议阅读官网文档）<ul>
+<li><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html#parameterstype" target="_blank" rel="noopener">utility-types</a> 内置的工具类型</li>
+</ul>
+</li>
+<li><a href="https://github.com/microsoft/tsdoc" target="_blank" rel="noopener">tsdoc</a> 标准的文档注释</li>
+<li><a href="https://github.com/TypeStrong/typedoc" target="_blank" rel="noopener">typedoc</a> ts 文档生成器</li>
+<li><a href="https://github.com/denoland/deno" target="_blank" rel="noopener">deno</a> runtime for ts</li>
+<li><a href="https://github.com/piotrwitek/utility-types" target="_blank" rel="noopener">utility-types</a> ts 中的 lodash</li>
+<li>vue 中相关的库<ul>
+<li><a href="https://github.com/kaorun343/vue-property-decorator" target="_blank" rel="noopener">vue-property-decorator</a> Vue.js and Property Decorator</li>
+<li><a href="https://github.com/vuejs/vue-class-component" target="_blank" rel="noopener">vue-class-component</a> ES / TypeScript decorator for class-style Vue components.</li>
+</ul>
+</li>
+<li><a href="https://www.typescriptlang.org/play?#code/Q" target="_blank" rel="noopener">typescript 在线编辑器</a></li>
+<li><a href="https://github.com/type-challenges/type-challenges" target="_blank" rel="noopener">type-challenges</a> TypeScript类型挑战</li>
+<li>Books<ul>
+<li><a href="https://jkchao.github.io/typescript-book-chinese/#why" target="_blank" rel="noopener">深入理解 TypeScript</a></li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">TypeScript</th>
+<th style="text-align:left">JavaScript</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">TS 是一种面向对象的脚本语言</td>
+<td style="text-align:left">JS 是一种面向对象的脚本语言</td>
+</tr>
+<tr>
+<td style="text-align:left">依赖语言（编译为 JavaScript）</td>
+<td style="text-align:left">独立语言（可以解释和执行）</td>
+</tr>
+<tr>
+<td style="text-align:left">编译语言，无法在浏览器中直接执行</td>
+<td style="text-align:left">解释语言，直接在网络浏览器中执行</td>
+</tr>
+<tr>
+<td style="text-align:left">可以静态输入</td>
+<td style="text-align:left">动态类型</td>
+</tr>
+<tr>
+<td style="text-align:left">更好的结构和简洁</td>
+<td style="text-align:left">不受类型系统限制，因此更加灵活</td>
+</tr>
+<tr>
+<td style="text-align:left">扩展名为.ts</td>
+<td style="text-align:left">具有.js 扩展名</td>
+</tr>
+<tr>
+<td style="text-align:left">复杂项目的理想选择</td>
+<td style="text-align:left">适用于小型，简单的项目</td>
+</tr>
+</tbody>
+</table>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>请注意我们的单文件组件的一些事项：</p>
+<ul>
+<li>我们必须编写 <code>&lt;script lang =“ts”&gt;</code> 才能使用 <code>TypeScript</code>。</li>
+<li>我们必须在 <code>index.ts</code> 中导入扩展名为 <code>.vue</code> 的组件。</li>
+<li><strong>我们能够在 <code>&lt;style&gt;</code> 标签中编写与我们的组件隔离的 <code>CSS</code> ，这是我们在 <code>.ts</code> 组件中无法做到的。</strong></li>
+<li>我们默认导出了对 <code>Vue.extend</code> 的调用（而不是选项包本身）。如果你不写 <code>Vue.extend</code>，<code>Vetur</code> 会让它看起来像是正常工作，但是你在构建项目时会遇到错误。</li>
+</ul>
+<blockquote>
+<p>typescript 英文文档比中文文档更新快，更准确信息请翻阅英文文档。</p>
+</blockquote>
+<h2 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A:"></a>Q&amp;A:</h2><p>Q: Error: <code>vue-loader</code> was used without the corresponding plugin</p>
+<ol>
+<li>升级 <code>vue-loader</code> 到 14 版本以上</li>
+<li>在 <code>webpack.config.js</code> 中添加：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; VueLoaderPlugin &#125; = <span class="built_in">require</span>(<span class="string">'vue-loader'</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  plugins: [<span class="keyword">new</span> VueLoaderPlugin()],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Q: # <a href="https://stackoverflow.com/questions/41292559/could-not-find-a-declaration-file-for-module-module-name-path-to-module-nam" target="_blank" rel="noopener">Could not find a declaration file for module ‘module-name’. ‘/path/to/module-name.js’ implicitly has an ‘any’ type</a></p>
+<p>Here are two other solutions</p>
+<p>When a module is not yours - try to install types from <code>@types</code>:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -D @types/module-name</span><br></pre></td></tr></table></figure>
+<p>If the above install errors - try changing <code>import</code> statements to <code>require</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// import * as yourModuleName from 'module-name';</span></span><br><span class="line"><span class="keyword">const</span> yourModuleName = <span class="built_in">require</span>(<span class="string">'module-name'</span>);</span><br></pre></td></tr></table></figure>
+<p>Q: <a href="https://github.com/Microsoft/TypeScript/issues/3263" target="_blank" rel="noopener">Property ‘style’ does not exist on type ‘Element’</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Test &#123;</span><br><span class="line">  constructor(elem:HTMLElement) &#123;</span><br><span class="line">    elem.style.color = &apos;red&apos;;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let elem = &lt;HTMLElement&gt;document.querySelector(&apos;#test&apos;);</span><br><span class="line">let test = new Test(elem);</span><br></pre></td></tr></table></figure>
+<p>Q: 如何处理在 <code>Vue.prototype</code> 上添加的变量</p>
+<p>在 <code>vue.d.ts</code> 文件中添加定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import  Vue  from  &apos;vue&apos;;</span><br><span class="line"></span><br><span class="line">declare  module  &apos;vue/types/vue&apos; &#123;</span><br><span class="line">  interface  Vue &#123;</span><br><span class="line">    $bus:  Vue</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Q: <a href="https://www.leevii.com/2018/10/what-does-the-exclamation-point-behind-the-ts-attribute-mean.html" target="_blank" rel="noopener">ts 属性后面的感叹号有什么用处？</a></p>
+<p>感叹号是非<code>null</code>和非<code>undefined</code>的类型断言，所以上面的写法就是对<code>propA</code>这个属性进行非空断言。文档的相关说明在<a href="https://github.com/Microsoft/TypeScript/wiki/What&#39;s-new-in-TypeScript#non-null-assertion-operator" target="_blank" rel="noopener">这里</a></p>
+<p>Q: <a href="https://stackoverflow.com/questions/49699067/property-has-no-initializer-and-is-not-definitely-assigned-in-the-construc" target="_blank" rel="noopener">Property ‘…’ has no initializer and is not definitely assigned in the constructor</a></p>
+<p>原因： <a href="http://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#strict-class-initialization" target="_blank" rel="noopener">typescript-2-7#strict-class-initialization</a></p>
+<p>解决方案：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// method 1</span></span><br><span class="line">keys: any[] = []</span><br><span class="line"></span><br><span class="line"><span class="comment">// method 2</span></span><br><span class="line">keys!: any[]</span><br><span class="line"></span><br><span class="line"><span class="comment">// method 3: not recommended</span></span><br><span class="line"><span class="comment">// settings in tsconfig.json</span></span><br><span class="line"><span class="string">"strictPropertyInitialization"</span>: <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>Q: <code>this.$router.push({})</code> tslint error</p>
+<p><a href="https://github.com/vuejs/vue-router/issues/2662" target="_blank" rel="noopener">Location interface typing for params should be more permissive</a></p>
+<p>Q: how to write mapState function in vuex?</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Vue, Component &#125; <span class="keyword">from</span>  <span class="string">'vue-property-decorator'</span></span><br><span class="line"><span class="keyword">import</span> &#123; mapState, mapMutations &#125; <span class="keyword">from</span>  <span class="string">'vuex'</span></span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  name      : <span class="string">'hello'</span>,</span><br><span class="line">  computed  : &#123;</span><br><span class="line">    ...mapState(&#123;</span><br><span class="line">      count: <span class="string">'count'</span>,</span><br><span class="line">    &#125;),</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloComponent</span> <span class="keyword">extends</span> <span class="title">Vue</span> </span>&#123;</span><br><span class="line">  count!: number</span><br><span class="line"></span><br><span class="line">  <span class="keyword">get</span> countDisplay(): string &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.count.toString() + <span class="string">'!!!'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用 <a href="https://github.com/ktsn/vuex-class/blob/master/test/bindings.ts" target="_blank" rel="noopener">vuex-class</a></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Vue, Component &#125; <span class="keyword">from</span>  <span class="string">'vue-property-decorator'</span></span><br><span class="line"><span class="keyword">import</span> &#123; State, Mutation &#125; <span class="keyword">from</span>  <span class="string">'vuex-class'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span>(&#123;</span><br><span class="line">  name: <span class="string">'hello'</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> HelloComponent <span class="keyword">extends</span> Vue &#123;</span><br><span class="line">  <span class="meta">@State</span> readonly count!: <span class="built_in">number</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">get</span> countDisplay(): <span class="built_in">string</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.count.toString() + <span class="string">'!!!'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Q: 辨析联合类型</p>
+<blockquote>
+<p>当类中含有<a href="https://jkchao.github.io/typescript-book-chinese/typings/literals.html" target="_blank" rel="noopener">字面量成员</a>时，我们可以用该类的属性来辨析联合类型。</p>
+</blockquote>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Square &#123;</span><br><span class="line">  kind: <span class="string">'square'</span>;</span><br><span class="line">  size: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Rectangle &#123;</span><br><span class="line">  kind: <span class="string">'rectangle'</span>;</span><br><span class="line">  width: <span class="built_in">number</span>;</span><br><span class="line">  height: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Shape = Square | Rectangle;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">area</span>(<span class="params">s: Shape</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (s.kind === <span class="string">'square'</span>) &#123;</span><br><span class="line">    <span class="comment">// 现在 TypeScript 知道 s 的类型是 Square</span></span><br><span class="line">    <span class="comment">// 所以你现在能安全使用它</span></span><br><span class="line">    <span class="keyword">return</span> s.size * s.size;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 不是一个 square ？因此 TypeScript 将会推算出 s 一定是 Rectangle</span></span><br><span class="line">    <span class="keyword">return</span> s.width * s.height;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Q: 配合 Axios 使用泛型</p>
+<p>通常情况下，我们会把后端返回数据格式单独放入一个 interface 里：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 请求接口数据</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> ResponseData&lt;T = any&gt; &#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 状态码</span></span><br><span class="line"><span class="comment">   * @type &#123; number &#125;</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  code: <span class="built_in">number</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 数据</span></span><br><span class="line"><span class="comment">   * @type &#123; T &#125;</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  result: T;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 消息</span></span><br><span class="line"><span class="comment">   * @type &#123; string &#125;</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  message: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当我们把 API 单独抽离成单个模块时：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 axios.ts 文件中对 axios 进行了处理，例如添加通用配置、拦截器等</span></span><br><span class="line"><span class="keyword">import</span> Ax <span class="keyword">from</span> <span class="string">'./axios'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; ResponseData &#125; <span class="keyword">from</span> <span class="string">'./interface.ts'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getUser</span>&lt;<span class="title">T</span>&gt;(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> Ax.get&lt;ResponseData&lt;T&gt;&gt;(<span class="string">'/somepath'</span>)</span><br><span class="line">    .then(<span class="function"><span class="params">res</span> =&gt;</span> res.data)</span><br><span class="line">    .catch(<span class="function"><span class="params">err</span> =&gt;</span> <span class="built_in">console</span>.error(err));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接着我们写入返回的数据类型 User，这可以让 TypeScript 顺利推断出我们想要的类型：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> User &#123;</span><br><span class="line">  name: <span class="built_in">string</span>;</span><br><span class="line">  age: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// user 被推断出为</span></span><br><span class="line">  <span class="comment">// &#123;</span></span><br><span class="line">  <span class="comment">//  code: number,</span></span><br><span class="line">  <span class="comment">//  result: &#123; name: string, age: number &#125;,</span></span><br><span class="line">  <span class="comment">//  message: string</span></span><br><span class="line">  <span class="comment">// &#125;</span></span><br><span class="line">  <span class="keyword">const</span> user = <span class="keyword">await</span> getUser&lt;User&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Q: 枚举使用</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Color &#123;</span><br><span class="line">  Red = <span class="string">'#fea'</span>,</span><br><span class="line">  Green = <span class="string">'#eaf'</span>,</span><br><span class="line">  Blue = <span class="string">'#afe'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// type ColorKey = "Red" | "Green" | "Blue"</span></span><br><span class="line"><span class="keyword">type</span> ColorKey = keyof <span class="keyword">typeof</span> Color</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">color: ColorKey</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Color[color]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> n = test(<span class="string">'Red'</span>)</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    赞赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://img.jogiter.cn/wechat.png" alt="Jogiter 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://img.jogiter.cn/alipay.png" alt="Jogiter 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/typescript/" rel="tag"># typescript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/06/17/搭建私有-npm/" rel="prev" title="搭建私有 npm">
+      <i class="fa fa-chevron-left"></i> 搭建私有 npm
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/08/11/使用-uni-app-开发小程序/" rel="next" title="使用 uni-app 开发小程序">
+      使用 uni-app 开发小程序 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#学习链接"><span class="nav-number">1.</span> <span class="nav-text">学习链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项"><span class="nav-number">2.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-amp-A"><span class="nav-number">3.</span> <span class="nav-text">Q&amp;A:</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jogiter</p>
+  <div class="site-description" itemprop="description">Life exists, and identity</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Jogiter" title="GitHub → https://github.com/Jogiter" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2409083451" title="Weibo → https://weibo.com/2409083451" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.confucianism.com.cn/" title="http://www.confucianism.com.cn/" rel="noopener" target="_blank">国学网</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://winnie0517.github.io/" title="https://winnie0517.github.io/" rel="noopener" target="_blank">邪恶的小爪子</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">粤ICP备18022983号-1 </a>
+      <img src="http://www.beian.miit.gov.cn" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jogiter</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

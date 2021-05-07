@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jogiter.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="常用的 webpack 插件 提取css文件并压缩 路由懒加载 fastclick 添加loading组件 – Vue组件的三种调用方式 .vue文件不会eslint --fix，使用eslint-plugin-vue Duplicate keys detected，见src/component/numbers.vue 仿原生滚动下拉刷新&amp;amp;上拉加载。didi-scroll  webpack">
+<meta name="keywords" content="vue,webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack.config">
+<meta property="og:url" content="https://jogiter.github.io/2018/04/12/webpack-config/index.html">
+<meta property="og:site_name" content="悲劇的藝術">
+<meta property="og:description" content="常用的 webpack 插件 提取css文件并压缩 路由懒加载 fastclick 添加loading组件 – Vue组件的三种调用方式 .vue文件不会eslint --fix，使用eslint-plugin-vue Duplicate keys detected，见src/component/numbers.vue 仿原生滚动下拉刷新&amp;amp;上拉加载。didi-scroll  webpack">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-05-07T12:45:44.352Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack.config">
+<meta name="twitter:description" content="常用的 webpack 插件 提取css文件并压缩 路由懒加载 fastclick 添加loading组件 – Vue组件的三种调用方式 .vue文件不会eslint --fix，使用eslint-plugin-vue Duplicate keys detected，见src/component/numbers.vue 仿原生滚动下拉刷新&amp;amp;上拉加载。didi-scroll  webpack">
+
+<link rel="canonical" href="https://jogiter.github.io/2018/04/12/webpack-config/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>webpack.config | 悲劇的藝術</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">悲劇的藝術</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">O'caption, My caption!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-reading">
+
+    <a href="/reading" rel="section"><i class="fa fa-sitemap fa-fw"></i>reading</a>
+
+  </li>
+        <li class="menu-item menu-item-book">
+
+    <a href="/book" rel="section"><i class="fa fa-book fa-fw"></i>book</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jogiter.github.io/2018/04/12/webpack-config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jogiter">
+      <meta itemprop="description" content="Life exists, and identity">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="悲劇的藝術">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          webpack.config
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-04-12 15:03:25" itemprop="dateCreated datePublished" datetime="2018-04-12T15:03:25+00:00">2018-04-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-07 12:45:44" itemprop="dateModified" datetime="2021-05-07T12:45:44+00:00">2021-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="常用的-webpack-插件"><a href="#常用的-webpack-插件" class="headerlink" title="常用的 webpack 插件"></a>常用的 webpack 插件</h2><ul>
+<li><a href="https://github.com/NMFR/optimize-css-assets-webpack-plugin" target="_blank" rel="noopener">提取css文件并压缩</a></li>
+<li><a href="https://router.vuejs.org/zh-cn/advanced/lazy-loading.html" target="_blank" rel="noopener">路由懒加载</a></li>
+<li><a href="https://github.com/ftlabs/fastclick" target="_blank" rel="noopener">fastclick</a></li>
+<li>添加loading组件 – <a href="https://molunerfinn.com/vue-components/#Loading" target="_blank" rel="noopener">Vue组件的三种调用方式</a></li>
+<li><code>.vue</code>文件不会<code>eslint --fix</code>，使用<a href="https://github.com/vuejs/eslint-plugin-vue#user-content-gear-configs" target="_blank" rel="noopener">eslint-plugin-vue</a></li>
+<li><a href="https://github.com/vuejs/vue/issues/7323" target="_blank" rel="noopener">Duplicate keys detected</a>，见<code>src/component/numbers.vue</code></li>
+<li>仿原生滚动下拉刷新&amp;上拉加载。<a href="https://github.com/didi/cube-ui/blob/dev/src/components/scroll/scroll.vue" target="_blank" rel="noopener">didi-scroll</a></li>
+</ul>
+<h2 id="webpack兼容ie8问题"><a href="#webpack兼容ie8问题" class="headerlink" title="webpack兼容ie8问题"></a>webpack兼容ie8问题</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">    <span class="comment">/** [uglify#1179](https://github.com/mishoo/UglifyJS2/pull/1179)</span></span><br><span class="line"><span class="comment">     * [Webpack构建兼容IE8](https://segmentfault.com/a/1190000007699918?winzoom=1)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">new</span> webpack.optimize.UglifyJsPlugin(&#123;</span><br><span class="line">        compress: &#123; <span class="attr">screw_ie8</span>: <span class="literal">false</span> &#125;,</span><br><span class="line">        mangle: <span class="literal">false</span>,</span><br><span class="line">        output: &#123; <span class="attr">screw_ie8</span>: <span class="literal">false</span> &#125;,</span><br><span class="line">    &#125;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>使用webpack打包后，代码没有兼容问题；<a href="https://github.com/mishoo/UglifyJS2/" target="_blank" rel="noopener">uglifyjs</a>压缩后才会不兼容ie8。因此在压缩时配置兼容ie8；</p>
+<h2 id="如何在-webpack-中引入未模块化的库，如-Zepto"><a href="#如何在-webpack-中引入未模块化的库，如-Zepto" class="headerlink" title="如何在 webpack 中引入未模块化的库，如 Zepto"></a><a href="https://sebastianblade.com/how-to-import-unmodular-library-like-zepto/" target="_blank" rel="noopener">如何在 webpack 中引入未模块化的库，如 Zepto</a></h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack.config</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    loaders: [&#123;</span><br><span class="line">      test: <span class="built_in">require</span>.resolve(<span class="string">'zepto'</span>),</span><br><span class="line">      loader: <span class="string">'exports-loader?window.Zepto!script-loader'</span></span><br><span class="line">    &#125;]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样我们在页面入口文件中就可以这么写：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// entry.js</span></span><br><span class="line"><span class="keyword">import</span> $ <span class="keyword">from</span> <span class="string">'zepto'</span></span><br><span class="line"></span><br><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="tree-shaking"><a href="#tree-shaking" class="headerlink" title="tree-shaking"></a>tree-shaking</h2><ul>
+<li><a href="https://doc.webpack-china.org/guides/tree-shaking/" target="_blank" rel="noopener">Tree Shaking</a></li>
+</ul>
+<p>为了学会使用 tree shaking，你必须……</p>
+<ul>
+<li>使用 ES2015 模块语法（即 import 和 export）。</li>
+<li>引入一个能够删除未引用代码(dead code)的压缩工具(minifier)（例如 UglifyJSPlugin）。</li>
+</ul>
+<hr>
+<h2 id="vue-webpack-项目配置"><a href="#vue-webpack-项目配置" class="headerlink" title="vue webpack 项目配置"></a>vue webpack 项目配置</h2><p>a demo config file:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>)</span><br><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>)</span><br><span class="line"><span class="keyword">const</span> Jarvis = <span class="built_in">require</span>(<span class="string">'webpack-jarvis'</span>)</span><br><span class="line"><span class="keyword">const</span> merge = <span class="built_in">require</span>(<span class="string">'webpack-merge'</span>)</span><br><span class="line"><span class="keyword">const</span> ExtractTextPlugin = <span class="built_in">require</span>(<span class="string">'extract-text-webpack-plugin'</span>)</span><br><span class="line"><span class="keyword">const</span> CopyWebpackPlugin = <span class="built_in">require</span>(<span class="string">'copy-webpack-plugin'</span>)</span><br><span class="line"><span class="keyword">const</span> UglifyJsPlugin = <span class="built_in">require</span>(<span class="string">'uglifyjs-webpack-plugin'</span>)</span><br><span class="line"><span class="keyword">const</span> OptimizeCSSPlugin = <span class="built_in">require</span>(<span class="string">'optimize-css-assets-webpack-plugin'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> base = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    index: <span class="string">'./src/index.js'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: path.resolve(__dirname, <span class="string">'dist/'</span>),</span><br><span class="line">    filename: <span class="string">'js/[name].js'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  resolve: &#123;</span><br><span class="line">    extensions: [<span class="string">'.js'</span>, <span class="string">'.vue'</span>],</span><br><span class="line">    alias: &#123;</span><br><span class="line">      <span class="string">'@'</span>: path.resolve(__dirname, <span class="string">'src'</span>),</span><br><span class="line">      vue$: <span class="string">'vue/dist/vue.common.js'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        enforce: <span class="string">'pre'</span>,</span><br><span class="line">        test: <span class="regexp">/\.(js|vue)$/</span>, <span class="comment">// to lint .vue files, also need to config .eslintrc.js</span></span><br><span class="line">        exclude: <span class="regexp">/node_modules/</span>,</span><br><span class="line">        use: [</span><br><span class="line">          &#123;</span><br><span class="line">            loader: <span class="string">'eslint-loader'</span>,</span><br><span class="line">            options: &#123;</span><br><span class="line">              formatter: <span class="built_in">require</span>(<span class="string">'eslint-friendly-formatter'</span>),</span><br><span class="line">              fix: <span class="literal">true</span>, <span class="comment">// eslint --fix</span></span><br><span class="line">              failOnError: <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.vue$/</span>,</span><br><span class="line">        use: [</span><br><span class="line">          &#123;</span><br><span class="line">            loader: <span class="string">'vue-loader'</span>,</span><br><span class="line">            options: &#123;</span><br><span class="line">              loaders: &#123;</span><br><span class="line">                js: <span class="string">'babel-loader!eslint-loader'</span></span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.js$/</span>,</span><br><span class="line">        exclude: <span class="regexp">/node_modules/</span>,</span><br><span class="line">        use: <span class="string">'babel-loader'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        use: ExtractTextPlugin.extract(&#123;</span><br><span class="line">          fallback: <span class="string">'style-loader'</span>,</span><br><span class="line">          use: <span class="string">'css-loader'</span></span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.(png|jp(e)?g|gif|svg)$/</span>,</span><br><span class="line">        use: [</span><br><span class="line">          &#123;</span><br><span class="line">            loader: <span class="string">'url-loader'</span>,</span><br><span class="line">            options: &#123;</span><br><span class="line">              limit: <span class="number">8192</span>,</span><br><span class="line">              name: <span class="string">'image/[name].[ext]'</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;, &#123;</span><br><span class="line">        test: <span class="regexp">/.html$/</span>,</span><br><span class="line">        use: [&#123;</span><br><span class="line">          loader: <span class="string">'html-loader'</span>,</span><br><span class="line">          options: &#123;</span><br><span class="line">            minimize: <span class="literal">true</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="keyword">new</span> ExtractTextPlugin(<span class="string">'css/style.css'</span>),</span><br><span class="line">    <span class="keyword">new</span> OptimizeCSSPlugin(&#123;</span><br><span class="line">      cssProcessorOptions: &#123;</span><br><span class="line">        assetNameRegExp: <span class="regexp">/\.optimize\.css$/g</span>,</span><br><span class="line">        cssProcessor: <span class="built_in">require</span>(<span class="string">'cssnano'</span>),</span><br><span class="line">        cssProcessorOptions: &#123; <span class="attr">discardComments</span>: &#123; <span class="attr">removeAll</span>: <span class="literal">true</span> &#125; &#125;,</span><br><span class="line">        canPrint: <span class="literal">true</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="keyword">new</span> webpack.optimize.CommonsChunkPlugin(&#123;</span><br><span class="line">      name: <span class="string">'vendor'</span>,</span><br><span class="line">      minChunks: <span class="function"><span class="keyword">function</span> (<span class="params">module</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// any required modules inside node_modules are extracted to vendor</span></span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">          <span class="built_in">module</span>.resource &amp;&amp;</span><br><span class="line">          /\.js$/.test(<span class="built_in">module</span>.resource) &amp;&amp;</span><br><span class="line">          <span class="built_in">module</span>.resource.indexOf(</span><br><span class="line">            path.join(__dirname, <span class="string">'./node_modules'</span>)</span><br><span class="line">          ) === <span class="number">0</span></span><br><span class="line">        )</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="comment">// extract webpack runtime and module manifest to its own file in order to</span></span><br><span class="line">    <span class="comment">// prevent vendor hash from being updated whenever app bundle is updated</span></span><br><span class="line">    <span class="keyword">new</span> webpack.optimize.CommonsChunkPlugin(&#123;</span><br><span class="line">      name: <span class="string">'manifest'</span>,</span><br><span class="line">      chunks: [<span class="string">'vendor'</span>]</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">      filename: <span class="string">'index.html'</span>,</span><br><span class="line">      template: <span class="string">'./src/index.html'</span>,</span><br><span class="line">      chunksSortMode: <span class="string">'dependency'</span>,</span><br><span class="line">      hash: <span class="literal">true</span>,</span><br><span class="line">      cache: <span class="literal">true</span></span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (process.env.NODE_ENV === <span class="string">'dev'</span>) &#123;</span><br><span class="line">  base = merge(base, &#123;</span><br><span class="line">    plugins: [</span><br><span class="line">      devServer: &#123;</span><br><span class="line">        contentBase: path.join(__dirname, <span class="string">'src'</span>),</span><br><span class="line">        <span class="comment">// host: '0.0.0.0',</span></span><br><span class="line">        port: <span class="number">80</span>,</span><br><span class="line">        compress: <span class="literal">false</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="keyword">new</span> webpack.DefinePlugin(&#123;</span><br><span class="line">        DEV: <span class="literal">true</span></span><br><span class="line">      &#125;),</span><br><span class="line">      <span class="comment">// A very intelligent browser based Webpack dashboard</span></span><br><span class="line">      <span class="keyword">new</span> Jarvis(&#123;</span><br><span class="line">        port: <span class="number">1337</span> <span class="comment">// optional: set a port</span></span><br><span class="line">      &#125;)</span><br><span class="line">    ]</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (process.env.NODE_ENV === <span class="string">'production'</span>) &#123;</span><br><span class="line">  base = merge(base, &#123;</span><br><span class="line">    plugins: [</span><br><span class="line">      <span class="comment">// spa add favicon</span></span><br><span class="line">      <span class="keyword">new</span> CopyWebpackPlugin([</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="keyword">from</span>: <span class="string">'src/favicon.ico'</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]),</span><br><span class="line">      <span class="keyword">new</span> UglifyJsPlugin(&#123;</span><br><span class="line">        uglifyOptions: &#123;</span><br><span class="line">          compress: &#123;</span><br><span class="line">            drop_console: <span class="literal">true</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    ]</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = base</span><br></pre></td></tr></table></figure>
+<p>打包后生产的目录结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">├── dist</span><br><span class="line">|   ├── css/</span><br><span class="line">|   ├── image/</span><br><span class="line">|   └── js/</span><br><span class="line">|   └── index.html</span><br><span class="line">|   └── favicon.ico</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="eslintrc-js-lint-js-and-vue-files"><a href="#eslintrc-js-lint-js-and-vue-files" class="headerlink" title=".eslintrc.js: lint .js and .vue files"></a><code>.eslintrc.js</code>: lint <code>.js</code> and <code>.vue</code> files</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  root: true,</span><br><span class="line">  env: &#123;</span><br><span class="line">    es6: true,</span><br><span class="line">    browser: true</span><br><span class="line">  &#125;,</span><br><span class="line">  parserOptions: &#123;</span><br><span class="line">    parser: &apos;babel-eslint&apos;,</span><br><span class="line">    sourceType: &apos;module&apos;</span><br><span class="line">  &#125;,</span><br><span class="line">  // more configs see https://github.com/vuejs/eslint-plugin-vue#user-content-gear-configs</span><br><span class="line">  extends: [&apos;plugin:vue/base&apos;, &apos;standard&apos;],</span><br><span class="line">  plugins: [</span><br><span class="line">    &apos;vue&apos;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="add-favicon-to-spa"><a href="#add-favicon-to-spa" class="headerlink" title="add favicon to spa"></a>add favicon to spa</h2><p>1.use <a href="https://github.com/webpack-contrib/copy-webpack-plugin" target="_blank" rel="noopener">copy-webpack-plugin</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// spa add favicon</span></span><br><span class="line"><span class="keyword">new</span> CopyWebpackPlugin([</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">from</span>: <span class="string">'favicon.ico'</span>,</span><br><span class="line">    to: <span class="string">'dest'</span></span><br><span class="line">  &#125;</span><br><span class="line">]),</span><br></pre></td></tr></table></figure>
+<p>2.use native javascript</p>
+<p>in your <code>main.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// add favicon</span></span><br><span class="line"><span class="keyword">const</span> favicon = <span class="built_in">require</span>(<span class="string">'./images/favicon.png'</span>)</span><br><span class="line"><span class="keyword">let</span> link = <span class="built_in">window</span>.document.querySelector(<span class="string">'link[rel*="icon"]'</span>) || <span class="built_in">document</span>.createElement(<span class="string">'link'</span>)</span><br><span class="line">link.type = <span class="string">'image/x-icon'</span></span><br><span class="line">link.rel = <span class="string">'shortcut icon'</span></span><br><span class="line">link.href = favicon</span><br><span class="line"><span class="built_in">window</span>.document.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>].appendChild(link)</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    赞赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://img.jogiter.cn/wechat.png" alt="Jogiter 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://img.jogiter.cn/alipay.png" alt="Jogiter 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vue/" rel="tag"># vue</a>
+              <a href="/tags/webpack/" rel="tag"># webpack</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/03/20/git-tutorial/" rel="prev" title="git 教程">
+      <i class="fa fa-chevron-left"></i> git 教程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/05/04/frontend-optimization/" rel="next" title="如何使用 chrome 优化资源加载时间">
+      如何使用 chrome 优化资源加载时间 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的-webpack-插件"><span class="nav-number">1.</span> <span class="nav-text">常用的 webpack 插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack兼容ie8问题"><span class="nav-number">2.</span> <span class="nav-text">webpack兼容ie8问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何在-webpack-中引入未模块化的库，如-Zepto"><span class="nav-number">3.</span> <span class="nav-text">如何在 webpack 中引入未模块化的库，如 Zepto</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tree-shaking"><span class="nav-number">4.</span> <span class="nav-text">tree-shaking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-webpack-项目配置"><span class="nav-number">5.</span> <span class="nav-text">vue webpack 项目配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eslintrc-js-lint-js-and-vue-files"><span class="nav-number">6.</span> <span class="nav-text">.eslintrc.js: lint .js and .vue files</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#add-favicon-to-spa"><span class="nav-number">7.</span> <span class="nav-text">add favicon to spa</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jogiter</p>
+  <div class="site-description" itemprop="description">Life exists, and identity</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Jogiter" title="GitHub → https://github.com/Jogiter" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2409083451" title="Weibo → https://weibo.com/2409083451" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.confucianism.com.cn/" title="http://www.confucianism.com.cn/" rel="noopener" target="_blank">国学网</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://winnie0517.github.io/" title="https://winnie0517.github.io/" rel="noopener" target="_blank">邪恶的小爪子</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">粤ICP备18022983号-1 </a>
+      <img src="http://www.beian.miit.gov.cn" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jogiter</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

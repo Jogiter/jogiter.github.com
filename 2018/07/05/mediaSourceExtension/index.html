@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jogiter.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="demo在 迅雷直播 中审查元素，可以看到视频元素会看到它的 src 是一个 Blob URL。 1&amp;lt;video preload=&quot;metadata&quot; src=&quot;blob:http://live.xunlei.com/79a71646-6b99-419c-a3c3-d7c171266aca&quot;&amp;gt;&amp;lt;/video&amp;gt; 与普通的 html5 video 的区别  直接访问 src 的">
+<meta name="keywords" content="video">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mediaSourceExtension">
+<meta property="og:url" content="https://jogiter.github.io/2018/07/05/mediaSourceExtension/index.html">
+<meta property="og:site_name" content="悲劇的藝術">
+<meta property="og:description" content="demo在 迅雷直播 中审查元素，可以看到视频元素会看到它的 src 是一个 Blob URL。 1&amp;lt;video preload=&quot;metadata&quot; src=&quot;blob:http://live.xunlei.com/79a71646-6b99-419c-a3c3-d7c171266aca&quot;&amp;gt;&amp;lt;/video&amp;gt; 与普通的 html5 video 的区别  直接访问 src 的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.jogiter.cn/rightmouse-video.png">
+<meta property="og:image" content="http://img.jogiter.cn/rightmouse-mse.png">
+<meta property="og:image" content="http://img.jogiter.cn/bufferAll.gif">
+<meta property="og:image" content="http://img.jogiter.cn/bufferWhenNeeded.gif">
+<meta property="og:image" content="http://img.jogiter.cn/createObjectURL.png">
+<meta property="og:image" content="https://www.w3.org/TR/media-source/pipeline_model.svg">
+<meta property="og:image" content="http://img.jogiter.cn/MSE-support.png">
+<meta property="og:updated_time" content="2021-05-07T12:45:44.352Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mediaSourceExtension">
+<meta name="twitter:description" content="demo在 迅雷直播 中审查元素，可以看到视频元素会看到它的 src 是一个 Blob URL。 1&amp;lt;video preload=&quot;metadata&quot; src=&quot;blob:http://live.xunlei.com/79a71646-6b99-419c-a3c3-d7c171266aca&quot;&amp;gt;&amp;lt;/video&amp;gt; 与普通的 html5 video 的区别  直接访问 src 的">
+<meta name="twitter:image" content="http://img.jogiter.cn/rightmouse-video.png">
+
+<link rel="canonical" href="https://jogiter.github.io/2018/07/05/mediaSourceExtension/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>mediaSourceExtension | 悲劇的藝術</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">悲劇的藝術</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">O'caption, My caption!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-reading">
+
+    <a href="/reading" rel="section"><i class="fa fa-sitemap fa-fw"></i>reading</a>
+
+  </li>
+        <li class="menu-item menu-item-book">
+
+    <a href="/book" rel="section"><i class="fa fa-book fa-fw"></i>book</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jogiter.github.io/2018/07/05/mediaSourceExtension/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jogiter">
+      <meta itemprop="description" content="Life exists, and identity">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="悲劇的藝術">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mediaSourceExtension
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-07-05 18:53:21" itemprop="dateCreated datePublished" datetime="2018-07-05T18:53:21+00:00">2018-07-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-07 12:45:44" itemprop="dateModified" datetime="2021-05-07T12:45:44+00:00">2021-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h2><p>在 <a href="http://live.xunlei.com/" target="_blank" rel="noopener">迅雷直播</a> 中审查元素，可以看到视频元素会看到它的 src 是一个 <a href="https://www.w3.org/TR/FileAPI/#url" target="_blank" rel="noopener">Blob URL</a>。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">preload</span>=<span class="string">"metadata"</span> <span class="attr">src</span>=<span class="string">"blob:http://live.xunlei.com/79a71646-6b99-419c-a3c3-d7c171266aca"</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>与普通的 html5 video 的区别</strong></p>
+<ol>
+<li>直接访问 <code>src</code> 的链接，无法播放视频</li>
+<li>无法右键保存到本地</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">使用 html5 video</th>
+<th style="text-align:left">使用 MSE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><img src="http://img.jogiter.cn/rightmouse-video.png" alt="使用 html5 video"></td>
+<td style="text-align:left"><img src="http://img.jogiter.cn/rightmouse-mse.png" alt="使用 MSE"></td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li>支持分片加载，加快视频打开速度，节省流量</li>
+</ol>
+<p>比如打开一个 <code>197 MB</code> 的视频文件，使用分片加载用户体验会更好。</p>
+<p>一次性加载完毕</p>
+<p><img src="http://img.jogiter.cn/bufferAll.gif" alt="bufferAll"></p>
+<p>分片加载，每次加载一部分</p>
+<p><img src="http://img.jogiter.cn/bufferWhenNeeded.gif" alt="bufferWhenNeeded"></p>
+<h2 id="使用-URL-createObjectURL-blob-创建-Blob-URL"><a href="#使用-URL-createObjectURL-blob-创建-Blob-URL" class="headerlink" title="使用 URL.createObjectURL(blob) 创建 Blob URL"></a>使用 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/URL/createObjectURL#Example" target="_blank" rel="noopener">URL.createObjectURL(blob)</a> 创建 Blob URL</h2><p>在每次调用 <code>createObjectURL()</code> 方法时，都会创建一个新的 <code>URL</code> 对象，即使你已经用相同的对象作为参数创建过。当不再需要这些 URL 对象时，每个对象必须通过调用 <code>URL.revokeObjectURL()</code> 方法来释放。浏览器会在文档退出的时候自动释放它们，但是为了获得最佳性能和内存使用状况，你应该在安全的时机主动释放掉它们。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// blob = scheme ":" origin "/" UUID</span></span><br><span class="line"><span class="keyword">let</span> url = URL.createObjectURL(<span class="keyword">new</span> Blob([], &#123;<span class="attr">type</span>: <span class="string">'image/png'</span>&#125;))</span><br><span class="line"><span class="keyword">let</span> img = <span class="built_in">document</span>.createElement(<span class="string">"img"</span>);</span><br><span class="line">img.src = url;</span><br><span class="line">img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.URL.revokeObjectURL(url);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.body.appendChild(img);</span><br><span class="line"><span class="comment">// &lt;img src="blob:https://developer.mozilla.org/0495d5c4-5b70-4960-8bdb-3b761d3b1c56"&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>createObjectURL 的兼容性</strong></p>
+<p><img src="http://img.jogiter.cn/createObjectURL.png" alt="caniuse?search=createObjectURL"></p>
+<p><a href="https://codepen.io/pen/" target="_blank" rel="noopener">demo</a>，更多例子参考 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/File/Using_files_from_web_applications" target="_blank" rel="noopener">使用 Web 应用程序中的文件</a></p>
+<h2 id="Media-Source-Extensions"><a href="#Media-Source-Extensions" class="headerlink" title="Media Source Extensions"></a>Media Source Extensions</h2><p>允许 <code>JavaScript</code> 动态构建 <code>&lt;audio&gt;</code> 和 <code>&lt;video&gt;</code> 的媒体流。它定义了一个 <code>MediaSource</code> 对象，可以作为 <code>HTMLMediaElement</code> 的媒体数据源。 <code>MediaSource</code> 对象具有一个或多个 <code>SourceBuffer</code> 对象。应用程序将数据段附加到 <code>SourceBuffer</code> 对象，并可以根据系统性能和其他因素调整附加数据的质量。来自 <code>SourceBuffer</code> 对象的数据被管理为用于解码和播放的音频，视频和文本数据的轨道缓冲器。</p>
+<p><img src="https://www.w3.org/TR/media-source/pipeline_model.svg" alt="pipeline_model"></p>
+<h3 id="HTML的媒体支持浏览器兼容情况"><a href="#HTML的媒体支持浏览器兼容情况" class="headerlink" title="HTML的媒体支持浏览器兼容情况"></a><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Supported_media_formats#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%83%85%E5%86%B5" target="_blank" rel="noopener">HTML的媒体支持浏览器兼容情况</a></h3><p><img src="http://img.jogiter.cn/MSE-support.png" alt="Supported_media_formats#浏览器兼容情况"></p>
+<p>判断给定的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME类型</a> 是否被当前的浏览器支持</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> mimeCodec = <span class="string">'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'</span></span><br><span class="line"><span class="keyword">let</span> isMediaSourceSupported = <span class="string">'MediaSource'</span> <span class="keyword">in</span> <span class="built_in">window</span> &amp;&amp; MediaSource.isTypeSupported(mimeCodec)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (isMediaSourceSupported) &#123;</span><br><span class="line">  <span class="keyword">let</span> mediaSource = <span class="keyword">new</span> MediaSource()</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.error(<span class="string">'Unsupported MIME type or codec: '</span>, mimeCodec);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>MediaSource.isTypeSupported(‘mime; codecs=””‘); 需要指定 codecs</p>
+</blockquote>
+<h3 id="transcoding"><a href="#transcoding" class="headerlink" title="transcoding"></a>transcoding</h3><p>并非所有浏览器都支持所有编解码器，所以我们需要对资源进行转码。这里推荐使用 <a href="https://github.com/FFmpeg/FFmpeg" target="_blank" rel="noopener">FFmpeg</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.wav output.mp3</span><br><span class="line">ffmpeg -i input.y4m -i input.wav output.webm</span><br></pre></td></tr></table></figure>
+<h3 id="获取资源的-codecs-及资源碎片化"><a href="#获取资源的-codecs-及资源碎片化" class="headerlink" title="获取资源的 codecs 及资源碎片化"></a>获取资源的 codecs 及资源碎片化</h3><p>下载 <a href="https://github.com/axiomatic-systems/Bento4" target="_blank" rel="noopener">Bento4 </a></p>
+<p>Bento4 SDK包含几个使用SDK API构建的命令行应用程序/工具。这些包括：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">程序名</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">mp4info</td>
+<td style="text-align:left">显示有关MP4文件的高级信息，包括所有曲目和编解码器详细信息</td>
+</tr>
+<tr>
+<td style="text-align:left">mp4dump</td>
+<td style="text-align:left">显示MP4文件的整个原子/框结构</td>
+</tr>
+<tr>
+<td style="text-align:left">mp4fragment</td>
+<td style="text-align:left">从非碎片文件创建碎片化MP4文件或重新碎片已碎片化的文件</td>
+</tr>
+<tr>
+<td style="text-align:left">mp4split</td>
+<td style="text-align:left">将碎片化的MP4文件拆分为离散文件</td>
+</tr>
+</tbody>
+</table>
+<p>查看资源的 Codecs</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./mp4info.exe src/pirates.mp4 | grep Codecs</span><br><span class="line"><span class="meta">#</span><span class="bash">   Codecs String: mp4a.40.2</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Codecs String: avc1.4D401F</span></span><br></pre></td></tr></table></figure>
+<p>那么 mimeCodec = ‘avc1.4D401F, mp4a.40.2’</p>
+<p>查看资源碎片化状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./mp4info.exe ./src/pirates.mp4 | grep fragments</span><br><span class="line"><span class="meta">#</span><span class="bash">fragments:  no</span></span><br></pre></td></tr></table></figure>
+<p>资源碎片化</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./mp4fragment.exe src/pirates.mp4 src/pirates_fragment.mp4</span><br><span class="line"><span class="meta">#</span><span class="bash">found regular I-frame interval: 17496 frames (at 23.976 frames per second)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">auto-detected fragment duration too large, using default</span></span><br></pre></td></tr></table></figure>
+<p>再次查看资源碎片化状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">./mp4info.exe ./src/pirates_fragmented.mp4 | grep fragments</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">fragments:  yes</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    sample count with fragments: 61991</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    duration with fragments:     63478784</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    duration with fragments:     1439428 (ms)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    sample count with fragments: 34511</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    duration with fragments:     69091022</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    duration with fragments:     1439396 (ms)</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用-MSE-播放二进制数据流"><a href="#使用-MSE-播放二进制数据流" class="headerlink" title="使用 MSE 播放二进制数据流"></a>使用 MSE 播放二进制数据流</h3><ul>
+<li><a href="http://nickdesaulniers.github.io/netfix/demo/bufferAll.html" target="_blank" rel="noopener">DEMO: BUFFER ASAP</a></li>
+<li><a href="http://nickdesaulniers.github.io/netfix/demo/bufferWhenNeeded.html" target="_blank" rel="noopener">DEMO: BUFFER JUST IN TIME</a></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> video = <span class="built_in">document</span>.querySelector(<span class="string">'video'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> assetURL = <span class="string">'frag_bunny.mp4'</span>;</span><br><span class="line"><span class="comment">// Need to be specific for Blink regarding codecs</span></span><br><span class="line"><span class="comment">// ./mp4info frag_bunny.mp4 | grep Codec</span></span><br><span class="line"><span class="keyword">var</span> mimeCodec = <span class="string">'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="string">'MediaSource'</span> <span class="keyword">in</span> <span class="built_in">window</span> &amp;&amp; MediaSource.isTypeSupported(mimeCodec)) &#123;</span><br><span class="line">  <span class="keyword">var</span> mediaSource = <span class="keyword">new</span> MediaSource();</span><br><span class="line">  <span class="comment">//console.log(mediaSource.readyState); // closed</span></span><br><span class="line">  video.src = URL.createObjectURL(mediaSource);</span><br><span class="line">  mediaSource.addEventListener(<span class="string">'sourceopen'</span>, sourceOpen);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.error(<span class="string">'Unsupported MIME type or codec: '</span>, mimeCodec);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sourceOpen</span> (<span class="params">_</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//console.log(this.readyState); // open</span></span><br><span class="line">  <span class="keyword">var</span> mediaSource = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">var</span> sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);</span><br><span class="line">  fetchAB(assetURL, <span class="function"><span class="keyword">function</span> (<span class="params">buf</span>) </span>&#123;</span><br><span class="line">    sourceBuffer.addEventListener(<span class="string">'updateend'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">_</span>) </span>&#123;</span><br><span class="line">      mediaSource.endOfStream();</span><br><span class="line">      video.play();</span><br><span class="line">      <span class="comment">//console.log(mediaSource.readyState); // ended</span></span><br><span class="line">    &#125;);</span><br><span class="line">    sourceBuffer.appendBuffer(buf);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fetchAB</span> (<span class="params">url, cb</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(url);</span><br><span class="line">  <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest;</span><br><span class="line">  xhr.open(<span class="string">'get'</span>, url);</span><br><span class="line">  xhr.responseType = <span class="string">'arraybuffer'</span>;</span><br><span class="line">  xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    cb(xhr.response);</span><br><span class="line">  &#125;;</span><br><span class="line">  xhr.send();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>替换本地资源后，报 MediaSource 错误：</p>
+<blockquote>
+<p>Uncaught DOMException: Failed to execute ‘endOfStream’ on ‘MediaSource’: The MediaSource’s readyState is not ‘open’.</p>
+</blockquote>
+<p>原因是因为视频资源不是 <code>fragmented</code>，需要进行转换，操作流程参考上一节。</p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
+<li>prevent-html5-video-from-being-downloaded-right-click-saved？</li>
+</ol>
+<p>最简单的方式移除视频标签的右键“保存”选项</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   $(<span class="string">'#videoElementID'</span>).bind(<span class="string">'contextmenu'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="literal">false</span>; &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>This does not help however if JavaScript is disabled in the browser</p>
+</blockquote>
+<ol start="2">
+<li>Firefox 61 上报错(QuotaExceededError: The quota has been exceeded.)</li>
+</ol>
+<p>firefox 会限制 fragment 的大小。firefox 需要 fragment 小于 20M。chrome &amp; Edge 无限制.</p>
+<h2 id="阅读链接"><a href="#阅读链接" class="headerlink" title="阅读链接"></a>阅读链接</h2><ul>
+<li>使用 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaSource" target="_blank" rel="noopener">MediaSource</a> 播放视频</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME 类型</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Blob" target="_blank" rel="noopener">Blob</a> Blob 对象表示一个不可变、原始数据的类文件对象。Blob 表示的不一定是JavaScript原生格式的数据。File 接口基于Blob，继承了 blob 的功能并将其扩展使其支持用户系统上的文件。</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/File/Using_files_from_web_applications" target="_blank" rel="noopener">Using files from web applications</a></li>
+<li><a href="https://github.com/nickdesaulniers/netfix" target="_blank" rel="noopener">Let’s build a Netflix</a> 使用 MediaSource 播放视频 demo</li>
+<li><a href="http://nickdesaulniers.github.io/netfix/#/" target="_blank" rel="noopener">LET’S MAKE A NETFLIX</a></li>
+<li><a href="https://caniuse.com/#search=createObjectURL" target="_blank" rel="noopener">caniuse: createObjectURL</a></li>
+<li><a href="https://developers.google.com/web/updates/2017/09/autoplay-policy-changes" target="_blank" rel="noopener">autoplay-policy-changes</a> 谷歌 66 版本自动播放政策更改</li>
+<li><a href="https://stackoverflow.com/questions/9756837/prevent-html5-video-from-being-downloaded-right-click-saved" target="_blank" rel="noopener">prevent-html5-video-from-being-downloaded-right-click-saved</a></li>
+<li><a href="chrome://flags/#autoplay-policy" target="_blank" rel="noopener">谷歌浏览器中更改自动播放策略</a></li>
+<li><a href="http://postbird.gitee.io/postbirdmp4toblob/" target="_blank" rel="noopener">Postbird-demo</a></li>
+<li><a href="https://github.com/axiomatic-systems/Bento4" target="_blank" rel="noopener">axiomatic-systems/Bento4</a> 全功能MP4格式和MPEG DASH库和工具</li>
+<li><a href="https://chocolatey.org/packages?q=ffmpeg" target="_blank" rel="noopener">ffmpeg</a> windows 上安装 ffmpeg</li>
+<li><a href="https://www.w3.org/TR/media-source/" target="_blank" rel="noopener">media-source</a> Media Source Extensions</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    赞赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://img.jogiter.cn/wechat.png" alt="Jogiter 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://img.jogiter.cn/alipay.png" alt="Jogiter 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/video/" rel="tag"># video</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/06/25/string-compare/" rel="prev" title="string-compare">
+      <i class="fa fa-chevron-left"></i> string-compare
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/10/18/当人们让你失望时，有6种方法可以照顾好自己/" rel="next" title="当人们让你失望时，有6种方法可以照顾好自己">
+      当人们让你失望时，有6种方法可以照顾好自己 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#demo"><span class="nav-number">1.</span> <span class="nav-text">demo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-URL-createObjectURL-blob-创建-Blob-URL"><span class="nav-number">2.</span> <span class="nav-text">使用 URL.createObjectURL(blob) 创建 Blob URL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Media-Source-Extensions"><span class="nav-number">3.</span> <span class="nav-text">Media Source Extensions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML的媒体支持浏览器兼容情况"><span class="nav-number">3.1.</span> <span class="nav-text">HTML的媒体支持浏览器兼容情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transcoding"><span class="nav-number">3.2.</span> <span class="nav-text">transcoding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取资源的-codecs-及资源碎片化"><span class="nav-number">3.3.</span> <span class="nav-text">获取资源的 codecs 及资源碎片化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-MSE-播放二进制数据流"><span class="nav-number">3.4.</span> <span class="nav-text">使用 MSE 播放二进制数据流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">3.5.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阅读链接"><span class="nav-number">4.</span> <span class="nav-text">阅读链接</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jogiter</p>
+  <div class="site-description" itemprop="description">Life exists, and identity</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Jogiter" title="GitHub → https://github.com/Jogiter" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2409083451" title="Weibo → https://weibo.com/2409083451" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.confucianism.com.cn/" title="http://www.confucianism.com.cn/" rel="noopener" target="_blank">国学网</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://winnie0517.github.io/" title="https://winnie0517.github.io/" rel="noopener" target="_blank">邪恶的小爪子</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">粤ICP备18022983号-1 </a>
+      <img src="http://www.beian.miit.gov.cn" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jogiter</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
