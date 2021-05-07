@@ -31,6 +31,8 @@ lerna add module-1 packages/prefix-* --dev
 
 ## tsdx
 
+Note: this works on tsdx@0.13.3 or lower version. tsdx@14.x may be blocked
+
 > [tsdx#6](https://github.com/formium/tsdx/issues/6)
 
 **tsdx build does not bundle the dependencies?**
