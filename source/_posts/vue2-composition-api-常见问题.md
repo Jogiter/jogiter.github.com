@@ -121,6 +121,118 @@ export default defineComponent({
 })
 ```
 
+## refs
+
+```html
+<template>
+  <el-form ref="dialogFormRef" :model="dialogForm">
+    <!-- ... -->
+  </el-form>
+  <el-button type="primary" @click="onDialogFormSubmit">确 定</el-button>
+</template>
+
+<script lang="ts">
+  import { defineComponent, ref, reactive } from '@nuxtjs/composition-api'
+  import type { ElForm } from 'element-ui/types/form'
+  
+  export default defineComponent({
+    setup() {
+      const dialogForm = reactive({...})
+    	const dialogFormRef = ref({} as ElForm)
+      
+      const onDialogFormSubmit = () => {
+        dialogFormRef.value.validate(async valid => {
+          if (valid) {
+            // do with dialogForm
+          } else {
+            return false
+          }
+        })
+      }
+      
+      return {
+        dialogForm,
+      	dialogFormRef,
+        onDialogFormSubmit,
+      }
+    }
+  })
+</script>
+
+```
+
+## avoid jsx in typescript
+
+```html
+<template>
+	<el-table :data="tableData" style="width: 100%">
+    <el-table-column v-for="col in columns" :key="col.prop" v-bind="{...col}" />
+  </el-table>
+</template>
+
+<script lang="ts">
+  import { defineComponent, ref, reactive } from '@nuxtjs/composition-api'
+	export default defineComponent({
+    setup() {
+      return {
+				tableData: [
+          {
+            date: "2016-05-02",
+            name: "王小虎",
+            address: "上海市普陀区金沙江路 1518 弄"
+          },
+          {
+            date: "2016-05-04",
+            name: "王小虎",
+            address: "上海市普陀区金沙江路 1517 弄"
+          },
+          {
+            date: "2016-05-01",
+            name: "王小虎",
+            address: "上海市普陀区金沙江路 1519 弄"
+          },
+          {
+            date: "2016-05-03",
+            name: "王小虎",
+            address: "上海市普陀区金沙江路 1516 弄"
+          }
+        ],
+        columns: [
+          {
+            prop: "date",
+            label: "日期"
+          },
+          {
+            prop: "name",
+            label: "姓名",
+            formatter(row, column, value) {
+              const { h } = Vue;
+              // avoid writing jsx in typescript. instead of return a vdom
+              return [
+                h(
+                  ElementPlus.ElButton,
+                  {
+                    type: "success",
+                    icon: "el-icon-search"
+                  },
+                  "搜索"
+                )
+              ];
+            }
+          },
+          {
+            prop: "address",
+            label: "地址"
+          }
+        ]
+      }
+		}
+  })
+</script>
+```
+
+[demo](https://codepen.io/Jogiter/pen/JjWrdNP?editors=0010)
+
 ## readings
 
 - [nuxt-community/composition-api](https://composition-api.nuxtjs.org/)
