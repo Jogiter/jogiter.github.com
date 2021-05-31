@@ -5,6 +5,12 @@ tags:
   - vue
 ---
 
+## 环境
+
+• nuxt@2.15.3
+• typescript@4.2.4
+• vue@2.6.12
+
 ## 安装
 
 安装 `@nuxtjs/composition-api`:
@@ -161,7 +167,9 @@ export default defineComponent({
 
 ```
 
-## avoid jsx in typescript
+## jsx in typescript
+
+way 1: replace jsx with vnode
 
 ```html
 <template>
@@ -172,6 +180,7 @@ export default defineComponent({
 
 <script lang="ts">
   import { defineComponent, ref, reactive } from '@nuxtjs/composition-api'
+  import { h } from '@vue/composition-api'
 	export default defineComponent({
     setup() {
       return {
@@ -206,7 +215,6 @@ export default defineComponent({
             prop: "name",
             label: "姓名",
             formatter(row, column, value) {
-              const { h } = Vue;
               // avoid writing jsx in typescript. instead of return a vdom
               return [
                 h(
@@ -232,6 +240,98 @@ export default defineComponent({
 ```
 
 [demo](https://codepen.io/Jogiter/pen/JjWrdNP?editors=0010)
+
+way2: (推荐)
+
+1. 创建 jsx.d.ts
+
+```ts
+import Vue, { VNode } from 'vue'
+
+declare global {
+  namespace JSX {
+    interface Element extends VNode {}
+    interface ElementClass extends Vue {}
+    interface ElementAttributesProperty {
+      $props: {}
+    }
+    interface IntrinsicElements {
+      [elemName: string]: any
+    }
+  }
+}
+```
+
+2. 更新 `tsconfig.json`
+
+```json
+{
+  "compilerOptions": {
+    "jsx": "preserve"
+  }
+}
+```
+
+3. code
+
+> <script lang="tsx">
+
+```html
+<template>
+  <el-table :data="tableData" style="width: 100%">
+    <el-table-column v-for="col in columns" :key="col.prop" v-bind="{...col}" />
+  </el-table>
+</template>
+
+<script lang="tsx">
+  import { defineComponent, ref, reactive } from '@nuxtjs/composition-api'
+  export default defineComponent({
+    setup() {
+      return {
+        tableData: [
+          {
+            date: "2016-05-02",
+            name: "王小虎",
+            address: "上海市普陀区金沙江路 1518 弄"
+          },
+          {
+            date: "2016-05-04",
+            name: "王小虎",
+            address: "上海市普陀区金沙江路 1517 弄"
+          },
+          {
+            date: "2016-05-01",
+            name: "王小虎",
+            address: "上海市普陀区金沙江路 1519 弄"
+          },
+          {
+            date: "2016-05-03",
+            name: "王小虎",
+            address: "上海市普陀区金沙江路 1516 弄"
+          }
+        ],
+        columns: [
+          {
+            prop: "date",
+            label: "日期"
+          },
+          {
+            prop: "name",
+            label: "姓名",
+            formatter(row, column, value) {
+              return (<ElButton type={row.type} icon={row.icon}></ElButton>);
+            }
+          },
+          {
+            prop: "address",
+            label: "地址"
+          }
+        ]
+      }
+    }
+  })
+</script>
+```
 
 ## readings
 
