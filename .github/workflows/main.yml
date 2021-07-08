@@ -26,13 +26,29 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: prepare and build
+        run: | 
+          yarn 
+          yarn run build
+        
+      - name: commit
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          cd ./public
+          git init
+          git add --all .
+          git commit -m "Github Action Auto Builder"
+
+      - name: push
+        uses: ad-m/github-push0action@master
+        with: 
+          github_token: ${{ github.token }}
+          branch: master
+          
+      - name: success
+        run: |
+          echo Github actions build success,
+          echo Awesome!.
