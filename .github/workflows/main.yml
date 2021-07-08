@@ -38,6 +38,8 @@ jobs:
       - name: commit
         run: |
           cd ./public
+          git config --global user.name "Jogiter"
+          git config --global user.email "jogiter.g@gmail.com"
           git init
           git add --all .
           git commit -m "Github Action Auto Builder"
