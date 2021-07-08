@@ -61,6 +61,7 @@ jobs:
         with: 
           github_token: ${{ github.token }}
           branch: master
+          force: true
           
       - name: success
         run: |
