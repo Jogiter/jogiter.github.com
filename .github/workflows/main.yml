@@ -47,15 +47,15 @@ jobs:
           yarn 
           yarn run build
         
-      - name: commit
+      - name: git commit
         run: |
           git config --global user.name "Jogiter"
           git config --global user.email "jogiter.g@gmail.com"
+          cd ./public
           git init
-          git add --all .
-          git commit -m "Github Action Auto Builder"
+          git commit -m "Github Action Auto Builder" -a
 
-      - name: push
+      - name: git push
         uses: ad-m/github-push-action@master
         with: 
           github_token: ${{ github.token }}
