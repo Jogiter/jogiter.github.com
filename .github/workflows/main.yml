@@ -53,7 +53,8 @@ jobs:
           git config --global user.email "jogiter.g@gmail.com"
           cd ./public
           git init
-          git commit -m "Github Action Auto Builder" -a
+          git add --all .
+          git commit -m "Github Action Auto Builder"
 
       - name: git push
         uses: ad-m/github-push-action@master
