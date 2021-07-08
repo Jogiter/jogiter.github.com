@@ -8,9 +8,11 @@ on:
   push:
     branches:
     - writing
-  pull_request:
+  pull_request_review:
     branches:
     - writing
+    types:
+      - submitted
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -47,20 +49,21 @@ jobs:
           yarn 
           yarn run build
         
-      - name: commit
+      - name: git commit
         run: |
-          cd ./public
           git config --global user.name "Jogiter"
           git config --global user.email "jogiter.g@gmail.com"
+          cd ./public
           git init
           git add --all .
           git commit -m "Github Action Auto Builder"
 
-      - name: push
+      - name: git push
         uses: ad-m/github-push-action@master
         with: 
           github_token: ${{ github.token }}
           branch: master
+          directory: public
           force: true
           
       - name: success
