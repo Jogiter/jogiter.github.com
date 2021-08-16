@@ -79,4 +79,4 @@ theme: next
 deploy:
   type: git
   repo: git@github.com:Jogiter/jogiter.github.com.git
-  branch: master
+  branch: main
