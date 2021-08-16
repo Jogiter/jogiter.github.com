@@ -59,7 +59,7 @@ jobs:
           git commit -m "Github Action Auto Builder"
 
       - name: git push
-        uses: ad-m/github-push-action@main
+        uses: ad-m/github-push-action@master
         with: 
           github_token: ${{ github.token }}
           branch: main
