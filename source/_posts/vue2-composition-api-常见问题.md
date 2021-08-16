@@ -5,6 +5,8 @@ tags:
   - vue
 ---
 
+使用限制：[composition-api#limitations](https://github.com/vuejs/composition-api#limitations)
+
 ## 环境
 
 • nuxt@2.15.3
@@ -332,6 +334,77 @@ declare global {
   })
 </script>
 ```
+
+## vuex types
+
+>vuex@3.6.2 支持 vue2。如果使用 vue3，请使用 vuex@4
+
+```ts
+// Getter, Plugin 等参见 vuex/types
+import { MutationTree, ActionTree } from 'vuex'
+
+const export const state = () => ({
+  stateA: '',
+  stateB: {
+    foo: 0
+  },
+  stateC: false
+})
+
+type State = ReturnType<typeof state>
+
+export const mutations: MutationTree<State> = {
+  updateA(state, payload: string) {
+    state.stateA = payload
+  },	
+  updateB(state, payload: {foo: number}) {
+    state.stateB = payload
+  },
+}
+export const actions: ActionTree<State, {}> = {
+	async login({ commit }, payload: any) {
+    const json = await $axios.post(API.login, payload)
+    commit('updateB', json)
+  }
+}
+```
+
+## provide/inject(响应性)
+
+父组件中提供响应式的注入
+
+```ts
+import { defineComponent, provide, toRef } from '@nuxtjs/composition-api'
+
+export default defineComponent({
+  setup(props) {
+    // 
+    provide('height', toRef(props, 'height'))
+  }
+}
+```
+
+子组件中监听响应式的注入
+
+```ts
+import { defineComponent, inject, watch } from '@nuxtjs/composition-api'
+
+export default defineComponent({
+  setup(props) {
+    watch(
+      inject('height') as string,
+      (height) => {
+        // do something with height
+      },
+      {
+        immediate: true,
+      }
+    )
+  }
+}
+```
+
+[Provide / Inject](https://v3.cn.vuejs.org/guide/composition-api-provide-inject.html#%E8%AE%BE%E6%83%B3%E5%9C%BA%E6%99%AF)
 
 ## readings
 
