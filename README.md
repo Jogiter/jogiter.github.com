@@ -15,14 +15,14 @@
 
 ## [site-config](https://segmentfault.com/a/1190000009054888)
 
-**move [https://jogiter.github.io](https://jogiter.github.io) to [http://jogiter.cn](http://jogiter.cn)**
+**move [https://jogiter.github.io](https://jogiter.github.io) to [http://blog.jogiter.cn](http://blog.jogiter.cn)**
 
 add a new file `CNAME` to `themes/source`, and it will be generated to the root of the github pages
 
 CNAME(put your own domain in)
 
 ```text
-jogiter.cn
+blog.jogiter.cn
 ```
 
 **use [traivas](https://travis-ci.org) to automatically build build and deploy**
