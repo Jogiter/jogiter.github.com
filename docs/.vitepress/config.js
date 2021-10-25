@@ -1,8 +1,6 @@
 const fs = require('fs')
 const path = require('path')
 
-console.log(path.resolve(process.cwd(), './dist'));
-
 module.exports = {
   title: 'Jogiter`s Blog',
   description: 'EveryThing about Me!',

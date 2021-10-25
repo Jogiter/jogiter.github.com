@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /favico.png
+heroImage: /favicon.png
 heroAlt: Logo image
 heroText: Jogiter`s 的博客
 tagline: Life exists, and the identity!
