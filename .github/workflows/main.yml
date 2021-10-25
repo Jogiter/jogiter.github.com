@@ -48,7 +48,7 @@ jobs:
 
       - name: prepare and build
         run: | 
-          yarn 
+          yarn
           yarn run build
 
       - name: git commit
@@ -63,7 +63,7 @@ jobs:
       - name: git push
         uses: ad-m/github-push-action@master
         with: 
-          github_token: ${{ github.token }}
+          github_token: ${{ secrets.TOKEN }}
           branch: main
           directory: public
           force: true
