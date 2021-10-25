@@ -55,7 +55,7 @@ jobs:
         run: |
           git config --global user.name "Jogiter"
           git config --global user.email "jogiter.g@gmail.com"
-          cd ./docs/.vitepress/dist
+          cd docs/.vitepress/dist
           git init
           git add --all .
           git commit -m "Github Action Auto Builder"
@@ -65,7 +65,6 @@ jobs:
         with: 
           github_token: ${{ secrets.TOKEN }}
           branch: main
-          directory: public
           force: true
           
       - name: success
