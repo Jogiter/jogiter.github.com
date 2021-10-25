@@ -8,9 +8,11 @@ on:
   push:
     branches:
     - writing
+    - vitepress
   pull_request_review:
     branches:
     - writing
+    - vitepress
     types:
       - submitted
 
@@ -53,7 +55,7 @@ jobs:
         run: |
           git config --global user.name "Jogiter"
           git config --global user.email "jogiter.g@gmail.com"
-          cd ./public
+          cd ./docs/.vitepress/dist
           git init
           git add --all .
           git commit -m "Github Action Auto Builder"
