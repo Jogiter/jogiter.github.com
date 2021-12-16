@@ -6,11 +6,17 @@
   "author": "jogiter",
   "license": "MIT",
   "devDependencies": {
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.5",
+    "tailwindcss": "2.2.19",
     "vitepress": "^0.20.0"
   },
   "scripts": {
     "dev": "vitepress dev docs",
     "build": "vitepress build docs",
     "serve": "vitepress serve docs"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "0.4.1"
   }
 }

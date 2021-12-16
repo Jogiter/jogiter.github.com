@@ -1,5 +1,7 @@
+import './index.css'
 import Theme from 'vitepress/theme';
 import { h } from 'vue'
+import MyContent from '../components/MyContent.vue'
 
 export default {
   ...Theme,
@@ -34,5 +36,8 @@ export default {
           ]
         ),
     })
+  },
+  enhanceApp({ app }) {
+    app.component('Content', MyContent)
   },
 }
