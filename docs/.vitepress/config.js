@@ -2,26 +2,22 @@ const fs = require('fs')
 const path = require('path')
 
 module.exports = {
-  title: 'Jogiter`s Blog',
+  title: 'Jogiter`s mind',
   description: 'EveryThing about Me!',
   themeConfig: {
     nav: [
       { text: '个人简介', link: '/about/' },
       {
-        text: '技术',
-        items: generateBlogLinks('techs'),
-      },
-      {
-        text: '情感',
-        items: generateBlogLinks('emotions'),
+        text: 'Awesome 学习链接',
+        link: '/reading/',
       },
       {
         text: '杂文',
         items: generateBlogLinks('essay'),
       },
       {
-        text: '学习列表',
-        link: '/reading/',
+        text: '情感',
+        items: generateBlogLinks('emotion'),
       },
       {
         text: '社交账号',
@@ -36,53 +32,26 @@ module.exports = {
           },
         ],
       },
-      // {
-      //   text: 'Languages',
-      //   items: [
-      //     {
-      //       text: 'English',
-      //       link: 'https://vitejs.dev',
-      //     },
-      //     {
-      //       text: '简体中文',
-      //       link: 'https://cn.vitejs.dev',
-      //     },
-      //   ],
-      // },
     ],
     sidebar: {
-      '/techs': 'auto',
-      '/emotions': 'auto',
+      '/emotion': 'auto',
       '/essay': 'auto',
-      '/': 'auto',
+      '/about': false,
+      '/reading': false,
       // catch-all fallback
-      // '/': [
-      //   {
-      //     text: 'Guide',
-      //     children: [
-      //       {
-      //         text: 'Why Vite',
-      //         link: '/guide/why',
-      //       },
-      //     ],
-      //   },
-      //   {
-      //     text: 'APIs',
-      //     children: [
-      //       {
-      //         text: 'Plugin API',
-      //         link: '/guide/api-plugin',
-      //       },
-      //     ],
-      //   },
-      // ],
+      '/': [
+        {
+          text: '文章',
+          children: generateBlogLinks('tech'),
+        },
+      ],
     },
   },
-};
+}
 
 function generateBlogLinks(dir) {
   const files = fs.readdirSync(path.resolve(__dirname, `../${dir}/`));
-  return files.map((file) => {
+  return files.filter(file => file.slice(0, -3) !== 'index').map((file) => {
     const name = file.slice(0, -3);
     return {
       text: name,
