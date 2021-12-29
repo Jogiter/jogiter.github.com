@@ -1,3 +1,3 @@
-# demo
+# techs of front-end
 
-hi, bro
+hi, bro, nice to see u.

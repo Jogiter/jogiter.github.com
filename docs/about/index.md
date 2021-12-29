@@ -7,7 +7,7 @@ date: 2018-03-13 19:24:43
 
 Hi
 
-我是一名软件工程师，专注于前端开发。
+我是前端开发工程师。关注前沿技术，目前在学习 [serverless](https://cn.serverless.com/) 和 [rust](https://www.rust-lang.org/)。
 
 ## Poet
 
