@@ -4,6 +4,7 @@ import { h } from 'vue'
 export default {
   ...Theme,
   Layout() {
+    const year = new Date().getFullYear()
     return h(Theme.Layout, null, {
       'home-footer': () =>
         h(
@@ -19,7 +20,7 @@ export default {
                   'margin: auto; line-height: 1.4; font-size: .9rem; text-align: center;',
               },
               [
-                'MIT Licensed | Copyright © 2021-present Jogiter ding | ',
+                `MIT Licensed | Copyright © ${year}-present Jogiter ding | `,
                 h(
                   'a',
                   {

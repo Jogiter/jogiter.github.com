@@ -2,15 +2,15 @@
 home: true
 heroImage: /avatar.jpg
 heroAlt: Logo image
-heroText: Jogiter`s 的博客
+heroText: O Captain! My Captain!
 tagline: Life exists, and the identity!
 actionText: 进入博客
 actionLink: /tech/
 features:
-  - title: Simplicity First
-    details: Minimal setup with markdown-centered project structure helps you focus on writing.
-  - title: Vue-Powered
-    details: Enjoy the dev experience of Vue + webpack, use Vue components in markdown, and develop custom themes with Vue.
-  - title: Performant
-    details: VitePress generates pre-rendered static HTML for each page, and runs as an SPA once a page is loaded.
+  - title: 家有小朋友
+    details: 女儿奴
+  - title: 软件工程师
+    details: 专注于前端开发。喜欢挑战，发现并解决问题。
+  - title: 网球爱好者
+    details: 因《网球王子》爱上网球，有球必应。
 ---
