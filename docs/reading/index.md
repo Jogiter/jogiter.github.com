@@ -64,6 +64,7 @@ sidebar: false
     + [tsdx](https://github.com/formium/tsdx) Zero-config CLI for TypeScript package development
     + [TypeDoc](http://typedoc.org/) A documentation generator for TypeScript projects
     + [utility-types](https://github.com/piotrwitek/utility-types) Collection of utility types, complementing TypeScript built-in mapped types and aliases (think "lodash" for static types).
+    + [type-challenges](https://github.com/type-challenges/type-challenges) Collection of TypeScript type challenges with online judge
 + 开发规范
   + AirBNB
   + Bootstrap
@@ -86,6 +87,24 @@ sidebar: false
       + [vue-awesome-swiper](https://github.com/surmon-china/vue-awesome-swiper)
       + [awesome image slide](https://deulos.github.io/vue-flux/) Image slider which comes with 20 cool transitions
     + [snabbdom](https://github.com/snabbdom/snabbdom) A virtual DOM library with focus on simplicity, modularity, powerful features and performance.
+  + [React](https://github.com/facebook/react/)
+    + [immutability-in-react](https://blog.logrocket.com/immutability-in-react-ebe55253a1cc/)
+      + immutability-lib
+        + [immutable-js](https://immutable-js.github.io/immutable-js/)
+        + [immutability-helper](https://github.com/kolodny/immutability-helper)
+    + [useEffect](https://www.ruanyifeng.com/blog/2020/09/react-hooks-useeffect-tutorial.html)
+    + [preact](https://github.com/preactjs/preact) Fast 3kB React alternative with the same modern API. Components & Virtual DOM.
+    + [js-framework-benchmark](https://www.infoq.cn/article/ebDcihIZbEZoFU9q6pi7)
+    + [为什么inferno.js这么快](https://www.zhihu.com/question/65824137/answer/235159117)
+    + [React Conf 2021: React without memo](https://www.zhihu.com/question/504666886)
+    + [什么是 “React Fiber”](https://github.com/acdlite/react-fiber-architecture)
+    + [hookstate](https://hookstate.js.org/) 对比了几个状态管理库。redux/saga/mobx。hookstate api 最简单，入门成本最低。redux api 简单且功能强大，当之无愧的状态管理库首选。
+  + [nestjs 文档](https://docs.nestjs.com/)
+    + [nestjs 中文文档](https://docs.nestjs.cn/8/firststeps)
+    + [精读 《Nestjs 文档》](https://zhuanlan.zhihu.com/p/28621374)
+    + [serverless](https://docs.nestjs.com/faq/serverless#serverless)
+    + [typeorm](https://docs.nestjs.com/recipes/sql-typeorm#getting-started)
+    + [graphql](https://docs.nestjs.com/graphql/quick-start#getting-started-with-graphql--typescript)
 + 工具
   + 兼容检测
     + [Can I Use](http://caniuse.com/) 浏览器js/css特性兼容性查询
@@ -158,5 +177,23 @@ sidebar: false
       + [serverless-offline](https://github.com/dherault/serverless-offline) Emulate AWS λ and API Gateway locally when developing your Serverless project
     + other
       + [Serverless 应用开发指南](https://serverless.ink/#serverless-dynamodb-%E9%83%A8%E7%BD%B2)
-+ BigData
-  + ...
++ rust
+  + [rust-zh](https://www.rust-lang.org/zh-CN/learn)
+  + [why rust](https://stackoverflow.blog/2020/01/20/what-is-rust-and-why-is-it-so-popular/)
+  + [2021 年 Rust 行业调研报告](https://mp.weixin.qq.com/s/9rjeVgVzmrC0wWhV4wA9FA)
+  + [Rust 在线编辑器](https://play.rust-lang.org/)
+  + [Rust 语言程序设计](https://kaisery.github.io/trpl-zh-cn/)
+  + [打怪通关学习方式 Rustlings](https://github.com/rust-lang/rustlings)
+  + [Rust 优秀项目 Databend](https://github.com/datafuselabs/databend)
+  + [Rust 宏的练习项目](https://github.com/dtolnay/proc-macro-workshop)
+  + [Rust 异步编程教材：](https://rust-lang.github.io/async-book/)
+  + [rust-fe](https://github.com/i5ting/rust-fe)
+  + [swc](https://github.com/swc-project/swc) swc is a super-fast compiler written in rust; producing widely-supported javascript from modern standards and typescript.
+  + [learning](https://kaisery.github.io/trpl-zh-cn/ch02-00-guessing-game-tutorial.html)
+  + wasm https://webassembly.org/getting-started/developers-guide/
+    + [Compiling from Rust to WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly/Rust_to_wasm)
+  + [wasm-pack](https://github.com/rustwasm/wasm-pack)
+    + [wasm-pack/docs](https://rustwasm.github.io/docs/wasm-pack/quickstart.html)
+    + [installer](https://rustwasm.github.io/wasm-pack/installer/)
+  + [mdn/webassembly-examples](https://github.com/mdn/webassembly-examples)
+  + [Rust 是 JavaScript 基础设施的未来](https://mp.weixin.qq.com/s?__biz=MzkxNDIzNTg4MA==&mid=2247485792&idx=1&sn=682a4dee7ce4d3b47a81baf9ebd7a98a&chksm=c170c1e7f60748f17585d6bfca0cff6edbf71bab95f0a4a1ea0bcf2d43c16d1722666d9fadc1&token=1766743281&lang=zh_CN#rd)
