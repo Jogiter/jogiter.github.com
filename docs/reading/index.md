@@ -44,6 +44,13 @@ sidebar: false
   + [rxdb](https://github.com/pubkey/rxdb) A realtime Database for JavaScript Applications
   + [deno](https://github.com/denoland/deno) A secure JavaScript and TypeScript runtime
   + [rome](https://github.com/romefrontend/rome) Frontend Toolchain. A linter, compiler, bundler, and more for JavaScript, TypeScript, HTML, Markdown, and CSS.
++ 编程书籍
+  + [awesome-programming-books](https://github.com/Jogiter/awesome-programming-books) 经典编程书籍大全 ⭐
+  + [apachecn-algo-zh](https://github.com/Jogiter/apachecn-algo-zh) 数据结构与算法译文集
+    + [数据结构思维中文版](https://github.com/Jogiter/apachecn-algo-zh/blob/master/docs/think-dast-zh/SUMMARY.md)
+    + [leetcode-javascript](https://github.com/Jogiter/apachecn-algo-zh/blob/master/docs/leetcode/javascript/SUMMARY.md)
+  + [经典编程书籍大全 PDF](https://github.com/imarvinle/awesome-cs-books#%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)
+  + [Designing Data-Intensive Application](https://github.com/Vonng/ddia) 《Designing Data-Intensive Application》DDIA中文翻译
 + Common
   + [regex](https://github.com/ziishaned/learn-regex) Learn regex the easy way
 + Typescript
@@ -125,7 +132,8 @@ sidebar: false
     + [Lighthouse](https://lighthouseapp.com/)
   + 文档生成
     + [docute](https://github.com/egoist/docute) Effortlessly documentation done right
-    + [vuepress](https://github.com/vuejs/vuepress) Vue驱动的静态站点生成器
+    + [vuepress](https://github.com/vuejs/vuepress) Vue 驱动的静态站点生成器
+    + [docusaurus](https://github.com/facebook/docusaurus) React 驱动的静态站点生成器
   + 视频相关
     + [ffmpeg](https://ffmpeg.org) 用于记录，转换和流式传输音频和视频的跨平台解决方案
     + [videojs-docs](https://docs.videojs.com/tutorial-text-tracks.html) open source HTML5 & Flash video player
