@@ -42,6 +42,7 @@ sidebar: false
   + [node-cron](https://github.com/kelektiv/node-cron) Cron for NodeJS.
   + [joi](https://github.com/sideway/joi) The most powerful data validation library for JS
   + [rxdb](https://github.com/pubkey/rxdb) A realtime Database for JavaScript Applications
+  + [sharedb](https://github.com/share/sharedb) Realtime database backend based on Operational Transformation (OT)
   + [deno](https://github.com/denoland/deno) A secure JavaScript and TypeScript runtime
   + [rome](https://github.com/romefrontend/rome) Frontend Toolchain. A linter, compiler, bundler, and more for JavaScript, TypeScript, HTML, Markdown, and CSS.
 + 编程书籍
