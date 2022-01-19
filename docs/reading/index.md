@@ -176,6 +176,8 @@ sidebar: false
     + dapp
       + [dtube](https://github.com/dtube/dtube) A full-featured video sharing website, decentralized.
       + [project_web3.0](https://github.com/adrianhajdin/project_web3.0) a Web 3.0 React Solidity Blockchain Application
+    + bestOfYear
+      + [best-dapps-2021](https://koinhow.com/best-dapps-2021/)
 + Cloud-compute
   + serverless
     + official
