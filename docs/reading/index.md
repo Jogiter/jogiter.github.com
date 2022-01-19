@@ -172,6 +172,10 @@ sidebar: false
     + [登链社区](https://learnblockchain.cn/)
       + [2022十大智能合约开发工具](https://learnblockchain.cn/article/3434)
       + [定义web3 技术栈](https://learnblockchain.cn/article/3390)
+    + [hardhat](https://github.com/nomiclabs/hardhat) Hardhat is a development environment to compile, deploy, test, and debug your Ethereum software. Get Solidity stack traces & console.log.
+    + dapp
+      + [dtube](https://github.com/dtube/dtube) A full-featured video sharing website, decentralized.
+      + [project_web3.0](https://github.com/adrianhajdin/project_web3.0) a Web 3.0 React Solidity Blockchain Application
 + Cloud-compute
   + serverless
     + official
