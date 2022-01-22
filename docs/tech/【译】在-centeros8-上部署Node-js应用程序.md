@@ -5,11 +5,11 @@ tags:
   - deploment
 ---
 
-## 【译】：在 centeros8 上部署Node.js应用程序
+## 【译】：在 centeros8 上部署 Node.js 应用程序
 
 ### install Git
 
-```
+```sh
 # 使用DNF程序包管理工具来更新您的本地程序包索引
 $ sudo dnf update -y
 
@@ -26,7 +26,7 @@ $ git --version
 
 **使用 dnf 安装**
 
-```
+```sh
 $ sudo dnf module list nodejs
 # Output
 #   Name                     Stream                   Profiles                                                Summary
@@ -48,7 +48,7 @@ $ node --version
 
 **使用 nvm 安装**
 
-```
+```sh
 # 访问 nvm 官方链接安装最新版
 # https://github.com/nvm-sh/nvm#install--update-script
 $ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
@@ -77,7 +77,7 @@ $ node --version
 
 1. 安装 Nginx
 
-```
+```sh
 # Install
 $ sudo dnf install nginx
 # enable
@@ -88,7 +88,7 @@ $ sudo systemctl start nginx
 
 2. 调整防火墙规则
 
-```
+```sh
 # 永久启用端口80上的HTTP连接
 $ sudo firewall-cmd --permanent --add-service=http
 
@@ -99,23 +99,23 @@ $ sudo firewall-cmd --permanent --list-all
 #   target: default
 #   icmp-block-inversion: no
 #   interfaces:
-#   sources: 
+#   sources:
 #   services: cockpit dhcpv6-client http ssh
-#   ports: 
-#   protocols: 
+#   ports:
+#   protocols:
 #   masquerade: no
-#   forward-ports: 
-#   source-ports: 
-#   icmp-blocks: 
+#   forward-ports:
+#   source-ports:
+#   icmp-blocks:
 #   rich rules:
 
 # 重启防火墙服务
 $ sudo firewall-cmd --reload
 ```
 
-3. 检查Web服务器
+3. 检查 Web 服务器
 
-```
+```sh
 # 查询服务器的公共IP地址
 $ ip addr show eth0 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
 # 172.18.4.110
@@ -127,7 +127,7 @@ $ curl -4 icanhazip.com
 
 4. 管理 Nginx 流程
 
-```
+```sh
 # 停止服务
 $ sudo systemctl stop nginx
 # 启用服务
@@ -146,7 +146,7 @@ $ sudo systemctl enable nginx
 
 ### Installing and Using PM2
 
-```
+```sh
 # install PM2:
 $ sudo npm install pm2@latest -g
 
