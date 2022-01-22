@@ -7,7 +7,21 @@ date: 2018-03-13 19:24:43
 
 Hi
 
-我是前端开发工程师。关注前沿技术，目前在学习 [serverless](https://cn.serverless.com/) 和 [rust](https://www.rust-lang.org/)。
+我是一名前端开发工程师。关注前沿技术，目前在学习 [serverless](https://cn.serverless.com/) 和 [web3](https://www.freecodecamp.org/news/what-is-web3/)。
+
+我的技能树：
+
+- JavaScript ⭐⭐⭐⭐⭐
+  - Vue2/3 ⭐⭐⭐⭐⭐
+  - React ⭐⭐
+- Typescript ⭐⭐⭐⭐
+- Nodejs ⭐⭐⭐⭐
+  - Express ⭐⭐⭐
+  - Nestjs ⭐⭐⭐
+  - Typeorm ⭐⭐⭐
+- Serverless ⭐⭐
+- CSS ⭐⭐⭐
+  - tailwindcss ⭐⭐⭐⭐
 
 ## Poet
 
