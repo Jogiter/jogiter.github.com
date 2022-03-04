@@ -23,7 +23,7 @@ categories:
 
 |使用 html5 video|使用 MSE|
 |:----|:----|
-|![使用 html5 video](http://img.jogiter.cn/rightmouse-video.png)|![使用 MSE](http://img.jogiter.cn/rightmouse-mse.png)|
+|![使用 html5 video](https://img.cdn.jogiter.cn/public/blog/rightmouse-video.png)|![使用 MSE](https://img.cdn.jogiter.cn/public/blog/rightmouse-mse.png)|
 
 3. 支持分片加载，加快视频打开速度，节省流量
 
@@ -31,11 +31,11 @@ categories:
 
 一次性加载完毕
 
-![bufferAll](http://img.jogiter.cn/bufferAll.gif)
+![bufferAll](https://img.cdn.jogiter.cn/public/blog/bufferAll.gif)
 
 分片加载，每次加载一部分
 
-![bufferWhenNeeded](http://img.jogiter.cn/bufferWhenNeeded.gif)
+![bufferWhenNeeded](https://img.cdn.jogiter.cn/public/blog/bufferWhenNeeded.gif)
 
 
 ## 使用 [URL.createObjectURL(blob)](https://developer.mozilla.org/zh-CN/docs/Web/API/URL/createObjectURL#Example) 创建 Blob URL
@@ -56,7 +56,7 @@ document.body.appendChild(img);
 
 **createObjectURL 的兼容性**
 
-![caniuse?search=createObjectURL](http://img.jogiter.cn/createObjectURL.png)
+![caniuse?search=createObjectURL](https://img.cdn.jogiter.cn/public/blog/createObjectURL.png)
 
 
 [demo](https://codepen.io/pen/)，更多例子参考 [使用 Web 应用程序中的文件](https://developer.mozilla.org/zh-CN/docs/Web/API/File/Using_files_from_web_applications)
@@ -71,7 +71,7 @@ document.body.appendChild(img);
 
 ### [HTML的媒体支持浏览器兼容情况](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Supported_media_formats#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%83%85%E5%86%B5)
 
-![Supported_media_formats#浏览器兼容情况](http://img.jogiter.cn/MSE-support.png)
+![Supported_media_formats#浏览器兼容情况](https://img.cdn.jogiter.cn/public/blog/MSE-support.png)
 
 判断给定的 [MIME类型](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types) 是否被当前的浏览器支持
 

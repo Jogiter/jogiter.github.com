@@ -464,7 +464,7 @@ git update-git-for-windows
 
 **git-flow-commands**
 
-![git-flow-commands](https://img.jogiter.cn/tech/git-flow-commands.png)
+![git-flow-commands](https://img.cdn.jogiter.cn/public/blog/git-flow-commands.png)
 
 ##   阅读链接
 

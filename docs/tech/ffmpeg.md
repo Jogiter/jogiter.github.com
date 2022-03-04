@@ -19,7 +19,7 @@ ffmpeg 是用于记录，转换和流式传输音频和视频的跨平台解决�
 
 右键【此电脑】>【属性】>【高级】>【环境变量】。选择 'Path'，添加 `D:\ffmpeg\bin`
 
-![win10_env_Pah](https://img.jogiter.cn/blog/win10_env_Pah.png)
+![win10_env_Pah](https://img.cdn.jogiter.cn/public/blog/win10_env_Pah.png)
 
 ```
 ffmpeg -version

@@ -153,8 +153,6 @@ b. 创建表：[Get all the sqls here](https://github.com/cnpm/cnpmjs.org/blob/m
 
 > [mysql 8.0 创建 table 时报错:【MYSQL】MYSQL报错解决方法： Warning: (3719, "'utf8' is currently an alias for the character set UTF8MB3, but will be an alias for UTF8M B4 in a future release."](http://www.ifepoland.com/lilip/p/10109557.html)
 
-[点击下载修复版 SQL]\(<https://img.jogiter.cn//tech/db%28mysql8.0%29.sql>
-
 3. Edit Your Own Config File
 
 ```

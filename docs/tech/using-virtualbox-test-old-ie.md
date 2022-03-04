@@ -19,7 +19,7 @@ categories:
 
 在 [caniuse](https://caniuse.com/#search=rgba) 查阅 rgba 的兼容性
 
-![rbga 兼容性](http://img.jogiter.cn/rgba.png)
+![rbga 兼容性](https://img.cdn.jogiter.cn/public/blog/rgba.png)
 
 ### 使用方法
 
@@ -52,4 +52,4 @@ getAlpha(0.5) // 7F
 
 最终效果如下
 
-![ie8-rgba](http://img.jogiter.cn/ie8-rgba.png)
+![ie8-rgba](https://img.cdn.jogiter.cn/public/blog/ie8-rgba.png)
