@@ -90,6 +90,7 @@ sidebar: false
       + [vue-patterns](https://github.com/learn-vuejs/vue-patterns)
       + [vuejs-component-style-guide](https://github.com/pablohpsilva/vuejs-component-style-guide)
     + [awesome-vue](https://github.com/vuejs/awesome-vue)
+      + [directives](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/directives)
       + [vue-promised](https://github.com/posva/vue-promised)
       + [vue-lazyload](https://github.com/hilongjw/vue-lazyload#usage)
       + [vue-awesome-swiper](https://github.com/surmon-china/vue-awesome-swiper)
