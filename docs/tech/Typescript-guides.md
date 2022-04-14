@@ -1,9 +1,12 @@
 ---
 title: Typescript guides
-date: 2019-08-11 12:55:51
 tags:
   - typescript
 ---
+
+# {{ $frontmatter.title }}
+
+[[toc]]
 
 ## 学习链接
 

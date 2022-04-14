@@ -1,9 +1,12 @@
 ---
 title: 【译】：什么是 Web3? 解释未来分散式互联网
-date: 2021-01-22 12:04:00
 tags:
   - web3
 ---
+
+# {{ $frontmatter.title }}
+
+[[toc]]
 
 ## 什么是 Web3? 解释未来分散式互联网
 

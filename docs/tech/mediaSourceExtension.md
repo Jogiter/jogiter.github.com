@@ -1,12 +1,15 @@
 ---
 title: mediaSourceExtension
-date: 2018-07-05 18:53:21
 type: "tags"
 tags:
   - video
 categories:
   - JavaScript
 ---
+
+# {{ $frontmatter.title }}
+
+[[toc]]
 
 ## demo
 

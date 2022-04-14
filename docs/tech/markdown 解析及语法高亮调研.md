@@ -1,4 +1,10 @@
-# markdown 解析及语法高亮调研
+---
+title: markdown 解析及语法高亮调研
+---
+
+# {{ $frontmatter.title }}
+
+[[toc]]
 
 项目起因: 迁移项目中的文档，发现两个问题：
 
@@ -18,7 +24,6 @@
 
 重头开始调研！！！
 
-
 ## markdown 解析
 
 - [markdown-it](https://npmjs.com/package/markdown-it) used by vitepress
@@ -26,7 +31,6 @@
 - [remark-parse](https://npmjs.com/package/remark-parse) used by @nuxt/content
 - diff
   - [markdown-it-vs-remark-parse-vs-marked](https://www.npmtrends.com/markdown-it-vs-remark-parse-vs-marked)
-
 
 结论：推荐 `marked`
 
@@ -45,11 +49,11 @@
 
 ## 最终项目应用
 
-----
+---
 
 [Demo](https://codesandbox.io/s/marked-prismjs-tailwindcss-typography-sy568)
 
-----
+---
 
 ### method one: custom headings
 
@@ -81,7 +85,7 @@ let renderer = new marked.Renderer()
  * overRiding output of default heading
  * @see {@link https://marked.js.org/using_pro#renderer | renderer}
  */
-renderer.heading = function(text, level, raw, slugger) {
+renderer.heading = function (text, level, raw, slugger) {
   if (this.options.headerIds) {
     return (
       '<h' +
@@ -103,7 +107,6 @@ renderer.heading = function(text, level, raw, slugger) {
   return '<h' + level + '>' + text + '</h' + level + '>\n'
 }
 
-
 module.exports = {
   build: {
     extend(config, { isDev, isClient }) {
@@ -121,8 +124,8 @@ module.exports = {
           },
         ],
       })
-    }
-  }
+    },
+  },
 }
 ```
 
@@ -132,15 +135,13 @@ module.exports = {
 
 1、安装依赖
 
->yarn add @tailwindcss/typography
+> yarn add @tailwindcss/typography
 
 2、配置 tailwind.config.js
 
 ```ts
 module.exports = {
-  plugins: [
-    require('@tailwindcss/typography'),
-  ]
+  plugins: [require('@tailwindcss/typography')],
 }
 ```
 
@@ -159,4 +160,4 @@ module.exports = {
 - [tailwindcss-typography](https://github.com/tailwindlabs/tailwindcss-typography)
 - [gist: marked-and-prism.js](https://gist.github.com/jpokan/e23e5606921b4a5aa98fd2dc2dd0e116)
 - [markdown-loader](https://www.npmjs.com/package/markdown-loader)
-- [html-loader](https://www.npmjs.com/package/html-loader)  **webpack4.x should use version not higher than 1.3.2, above version dependents on webpack^5.0.0**
+- [html-loader](https://www.npmjs.com/package/html-loader) **webpack4.x should use version not higher than 1.3.2, above version dependents on webpack^5.0.0**

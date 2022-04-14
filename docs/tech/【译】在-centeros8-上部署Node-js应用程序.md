@@ -1,13 +1,14 @@
 ---
 title: 【译】：在 centeros8 上部署Node.js应用程序
-date: 2021-03-31 11:50:18
 tags:
   - deploment
 ---
 
-## 【译】：在 centeros8 上部署 Node.js 应用程序
+# {{ $frontmatter.title }}
 
-### install Git
+[[toc]]
+
+## install Git
 
 ```sh
 # 使用DNF程序包管理工具来更新您的本地程序包索引
@@ -144,7 +145,7 @@ $ sudo systemctl enable nginx
 
 > Nginx 开启 gzip & cache-control 等等配置请参考官方文档
 
-### Installing and Using PM2
+## Installing and Using PM2
 
 ```sh
 # install PM2:
@@ -187,7 +188,7 @@ $ pm2 info example
 $ pm2 monit
 ```
 
-### 参考链接
+## 参考链接
 
 - [https://www.digitalocean.com/community/tutorials/initial-server-setup-with-centos-8](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-centos-8)
 - [https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-centos-8](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-centos-8)

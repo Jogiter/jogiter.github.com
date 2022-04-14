@@ -1,10 +1,11 @@
 ---
 title: 搭建私有 npm
-date: 2019-06-17 17:44:26
 tags:
 ---
 
-# 搭建私有 npm
+# {{ $frontmatter.title }}
+
+[[toc]]
 
 目前有以下两种推荐方案：
 

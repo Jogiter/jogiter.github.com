@@ -1,13 +1,12 @@
 ---
 title: git 教程
-date: 2018-03-20 14:56:59
 tags:
   - git
 categories:
   - tool
 ---
 
-# git 教程
+# {{ $frontmatter.title }}
 
 [[toc]]
 

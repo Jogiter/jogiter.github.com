@@ -1,22 +1,28 @@
-## WebRTC 简介
+---
+title: WebRTC 简介
+---
 
-**WebRTC** (Web Real-Time Communications) 是一项实时通讯技术，它允许网络应用或者站点，在不借助中间媒介的情况下，建立浏览器之间点对点（Peer-to-Peer）的连接，实现视频流和（或）音频流或者其他任意数据的传输。WebRTC包含的这些标准使用户在无需安装任何插件或者第三方的软件的情况下，创建点对点（Peer-to-Peer）的数据分享和电话会议成为可能。
+# {{ $frontmatter.title }}
+
+[[toc]]
+
+**WebRTC** (Web Real-Time Communications) 是一项实时通讯技术，它允许网络应用或者站点，在不借助中间媒介的情况下，建立浏览器之间点对点（Peer-to-Peer）的连接，实现视频流和（或）音频流或者其他任意数据的传输。WebRTC 包含的这些标准使用户在无需安装任何插件或者第三方的软件的情况下，创建点对点（Peer-to-Peer）的数据分享和电话会议成为可能。
 
 ## UDP(User Data Protocol)
 
-1、UDP是一个非连接的协议，传输数据之前源端和终端不建立连接， 当它想传送时就简单地去抓取来自应用程序的数据，并尽可能快地把它扔到网络上。 在发送端，UDP传送数据的速度仅仅是受应用程序生成数据的速度、 计算机的能力和传输带宽的限制； 在接收端，UDP把每个消息段放在队列中，应用程序每次从队列中读一个消息段。
+1、UDP 是一个非连接的协议，传输数据之前源端和终端不建立连接， 当它想传送时就简单地去抓取来自应用程序的数据，并尽可能快地把它扔到网络上。 在发送端，UDP 传送数据的速度仅仅是受应用程序生成数据的速度、 计算机的能力和传输带宽的限制； 在接收端，UDP 把每个消息段放在队列中，应用程序每次从队列中读一个消息段。
 
 2、 由于传输数据不建立连接，因此也就不需要维护连接状态，包括收发状态等， 因此一台服务机可同时向多个客户机传输相同的消息。
 
-3、UDP信息包的标题很短，只有8个字节，相对于TCP的20个字节信息包的额外开销很小。
+3、UDP 信息包的标题很短，只有 8 个字节，相对于 TCP 的 20 个字节信息包的额外开销很小。
 
 4、吞吐量不受拥挤控制算法的调节，只受应用软件生成数据的速率、传输带宽、 源端和终端主机性能的限制。
 
-5、UDP使用尽最大努力交付，即不保证可靠交付， 因此主机不需要维持复杂的链接状态表（这里面有许多参数）。
+5、UDP 使用尽最大努力交付，即不保证可靠交付， 因此主机不需要维持复杂的链接状态表（这里面有许多参数）。
 
-6、UDP是面向报文的。发送方的UDP对应用程序交下来的报文， 在添加首部后就向下交付给IP层。既不拆分，也不合并，而是保留这些报文的边界， 因此，应用程序需要选择合适的报文大小。
+6、UDP 是面向报文的。发送方的 UDP 对应用程序交下来的报文， 在添加首部后就向下交付给 IP 层。既不拆分，也不合并，而是保留这些报文的边界， 因此，应用程序需要选择合适的报文大小。
 
->参考[TCP和UDP的区别](https://zhuanlan.zhihu.com/p/24860273)
+> 参考[TCP 和 UDP 的区别](https://zhuanlan.zhihu.com/p/24860273)
 
 ## SDP(Session Description Protocol)
 
@@ -24,17 +30,15 @@
 
 什么叫会话呢，比如一次网络电话、一次电话会议、一次视频聊天，这些都可以称之为一次会话。
 
-那为什么要去发这个描述文本呢，主要是为了解决参与会话的各成员之间能力不对等的问题，如果参加本次通话的成员都支持高质量的通话，但是我们没有去进行协议，为了兼容性，使用的都是普通质量的通话格式，这样就很浪费资源了。所以SDP的作用还是很有必要的。
+那为什么要去发这个描述文本呢，主要是为了解决参与会话的各成员之间能力不对等的问题，如果参加本次通话的成员都支持高质量的通话，但是我们没有去进行协议，为了兼容性，使用的都是普通质量的通话格式，这样就很浪费资源了。所以 SDP 的作用还是很有必要的。
 
-### SDP协议结构
+### SDP 协议结构
 
 SDP 是浏览器提供的基于字符串的二进制数据对象。这种字符串的形式是一些列的键值对，由换行符分隔：
-
 
 ```
 <key>=<value>\n
 ```
-
 
 - `key` 是一个单字符，用来表明值的类型
 - `value` 是有结构的一组文本
@@ -42,7 +46,7 @@ SDP 是浏览器提供的基于字符串的二进制数据对象。这种字符�
 
 SDP 涵盖了一个指定用户的描述、时间配置和对媒体的限制。
 
-SDP的 文本信息包括：
+SDP 的 文本信息包括：
 
 - 会话名称和意图
 - 会话持续时间
@@ -86,7 +90,7 @@ k=* (encryption key)
 a=* (zero or more media attributelines)
 ```
 
-对于媒体级描述而言只有m=是必须的。
+对于媒体级描述而言只有 m=是必须的。
 
 ### 各个字段的描述
 
@@ -121,7 +125,7 @@ m=audio 9 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126
 a=rtpmap:103 ISAC/16000
 ```
 
->参考[SDP协议](https://www.jianshu.com/p/94b118b8fd97)
+> 参考[SDP 协议](https://www.jianshu.com/p/94b118b8fd97)
 
 ### SDP 例子
 
@@ -262,7 +266,7 @@ a=mid:data
 a=sctpmap:5000 webrtc-datachannel 1024
 ```
 
-- 参考[SDP协议详细总结](https://www.jianshu.com/p/3dbdd10a4038)
+- 参考[SDP 协议详细总结](https://www.jianshu.com/p/3dbdd10a4038)
 - 规范: [RFC 4566: SDP: Session Description Protocol](https://tools.ietf.org/html/rfc4566)
 
 ## WebRTC 中的 SDP 连接流程
@@ -275,66 +279,70 @@ WebRTC 连接过程图如下：
 
 ```typescript
 // https://github.com/webrtc/samples/blob/gh-pages/src/content/peerconnection/constraints/js/main.js#L144-L190
-localPeerConnection = new RTCPeerConnection(null);
-remotePeerConnection = new RTCPeerConnection(null);
-localStream.getTracks().forEach(track => localPeerConnection.addTrack(track, localStream));
-console.log('localPeerConnection creating offer');
-localPeerConnection.onnegotiationeeded = () => console.log('Negotiation needed - localPeerConnection');
-remotePeerConnection.onnegotiationeeded = () => console.log('Negotiation needed - remotePeerConnection');
-localPeerConnection.onicecandidate = e => {
-  console.log('Candidate localPeerConnection');
+localPeerConnection = new RTCPeerConnection(null)
+remotePeerConnection = new RTCPeerConnection(null)
+localStream
+  .getTracks()
+  .forEach((track) => localPeerConnection.addTrack(track, localStream))
+console.log('localPeerConnection creating offer')
+localPeerConnection.onnegotiationeeded = () =>
+  console.log('Negotiation needed - localPeerConnection')
+remotePeerConnection.onnegotiationeeded = () =>
+  console.log('Negotiation needed - remotePeerConnection')
+localPeerConnection.onicecandidate = (e) => {
+  console.log('Candidate localPeerConnection')
   remotePeerConnection
-      .addIceCandidate(e.candidate)
-      .then(onAddIceCandidateSuccess, onAddIceCandidateError);
-};
-remotePeerConnection.onicecandidate = e => {
-  console.log('Candidate remotePeerConnection');
+    .addIceCandidate(e.candidate)
+    .then(onAddIceCandidateSuccess, onAddIceCandidateError)
+}
+remotePeerConnection.onicecandidate = (e) => {
+  console.log('Candidate remotePeerConnection')
   localPeerConnection
-      .addIceCandidate(e.candidate)
-      .then(onAddIceCandidateSuccess, onAddIceCandidateError);
-};
-remotePeerConnection.ontrack = e => {
+    .addIceCandidate(e.candidate)
+    .then(onAddIceCandidateSuccess, onAddIceCandidateError)
+}
+remotePeerConnection.ontrack = (e) => {
   if (remoteVideo.srcObject !== e.streams[0]) {
-    console.log('remotePeerConnection got stream');
-    remoteVideo.srcObject = e.streams[0];
+    console.log('remotePeerConnection got stream')
+    remoteVideo.srcObject = e.streams[0]
   }
-};
+}
 localPeerConnection.createOffer().then(
-    desc => {
-      console.log('localPeerConnection offering');
-      localPeerConnection.setLocalDescription(desc);
-      remotePeerConnection.setRemoteDescription(desc);
-      remotePeerConnection.createAnswer().then(
-          desc2 => {
-            console.log('remotePeerConnection answering');
-            remotePeerConnection.setLocalDescription(desc2);
-            localPeerConnection.setRemoteDescription(desc2);
-          },
-          err => console.log(err)
-      );
-    },
-    err => console.log(err)
-);
+  (desc) => {
+    console.log('localPeerConnection offering')
+    localPeerConnection.setLocalDescription(desc)
+    remotePeerConnection.setRemoteDescription(desc)
+    remotePeerConnection.createAnswer().then(
+      (desc2) => {
+        console.log('remotePeerConnection answering')
+        remotePeerConnection.setLocalDescription(desc2)
+        localPeerConnection.setRemoteDescription(desc2)
+      },
+      (err) => console.log(err)
+    )
+  },
+  (err) => console.log(err)
+)
 ```
 
->查看更多 [webrtc samples](https://github.com/webrtc/samples)
+> 查看更多 [webrtc samples](https://github.com/webrtc/samples)
 
 ## 阅读链接
 
-+ MDN
-  + [Navigator.getUserMedia](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getUserMedia)
-  + [WebRTC API](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API) 入门指南
-    + [WebRTC protocols](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Protocols)
-    + [WebRTC connectivity](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Connectivity)
-    + [Lifetime of a WebRTC session](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Session_lifetime)
-  + [WebRTC codecs](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/WebRTC_codecs)
-    + [Video codecs](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Video_codecs)
-    + [Audio codecs](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Audio_codecs)
-+ Github
-  + [search: webrtc](https://github.com/search?p=2&q=webrtc&type=Repositories)
-  + [WebRTC/samples](https://github.com/webrtc/samples) WebRTC Web demos and samples
-  + [[WebRTC-Experiment](https://github.com/muaz-khan/WebRTC-Experiment)](https://github.com/muaz-khan/WebRTC-Experiment) WebRTC, WebRTC and WebRTC. Everything here is all about WebRTC!!
-  + [peerjs](https://github.com/peers/peerjs) Simple peer-to-peer with WebRTC
-  + [webrtc-sdk](https://github.com/stephenlb/webrtc-sdk) WebRTC Simple Calling API + Mobile SDK - A simplified approach to RTCPeerConnection for mobile and web video calling apps.
-+ Blog
-  + [JS纯前端实现audio音频剪裁剪切复制播放与上传](https://www.zhangxinxu.com/wordpress/2020/07/js-audio-clip-copy-upload/#comments)
+- MDN
+  - [Navigator.getUserMedia](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getUserMedia)
+  - [WebRTC API](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API) 入门指南
+    - [WebRTC protocols](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Protocols)
+    - [WebRTC connectivity](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Connectivity)
+    - [Lifetime of a WebRTC session](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Session_lifetime)
+  - [WebRTC codecs](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/WebRTC_codecs)
+    - [Video codecs](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Video_codecs)
+    - [Audio codecs](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Audio_codecs)
+- Github
+  - [search: webrtc](https://github.com/search?p=2&q=webrtc&type=Repositories)
+  - [WebRTC/samples](https://github.com/webrtc/samples) WebRTC Web demos and samples
+  - [[WebRTC-Experiment](https://github.com/muaz-khan/WebRTC-Experiment)](https://github.com/muaz-khan/WebRTC-Experiment) WebRTC, WebRTC and WebRTC. Everything here is all about WebRTC!!
+  - [peerjs](https://github.com/peers/peerjs) Simple peer-to-peer with WebRTC
+  - [webrtc-sdk](https://github.com/stephenlb/webrtc-sdk) WebRTC Simple Calling API + Mobile SDK - A simplified approach to RTCPeerConnection for mobile and web video calling apps.
+- Blog
+  - [JS 纯前端实现 audio 音频剪裁剪切复制播放与上传](https://www.zhangxinxu.com/wordpress/2020/07/js-audio-clip-copy-upload/#comments)

@@ -1,6 +1,5 @@
 ---
 title: 如何使用 chrome 优化资源加载时间
-date: 2018-05-04 16:12:21
 tags:
   - optimize
   - translation
@@ -8,6 +7,9 @@ categories:
   - tool
 ---
 
+# {{ $frontmatter.title }}
+
+[[toc]]
 
 ## [如何使用 chrome 优化资源加载时间](https://developers.google.com/web/tools/chrome-devtools/network-performance/resource-loading#view-network-timing-details-for-a-specific-resource)
 

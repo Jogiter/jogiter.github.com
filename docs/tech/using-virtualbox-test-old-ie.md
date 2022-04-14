@@ -1,12 +1,15 @@
 ---
 title: using-virtualbox-test-old-ie
-date: 2018-05-31 18:31:36
 tags:
   - test
   - ie8
 categories:
   - tool
 ---
+
+# {{ $frontmatter.title }}
+
+[[toc]]
 
 ## 使用 virtualbox 安装老版本 ie 进行测试
 

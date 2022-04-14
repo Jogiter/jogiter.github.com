@@ -1,6 +1,5 @@
 ---
 title: ffmpeg
-date: 2020-05-21 18:28:02
 tags:
   - video
   - audio
@@ -8,6 +7,10 @@ tags:
 categories:
   - tool
 ---
+
+# {{ $frontmatter.title }}
+
+[[toc]]
 
 ffmpeg 是用于记录，转换和流式传输音频和视频的跨平台解决方案，
 

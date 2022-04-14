@@ -1,3 +1,9 @@
-# techs of front-end
+---
+title: techs of front-end
+---
 
-hi, bro, nice to see u.
+# {{ $frontmatter.title }}
+
+[[toc]]
+
+hi, here is my blog.

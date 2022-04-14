@@ -1,12 +1,15 @@
 ---
 title: wechat save and share image
-date: 2018-12-29 11:54:47
 tags:
   - wechat
   - canvas
 categories:
   - JavaScript
 ---
+
+# {{ $frontmatter.title }}
+
+[[toc]]
 
 参考 [一次 H5 「保存页面为图片」 的踩坑之旅](https://juejin.im/post/5a17c5e26fb9a04527254689) 可以完成 90% 的工作量。项目主要用到的是 [html2canvas](https://html2canvas.hertzen.com/configuration)。
 
@@ -45,44 +48,44 @@ These CSS properties are NOT currently supported
 
 ```js
 function toDataURL(src, callback, outputFormat) {
-  var img = new Image();
-  img.crossOrigin = "Anonymous";
-  img.onload = function() {
-    var canvas = document.createElement("CANVAS");
-    var ctx = canvas.getContext("2d");
-    var dataURL;
-    canvas.height = this.naturalHeight;
-    canvas.width = this.naturalWidth;
-    ctx.drawImage(this, 0, 0);
-    dataURL = canvas.toDataURL(outputFormat);
-    callback(dataURL);
-  };
-  img.src = src;
+  var img = new Image()
+  img.crossOrigin = 'Anonymous'
+  img.onload = function () {
+    var canvas = document.createElement('CANVAS')
+    var ctx = canvas.getContext('2d')
+    var dataURL
+    canvas.height = this.naturalHeight
+    canvas.width = this.naturalWidth
+    ctx.drawImage(this, 0, 0)
+    dataURL = canvas.toDataURL(outputFormat)
+    callback(dataURL)
+  }
+  img.src = src
   if (img.complete || img.complete === undefined) {
     img.src =
-      "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-    img.src = src;
+      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='
+    img.src = src
   }
 }
 
 toDataURL(
-  "https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0",
-  function(dataUrl) {
-    console.log("RESULT:", dataUrl);
+  'https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0',
+  function (dataUrl) {
+    console.log('RESULT:', dataUrl)
   }
-);
+)
 ```
 
 **方案二：`html2canvas` 开启 `useCORS`(Whether to attempt to load images from a server using CORS)**
 
 ```js
 html2canvas(document.body, {
-  useCORS: true
-}).then(function(canvas) {
-  let img = new Image();
-  img.src = canvas.toDataURL();
-  document.body.appenChild(img);
-});
+  useCORS: true,
+}).then(function (canvas) {
+  let img = new Image()
+  img.src = canvas.toDataURL()
+  document.body.appenChild(img)
+})
 ```
 
 ## canvas 绘制模糊
@@ -96,23 +99,23 @@ html2canvas(document.body, {
 > 以缩放画布为例，这个属性对像素为主的游戏很有用。默认的改变大小的算法会造成图片模糊并且破坏图片原有的像素。 如果那样的话，设置属性值为 false。
 
 ```js
-var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
+var canvas = document.getElementById('canvas')
+var ctx = canvas.getContext('2d')
 
-var img = new Image();
+var img = new Image()
 // ios 会报错: The operation is insecure.
-img.crossOrigin = 'anonymous';
-img.onload = function() {
-  ctx.mozImageSmoothingEnabled = false;
-  ctx.webkitImageSmoothingEnabled = false;
-  ctx.msImageSmoothingEnabled = false;
-  ctx.imageSmoothingEnabled = false;
+img.crossOrigin = 'anonymous'
+img.onload = function () {
+  ctx.mozImageSmoothingEnabled = false
+  ctx.webkitImageSmoothingEnabled = false
+  ctx.msImageSmoothingEnabled = false
+  ctx.imageSmoothingEnabled = false
 
   // 浏览器为了达到抗锯齿的效果会做额外的运算。为了避免这种情况，请保证在你调用 drawImage() 函数时，
   // 用 Math.floor() 函数对所有的坐标点取整。
-  ctx.drawImage(img, 0, 0, 400, 200);
-};
-img.src = "https://mdn.mozillademos.org/files/222/Canvas_createpattern.png";
+  ctx.drawImage(img, 0, 0, 400, 200)
+}
+img.src = 'https://mdn.mozillademos.org/files/222/Canvas_createpattern.png'
 ```
 
 **2.解决 Retina 屏下的 图片模糊问题**
@@ -122,28 +125,28 @@ img.src = "https://mdn.mozillademos.org/files/222/Canvas_createpattern.png";
 ```js
 function setupCanvas(canvas) {
   // Get the device pixel ratio, falling back to 1.
-  var dpr = window.devicePixelRatio || 1;
+  var dpr = window.devicePixelRatio || 1
   // Get the size of the canvas in CSS pixels.
-  var rect = canvas.getBoundingClientRect();
+  var rect = canvas.getBoundingClientRect()
   // Give the canvas pixel dimensions of their CSS
   // size * the device pixel ratio.
-  canvas.width = rect.width * dpr;
-  canvas.height = rect.height * dpr;
-  var ctx = canvas.getContext("2d");
+  canvas.width = rect.width * dpr
+  canvas.height = rect.height * dpr
+  var ctx = canvas.getContext('2d')
   // Scale all drawing operations by the dpr, so you
   // don't have to worry about the difference.
-  ctx.scale(dpr, dpr);
-  return ctx;
+  ctx.scale(dpr, dpr)
+  return ctx
 }
 
 // Now this line will be the same size on the page
 // but will look sharper on high-DPI devices!
-var ctx = setupCanvas(document.querySelector(".my-canvas"));
-ctx.lineWidth = 5;
-ctx.beginPath();
-ctx.moveTo(100, 100);
-ctx.lineTo(200, 200);
-ctx.stroke();
+var ctx = setupCanvas(document.querySelector('.my-canvas'))
+ctx.lineWidth = 5
+ctx.beginPath()
+ctx.moveTo(100, 100)
+ctx.lineTo(200, 200)
+ctx.stroke()
 ```
 
 **3.移动端 zoom 适配问题**

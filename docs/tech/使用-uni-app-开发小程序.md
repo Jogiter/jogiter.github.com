@@ -1,10 +1,13 @@
 ---
 title: 使用 uni-app 开发小程序
-date: 2019-08-11 12:58:06
 tags:
   - mp
   - 小程序
 ---
+
+# {{ $frontmatter.title }}
+
+[[toc]]
 
 ## 阅读链接
 

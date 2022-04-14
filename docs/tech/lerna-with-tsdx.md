@@ -1,7 +1,10 @@
 ---
 title: lerna with tsdx
-date: 2020-09-03 18:43:26
 ---
+
+# {{ $frontmatter.title }}
+
+[[toc]]
 
 ## 使用 lerna 创建 Mono Project
 

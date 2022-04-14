@@ -1,10 +1,13 @@
 ---
 title: higher-order-function
-date: 2019-03-14 18:46:23
 tags: js-tips
 categories:
   - JavaScript
 ---
+
+# {{ $frontmatter.title }}
+
+[[toc]]
 
 ## 柯里化
 

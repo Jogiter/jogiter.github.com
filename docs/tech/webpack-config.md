@@ -1,6 +1,5 @@
 ---
 title: webpack.config
-date: 2018-4-12 15:03:25
 tags:
   - webpack
   - vue
@@ -8,33 +7,36 @@ categories:
   - JavaScript
 ---
 
+# {{ $frontmatter.title }}
+
+[[toc]]
+
 ## 常用的 webpack 插件
 
-+ [提取css文件并压缩](https://github.com/NMFR/optimize-css-assets-webpack-plugin)
-+ [路由懒加载](https://router.vuejs.org/zh-cn/advanced/lazy-loading.html)
-+ [fastclick](https://github.com/ftlabs/fastclick)
-+ 添加loading组件 -- [Vue组件的三种调用方式](https://molunerfinn.com/vue-components/#Loading)
-+ `.vue`文件不会`eslint --fix`，使用[eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue#user-content-gear-configs)
-+ [Duplicate keys detected](https://github.com/vuejs/vue/issues/7323)，见`src/component/numbers.vue`
-+ 仿原生滚动下拉刷新&上拉加载。[didi-scroll](https://github.com/didi/cube-ui/blob/dev/src/components/scroll/scroll.vue)
+- [提取 css 文件并压缩](https://github.com/NMFR/optimize-css-assets-webpack-plugin)
+- [路由懒加载](https://router.vuejs.org/zh-cn/advanced/lazy-loading.html)
+- [fastclick](https://github.com/ftlabs/fastclick)
+- 添加 loading 组件 -- [Vue 组件的三种调用方式](https://molunerfinn.com/vue-components/#Loading)
+- `.vue`文件不会`eslint --fix`，使用[eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue#user-content-gear-configs)
+- [Duplicate keys detected](https://github.com/vuejs/vue/issues/7323)，见`src/component/numbers.vue`
+- 仿原生滚动下拉刷新&上拉加载。[didi-scroll](https://github.com/didi/cube-ui/blob/dev/src/components/scroll/scroll.vue)
 
-## webpack兼容ie8问题
+## webpack 兼容 ie8 问题
 
 ```js
 plugins: [
-    /** [uglify#1179](https://github.com/mishoo/UglifyJS2/pull/1179)
-     * [Webpack构建兼容IE8](https://segmentfault.com/a/1190000007699918?winzoom=1)
-     */
-    new webpack.optimize.UglifyJsPlugin({
-        compress: { screw_ie8: false },
-        mangle: false,
-        output: { screw_ie8: false },
-    })
+  /** [uglify#1179](https://github.com/mishoo/UglifyJS2/pull/1179)
+   * [Webpack构建兼容IE8](https://segmentfault.com/a/1190000007699918?winzoom=1)
+   */
+  new webpack.optimize.UglifyJsPlugin({
+    compress: { screw_ie8: false },
+    mangle: false,
+    output: { screw_ie8: false },
+  }),
 ]
 ```
 
-使用webpack打包后，代码没有兼容问题；[uglifyjs](https://github.com/mishoo/UglifyJS2/)压缩后才会不兼容ie8。因此在压缩时配置兼容ie8；
-
+使用 webpack 打包后，代码没有兼容问题；[uglifyjs](https://github.com/mishoo/UglifyJS2/)压缩后才会不兼容 ie8。因此在压缩时配置兼容 ie8；
 
 ## [如何在 webpack 中引入未模块化的库，如 Zepto](https://sebastianblade.com/how-to-import-unmodular-library-like-zepto/)
 
@@ -43,10 +45,12 @@ plugins: [
 {
   // ...
   module: {
-    loaders: [{
-      test: require.resolve('zepto'),
-      loader: 'exports-loader?window.Zepto!script-loader'
-    }]
+    loaders: [
+      {
+        test: require.resolve('zepto'),
+        loader: 'exports-loader?window.Zepto!script-loader',
+      },
+    ]
   }
 }
 ```
@@ -62,7 +66,7 @@ $(function () {
 })
 ```
 
-----
+---
 
 ## tree-shaking
 
@@ -70,10 +74,10 @@ $(function () {
 
 为了学会使用 tree shaking，你必须……
 
-+	使用 ES2015 模块语法（即 import 和 export）。
-+	引入一个能够删除未引用代码(dead code)的压缩工具(minifier)（例如 UglifyJSPlugin）。
+- 使用 ES2015 模块语法（即 import 和 export）。
+- 引入一个能够删除未引用代码(dead code)的压缩工具(minifier)（例如 UglifyJSPlugin）。
 
-----
+---
 
 ## vue webpack 项目配置
 
@@ -262,7 +266,7 @@ module.exports = base
 |   └── favicon.ico
 ```
 
-----
+---
 
 ## `.eslintrc.js`: lint `.js` and `.vue` files
 
@@ -271,21 +275,19 @@ module.exports = {
   root: true,
   env: {
     es6: true,
-    browser: true
+    browser: true,
   },
   parserOptions: {
     parser: 'babel-eslint',
-    sourceType: 'module'
+    sourceType: 'module',
   },
   // more configs see https://github.com/vuejs/eslint-plugin-vue#user-content-gear-configs
   extends: ['plugin:vue/base', 'standard'],
-  plugins: [
-    'vue'
-  ]
+  plugins: ['vue'],
 }
 ```
 
-----
+---
 
 ## add favicon to spa
 
@@ -308,7 +310,9 @@ in your `main.js`
 ```js
 // add favicon
 const favicon = require('./images/favicon.png')
-let link = window.document.querySelector('link[rel*="icon"]') || document.createElement('link')
+let link =
+  window.document.querySelector('link[rel*="icon"]') ||
+  document.createElement('link')
 link.type = 'image/x-icon'
 link.rel = 'shortcut icon'
 link.href = favicon
