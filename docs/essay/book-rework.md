@@ -4,6 +4,8 @@ title: rework 重来
 
 # {{ $frontmatter.title }}
 
+[[toc]]
+
 ![rework](/public/rework2.jpg)
 
 :::tip
