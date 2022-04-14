@@ -4,7 +4,21 @@ const path = require('path')
 module.exports = {
   title: 'Jogiter`s mind',
   description: 'EveryThing about Me!',
+
   themeConfig: {
+    repo: 'Jogiter/jogiter.github.com',
+    docsDir: 'docs',
+    docsBranch: 'vitepress',
+    editLinks: true,
+    editLinkText: '在GitHub上编辑此页面',
+    lastUpdated: '最后更新',
+
+    algolia: {
+      appId: '3FNT30KAKM',
+      apiKey: '3072cbef8d2f6ceb2c1d262b87f87255',
+      indexName: 'jogiter-blog',
+    },
+
     nav: [
       { text: '个人简介', link: '/about/' },
       {
