@@ -3,17 +3,25 @@ on:
   pull_request:
     branches:
     - writing
+    - vitepress
+  pull_request_review:
+    branches:
+    - writing
+    - vitepress
+    types:
+      - submitted
 
 jobs:
-  my-job:
-    name: My Job
+  algolia_indexer:
     runs-on: ubuntu-latest
+    env:
+      APPLICATION_ID: 3FNT30KAKM
+      API_KEY: 1a14c4f9e7db8179a99c0ce210008e40
+      INDEX_NAME: jogiter-blog
+      # full configuration: https://www.algolia.com/doc/tools/crawler/apis/configuration/
+      CONFIG: '{"index_name":"http://blog.jogiter.cn/","start_urls":["http://blog.jogiter.cn/"],"selectors":{"lvl0":"h1","lvl1":"h2","lvl2":"h3","lvl3":"h4","lvl4":"h5","lvl5":"h6","text":".content p"}}'
+    name: Index Algolia
     steps:
-    - name: Print a greeting
-      env:
-        MY_VAR: Hi there! My name is
-        FIRST_NAME: Mona
-        MIDDLE_NAME: The
-        LAST_NAME: Octocat
-      run: |
-        echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
+    - name: Algolia Docsearch Action
+      id: algolia
+      uses:  adapttive/algolia-docsearch-action@1.1.1
