@@ -1,6 +1,6 @@
-name: Greeting from Mona
+name: Index Algolia
 on:
-  pull_request:
+  push:
     branches:
     - writing
     - vitepress
