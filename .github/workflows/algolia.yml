@@ -1,0 +1,22 @@
+name: Index Algolia
+on:
+  push:
+    branches:
+    - vitepress
+  pull_request_review:
+    branches:
+    - vitepress
+    types:
+      - submitted
+
+jobs:
+  algolia_indexer:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: darrenjennings/algolia-docsearch-action@master
+        with:
+          algolia_application_id: ${{ secrets.ALGOLIA_APPID }}
+          algolia_api_key: ${{ secrets.ALGOLIA_APIKEY }}
+          file: algolia-config.json
