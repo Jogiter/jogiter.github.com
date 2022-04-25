@@ -16,7 +16,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Algolia Docsearch Action
       - uses: actions/checkout@v2
       - uses: darrenjennings/algolia-docsearch-action@master
         with:
