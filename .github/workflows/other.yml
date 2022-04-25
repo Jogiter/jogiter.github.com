@@ -14,14 +14,20 @@ on:
 jobs:
   algolia_indexer:
     runs-on: ubuntu-latest
-    env:
-      APPLICATION_ID: 3FNT30KAKM
-      API_KEY: 1a14c4f9e7db8179a99c0ce210008e40
-      INDEX_NAME: jogiter-blog
-      # full configuration: https://www.algolia.com/doc/tools/crawler/apis/configuration/
-      CONFIG: '{"index_name":"http://blog.jogiter.cn/","start_urls":["http://blog.jogiter.cn/"],"selectors":{"lvl0":"h1","lvl1":"h2","lvl2":"h3","lvl3":"h4","lvl4":"h5","lvl5":"h6","text":".content p"}}'
-    name: Index Algolia
-    steps:
-    - name: Algolia Docsearch Action
-      id: algolia
-      uses:  adapttive/algolia-docsearch-action@1.1.1
+    - uses: actions/checkout@v2
+    - uses: darrenjennings/algolia-docsearch-action@master
+      with:
+        algolia_application_id: 3FNT30KAKM
+        algolia_api_key: 1a14c4f9e7db8179a99c0ce210008e40
+        file: ./algolia-config.json
+    # env:
+    #   APPLICATION_ID: 3FNT30KAKM
+    #   API_KEY: 1a14c4f9e7db8179a99c0ce210008e40
+    #   INDEX_NAME: jogiter-blog
+    #   # full configuration: https://www.algolia.com/doc/tools/crawler/apis/configuration/
+    #   CONFIG: '{"index_name":"http://blog.jogiter.cn/","start_urls":["http://blog.jogiter.cn/"],"selectors":{"lvl0":"h1","lvl1":"h2","lvl2":"h3","lvl3":"h4","lvl4":"h5","lvl5":"h6","text":".content p"}}'
+    # name: Index Algolia
+    # steps:
+    # - name: Algolia Docsearch Action
+    #   id: algolia
+    #   uses:  adapttive/algolia-docsearch-action@1.1.1
