@@ -14,12 +14,15 @@ on:
 jobs:
   algolia_indexer:
     runs-on: ubuntu-latest
-    - uses: actions/checkout@v2
-    - uses: darrenjennings/algolia-docsearch-action@master
-      with:
-        algolia_application_id: 3FNT30KAKM
-        algolia_api_key: 1a14c4f9e7db8179a99c0ce210008e40
-        file: ./algolia-config.json
+
+    steps:
+    - name: Algolia Docsearch Action
+      - uses: actions/checkout@v2
+      - uses: darrenjennings/algolia-docsearch-action@master
+        with:
+          algolia_application_id: 3FNT30KAKM
+          algolia_api_key: 1a14c4f9e7db8179a99c0ce210008e40
+          file: ./algolia-config.json
     # env:
     #   APPLICATION_ID: 3FNT30KAKM
     #   API_KEY: 1a14c4f9e7db8179a99c0ce210008e40
