@@ -15,7 +15,7 @@ module.exports = {
 
     algolia: {
       appId: '3FNT30KAKM',
-      apiKey: '1a14c4f9e7db8179a99c0ce210008e40',
+      apiKey: '6cba52928cfdc70de6b230fbc7fedf10',
       indexName: 'jogiter-blog',
     },
 
