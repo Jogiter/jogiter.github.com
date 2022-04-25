@@ -21,13 +21,13 @@ jobs:
         with:
           algolia_application_id: 3FNT30KAKM
           algolia_api_key: 1a14c4f9e7db8179a99c0ce210008e40
-          file: ./algolia-config.json
+          file: algolia-config.json
     # env:
     #   APPLICATION_ID: 3FNT30KAKM
     #   API_KEY: 1a14c4f9e7db8179a99c0ce210008e40
     #   INDEX_NAME: jogiter-blog
     #   # full configuration: https://www.algolia.com/doc/tools/crawler/apis/configuration/
-    #   CONFIG: '{"index_name":"http://blog.jogiter.cn/","start_urls":["http://blog.jogiter.cn/"],"selectors":{"lvl0":"h1","lvl1":"h2","lvl2":"h3","lvl3":"h4","lvl4":"h5","lvl5":"h6","text":".content p"}}'
+    #   CONFIG: '{"index_name":"http://blog.jogiter.cn/","start_urls":["http://blog.jogiter.cn/"],"selectors":{"lvl0":".content h1","lvl1":".content h2","lvl2":".content h3","lvl3":".content h4","lvl4":".content h5","lvl5":".content h6","text":".content p"}}'
     # name: Index Algolia
     # steps:
     # - name: Algolia Docsearch Action
