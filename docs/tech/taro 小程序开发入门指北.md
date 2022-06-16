@@ -226,7 +226,7 @@ chmod a+x .husky/commit-msg
 
 ```sh
 npm install -g commitizen git-cz
-commitizen init git-cz --save-dev --save-exact
+commitizen init cz-conventional-changelog --yarn --dev --exact
 ```
 
 更新 `scripts`:
@@ -243,7 +243,7 @@ commitizen init git-cz --save-dev --save-exact
 
 ```sh
 # 默认方式
-git commit --mesage 'feat: add commitlint support'
+git commit --message 'feat: add commitlint support'
 
 # 使用 commit-script，进入提交信息交互，填入对应信息即可。
 yarn commit
