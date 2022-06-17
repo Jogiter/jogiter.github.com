@@ -191,7 +191,7 @@ yarn add -D postcss-html stylelint-config-recommended-vue
 
 ```sh
 # install
-npm install -g @commitlint/cli @commitlint/config-conventional
+yarn add -D @commitlint/config-conventional @commitlint/cli
 
 # 创建配置文件
 echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
