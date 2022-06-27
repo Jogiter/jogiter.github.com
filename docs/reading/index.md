@@ -54,6 +54,9 @@ sidebar: false
   + [Designing Data-Intensive Application](https://github.com/Vonng/ddia) 《Designing Data-Intensive Application》DDIA中文翻译
 + Common
   + [regex](https://github.com/ziishaned/learn-regex) Learn regex the easy way
++ Linux
+  + [《Linux就该这么学》](https://www.linuxprobe.com/basic-learning-00.html)
+  + [Linux命令大全(手册)](https://www.linuxcool.com/df)
 + Typescript
   + official
     + [typescript](https://www.typescriptlang.org/docs/home.html)
