@@ -81,7 +81,16 @@ sidebar: false
   + Bootstrap
   + [eslint](http://eslint.cn/docs/rules/)
     + [typescript-eslint](https://github.com/typescript-eslint/typescript-eslint)
+    + [https://typescript-eslint.io/docs/linting/](https://typescript-eslint.io/docs/linting/)
   + [Git Commit Message](https://juejin.im/post/5afc5242f265da0b7f44bee4#heading-10)
+    + [https://commitlint.js.org/#/](https://commitlint.js.org/#/)
+    + [https://www.conventionalcommits.org/zh-hans/v1.0.0/](https://www.conventionalcommits.org/zh-hans/v1.0.0/)
+  + stylelint
+    + [https://stylelint.io/user-guide/get-started](https://stylelint.io/user-guide/get-started)
+    + [stylelint-config-standard-scss#5](https://github.com/stylelint-scss/stylelint-config-standard-scss/issues/5)
+  + git-hooks
+    + [husky](https://github.com/typicode/husky)  Git hooks made easy woof!
+    + [lint-staged](https://github.com/okonet/lint-staged) Run linters on git staged files
 + 框架
   + Plugins
     + [nprogress](https://github.com/rstacruz/nprogress) progress bars
