@@ -31,40 +31,37 @@ categories:
 优点：任何一处协同工作用的服务器发生故障，事后都可以用任何一个镜像出来的本地仓库恢复。 因为每一次的克隆操作，实际上都是一次对代码仓库的完整备份。
 缺点：有一定的学习成本
 
+### git 简史
 
-###  git简史
-
-Linux 内核开源项目有着为数众广的参与者。 绝大多数的 Linux 内核维护工作都花在了提交补丁和保存归档的繁琐事务上（1991－2002年间）。 到 2002 年，整个项目组开始启用一个专有的分布式版本控制系统 BitKeeper 来管理和维护代码。
+Linux 内核开源项目有着为数众广的参与者。 绝大多数的 Linux 内核维护工作都花在了提交补丁和保存归档的繁琐事务上（1991－2002 年间）。 到 2002 年，整个项目组开始启用一个专有的分布式版本控制系统 BitKeeper 来管理和维护代码。
 
 到了 2005 年，开发 BitKeeper 的商业公司同 Linux 内核开源社区的合作关系结束，他们收回了 Linux 内核社区免费使用 BitKeeper 的权力。 这就迫使 Linux 开源社区（特别是 Linux 的缔造者 Linus Torvalds）基于使用 BitKeeper 时的经验教训，开发出自己的版本系统。 他们对新的系统制订了若干目标：
 
-+ 速度
-+ 简单的设计
-+ 对非线性开发模式的强力支持（允许成千上万个并行开发的分支）
-+ 完全分布式
-+ 有能力高效管理类似 Linux 内核一样的超大规模项目（速度和数据量）
+- 速度
+- 简单的设计
+- 对非线性开发模式的强力支持（允许成千上万个并行开发的分支）
+- 完全分布式
+- 有能力高效管理类似 Linux 内核一样的超大规模项目（速度和数据量）
 
 自诞生于 2005 年以来，Git 日臻成熟完善，在高度易用的同时，仍然保留着初期设定的目标。 它的速度飞快，极其适合管理大项目，有着令人难以置信的非线性分支管理系统
 
-###  命令行
+### 命令行
 
 Git 有多种使用方式。 你可以使用原生的命令行模式，也可以使用 GUI 模式，这些 GUI 软件也能提供多种功能。 在本书中，我们将使用命令行模式。 这是因为首先，**只有在命令行模式下你才能执行 Git 的 所有 命令**，而大多数的 GUI 软件只实现了 Git 所有功能的一个子集以降低操作难度。 如果你学会了在命令行下如何操作，那么你在操作 GUI 软件时应该也不会遇到什么困难，但是，反之则不成立。 此外，由于每个人的想法与侧重点不同，不同的人常常会安装不同的 GUI 软件，但 所有 人一定会有命令行工具。。
 
-###  安装git
+### 安装 git
 
-+ [下载 git OSX 版](http://git-scm.com/download/mac)
-+ [下载 git Windows 版](http://git-for-windows.github.io/)
-+ [下载 git Linux 版](http://book.git-scm.com/2_installing_git.html)
+- [下载 git OSX 版](http://git-scm.com/download/mac)
+- [下载 git Windows 版](http://git-for-windows.github.io/)
+- [下载 git Linux 版](http://book.git-scm.com/2_installing_git.html)
 
-
-
-###  工作区，暂存区，本地仓库，远程仓库
+### 工作区，暂存区，本地仓库，远程仓库
 
 ![git work flow](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015120901.png)
 
-##   常见命令
+## 常见命令
 
-###  创建新仓库
+### 创建新仓库
 
 github 创建新项目时的 Quick setup：
 
@@ -86,9 +83,9 @@ git remote add origin git@github.com:userName/repo.git
 git push -u origin master # -u, --set-upstream    set upstream for git pull/status
 ```
 
-###  配置.gitconfig
+### 配置.gitconfig
 
-Git的设置文件为.gitconfig，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。
+Git 的设置文件为.gitconfig，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。
 
 ```
 # 显示当前的Git配置
@@ -127,10 +124,9 @@ vim ~/.gitconfig # 打开`.gitconfig`
 	git = !exec git
 ```
 
->更多配置参考 [.gitconfig](https://github.com/paulirish/dotfiles/blob/master/.gitconfig)
+> 更多配置参考 [.gitconfig](https://github.com/paulirish/dotfiles/blob/master/.gitconfig)
 
-
-###  配置ssh-key
+### 配置 ssh-key
 
 ```
 # 设置提交代码时的用户信息
@@ -141,7 +137,7 @@ git config --global user.email "[email address]"
 ssh-keygen -t rsa -C "email address"
 # 按3个回车，密码为空
 # 查看ssh密钥
-cd ~/.ssh && ll  
+cd ~/.ssh && ll
 # id_rsa  id_rsa.pub  known_hosts
 ```
 
@@ -153,7 +149,7 @@ ssh git@github.com
 # Hi xxx! You've successfully authenticated
 ```
 
-###  配置.gitignore
+### 配置.gitignore
 
 前端项目常见配置
 
@@ -168,9 +164,9 @@ bower_components/
 .deploy*/
 ```
 
->更多配置参考 [.gitignore](https://github.com/github/gitignore/blob/master/Node.gitignore)
+> 更多配置参考 [.gitignore](https://github.com/github/gitignore/blob/master/Node.gitignore)
 
-###  创建特性分支
+### 创建特性分支
 
 ```
 # 列出所有本地分支
@@ -242,7 +238,7 @@ $ git push origin :[branch-name]
 $ git branch -dr [remote/branch]
 ```
 
-###  特性分支开发
+### 特性分支开发
 
 ```
 # 添加指定文件到暂存区
@@ -326,7 +322,7 @@ $ git stash
 $ git stash pop
 ```
 
-###  查看信息
+### 查看信息
 
 ```
 # 显示有变更的文件
@@ -425,15 +421,15 @@ $ git push [remote] --tags
 $ git checkout -b [branch] [tag]
 ```
 
-###  Liscense
+### Liscense
 
 开源许可证是一种法律许可。通过它，版权拥有人明确允许，用户可以免费地使用、修改、共享版权软件。
 
 版权法默认禁止共享，也就是说，没有许可证的软件，就等同于保留版权，虽然开源了，用户只能看看源码，不能用，一用就会侵犯版权。所以软件开源的话，必须明确地授予用户开源许可证。
 
-目前，国际公认的开源许可证共有[80多种](https://opensource.org/licenses/alphabetical)。最常见的是[GPL](http://www.gnu.org/licenses/gpl.html)、[BSD](http://en.wikipedia.org/wiki/BSD_licenses)、[MIT](http://en.wikipedia.org/wiki/MIT_License)、[Mozilla](http://www.mozilla.org/MPL/)、[Apache](http://www.apache.org/licenses/LICENSE-2.0)和[LGPL](http://www.gnu.org/copyleft/lesser.html)
+目前，国际公认的开源许可证共有[80 多种](https://opensource.org/licenses/alphabetical)。最常见的是[GPL](http://www.gnu.org/licenses/gpl.html)、[BSD](http://en.wikipedia.org/wiki/BSD_licenses)、[MIT](http://en.wikipedia.org/wiki/MIT_License)、[Mozilla](http://www.mozilla.org/MPL/)、[Apache](http://www.apache.org/licenses/LICENSE-2.0)和[LGPL](http://www.gnu.org/copyleft/lesser.html)
 
->更多内容请阅读[阮一峰的网络日志-开源许可证教程](http://www.ruanyifeng.com/blog/2017/10/open-source-license-tutorial.html)
+> 更多内容请阅读[阮一峰的网络日志-开源许可证教程](http://www.ruanyifeng.com/blog/2017/10/open-source-license-tutorial.html)
 
 ### git-flow
 
@@ -443,15 +439,14 @@ $ git checkout -b [branch] [tag]
 
 git-flow 并不是要替代 Git，它仅仅是非常聪明有效地把标准的 Git 命令用脚本组合了起来。
 
-
 **安装**
 
-|platform|command|
-|:----|:----|
-|macOS|`$ brew install git-flow-avh`|
-|Macports|`$ port install git-flow-avh`|
-|Linux|`$ apt-get install git-flow`|
-|Windows (Cygwin)|`$ wget -q -O - --no-check-certificate https://raw.github.com/petervanderdoes/gitflow-avh/develop/contrib/gitflow-installer.sh install stable | bash`|
+| platform         | command                                                                                                                                       |
+| :--------------- | :-------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| macOS            | `$ brew install git-flow-avh`                                                                                                                 |
+| Macports         | `$ port install git-flow-avh`                                                                                                                 |
+| Linux            | `$ apt-get install git-flow`                                                                                                                  |
+| Windows (Cygwin) | `$ wget -q -O - --no-check-certificate https://raw.github.com/petervanderdoes/gitflow-avh/develop/contrib/gitflow-installer.sh install stable | bash` |
 
 ```
 # git version 2.14.2 ~ 2.16.1 之间的版本
@@ -465,11 +460,11 @@ git update-git-for-windows
 
 ![git-flow-commands](https://img.cdn.jogiter.cn/public/blog/git-flow-commands.png)
 
-##   阅读链接
+## 阅读链接
 
-+ [廖雪峰的Git教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
-+ [Git book中文版本](http://gitbook.liuhui998.com/index.html)
-+ [Git book官方中文版](http://git-scm.com/book/zh/v2)
-+ [git - 简明指南](http://rogerdudler.github.io/git-guide/index.zh.html)
-+ [git-flow](https://www.git-tower.com/learn/git/ebook/cn/command-line/advanced-topics/git-flow)
-+ [git-flow 备忘清单](https://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html)
+- [廖雪峰的 Git 教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
+- [Git book 中文版本](http://gitbook.liuhui998.com/index.html)
+- [Git book 官方中文版](http://git-scm.com/book/zh/v2)
+- [git - 简明指南](http://rogerdudler.github.io/git-guide/index.zh.html)
+- [git-flow](https://www.git-tower.com/learn/git/ebook/cn/command-line/advanced-topics/git-flow)
+- [git-flow 备忘清单](https://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html)

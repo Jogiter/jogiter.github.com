@@ -2,10 +2,10 @@ name: Index Algolia
 on:
   push:
     branches:
-    - vitepress
+      - vitepress
   pull_request_review:
     branches:
-    - vitepress
+      - vitepress
     types:
       - submitted
 

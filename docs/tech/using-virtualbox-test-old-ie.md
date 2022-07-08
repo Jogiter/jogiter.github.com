@@ -28,11 +28,11 @@ categories:
 
 ```html
 <!--[if IE 8]>
-<style>
-  .rbga-hack {
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F000000,endColorstr=#7F000000);
-  }
-</style>
+  <style>
+    .rbga-hack {
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F000000,endColorstr=#7F000000);
+    }
+  </style>
 <![endif]-->
 <style>
   .rbga-hack {
@@ -42,7 +42,7 @@ categories:
 ```
 
 startColorstr 和 endColorstr 的值由两部分组成：前两位是 alpha 值，后六位是颜色值，都是十六进制表示法；
-可以用 x=a*255 (其中x是表达式的 16 进制值，a 表示 alpha 值如 0.5 )；
+可以用 x=a\*255 (其中 x 是表达式的 16 进制值，a 表示 alpha 值如 0.5 )；
 
 ```js
 function getAlpha(opacity) {

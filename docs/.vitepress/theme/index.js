@@ -1,4 +1,4 @@
-import Theme from 'vitepress/theme';
+import Theme from 'vitepress/theme'
 import { h } from 'vue'
 
 export default {

@@ -12,9 +12,9 @@ title: js 字符串比较大小
 
 ```js
 {
-  let a = "a11";
-  let b = "a2";
-  console.log(a > b); // false
+  let a = 'a11'
+  let b = 'a2'
+  console.log(a > b) // false
 }
 ```
 
@@ -25,7 +25,7 @@ a 和 b 比较，步骤如下：
 3.  所以 a < b
 
 ```js
-console.log("选择" > "努力"); // true
+console.log('选择' > '努力') // true
 ```
 
 因为 "选" 的 charCode 是 36873，"努" 的 charCode 是 21162
@@ -36,15 +36,15 @@ console.log("选择" > "努力"); // true
 
 ```js
 {
-  let v1 = "9.1.21";
-  let v2 = "7.1.1.28";
-  console.log(v1 > v2); // true
+  let v1 = '9.1.21'
+  let v2 = '7.1.1.28'
+  console.log(v1 > v2) // true
 }
 {
   // v2 实际上是大于 v1
-  let v1 = "9.1.21";
-  let v2 = "10.1.1.28";
-  console.log(v1 > v2); // true
+  let v1 = '9.1.21'
+  let v2 = '10.1.1.28'
+  console.log(v1 > v2) // true
 }
 ```
 
@@ -53,29 +53,29 @@ console.log("选择" > "努力"); // true
 ```js
 // 对比版本号大小
 function isBiggerVersion(v1, v2) {
-  var result = true;
-  var array1 = v1.split(".");
-  var array2 = v2.split(".");
-  var isFirstLonger = array1.length >= array2.length;
+  var result = true
+  var array1 = v1.split('.')
+  var array2 = v2.split('.')
+  var isFirstLonger = array1.length >= array2.length
 
   function _bigger(longer, shorter) {
-    var l = ~~(longer[0] || 0);
-    var s = ~~(shorter[0] || 0);
+    var l = ~~(longer[0] || 0)
+    var s = ~~(shorter[0] || 0)
     if (s >= l) {
-      return false;
+      return false
     }
     if (s < l) {
-      return true;
+      return true
     }
     if (s === l) {
-      longer.shift();
-      shorter.shift();
+      longer.shift()
+      shorter.shift()
 
-      return _bigger(longer, shorter);
+      return _bigger(longer, shorter)
     }
   }
 
-  return isFirstLonger ? _bigger(array1, array2) : !_bigger(array2, array1);
+  return isFirstLonger ? _bigger(array1, array2) : !_bigger(array2, array1)
 }
 ```
 
@@ -83,50 +83,50 @@ function isBiggerVersion(v1, v2) {
 
 ```js
 {
-  let v1 = "9.1.21";
-  let v2 = v1;
-  console.log(isBiggerVersion(v1, v2)); // false
+  let v1 = '9.1.21'
+  let v2 = v1
+  console.log(isBiggerVersion(v1, v2)) // false
 }
 
 {
-  let v1 = "9.1.21";
-  let v2 = "10.1.1.28";
-  console.log(isBiggerVersion(v1, v2)); // false
+  let v1 = '9.1.21'
+  let v2 = '10.1.1.28'
+  console.log(isBiggerVersion(v1, v2)) // false
 }
 
 {
-  let v1 = "9.1.21";
-  let v2 = "10.0.1.28";
-  console.log(isBiggerVersion(v1, v2)); // false
+  let v1 = '9.1.21'
+  let v2 = '10.0.1.28'
+  console.log(isBiggerVersion(v1, v2)) // false
 }
 
 {
-  let v1 = "9.1.21";
-  let v2 = "9.0.1.28";
-  console.log(isBiggerVersion(v1, v2)); // true
+  let v1 = '9.1.21'
+  let v2 = '9.0.1.28'
+  console.log(isBiggerVersion(v1, v2)) // true
 }
 
 {
-  let v1 = "9.1.21";
-  let v2 = "9.1.1.28";
-  console.log(isBiggerVersion(v1, v2)); // true
+  let v1 = '9.1.21'
+  let v2 = '9.1.1.28'
+  console.log(isBiggerVersion(v1, v2)) // true
 }
 {
-  let v1 = "9.1.21";
-  let v2 = "8.1.1.28";
-  console.log(isBiggerVersion(v1, v2)); // true
-}
-
-{
-  let v1 = "9.1.21";
-  let v2 = "8.1";
-  console.log(isBiggerVersion(v1, v2)); // true
+  let v1 = '9.1.21'
+  let v2 = '8.1.1.28'
+  console.log(isBiggerVersion(v1, v2)) // true
 }
 
 {
-  let v1 = "9.1.21";
-  let v2 = "10.1";
-  console.log(isBiggerVersion(v1, v2)); // false
+  let v1 = '9.1.21'
+  let v2 = '8.1'
+  console.log(isBiggerVersion(v1, v2)) // true
+}
+
+{
+  let v1 = '9.1.21'
+  let v2 = '10.1'
+  console.log(isBiggerVersion(v1, v2)) // false
 }
 ```
 

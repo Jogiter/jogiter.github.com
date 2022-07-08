@@ -64,12 +64,14 @@ module.exports = {
 }
 
 function generateBlogLinks(dir) {
-  const files = fs.readdirSync(path.resolve(__dirname, `../${dir}/`));
-  return files.filter(file => file.slice(0, -3) !== 'index').map((file) => {
-    const name = file.slice(0, -3);
-    return {
-      text: name,
-      link: `${dir}/${name}`,
-    };
-  });
+  const files = fs.readdirSync(path.resolve(__dirname, `../${dir}/`))
+  return files
+    .filter((file) => file.slice(0, -3) !== 'index')
+    .map((file) => {
+      const name = file.slice(0, -3)
+      return {
+        text: name,
+        link: `${dir}/${name}`,
+      }
+    })
 }

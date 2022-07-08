@@ -168,112 +168,112 @@ pQ.print()
 ```ts
 /** 链表中的节点 **/
 function Node(element) {
-    // 节点中的数据
-    this.element = element;
-    // 指向下一个节点的指针
-    this.next = null;
+  // 节点中的数据
+  this.element = element
+  // 指向下一个节点的指针
+  this.next = null
 }
 function LinkedList() {
-  var length = 0;
-  var head = null;
+  var length = 0
+  var head = null
   this.size = function () {
-    return length;
+    return length
   }
   this.head = function () {
-    return head;
+    return head
   }
   this.add = function (element) {
-    var node = new Node(element);
+    var node = new Node(element)
     if (head == null) {
-      head = node;
+      head = node
     } else {
-      var currentNode = head;
+      var currentNode = head
       while (currentNode.next) {
-        currentNode = currentNode.next;
+        currentNode = currentNode.next
       }
-      currentNode.next = node;
+      currentNode.next = node
     }
-    length++;
+    length++
   }
   this.remove = function (element) {
-    var currentNode = head;
-    var previousNode;
+    var currentNode = head
+    var previousNode
     if (currentNode.element === element) {
-      head = currentNode.next;
+      head = currentNode.next
     } else {
       while (currentNode.element !== element) {
-        previousNode = currentNode;
-        currentNode = currentNode.next;
+        previousNode = currentNode
+        currentNode = currentNode.next
       }
-      previousNode.next = currentNode.next;
+      previousNode.next = currentNode.next
     }
-    length--;
+    length--
   }
   this.isEmpty = function () {
-    return length === 0;
+    return length === 0
   }
   this.indexOf = function (element) {
-    var currentNode = head;
-    var index = -1;
+    var currentNode = head
+    var index = -1
     while (currentNode) {
-      index++;
+      index++
       if (currentNode.element === element) {
-        return index;
+        return index
       }
-      currentNode = currentNode.next;
+      currentNode = currentNode.next
     }
-    return-1;
+    return -1
   }
   this.elementAt = function (index) {
-    var currentNode = head;
-    var count = 0;
+    var currentNode = head
+    var count = 0
     while (count < index) {
-      count++;
-      currentNode = currentNode.next;
+      count++
+      currentNode = currentNode.next
     }
-    return currentNode.element;
+    return currentNode.element
   }
   this.addAt = function (index, element) {
-    var node = new Node(element);
-    var currentNode = head;
-    var previousNode;
-    var currentIndex = 0;
+    var node = new Node(element)
+    var currentNode = head
+    var previousNode
+    var currentIndex = 0
     if (index > length) {
-      returnfalse;
+      returnfalse
     }
     if (index === 0) {
-      node.next = currentNode;
-      head = node;
+      node.next = currentNode
+      head = node
     } else {
       while (currentIndex < index) {
-        currentIndex++;
-        previousNode = currentNode;
-        currentNode = currentNode.next;
+        currentIndex++
+        previousNode = currentNode
+        currentNode = currentNode.next
       }
-      node.next = currentNode;
-      previousNode.next = node;
+      node.next = currentNode
+      previousNode.next = node
     }
-    length++;
+    length++
   }
   this.removeAt = function (index) {
-    var currentNode = head;
-    var previousNode;
-    var currentIndex = 0;
+    var currentNode = head
+    var previousNode
+    var currentIndex = 0
     if (index < 0 || index >= length) {
-      returnnull;
+      returnnull
     }
     if (index === 0) {
-      head = currentIndex.next;
+      head = currentIndex.next
     } else {
       while (currentIndex < index) {
-        currentIndex++;
-        previousNode = currentNode;
-        currentNode = currentNode.next;
+        currentIndex++
+        previousNode = currentNode
+        currentNode = currentNode.next
       }
-      previousNode.next = currentNode.next;
+      previousNode.next = currentNode.next
     }
-    length--;
-    return currentNode.element;
+    length--
+    return currentNode.element
   }
 }
 ```
@@ -282,7 +282,7 @@ function LinkedList() {
 
 ![set](https://img.cdn.jogiter.cn/public/blog/algorithm/Set.png)
 
-集合是数学的基本概念：定义明确且不同的对象的集合。ES6引入了集合的概念，它与数组有一定程度的相似性。但是，集合不允许重复元素，也不会被索引。
+集合是数学的基本概念：定义明确且不同的对象的集合。ES6 引入了集合的概念，它与数组有一定程度的相似性。但是，集合不允许重复元素，也不会被索引。
 
 一个典型的集合具有以下方法：
 
@@ -299,67 +299,68 @@ function LinkedList() {
 
 ```ts
 function MySet() {
-  var collection = [];
+  var collection = []
   this.has = function (element) {
-    return (collection.indexOf(element) !== -1);
+    return collection.indexOf(element) !== -1
   }
   this.values = function () {
-    return collection;
+    return collection
   }
   this.size = function () {
-    return collection.length;
+    return collection.length
   }
   this.add = function (element) {
     if (!this.has(element)) {
-      collection.push(element);
-      returntrue;
+      collection.push(element)
+      returntrue
     }
-    returnfalse;
+    returnfalse
   }
   this.remove = function (element) {
     if (this.has(element)) {
-      index = collection.indexOf(element);
-      collection.splice(index, 1);
-      returntrue;
+      index = collection.indexOf(element)
+      collection.splice(index, 1)
+      returntrue
     }
-    returnfalse;
+    returnfalse
   }
   this.union = function (otherSet) {
-    var unionSet = new MySet();
-    var firstSet = this.values();
-    var secondSet = otherSet.values();
+    var unionSet = new MySet()
+    var firstSet = this.values()
+    var secondSet = otherSet.values()
     firstSet.forEach(function (e) {
-      unionSet.add(e);
-    });
+      unionSet.add(e)
+    })
     secondSet.forEach(function (e) {
-      unionSet.add(e);
-    });
-    return unionSet;  }
+      unionSet.add(e)
+    })
+    return unionSet
+  }
   this.intersection = function (otherSet) {
-    var intersectionSet = new MySet();
-    var firstSet = this.values();
+    var intersectionSet = new MySet()
+    var firstSet = this.values()
     firstSet.forEach(function (e) {
       if (otherSet.has(e)) {
-        intersectionSet.add(e);
+        intersectionSet.add(e)
       }
-    });
-    return intersectionSet;
+    })
+    return intersectionSet
   }
   this.difference = function (otherSet) {
-    var differenceSet = new MySet();
-    var firstSet = this.values();
+    var differenceSet = new MySet()
+    var firstSet = this.values()
     firstSet.forEach(function (e) {
       if (!otherSet.has(e)) {
-        differenceSet.add(e);
+        differenceSet.add(e)
       }
-    });
-    return differenceSet;
+    })
+    return differenceSet
   }
   this.subset = function (otherSet) {
-    var firstSet = this.values();
+    var firstSet = this.values()
     return firstSet.every(function (value) {
-      return otherSet.has(value);
-    });
+      return otherSet.has(value)
+    })
   }
 }
 ```
@@ -376,62 +377,60 @@ function MySet() {
 - `remove`：删除键值对
 - `lookup`：使用键查找对应的值
 
-一个Javascript中简化的哈希表的例子：
+一个 Javascript 中简化的哈希表的例子：
 
 ```ts
 function hash(string, max) {
-  var hash = 0;
+  var hash = 0
   for (var i = 0; i < string.length; i++) {
-    hash += string.charCodeAt(i);
+    hash += string.charCodeAt(i)
   }
-  return hash % max;
+  return hash % max
 }
 
 function HashTable() {
-  let storage = [];
-  const storageLimit = 4;
+  let storage = []
+  const storageLimit = 4
 
   this.add = function (key, value) {
-    var index = hash(key, storageLimit);
+    var index = hash(key, storageLimit)
     if (storage[index] === undefined) {
-      storage[index] = [
-        [key, value]
-      ];
+      storage[index] = [[key, value]]
     } else {
-      var inserted = false;
+      var inserted = false
       for (var i = 0; i < storage[index].length; i++) {
         if (storage[index][i][0] === key) {
-          storage[index][i][1] = value;
-          inserted = true;
+          storage[index][i][1] = value
+          inserted = true
         }
       }
       if (inserted === false) {
-        storage[index].push([key, value]);
+        storage[index].push([key, value])
       }
     }
   }
 
   this.remove = function (key) {
-    var index = hash(key, storageLimit);
+    var index = hash(key, storageLimit)
     if (storage[index].length === 1 && storage[index][0][0] === key) {
-      delete storage[index];
+      delete storage[index]
     } else {
       for (var i = 0; i < storage[index]; i++) {
         if (storage[index][i][0] === key) {
-          delete storage[index][i];
+          delete storage[index][i]
         }
       }
     }
   }
 
   this.lookup = function (key) {
-    var index = hash(key, storageLimit);
+    var index = hash(key, storageLimit)
     if (storage[index] === undefined) {
-      returnundefined;
+      returnundefined
     } else {
       for (var i = 0; i < storage[index].length; i++) {
         if (storage[index][i][0] === key) {
-          return storage[index][i][1];
+          return storage[index][i][1]
         }
       }
     }
@@ -470,7 +469,7 @@ function HashTable() {
 - `isPresent`：确定某个节点的存在
 - `remove`：从树中删除节点
 
-JavaScript中的示例：
+JavaScript 中的示例：
 
 ```ts
 class Node {
@@ -603,20 +602,20 @@ class BST {
 测试一下：
 
 ```ts
-const bst = new BST();
-bst.add(4);
-bst.add(2);
-bst.add(6);
-bst.add(1);
-bst.add(3);
-bst.add(5);
-bst.add(7);
-bst.remove(4);
-console.log(bst.findMin());
-console.log(bst.findMax());
-bst.remove(7);
-console.log(bst.findMax());
-console.log(bst.isPresent(4));
+const bst = new BST()
+bst.add(4)
+bst.add(2)
+bst.add(6)
+bst.add(1)
+bst.add(3)
+bst.add(5)
+bst.add(7)
+bst.remove(4)
+console.log(bst.findMin())
+console.log(bst.findMax())
+bst.remove(7)
+console.log(bst.findMax())
+console.log(bst.isPresent(4))
 
 1
 7
@@ -632,7 +631,7 @@ false
 
 `Trie` 中的每个节点都有一个字母——分支之后可以组成一个完整的单词。它还包括一个布尔指示符，以显示这是否是最后一个字母。
 
-Trie具有以下方法：
+Trie 具有以下方法：
 
 - `add`：在字典树中插入一个单词
 - `isWord`：确定树是否由某些单词组成
@@ -719,35 +718,35 @@ function Trie() {
 
 要查询图中的节点，必须用 “宽度优先搜索"（BFS）方法或 “深度优先搜索”（DFS）方法在整个树网中进行搜索。
 
-让我们看一个例子的BFS在Javascript：
+让我们看一个例子的 BFS 在 Javascript：
 
 ```ts
 function bfs(graph, root) {
-  var nodesLen = {};
+  var nodesLen = {}
   for (var i = 0; i < graph.length; i++) {
-    nodesLen[i] = Infinity;
+    nodesLen[i] = Infinity
   }
-  nodesLen[root] = 0;
-  var queue = [root];
-  var current;
+  nodesLen[root] = 0
+  var queue = [root]
+  var current
   while (queue.length != 0) {
-    current = queue.shift();
+    current = queue.shift()
 
-    var curConnected = graph[current];
-    var neighborIdx = [];
-    var idx = curConnected.indexOf(1);
+    var curConnected = graph[current]
+    var neighborIdx = []
+    var idx = curConnected.indexOf(1)
     while (idx != -1) {
-      neighborIdx.push(idx);
-      idx = curConnected.indexOf(1, idx + 1);
+      neighborIdx.push(idx)
+      idx = curConnected.indexOf(1, idx + 1)
     }
     for (var j = 0; j < neighborIdx.length; j++) {
       if (nodesLen[neighborIdx[j]] == Infinity) {
-        nodesLen[neighborIdx[j]] = nodesLen[current] + 1;
-        queue.push(neighborIdx[j]);
+        nodesLen[neighborIdx[j]] = nodesLen[current] + 1
+        queue.push(neighborIdx[j])
       }
     }
   }
-  return nodesLen;
+  return nodesLen
 }
 ```
 
@@ -773,9 +772,9 @@ console.log(bfs(graph, 1));
 }
 ```
 
-就是这样——我们已经介绍了所有常见的数据结构，并给出了JavaScript中的例子。这应该能让你更好地了解数据结构在计算机中的工作原理。祝你编码愉快！
+就是这样——我们已经介绍了所有常见的数据结构，并给出了 JavaScript 中的例子。这应该能让你更好地了解数据结构在计算机中的工作原理。祝你编码愉快！
 
 ## 原文链接
 
 - [8-common-data-structures-in-javascript](https://medium.com/better-programming/8-common-data-structures-in-javascript-3d3537e69a27)
-- [译：Javascript中的8种常见数据结构](https://blog.csdn.net/weixin_48726650/article/details/107789164)
+- [译：Javascript 中的 8 种常见数据结构](https://blog.csdn.net/weixin_48726650/article/details/107789164)

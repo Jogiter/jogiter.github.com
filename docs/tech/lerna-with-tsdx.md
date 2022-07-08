@@ -51,21 +51,21 @@ My work around is fairly simple, but there's potential implications I don't curr
 Create a `tsdx.config.js` (in your project root):
 
 ```js
-const commonjs = require('@rollup/plugin-commonjs');
+const commonjs = require('@rollup/plugin-commonjs')
 
 module.exports = {
   rollup(config) {
     // Delete the external config property.
     // This essentially means we're allowing all packages to be bundled.
-    delete config.external;
+    delete config.external
 
     // Manually use the commonjs plugin.
     // This is opposed to specifying umd as the format as there's more implications that, again, are unclear.
-    config.plugins.push(commonjs());
+    config.plugins.push(commonjs())
 
-    return config;
+    return config
   },
-};
+}
 ```
 
 You can then call yarn build and use the resulting dist/ as your lambda. When building expect a ton of warnings around dependencies, e.g.

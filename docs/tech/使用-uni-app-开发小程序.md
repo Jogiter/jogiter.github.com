@@ -31,11 +31,11 @@ tags:
       - [腾讯云会话](https://cloud.tencent.com/document/product/619/11449)
       - [阿拉丁](https://www.aldwx.com/)
       - [神策数据](https://www.sensorsdata.cn/)
-      - [诸葛IO](https://zhugeio.com/)
+      - [诸葛 IO](https://zhugeio.com/)
       - [GrowingIO](https://docs.growingio.com/docs/sdk-integration/mina-sdk)
       - [讯飞 AI](https://www.xfyun.cn/solutions/miniAppSolution)
-      - [leancloud serverless开发](https://leancloud.cn/docs/sdk_setup-js.html#hash1778723680)
-      - [bomb serverless开发](https://ask.dcloud.net.cn/question/54795)
+      - [leancloud serverless 开发](https://leancloud.cn/docs/sdk_setup-js.html#hash1778723680)
+      - [bomb serverless 开发](https://ask.dcloud.net.cn/question/54795)
 - Vue 开发常用功能
   - I18n
   - Vuex
@@ -81,18 +81,18 @@ npm install -D node-sass sass-loader
 </template>
 
 <script lang="ts">
-  import uniLoadMore from '@dcloudio/uni-ui/lib/uni-load-more/uni-load-more.vue';
+  import uniLoadMore from '@dcloudio/uni-ui/lib/uni-load-more/uni-load-more.vue'
 
   @Component({
     components: {
-      uniLoadMore
-    }
+      uniLoadMore,
+    },
   })
   export default class component extends Vue {
     // 下拉加载功能实现（uni 自带的生命周期）
     onReachBottom() {
       if (this.hasMore) {
-        this.loadStatus = 'loading';
+        this.loadStatus = 'loading'
         // load more
       }
     }
@@ -105,17 +105,17 @@ npm install -D node-sass sass-loader
 `store/index.js`
 
 ```js
-import Vue from 'vue';
-import Vuex from 'vuex';
-import destination from './destination';
+import Vue from 'vue'
+import Vuex from 'vuex'
+import destination from './destination'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    destination
-  }
-});
+    destination,
+  },
+})
 ```
 
 `store/destination.ts`
@@ -124,23 +124,23 @@ export default new Vuex.Store({
 export default {
   namespaced: true,
   state: {},
-  mutation: {}
+  mutation: {},
   // ...
-};
+}
 ```
 
 `page.vue`
 
 ```typescript
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
-import { State, Mutation, Action, namespace } from 'vuex-class';
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
+import { State, Mutation, Action, namespace } from 'vuex-class'
 
-const store = namespace('destination');
+const store = namespace('destination')
 
 @Component
 export default class Page extends Vue {
-  @store.State cityInfo!: CityInfo.Response;
-  @store.Action getCityInfo!: (data: CityInfo.Param) => void;
+  @store.State cityInfo!: CityInfo.Response
+  @store.Action getCityInfo!: (data: CityInfo.Param) => void
 }
 ```
 
@@ -259,24 +259,24 @@ export default class Index extends Vue {
 
 ```js
 wx.login({
-    success: (res: any) => {
-        const { code } = res;
-        if (code) {
-            // 获取用户信息
-            wx.getUserInfo({
-                withCredentials: true, // encryptedData, iv 等敏感信息
-                success: (res: any) => {
-                    const { encryptedData, iv } = res;
-                    // todo: 将 encryptedData, iv 和 code 传递到开发者服务器，获取用户手机号等信息
-                },
-                fail: (e: any) => {
-                    // 需要用户点击页面的按钮触发授权，才可以获取用户信息。
-                }
-            })
-        } else {
-            console.log('登录失败！' + res.errMsg)
-        }
+  success: (res: any) => {
+    const { code } = res
+    if (code) {
+      // 获取用户信息
+      wx.getUserInfo({
+        withCredentials: true, // encryptedData, iv 等敏感信息
+        success: (res: any) => {
+          const { encryptedData, iv } = res
+          // todo: 将 encryptedData, iv 和 code 传递到开发者服务器，获取用户手机号等信息
+        },
+        fail: (e: any) => {
+          // 需要用户点击页面的按钮触发授权，才可以获取用户信息。
+        },
+      })
+    } else {
+      console.log('登录失败！' + res.errMsg)
     }
+  },
 })
 ```
 

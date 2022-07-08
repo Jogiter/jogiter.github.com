@@ -20,7 +20,7 @@ tags:
 ```
 $ npm install -g verdaccio
 $ verdaccio
-warn --- config file - /home/.config/verdaccio/config.yaml 
+warn --- config file - /home/.config/verdaccio/config.yaml
 warn --- http address - http://localhost:4873/ - verdaccio/3.0.0
 ```
 
@@ -32,7 +32,7 @@ warn --- http address - http://localhost:4873/ - verdaccio/3.0.0
 server {
   listen       80;
   server_name  host;
-  
+
   location ~ ^/verdaccio/(.*)$ {
     proxy_pass http://127.0.0.1:4873/$1;
     proxy_set_header Host            $host:$server_port;
@@ -105,7 +105,7 @@ $ npm publish @private/util
 $ npm install @vue/cli
 ```
 
-* * *
+---
 
 ## 使用 `cnpmjs.org`
 
@@ -152,7 +152,7 @@ create database private-npm
 
 b. 创建表：[Get all the sqls here](https://github.com/cnpm/cnpmjs.org/blob/master/docs/db.sql)
 
-> [mysql 8.0 创建 table 时报错:【MYSQL】MYSQL报错解决方法： Warning: (3719, "'utf8' is currently an alias for the character set UTF8MB3, but will be an alias for UTF8M B4 in a future release."](http://www.ifepoland.com/lilip/p/10109557.html)
+> [mysql 8.0 创建 table 时报错:【MYSQL】MYSQL 报错解决方法： Warning: (3719, "'utf8' is currently an alias for the character set UTF8MB3, but will be an alias for UTF8M B4 in a future release."](http://www.ifepoland.com/lilip/p/10109557.html)
 
 3. Edit Your Own Config File
 
@@ -167,52 +167,52 @@ module.exports = {
   enableCluster: true, // enable cluster mode
   enablePrivate: true, // enable private mode, only admin can publish, other use just can sync package from source npm
   database: {
-      db: 'private-npm',
-      username: '',
-      password: '',
+    db: 'private-npm',
+    username: '',
+    password: '',
 
-      // the sql dialect of the database
-      // - currently supported: 'mysql', 'sqlite', 'postgres', 'mariadb'
-      dialect: 'mysql',
+    // the sql dialect of the database
+    // - currently supported: 'mysql', 'sqlite', 'postgres', 'mariadb'
+    dialect: 'mysql',
 
-      // custom host; default: 127.0.0.1
-      host: '',
+    // custom host; default: 127.0.0.1
+    host: '',
 
-      // custom port; default: 3306
-      port: 3306,
+    // custom port; default: 3306
+    port: 3306,
 
-      ssl: {
-          ca: path.join(dataDir, 'certs/mysql-test.pem')
-      },
+    ssl: {
+      ca: path.join(dataDir, 'certs/mysql-test.pem'),
+    },
 
-      // use pooling in order to reduce db connection overload and to increase speed
-      // currently only for mysql and postgresql (since v1.5.0)
-      pool: {
-        maxConnections: 10,
-        minConnections: 0,
-        maxIdleTime: 30000
-      },
+    // use pooling in order to reduce db connection overload and to increase speed
+    // currently only for mysql and postgresql (since v1.5.0)
+    pool: {
+      maxConnections: 10,
+      minConnections: 0,
+      maxIdleTime: 30000,
+    },
 
-      dialectOptions: {
-        trace: true,
-      },
+    dialectOptions: {
+      trace: true,
+    },
 
-      // the storage engine for 'sqlite'
-      // default store into ~/.cnpmjs.org/data.sqlite
-      storage: path.join(dataDir, 'data.sqlite'),
+    // the storage engine for 'sqlite'
+    // default store into ~/.cnpmjs.org/data.sqlite
+    storage: path.join(dataDir, 'data.sqlite'),
 
-      logging: !!process.env.SQL_DEBUG,
+    logging: !!process.env.SQL_DEBUG,
   },
   admins: {
     admin: 'admin@cnpmjs.org',
   },
   // registry scopes, if don't set, means do not support scopes
-  scopes: [ '@knpm', '@knpmtest', '@knpm-test' ],
+  scopes: ['@knpm', '@knpmtest', '@knpm-test'],
   // 'none': 永不同步，只管理私有用户上传的包，其它源包会直接从源站获取
   // 'exist': 定时同步已经存在于数据库的包
   // 'all': 定时同步所有源站的
-  syncModel: 'none'// 'none', 'all', 'exist'
-};
+  syncModel: 'none', // 'none', 'all', 'exist'
+}
 ```
 
 注意这里的 `mysql` 的连接使用测试环境的 `mysql`，采用 `ssl` 的方式进行连接，因此还需要添加 `ssl` 配置。
@@ -251,7 +251,7 @@ $ vim nginx.conf
     server {
       listen       80;
       server_name  host;
-      
+
       location ~ ^/knpm/(.*)$ {
         proxy_pass http://127.0.0.1:7001/$1;
         proxy_set_header Host            $host:$server_port;
@@ -306,4 +306,4 @@ $ cd ~/cnpmjs.org/
 
 - [verdaccio 安装](https://verdaccio.org/docs/en/installation)
 - [Deploy a private npm registry in 5 minutes](https://github.com/cnpm/cnpmjs.org/wiki/Deploy-a-private-npm-registry-in-5-minutes)
-- [在5分钟内搭建企业内部私有npm仓库](https://github.com/jaywcjlove/handbook/blob/master/CentOS/%E5%9C%A85%E5%88%86%E9%92%9F%E5%86%85%E6%90%AD%E5%BB%BA%E4%BC%81%E4%B8%9A%E5%86%85%E9%83%A8%E7%A7%81%E6%9C%89npm%E4%BB%93%E5%BA%93.md)
+- [在 5 分钟内搭建企业内部私有 npm 仓库](https://github.com/jaywcjlove/handbook/blob/master/CentOS/%E5%9C%A85%E5%88%86%E9%92%9F%E5%86%85%E6%90%AD%E5%BB%BA%E4%BC%81%E4%B8%9A%E5%86%85%E9%83%A8%E7%A7%81%E6%9C%89npm%E4%BB%93%E5%BA%93.md)

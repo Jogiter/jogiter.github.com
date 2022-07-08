@@ -19,11 +19,11 @@ Network 面板记录页面上每个网络操作的相关信息，包括详细的
 
 TL;DR
 
-* 使用 Network 面板记录和分析网络活动。
-* 整体或单独查看资源的加载信息。
-* 过滤和排序资源的显示方式。
-* 保存、复制和清除网络记录。
-* 根据需求自定义 Network 面板。
+- 使用 Network 面板记录和分析网络活动。
+- 整体或单独查看资源的加载信息。
+- 过滤和排序资源的显示方式。
+- 保存、复制和清除网络记录。
+- 根据需求自定义 Network 面板。
 
 ### Network 面板概览
 
@@ -39,17 +39,17 @@ Network 面板由五个窗格组成：
 
 默认情况下，Requests Table 会显示以下列。您可以添加和移除列。
 
-+ **Name**。资源的名称。
-+ **Status**。HTTP 状态代码。
-+ **Type**。已请求资源的 MIME 类型。
-+ **Initiator**。发起请求的对象或进程。值为以下选项之一：
-+ **Parser**。Chrome 的 HTML 解析器发起请求。
-+ **Redirect**。HTTP 重定向发起请求。
-+ **Script**。脚本发起请求。
-+ **Other**。某些其他进程或操作发起请求，例如用户通过链接或者在地址栏中输入网址导航到页面。
-+ **Size**。响应标头（通常为数百字节）加响应正文（由服务器提供）的组合大小。
-+ **Time**。从请求开始至在响应中接收到最终字节的总持续时间。
-+ **Timeline**。Timeline 列可以显示所有网络请求的可视瀑布。 点击此列的标题可以显示一个包含更多排序字段的菜单。
+- **Name**。资源的名称。
+- **Status**。HTTP 状态代码。
+- **Type**。已请求资源的 MIME 类型。
+- **Initiator**。发起请求的对象或进程。值为以下选项之一：
+- **Parser**。Chrome 的 HTML 解析器发起请求。
+- **Redirect**。HTTP 重定向发起请求。
+- **Script**。脚本发起请求。
+- **Other**。某些其他进程或操作发起请求，例如用户通过链接或者在地址栏中输入网址导航到页面。
+- **Size**。响应标头（通常为数百字节）加响应正文（由服务器提供）的组合大小。
+- **Time**。从请求开始至在响应中接收到最终字节的总持续时间。
+- **Timeline**。Timeline 列可以显示所有网络请求的可视瀑布。 点击此列的标题可以显示一个包含更多排序字段的菜单。
 
 ### 记录网络活动
 
@@ -75,7 +75,6 @@ Network 面板由五个窗格组成：
 
 ![filmstrip-zoom](https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/filmstrip-zoom.png)
 
-
 ### 查看 DOMContentLoaded 和 load 事件信息
 
 **Network** 面板突出显示两种事件：**DOMContentLoaded** 和 **load**。
@@ -95,17 +94,16 @@ Network 面板由五个窗格组成：
 
 ![load](https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/load.png)
 
-
 ### 查看单个资源的详细信息
 
 点击资源名称（位于 **Requests Table** 的 **Name** 列下）可以查看与该资源有关的更多信息。
 
 可用标签会因您所选择资源类型的不同而不同，但下面四个标签最常见：
 
-+ **Headers**。与资源关联的 HTTP 标头。
-+ **Preview**。JSON、图像和文本资源的预览。
-+ **Response**。HTTP 响应数据（如果存在）。
-+ **Timing**。资源请求生命周期的精细分解。
+- **Headers**。与资源关联的 HTTP 标头。
+- **Preview**。JSON、图像和文本资源的预览。
+- **Response**。HTTP 响应数据（如果存在）。
+- **Timing**。资源请求生命周期的精细分解。
 
 ![network-headers](https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/network-headers.png)
 
@@ -115,12 +113,12 @@ Network 面板由五个窗格组成：
 
 生命周期按照以下类别显示花费的时间：
 
-+ Queuing
-+ Stalled
-+ 如果适用：DNS lookup、initial connection、SSL handshake
-+ Request sent
-+ Waiting (TTFB)
-+ Content Download
+- Queuing
+- Stalled
+- 如果适用：DNS lookup、initial connection、SSL handshake
+- Request sent
+- Waiting (TTFB)
+- Content Download
 
 ![timing-tab](https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/timing-tab.png)
 
@@ -130,7 +128,7 @@ Network 面板由五个窗格组成：
 
 相关指南：
 
-+ [了解 Resource Timing](https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing)
+- [了解 Resource Timing](https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing)
 
 #### 查看 HTTP 标头
 
@@ -166,14 +164,14 @@ Network 面板由五个窗格组成：
 
 下面是 Cookie 表中每一列的说明：
 
-+ **Name**。Cookie 的名称。
-+ **Value**。Cookie 的值。
-+ **Domain**。Cookie 所属的域。
-+ **Path**。Cookie 来源的网址路径。
-+ **Expires / Max-Age**。Cookie 的 expires 或 max-age 属性的值。
-+ **Size**。Cookie 的大小（以字节为单位）。
-+ **HTTP**。指示 Cookie 应仅由浏览器在 HTTP 请求中设置，而无法通过 JavaScript 访问。
-+ **Secure**。如果存在此属性，则指示 Cookie 应仅通过安全连接传输。
+- **Name**。Cookie 的名称。
+- **Value**。Cookie 的值。
+- **Domain**。Cookie 所属的域。
+- **Path**。Cookie 来源的网址路径。
+- **Expires / Max-Age**。Cookie 的 expires 或 max-age 属性的值。
+- **Size**。Cookie 的大小（以字节为单位）。
+- **HTTP**。指示 Cookie 应仅由浏览器在 HTTP 请求中设置，而无法通过 JavaScript 访问。
+- **Secure**。如果存在此属性，则指示 Cookie 应仅通过安全连接传输。
 
 ![cookies](https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/cookies.png)
 
@@ -187,26 +185,26 @@ Network 面板由五个窗格组成：
 
 下表对 **Frames** 标签上表格中的每一列进行了说明：
 
-+ Data。消息负载。如果消息为纯文本，将在此处显示。 对于二进制操作码，此字段将显示操作码的名称和代码。 支持以下操作码：
-+ 延续框架
-+ 二进制框架
-+ 连接关闭框架
-+ Ping 框架
-+ Pong 框架
-+ Length。消息负载的长度（以字节为单位）。
-+ Time。消息创建时的时间戳。
+- Data。消息负载。如果消息为纯文本，将在此处显示。 对于二进制操作码，此字段将显示操作码的名称和代码。 支持以下操作码：
+- 延续框架
+- 二进制框架
+- 连接关闭框架
+- Ping 框架
+- Pong 框架
+- Length。消息负载的长度（以字节为单位）。
+- Time。消息创建时的时间戳。
 
 消息根据其类型进行彩色编码：
 
-+ 传出文本消息为浅绿色。
-+ 传入文本消息为白色。
-+ WebSocket 操作码为浅黄色。
-+ 错误为浅红色。
+- 传出文本消息为浅绿色。
+- 传入文本消息为白色。
+- WebSocket 操作码为浅黄色。
+- 错误为浅红色。
 
 有关当前实现的说明：
 
-+ 要在每条新消息到达后刷新 Frames 表，请点击左侧的资源名称。
-+ Frames 表格仅保留最后 100 条 WebSocket 消息。
+- 要在每条新消息到达后刷新 Frames 表，请点击左侧的资源名称。
+- Frames 表格仅保留最后 100 条 WebSocket 消息。
 
 ### 查看资源发起者和依赖项
 
@@ -228,12 +226,12 @@ Network 面板由五个窗格组成：
 
 **Timeline** 列与其他列不同。点击此列时，它将显示一个由多个排序字段组成的菜单：
 
-+ **Timeline**。按每个网络请求的开始时间排序。这是默认排序方式，与按 Start Time 选项排序相同。
-+ **Start Time**。按每个网络请求的开始时间排序（与按 Timeline 选项排序相同）。
-+ **Response Time**。按每个请求的响应时间排序。
-+ **End Time**。按每个请求完成的时间排序。
-+ **Duration**。按每个请求的总时间排序。选择此过滤器可以确定哪些资源的加载时间最长。
-+ **Latency**。按请求开始与响应开始之间的时间排序。 选择此过滤器可以确定哪些资源至第一字节 (TTFB) 的时间最长。
+- **Timeline**。按每个网络请求的开始时间排序。这是默认排序方式，与按 Start Time 选项排序相同。
+- **Start Time**。按每个网络请求的开始时间排序（与按 Timeline 选项排序相同）。
+- **Response Time**。按每个请求的响应时间排序。
+- **End Time**。按每个请求完成的时间排序。
+- **Duration**。按每个请求的总时间排序。选择此过滤器可以确定哪些资源的加载时间最长。
+- **Latency**。按请求开始与响应开始之间的时间排序。 选择此过滤器可以确定哪些资源至第一字节 (TTFB) 的时间最长。
 
 ![timeline-sort-fields](https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/timeline-sort-fields.png)
 
@@ -255,18 +253,18 @@ Network 面板由五个窗格组成：
 
 下文列表说明了所有关键字。
 
-+ `domain`。仅显示来自指定域的资源。您可以使用通配符字符 (*) 来包含多个域。 例如，*.com 将显示来自以 .com 结尾的所有域名的资源。 DevTools 会使用它遇到的所有域填充自动填充下拉菜单。
-+ `has-response-header`。显示包含指定 HTTP 响应标头的资源。 DevTools 会使用它遇到的所有响应标头填充自动填充下拉菜单。
-+ `is`。使用 is:running 可以查找 WebSocket 资源。
-+ `larger-than`。显示大于指定大小的资源（以字节为单位）。 将值设为 1000 等同于设置为 1k。
-+ `method`。显示通过指定 HTTP 方法类型检索的资源。 DevTools 会使用它遇到的所有 HTTP 方法填充下拉菜单。
-+ `mime-type`。显示指定 MIME 类型的资源。DevTools 会使用它遇到的所有 MIME 类型填充下拉菜单。
-+ `mixed-content`。显示所有混合内容资源 (mixed-content:all)，或者仅显示当前显示的资源 (mixed-content:displayed)。
-+ `scheme`。显示通过未保护 HTTP (scheme:http) 或受保护 HTTPS (scheme:https) 检索的资源。
-+ `set-cookie-domain`。显示具有 Set-Cookie 标头并带有与指定值匹配的 Domain 属性的资源。 DevTools 会使用它遇到的所有 Cookie 域填充自动填充下拉菜单。
-+ `set-cookie-name`。显示具有 Set-Cookie 标头并且名称与指定值匹配的资源。 DevTools 会使用它遇到的所有 Cookie 名称填充自动填充下拉菜单。
-+ `set-cookie-value`。显示具有 Set-Cookie 标头并且值与指定值匹配的资源。 DevTools 会使用它遇到的所有 Cookie 值填充自动填充下拉菜单。
-+ `status-code`。仅显示 HTTP 状态代码与指定代码匹配的资源。 DevTools 会使用它遇到的所有状态代码填充自动填充下拉菜单。
+- `domain`。仅显示来自指定域的资源。您可以使用通配符字符 (_) 来包含多个域。 例如，_.com 将显示来自以 .com 结尾的所有域名的资源。 DevTools 会使用它遇到的所有域填充自动填充下拉菜单。
+- `has-response-header`。显示包含指定 HTTP 响应标头的资源。 DevTools 会使用它遇到的所有响应标头填充自动填充下拉菜单。
+- `is`。使用 is:running 可以查找 WebSocket 资源。
+- `larger-than`。显示大于指定大小的资源（以字节为单位）。 将值设为 1000 等同于设置为 1k。
+- `method`。显示通过指定 HTTP 方法类型检索的资源。 DevTools 会使用它遇到的所有 HTTP 方法填充下拉菜单。
+- `mime-type`。显示指定 MIME 类型的资源。DevTools 会使用它遇到的所有 MIME 类型填充下拉菜单。
+- `mixed-content`。显示所有混合内容资源 (mixed-content:all)，或者仅显示当前显示的资源 (mixed-content:displayed)。
+- `scheme`。显示通过未保护 HTTP (scheme:http) 或受保护 HTTPS (scheme:https) 检索的资源。
+- `set-cookie-domain`。显示具有 Set-Cookie 标头并带有与指定值匹配的 Domain 属性的资源。 DevTools 会使用它遇到的所有 Cookie 域填充自动填充下拉菜单。
+- `set-cookie-name`。显示具有 Set-Cookie 标头并且名称与指定值匹配的资源。 DevTools 会使用它遇到的所有 Cookie 名称填充自动填充下拉菜单。
+- `set-cookie-value`。显示具有 Set-Cookie 标头并且值与指定值匹配的资源。 DevTools 会使用它遇到的所有 Cookie 值填充自动填充下拉菜单。
+- `status-code`。仅显示 HTTP 状态代码与指定代码匹配的资源。 DevTools 会使用它遇到的所有状态代码填充自动填充下拉菜单。
 
 ![larger-than](https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/larger-than.png)
 
@@ -280,17 +278,17 @@ Network 面板由五个窗格组成：
 
 下面的列表说明了每一个选项。
 
-+ **Copy Response**。将选定资源的 HTTP 响应复制到系统剪贴板。
-+ **Copy as cURL**。以 cURL 命令字符串的形式将选定资源的网络请求复制到系统剪贴板。请参阅以 cURL 命令形式复制请求。
-+ **Copy All as HAR**。以 HAR 数据形式将所有资源复制到系统剪贴板。HAR 文件包含用于说明网络“瀑布”的 JSON 数据结构。多款第三方 工具 可以依据 HAR 文件中的数据重建网络瀑布。请参阅网页性能工具： HTTP 归档 (HAR)，了解更多信息。
-+ **Save as HAR with Content**。将所有网络数据及每一个页面资源保存到 HAR 文件。 二进制资源（包括图像）以 Base64 编码文本的形式编码。
-+ **Clear Browser Cache**。清除浏览器缓存。提示：您也可以从 Network Conditions 抽屉式导航栏中启用或停用浏览器缓存。
-+ **Clear Browser Cookies**。清除浏览器的 Cookie。
-+ **Open in Sources Panel**。在 Sources 面板中打开选定资源。
-+ **Open Link in New Tab**。在新标签中打开选定资源。您也可以在 Network 表中双击资源名称。
-+ **Copy Link Address**。将资源网址复制到系统剪贴板。
-+ **Save**。保存选定的文本资源。仅在文本资源上显示。
-+ **Replay XHR**。重新发送选定的 XMLHTTPRequest。仅在 XHR 资源上显示。
+- **Copy Response**。将选定资源的 HTTP 响应复制到系统剪贴板。
+- **Copy as cURL**。以 cURL 命令字符串的形式将选定资源的网络请求复制到系统剪贴板。请参阅以 cURL 命令形式复制请求。
+- **Copy All as HAR**。以 HAR 数据形式将所有资源复制到系统剪贴板。HAR 文件包含用于说明网络“瀑布”的 JSON 数据结构。多款第三方 工具 可以依据 HAR 文件中的数据重建网络瀑布。请参阅网页性能工具： HTTP 归档 (HAR)，了解更多信息。
+- **Save as HAR with Content**。将所有网络数据及每一个页面资源保存到 HAR 文件。 二进制资源（包括图像）以 Base64 编码文本的形式编码。
+- **Clear Browser Cache**。清除浏览器缓存。提示：您也可以从 Network Conditions 抽屉式导航栏中启用或停用浏览器缓存。
+- **Clear Browser Cookies**。清除浏览器的 Cookie。
+- **Open in Sources Panel**。在 Sources 面板中打开选定资源。
+- **Open Link in New Tab**。在新标签中打开选定资源。您也可以在 Network 表中双击资源名称。
+- **Copy Link Address**。将资源网址复制到系统剪贴板。
+- **Save**。保存选定的文本资源。仅在文本资源上显示。
+- **Replay XHR**。重新发送选定的 XMLHTTPRequest。仅在 XHR 资源上显示。
 
 ![copy-save-menu](https://developers.google.com/web/tools/chrome-devtools/network-performance/imgs/copy-save-menu.png)
 
@@ -327,7 +325,7 @@ cURL 是一种用于进行 HTTP 事务的命令行工具。
 
 要详细了解如何优化您的应用的网络性能，请参阅下面的资源：
 
-+ 使用 [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights) 确定可以应用到您网站的性能最佳做法，以及使用 [PageSpeed 优化工具](https://developers.google.com/speed/pagespeed/optimization)将应用这些最佳做法的流程自动化。
-+ [Google Chrome 中的高性能网络](https://www.igvita.com/posa/high-performance-networking-in-google-chrome/)讨论了 Chrome 网络内部机制，以及您如何充分利用它们让您的网站更快。
-+ [gzip 压缩的工作原理](https://developers.google.com/speed/articles/gzip)提供了 gzip 压缩的高级概览，并介绍了这种压缩为什么是一种不错的方法。
-+ [网页性能最佳做法](https://developers.google.com/speed/docs/best-practices/rules_intro)提供了更多用于优化您的网页或应用的网络性能的提示。
+- 使用 [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights) 确定可以应用到您网站的性能最佳做法，以及使用 [PageSpeed 优化工具](https://developers.google.com/speed/pagespeed/optimization)将应用这些最佳做法的流程自动化。
+- [Google Chrome 中的高性能网络](https://www.igvita.com/posa/high-performance-networking-in-google-chrome/)讨论了 Chrome 网络内部机制，以及您如何充分利用它们让您的网站更快。
+- [gzip 压缩的工作原理](https://developers.google.com/speed/articles/gzip)提供了 gzip 压缩的高级概览，并介绍了这种压缩为什么是一种不错的方法。
+- [网页性能最佳做法](https://developers.google.com/speed/docs/best-practices/rules_intro)提供了更多用于优化您的网页或应用的网络性能的提示。

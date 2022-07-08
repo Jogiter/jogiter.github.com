@@ -13,8 +13,8 @@ tags: blog
 
 根据 [docsearch.algolia.com](https://docsearch.algolia.com/docs/what-is-docsearch/) 的快速描述。 DocSearch 分为 2 个部分：一个爬虫程序和一个前端库。
 
-* 爬虫程序：用来获取博客的查询关键字，为博客搜索接口提供结果。
-* 前端库：用来提供沉浸式搜索体验。（就是集成了 UI 组件和搜索接口，能够快速接入搜索功能）
+- 爬虫程序：用来获取博客的查询关键字，为博客搜索接口提供结果。
+- 前端库：用来提供沉浸式搜索体验。（就是集成了 UI 组件和搜索接口，能够快速接入搜索功能）
 
 ## vitepress 博客添加 algolia 配置
 
@@ -25,9 +25,9 @@ module.exports = {
   themeConfig: {
     algolia: {
       apiKey: 'your_api_key',
-      indexName: 'index_name'
-    }
-  }
+      indexName: 'index_name',
+    },
+  },
 }
 ```
 
@@ -35,10 +35,10 @@ module.exports = {
 
 ![API Keys](/public/algolia-api-keys.jpg)
 
-* `Application ID` 这是您的唯一应用程序标识符。它用于在使用Algolia的API时识别您。
-* `Search-Only API Key` 这是在前端代码中使用的公共API密钥。此密钥仅用于搜索查询和向Insights API发送数据。
-* `Admin API Key` 这是管理API密钥。请保守秘密，仅从后端使用：此密钥用于创建、更新和删除索引。您还可以使用它来管理API密钥。
-* `IndexName` 创建应用后，创建用于博客搜索的索引。
+- `Application ID` 这是您的唯一应用程序标识符。它用于在使用 Algolia 的 API 时识别您。
+- `Search-Only API Key` 这是在前端代码中使用的公共 API 密钥。此密钥仅用于搜索查询和向 Insights API 发送数据。
+- `Admin API Key` 这是管理 API 密钥。请保守秘密，仅从后端使用：此密钥用于创建、更新和删除索引。您还可以使用它来管理 API 密钥。
+- `IndexName` 创建应用后，创建用于博客搜索的索引。
 
 完成配置后，就可以在博客界面上看到搜索框了。但是输入任何内容，你会发现都查不到结果。这是因为在 algolia 的后台还没有上传索引。
 
@@ -50,8 +50,8 @@ module.exports = {
 
 [Algolia Crawler](https://www.algolia.com/doc/tools/crawler/getting-started/overview/) 支持两种方式进行生成索引。
 
-* 官方推荐使用 [The admin console](https://crawler.algolia.com/admin/)。需要付费。
-* 使用 [Crawler REST API](https://www.algolia.com/doc/tools/crawler/apis/crawler-rest-api)
+- 官方推荐使用 [The admin console](https://crawler.algolia.com/admin/)。需要付费。
+- 使用 [Crawler REST API](https://www.algolia.com/doc/tools/crawler/apis/crawler-rest-api)
 
 上述两种方式，其一需要付费，本篇不做介绍，有兴趣的可以参阅官方文档。其二使用 API 调用相对较麻烦。经过多番查阅文档，终于找到了可以在可以自行生成索引的方式 [docsearch#legacy/run-your-own](https://docsearch.algolia.com/docs/legacy/run-your-own)
 
@@ -61,10 +61,10 @@ module.exports = {
 
 记录一下遇到的问题：
 
-* 安装 python 3.10.0 版本：`choco install python3`（使用管理员身份运行 power shell）。
-* 安装 pipenv 需要使用国内的 python 镜像源。
-* 公司网络有进行拦截，导致安装失败。（使用个人 wifi 后安装成功:cry:）
-* windows 平台下运行 `pipenv install`、 `pipenv shell`命令失败。弃坑于此！
+- 安装 python 3.10.0 版本：`choco install python3`（使用管理员身份运行 power shell）。
+- 安装 pipenv 需要使用国内的 python 镜像源。
+- 公司网络有进行拦截，导致安装失败。（使用个人 wifi 后安装成功:cry:）
+- windows 平台下运行 `pipenv install`、 `pipenv shell`命令失败。弃坑于此！
 
 ### 使用 GithubAction
 
@@ -75,10 +75,10 @@ name: Index Algolia
 on:
   push:
     branches:
-    - vitepress
+      - vitepress
   pull_request_review:
     branches:
-    - vitepress
+      - vitepress
     types:
       - submitted
 
@@ -122,7 +122,7 @@ jobs:
 
 ## 相关链接
 
-* [https://www.algolia.com/](https://www.algolia.com/)
-* [https://vitepress.vuejs.org/](https://vitepress.vuejs.org/)
-* [https://docsearch.algolia.com/](https://docsearch.algolia.com/)
-* [GithubAction: algolia-docsearch-action](https://github.com/darrenjennings/algolia-docsearch-action) 运行 docsearch scraper 并更新索引
+- [https://www.algolia.com/](https://www.algolia.com/)
+- [https://vitepress.vuejs.org/](https://vitepress.vuejs.org/)
+- [https://docsearch.algolia.com/](https://docsearch.algolia.com/)
+- [GithubAction: algolia-docsearch-action](https://github.com/darrenjennings/algolia-docsearch-action) 运行 docsearch scraper 并更新索引

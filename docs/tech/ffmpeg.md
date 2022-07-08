@@ -28,7 +28,7 @@ ffmpeg 是用于记录，转换和流式传输音频和视频的跨平台解决�
 ffmpeg -version
 ```
 
-## ffmpeg参数中文详细解释
+## ffmpeg 参数中文详细解释
 
 window 执行 `./bin/ffmpeg -h`
 
@@ -128,7 +128,7 @@ Subtitle options:
 -spre preset        set the subtitle options to the indicated preset
 ```
 
-中文参考可参考 [ffmpeg参数中文详细解释](https://blog.csdn.net/leixiaohua1020/article/details/12751349)
+中文参考可参考 [ffmpeg 参数中文详细解释](https://blog.csdn.net/leixiaohua1020/article/details/12751349)
 
 ## ffmpeg 常用命令总结
 
@@ -160,22 +160,22 @@ ffmpeg -ss 00:00:15 -t 00:00:10 -i ./videos/tennis.mp4 -vn -acodec copy output.a
 ffmpeg -ss 00:00:15 -t 00:00:10 -i ./videos/tennis.mp4 -vn -f mp3 output.mp3
 ```
 
-## ffmpeg filter过滤器
+## ffmpeg filter 过滤器
 
 ```
 # show available filters
 ffmpeg -filters
 ```
 
->[ffmpeg filter过滤器 基础实例及全面解析](https://blog.csdn.net/newchenxf/article/details/51364105)
+> [ffmpeg filter 过滤器 基础实例及全面解析](https://blog.csdn.net/newchenxf/article/details/51364105)
 
-**将输入的1920x1080缩小到960x540输出**
+**将输入的 1920x1080 缩小到 960x540 输出**
 
 ```
 ffmpeg -i input.mp4 -vf scale=960:540 output.mp4
 ```
 
-**为视频添加logo**
+**为视频添加 logo**
 
 ```
 # 左上角
@@ -188,16 +188,16 @@ ffmpeg -i input.mp4 -i logo.png -filter_complex overlay=0:H-h output.mp4
 ffmpeg -i input.mp4 -i logo.png -filter_complex overlay=W-w:H-h output.mp4
 ```
 
-**去掉视频的logo**
+**去掉视频的 logo**
 
 用 ffmpeg 的 [delogo](https://ffmpeg.org/ffmpeg-filters.html#delogo) 过滤器。
 
->语法：-vf delogo=x:y:w:h[:t[:show]]
+> 语法：-vf delogo=x:y:w:h[:t[:show]]
 
-+ x:y 离左上角的坐标。
-+ w:h logo 的宽和高。
-+ t: 矩形边缘的厚度，默认值 4。
-+ show：若设置为1有一个绿色的矩形，默认值0。
+- x:y 离左上角的坐标。
+- w:h logo 的宽和高。
+- t: 矩形边缘的厚度，默认值 4。
+- show：若设置为 1 有一个绿色的矩形，默认值 0。
 
 ```
 ffmpeg -i input.mp4 -vf delogo=0:0:220:90:100:1 output.mp4
@@ -218,7 +218,7 @@ ffmpeg -i input.mp4 -vf subtitles=en.srt srt.mp4
 
 ## 阅读链接
 
-+ [ffmpeg document](https://ffmpeg.org/documentation.html)
-+ [雷霄骅：FFMPEG视音频编解码零基础学习方法](https://blog.csdn.net/leixiaohua1020/article/details/15811977)
-+ [ffmpeg常用命令总结](https://blog.csdn.net/langzijing/article/details/85256846)
-+ [使用 MediaSource 搭建流式播放器](https://zhuanlan.zhihu.com/p/26374202)
+- [ffmpeg document](https://ffmpeg.org/documentation.html)
+- [雷霄骅：FFMPEG 视音频编解码零基础学习方法](https://blog.csdn.net/leixiaohua1020/article/details/15811977)
+- [ffmpeg 常用命令总结](https://blog.csdn.net/langzijing/article/details/85256846)
+- [使用 MediaSource 搭建流式播放器](https://zhuanlan.zhihu.com/p/26374202)

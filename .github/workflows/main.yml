@@ -7,12 +7,12 @@ on:
   # Triggers the workflow on push or pull request events but only for the writing branch
   push:
     branches:
-    - writing
-    - vitepress
+      - writing
+      - vitepress
   pull_request_review:
     branches:
-    - writing
-    - vitepress
+      - writing
+      - vitepress
     types:
       - submitted
 
@@ -47,7 +47,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: prepare and build
-        run: | 
+        run: |
           yarn
           yarn run build
 
@@ -62,12 +62,12 @@ jobs:
 
       - name: git push
         uses: ad-m/github-push-action@master
-        with: 
+        with:
           github_token: ${{ secrets.TOKEN }}
           branch: main
           force: true
           directory: docs/.vitepress/dist
-          
+
       - name: success
         run: |
           echo Github actions build success,

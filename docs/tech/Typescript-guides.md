@@ -20,7 +20,7 @@ tags:
   - [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator) Vue.js and Property Decorator
   - [vue-class-component](https://github.com/vuejs/vue-class-component) ES / TypeScript decorator for class-style Vue components.
 - [typescript 在线编辑器](https://www.typescriptlang.org/play?#code/Q)
-- [type-challenges](https://github.com/type-challenges/type-challenges) TypeScript类型挑战
+- [type-challenges](https://github.com/type-challenges/type-challenges) TypeScript 类型挑战
 - Books
   - [深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/#why)
 
@@ -53,11 +53,11 @@ Q: Error: `vue-loader` was used without the corresponding plugin
 2. 在 `webpack.config.js` 中添加：
 
 ```js
-const { VueLoaderPlugin } = require('vue-loader');
+const { VueLoaderPlugin } = require('vue-loader')
 module.exports = {
   // ...
   plugins: [new VueLoaderPlugin()],
-};
+}
 ```
 
 Q: # [Could not find a declaration file for module 'module-name'. '/path/to/module-name.js' implicitly has an 'any' type](https://stackoverflow.com/questions/41292559/could-not-find-a-declaration-file-for-module-module-name-path-to-module-nam)
@@ -74,20 +74,20 @@ If the above install errors - try changing `import` statements to `require`:
 
 ```js
 // import * as yourModuleName from 'module-name';
-const yourModuleName = require('module-name');
+const yourModuleName = require('module-name')
 ```
 
 Q: [Property 'style' does not exist on type 'Element'](https://github.com/Microsoft/TypeScript/issues/3263)
 
 ```typescript
 class Test {
-  constructor(elem:HTMLElement) {
-    elem.style.color = 'red';
-  };
+  constructor(elem: HTMLElement) {
+    elem.style.color = 'red'
+  }
 }
 
-let elem = <HTMLElement>document.querySelector('#test');
-let test = new Test(elem);
+let elem = <HTMLElement>document.querySelector('#test')
+let test = new Test(elem)
 ```
 
 Q: 如何处理在 `Vue.prototype` 上添加的变量
@@ -95,11 +95,11 @@ Q: 如何处理在 `Vue.prototype` 上添加的变量
 在 `vue.d.ts` 文件中添加定义：
 
 ```typescript
-import  Vue  from  'vue';
+import Vue from 'vue'
 
-declare  module  'vue/types/vue' {
-  interface  Vue {
-    $bus:  Vue
+declare module 'vue/types/vue' {
+  interface Vue {
+    $bus: Vue
   }
 }
 ```
@@ -156,8 +156,8 @@ export default class HelloComponent extends Vue {
 使用 [vuex-class](https://github.com/ktsn/vuex-class/blob/master/test/bindings.ts)
 
 ```typescript
-import { Vue, Component } from  'vue-property-decorator'
-import { State, Mutation } from  'vuex-class'
+import { Vue, Component } from 'vue-property-decorator'
+import { State, Mutation } from 'vuex-class'
 
 @Component({
   name: 'hello',
@@ -173,30 +173,30 @@ export default class HelloComponent extends Vue {
 
 Q: 辨析联合类型
 
->当类中含有[字面量成员](https://jkchao.github.io/typescript-book-chinese/typings/literals.html)时，我们可以用该类的属性来辨析联合类型。
+> 当类中含有[字面量成员](https://jkchao.github.io/typescript-book-chinese/typings/literals.html)时，我们可以用该类的属性来辨析联合类型。
 
 ```typescript
 interface Square {
-  kind: 'square';
-  size: number;
+  kind: 'square'
+  size: number
 }
 
 interface Rectangle {
-  kind: 'rectangle';
-  width: number;
-  height: number;
+  kind: 'rectangle'
+  width: number
+  height: number
 }
 
-type Shape = Square | Rectangle;
+type Shape = Square | Rectangle
 
 function area(s: Shape) {
   if (s.kind === 'square') {
     // 现在 TypeScript 知道 s 的类型是 Square
     // 所以你现在能安全使用它
-    return s.size * s.size;
+    return s.size * s.size
   } else {
     // 不是一个 square ？因此 TypeScript 将会推算出 s 一定是 Rectangle
-    return s.width * s.height;
+    return s.width * s.height
   }
 }
 ```
@@ -212,19 +212,19 @@ export interface ResponseData<T = any> {
    * 状态码
    * @type { number }
    */
-  code: number;
+  code: number
 
   /**
    * 数据
    * @type { T }
    */
-  result: T;
+  result: T
 
   /**
    * 消息
    * @type { string }
    */
-  message: string;
+  message: string
 }
 ```
 
@@ -232,14 +232,14 @@ export interface ResponseData<T = any> {
 
 ```typescript
 // 在 axios.ts 文件中对 axios 进行了处理，例如添加通用配置、拦截器等
-import Ax from './axios';
+import Ax from './axios'
 
-import { ResponseData } from './interface.ts';
+import { ResponseData } from './interface.ts'
 
 export function getUser<T>() {
   return Ax.get<ResponseData<T>>('/somepath')
-    .then(res => res.data)
-    .catch(err => console.error(err));
+    .then((res) => res.data)
+    .catch((err) => console.error(err))
 }
 ```
 
@@ -247,8 +247,8 @@ export function getUser<T>() {
 
 ```typescript
 interface User {
-  name: string;
-  age: number;
+  name: string
+  age: number
 }
 
 async function test() {
@@ -258,7 +258,7 @@ async function test() {
   //  result: { name: string, age: number },
   //  message: string
   // }
-  const user = await getUser<User>();
+  const user = await getUser<User>()
 }
 ```
 
@@ -268,14 +268,14 @@ Q: 枚举使用
 enum Color {
   Red = '#fea',
   Green = '#eaf',
-  Blue = '#afe'
+  Blue = '#afe',
 }
 
 // type ColorKey = "Red" | "Green" | "Blue"
 type ColorKey = keyof typeof Color
 
 function test(color: ColorKey) {
-    return Color[color]
+  return Color[color]
 }
 
 const n = test('Red')
