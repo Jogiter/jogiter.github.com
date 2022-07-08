@@ -39,7 +39,8 @@ title: taro 小程序开发入门指北
   - [Pre-commit Hook](https://prettier.io/docs/en/precommit.html)
 - [stylelint](https://stylelint.io/user-guide/get-started) A mighty, modern linter that helps you avoid errors and enforce conventions in your styles.
 - [commitlint](https://commitlint.js.org/#/guides-local-setup?id=add-hook) Lint commit messages
-- [git-cz](https://www.npmjs.com/package/git-cz) Semantic Git commits
+- [commitizen](https://www.npmjs.com/package/commitizen)
+  - [git-cz](https://www.npmjs.com/package/git-cz) Semantic Git commits
 - git-hooks
   - [husky](https://github.com/typicode/husky) Git hooks made easy 🐶 woof!
   - [lint-staged](https://github.com/okonet/lint-staged) Run linters on git staged files
@@ -97,7 +98,7 @@ echo {}> .prettierrc.json
 }
 ```
 
->参考 [elux-cli#eslint-plugin](https://github.com/hiisea/elux-cli/blob/main/packages/eslint-plugin/config/vue.js#L7)
+> 参考 [elux-cli#eslint-plugin](https://github.com/hiisea/elux-cli/blob/main/packages/eslint-plugin/config/vue.js#L7)
 
 4.更新 `package.json` 的 `scripts`:
 
@@ -166,7 +167,7 @@ yarn add -D postcss-html stylelint-config-recommended-vue
 ```json
 {
   "scripts": {
-    "stylelint": "stylelint **/*.css **/*.vue",
+    "stylelint": "stylelint **/*.css **/*.vue"
   }
 }
 ```
@@ -234,7 +235,7 @@ commitizen init cz-conventional-changelog --yarn --dev --exact
 ```json
 {
   "scripts": {
-    "commit": "git-cz",
+    "commit": "git-cz"
   }
 }
 ```
@@ -280,11 +281,7 @@ yarn add -D lint-staged
       "eslint --cache --fix",
       "git add"
     ],
-    "**/*.{css,vue}": [
-      "prettier --write",
-      "stylelint --fix",
-      "git add"
-    ]
+    "**/*.{css,vue}": ["prettier --write", "stylelint --fix", "git add"]
   }
 }
 ```
@@ -303,7 +300,7 @@ commitlint
 
 如果有错误，则根据提示信息进行修复，如果没有则完成提交。
 
->上述命令仅针对 commit 时更新的文件，未修改的文件是不会执行的，因此对于老项目，我们可以渐进式进行代码规范，而不会担忧提交信息时会导致过多改动）
+> 上述命令仅针对 commit 时更新的文件，未修改的文件是不会执行的，因此对于老项目，我们可以渐进式进行代码规范，而不会担忧提交信息时会导致过多改动）
 
 ## 如何在老项目中集成
 
