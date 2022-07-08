@@ -6,14 +6,29 @@
   "author": "jogiter",
   "license": "MIT",
   "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "cz-conventional-changelog": "3.3.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "vitepress": "^0.20.0"
   },
   "scripts": {
     "dev": "vitepress dev docs",
     "build": "vitepress build docs",
-    "serve": "vitepress serve docs"
+    "serve": "vitepress serve docs",
+    "postinstall": "husky install",
+    "commit": "git-cz"
   },
   "dependencies": {
     "algoliasearch": "^4.13.0"
+  },
+  "lint-staged": {
+    "*": "prettier --write"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
