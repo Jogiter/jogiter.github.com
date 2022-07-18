@@ -68,6 +68,17 @@ yarn add --dev --exact prettier eslint-config-prettier eslint-plugin-prettier
 echo {}> .prettierrc.json
 ```
 
+`.prettierrc.json`:
+
+```json
+{
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "semi": false,
+  "singleQuote": true
+}
+```
+
 3.更新 `.eslintrc` 文件
 
 ```js
@@ -94,7 +105,11 @@ echo {}> .prettierrc.json
         "parser": "@typescript-eslint/parser" // 支持 lang="ts"
       }
     }
-  ]
+  ],
+  // 兼容 taro 的编译环境
+  "env": {
+    "node": true
+  },
 }
 ```
 
