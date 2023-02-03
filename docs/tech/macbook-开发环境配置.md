@@ -114,6 +114,8 @@ Hi user! You've successfully authenticated, but GitHub does not provide shell ac
 
 ## NPM 镜像的坑
 
+>更多配置见 [binary-mirror-config](https://github.com/cnpm/binary-mirror-config/blob/master/package.json)
+
 ```sh
 npm i -g nrm
 nrm use taobao
