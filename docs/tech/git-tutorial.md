@@ -164,7 +164,7 @@ bower_components/
 .deploy*/
 ```
 
-> 更多配置参考 [.gitignore](https://github.com/github/gitignore/blob/master/Node.gitignore)
+> 更多配置参考 [.gitignore](https://github.com/github/gitignore/blob/master/Node.gitignore) & [gitalias](https://github.com/GitAlias/gitalias/blob/main/gitalias.txt)
 
 ### 创建特性分支
 
