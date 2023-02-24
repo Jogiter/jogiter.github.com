@@ -14,15 +14,15 @@ tags:
 - [nest.js](https://docs.nestjs.com/)
 - [typeOrm](https://github.com/typeorm/typeorm)
 
-![nest.js](../public/nestjs.png)
+![nest.js](/public/nestjs.png)
 
-![typeOrm](../public/typeorm.png)
+![typeOrm](/public/typeorm.png)
 
 ### env 配置
 
 • [https://docs.nestjs.com/techniques/configuration#configuration](https://docs.nestjs.com/techniques/configuration#configuration)
 
-![dotenv](../public/dotenv.png)
+![dotenv](/public/dotenv.png)
 
 ```sh
 # 生成 .env 文件
@@ -36,8 +36,8 @@ cp .env.example .env
 ### DB-Transaction 事务
 
 • [https://typeorm.io/transactions](https://typeorm.io/transactions)
-  • [#creating-and-using-transactions](https//typeorm.io/transactions#creating-and-using-transactions)  官方的文档和 example 内容太简单。
-  • [#using-queryrunner-to-create-and-control-state-of-single-database-connection](https://typeorm.io/transactions#using-queryrunner-to-create-and-control-state-of-single-database-connection)
+• [#creating-and-using-transactions](https://typeorm.io/transactions#creating-and-using-transactions) 官方的文档和 example 内容太简单。
+• [#using-queryrunner-to-create-and-control-state-of-single-database-connection](https://typeorm.io/transactions#using-queryrunner-to-create-and-control-state-of-single-database-connection)
 
 **推荐：dataSource.transaction**
 
@@ -91,44 +91,42 @@ Everything you want to run in a transaction must be executed in a callback:
 
 ```ts
 await myDataSource.manager.transaction(async (transactionalEntityManager) => {
-    await transactionalEntityManager.save(users)
-    await transactionalEntityManager.save(photos)
-    // ...
+  await transactionalEntityManager.save(users)
+  await transactionalEntityManager.save(photos)
+  // ...
 })
 ```
 
-The most important restriction when working in a transaction is to **ALWAYS** use the provided instance of entity manager - transactionalEntityManager in this example. **DO NOT USE GLOBAL ENTITY MANAGER**. *All operations MUST be executed using the provided transactional entity manager*.
+The most important restriction when working in a transaction is to **ALWAYS** use the provided instance of entity manager - transactionalEntityManager in this example. **DO NOT USE GLOBAL ENTITY MANAGER**. _All operations MUST be executed using the provided transactional entity manager_.
 
 **demo**
 
 ```ts
-import { Injectable, Logger } from '@nestjs/common';
-import { DataSource } from 'typeorm';
-import { OnesUsers } from "@app/modules/slack/entity/ones-users.entity";
+import { Injectable, Logger } from '@nestjs/common'
+import { DataSource } from 'typeorm'
+import { OnesUsers } from '@app/modules/slack/entity/ones-users.entity'
 
 @Injectable()
 export class UserService {
-  private readonly logger = new Logger(UserService.name);
+  private readonly logger = new Logger(UserService.name)
 
-  constructor(
-    private dataSource: DataSource,
-  ) {}
+  constructor(private dataSource: DataSource) {}
 
   async newAction() {
     return await this.dataSource.transaction(async (entityManager) => {
-        const onesUser = entityManager.getRepository(OnesUsers)
-        
-        const users = await onesUser.save({
-          appUserId: 'appUserId' + Math.random(),
-          onesUserId: 'onesUserId' + Math.random(),
-          accessToken: 'accessToken' + Math.random(),
-          email: 'email'
-        })
-        this.logger.log('%o', users)
+      const onesUser = entityManager.getRepository(OnesUsers)
 
-        // throw Error('123')
-        return await onesUser.find()
+      const users = await onesUser.save({
+        appUserId: 'appUserId' + Math.random(),
+        onesUserId: 'onesUserId' + Math.random(),
+        accessToken: 'accessToken' + Math.random(),
+        email: 'email',
       })
+      this.logger.log('%o', users)
+
+      // throw Error('123')
+      return await onesUser.find()
+    })
   }
 }
 ```
