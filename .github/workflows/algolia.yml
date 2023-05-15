@@ -8,15 +8,15 @@ on:
       - vitepress
     types:
       - submitted
-
+      
 jobs:
   algolia_indexer:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
-      - uses: darrenjennings/algolia-docsearch-action@master
+      - uses: darrenjennings/algolia-docsearch-action@v0.2.0
         with:
           algolia_application_id: ${{ secrets.ALGOLIA_APPID }}
           algolia_api_key: ${{ secrets.ALGOLIA_APIKEY }}
           file: algolia-config.json
+          
