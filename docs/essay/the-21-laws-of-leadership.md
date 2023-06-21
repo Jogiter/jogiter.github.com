@@ -66,7 +66,7 @@ PLAN AHEAD：
 - Allow time for acceptance：预留时间征得同意
 - Head to action：开始行动
 - Except problems：预测将会出现的问题
-- Always point to the success：适中明白成功的方向
+- Always point to the success：始终明白成功的方向
 - Daily review your plan：每次对计划进行回顾
 
 一个成功的方案遇到的最大的阻碍就是：对改革的恐惧、无知，对未来的不确定以及想象力的缺乏。
@@ -124,7 +124,7 @@ PLAN AHEAD：
 
 如何培养现有和未来的核心圈成员。
 
-- 他们有意识地话费额外时间和成员相处，以此指导他们，并增进关系。
+- 他们有意识地花费额外时间和成员相处，以此指导他们，并增进关系。
 - 他们赋予成员更多的责任，寄予更高的期望。
 - 当工作进展顺利时，他们给予成员更多的功劳；而当工作发展不顺利时，他们让成员承担责任。
 
