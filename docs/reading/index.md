@@ -96,7 +96,7 @@ sidebar: false
     - [nprogress](https://github.com/rstacruz/nprogress) progress bars
     - [better-scroll](https://github.com/ustbhuangyi/better-scroll) inspired by iscroll。支持 swipe、 IOS Picker 等功能。
     - [scrollama](https://github.com/russellgoldenberg/scrollama) Scrollytelling with IntersectionObserver
-  - [Vue](https://cn.vuejs.org/)
+  - [Vue](https://vuejs.org/)
     - [vux](https://github.com/airyland/vux) Vue UI Components based on WeUI
     - Style guide
       - [vue-patterns](https://github.com/learn-vuejs/vue-patterns)
