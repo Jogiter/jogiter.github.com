@@ -4,8 +4,6 @@ on:
     branches:
       - vitepress
   pull_request_review:
-    branches:
-      - vitepress
     types:
       - submitted
       

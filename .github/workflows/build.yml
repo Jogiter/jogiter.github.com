@@ -6,8 +6,9 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the writing branch
   push:
-    branches:
-      - writing
+    branches-ignore:
+      - main
+      - master
       - vitepress
   pull_request_review:
     types:
@@ -63,23 +64,6 @@ jobs:
         run: |
           pnpm install
           pnpm run build
-
-      - name: git commit
-        run: |
-          git config --global user.name "Jogiter"
-          git config --global user.email "jogiter.g@gmail.com"
-          cd docs/.vitepress/dist
-          git init
-          git add --all .
-          git commit -m "Github Action Auto Builder"
-
-      - name: git push
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.TOKEN }}
-          branch: main
-          force: true
-          directory: docs/.vitepress/dist
 
       - name: success
         run: |
