@@ -9,6 +9,7 @@ on:
     branches-ignore:
       - main
       - master
+      - vitepress
   pull_request_review:
     types:
       - submitted
