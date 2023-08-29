@@ -180,18 +180,59 @@ sidebar: false
     - [讯飞开放平台](https://console.xfyun.cn/services/) 提供了基础的 API，需要有开发才能投入使用。
 - blockchain
   - [JSON-RPC node](https://github.com/tedeh/jayson) a simple but featureful JSON-RPC 2.0/1.0 client and server for node.js
-  - Eth
-    - [web3](https://github.com/ethereum/web3.js/tree/v1.2.1) Ethereum JavaScript API
-    - [Solidity](https://solidity-cn.readthedocs.io/zh/develop/installing-solidity.html)
-    - [登链社区](https://learnblockchain.cn/)
-      - [2022 十大智能合约开发工具](https://learnblockchain.cn/article/3434)
-      - [定义 web3 技术栈](https://learnblockchain.cn/article/3390)
-    - [hardhat](https://github.com/nomiclabs/hardhat) Hardhat is a development environment to compile, deploy, test, and debug your Ethereum software. Get Solidity stack traces & console.log.
-    - dapp
-      - [dtube](https://github.com/dtube/dtube) A full-featured video sharing website, decentralized.
-      - [project_web3.0](https://github.com/adrianhajdin/project_web3.0) a Web 3.0 React Solidity Blockchain Application
-    - bestOfYear
-      - [best-dapps-2021](https://koinhow.com/best-dapps-2021/)
+  - [https://github.com/bitcoin/bips](https://github.com/bitcoin/bips)
+  - 助记词生成：[https://en.bitcoin.it/wiki/BIP_0039](https://en.bitcoin.it/wiki/BIP_0039)
+  - 助记词词语列表：[https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt](https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt)
+  - BTC
+      - [https://github.com/bitcoin/bips](https://github.com/bitcoin/bips)
+      - [https://github.com/bitcoinbook/bitcoinbook](https://github.com/bitcoinbook/bitcoinbook)
+  - ETH
+      - docs
+          - ✅[https://ethereum.org/zh/developers/docs](https://ethereum.org/zh/developers/docs)
+          - ✅[https://github.com/web3/web3.js](https://github.com/web3/web3.js)
+          - [https://github.com/ethers-io/ethers.js](https://github.com/ethers-io/ethers.js)
+      - ****smart contract development****
+          - Solidity: [https://soliditylang.org/](https://soliditylang.org/)
+      - dapp ****development****
+          - [https://metamask.io/](https://metamask.io/)
+          - [http://remix.ethereum.org/](http://remix.ethereum.org/)   在线以太坊编译器（注意：要部署合约，只能通过http访问，不能使用https）
+          - [https://www.trufflesuite.com/](https://www.trufflesuite.com/)  以太坊Dapp开发脚手架
+      - node-service
+          - node-as-a-service
+              - [https://ethereum.org/zh/developers/docs/nodes-and-clients/nodes-as-a-service/#popular-node-services](https://ethereum.org/zh/developers/docs/nodes-and-clients/nodes-as-a-service/#popular-node-services)
+              - [https://ethereumnodes.com/](https://ethereumnodes.com/)
+          - services
+              - [https://app.infura.io/dashboard](https://app.infura.io/dashboard)
+              - [https://www.quicknode.com/](https://www.quicknode.com/)
+              - [https://www.alchemy.com/](https://www.alchemy.com/)
+      - 测试网络([https://ethereum.org/en/developers/docs/networks/#sepolia](https://ethereum.org/en/developers/docs/networks/#sepolia))
+          - Sepolia
+              - [https://sepoliafaucet.com/](https://sepoliafaucet.com/)    获取测试Ether，0.5 Sepolia ETH/day
+          - Goerli
+              - [https://goerlifaucet.com/](https://goerlifaucet.com/)  获取测试Ether，0.02 Goerli ETH/day（requires a minimum mainnet balance of 0.001 ETH on the wallet）
+      - Geth 是一个以太坊*执行客户端，**本地**运行节点。*
+          - [https://geth.ethereum.org/](https://geth.ethereum.org/)
+          - [https://ethereum.org/zh/developers/tutorials/run-light-node-geth/](https://ethereum.org/zh/developers/tutorials/run-light-node-geth/)
+  - Wallet（[https://money.com/best-crypto-wallets/](https://money.com/best-crypto-wallets/)）
+      - [https://www.coinbase.com/wallet](https://www.coinbase.com/wallet)
+      - [https://www.bitcoin.com/](https://www.bitcoin.com/)
+      - [https://metamask.io/](https://metamask.io/)
+      - [https://trustwallet.com/](https://trustwallet.com/)
+      - [https://electrum.org/](https://electrum.org/)
+      - [https://bluewallet.io/](https://bluewallet.io/)
+      - [https://crypto.com/](https://crypto.com/)
+      - [https://www.moonpay.com/](https://www.moonpay.com/)
+  - resources
+      - [https://www.btcstudy.org/](https://www.btcstudy.org/)
+      - [https://123btc.org/](https://123btc.org/)  比特币生态资源导航
+      - [https://github.com/chaozh/**awesome-blockchain-cn**](https://github.com/chaozh/awesome-blockchain-cn)
+      - ✅[https://www.liaoxuefeng.com/wiki/1207298049439968](https://www.liaoxuefeng.com/wiki/1207298049439968)  廖雪峰区块链教程
+      - [登链社区](https://learnblockchain.cn/)
+  - wallet-demo
+      - [https://github.com/avkos/web3js-dapp-example](https://github.com/avkos/web3js-dapp-example)
+      - [https://github.com/rabin-nyaundi/NextJs-next-auth-authentication](https://github.com/rabin-nyaundi/NextJs-next-auth-authentication)
+  - others
+      - [https://www.trustpilot.com/](https://www.trustpilot.com/)  *Trustpilot* is a review platform
 - Cloud-compute
   - serverless
     - official
