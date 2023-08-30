@@ -197,6 +197,8 @@ sidebar: false
           - [https://metamask.io/](https://metamask.io/)
           - [http://remix.ethereum.org/](http://remix.ethereum.org/)   在线以太坊编译器（注意：要部署合约，只能通过http访问，不能使用https）
           - [https://www.trufflesuite.com/](https://www.trufflesuite.com/)  以太坊Dapp开发脚手架
+          - [dtube](https://github.com/dtube/dtube) A full-featured video sharing website, decentralized.
+          - [project_web3.0](https://github.com/adrianhajdin/project_web3.0) a Web 3.0 React Solidity Blockchain Application
       - node-service
           - node-as-a-service
               - [https://ethereum.org/zh/developers/docs/nodes-and-clients/nodes-as-a-service/#popular-node-services](https://ethereum.org/zh/developers/docs/nodes-and-clients/nodes-as-a-service/#popular-node-services)
@@ -233,6 +235,10 @@ sidebar: false
       - [https://github.com/rabin-nyaundi/NextJs-next-auth-authentication](https://github.com/rabin-nyaundi/NextJs-next-auth-authentication)
   - others
       - [https://www.trustpilot.com/](https://www.trustpilot.com/)  *Trustpilot* is a review platform
+  - [2022 十大智能合约开发工具](https://learnblockchain.cn/article/3434)
+      - [定义 web3 技术栈](https://learnblockchain.cn/article/3390)
+    - bestOfYear
+      - [best-dapps-2021](https://koinhow.com/best-dapps-2021/)
 - Cloud-compute
   - serverless
     - official
