@@ -1,4 +1,5 @@
 node_modules
 docs/.vitepress/dist
+docs/.vitepress/cache
 .yarn
 .DS_Store
