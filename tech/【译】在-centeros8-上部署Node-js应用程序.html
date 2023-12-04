@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>【译】：在 centeros8 上部署Node.js应用程序 | Jogiter`s mind</title>
+    <meta name="description" content="EveryThing about Me!">
+    <link rel="stylesheet" href="/assets/style.d7f2fbcd.css">
+    <link rel="modulepreload" href="/assets/plugin-vue_export-helper.71bb0c0b.js">
+    <link rel="modulepreload" href="/assets/Home.4b66fb27.js">
+    <link rel="modulepreload" href="/assets/AlgoliaSearchBox.4fd3e7bf.js">
+    <link rel="modulepreload" href="/assets/tech_【译】在-centeros8-上部署Node-js应用程序.md.f64f4864.lean.js">
+    <link rel="modulepreload" href="/assets/app.9366d4db.js">
+    <meta name="twitter:title" content="【译】：在 centeros8 上部署Node.js应用程序 | Jogiter`s mind">
+    <meta property="og:title" content="【译】：在 centeros8 上部署Node.js应用程序 | Jogiter`s mind">
+  </head>
+  <body>
+    <div id="app"><!--[--><div class="theme"><header class="nav-bar" data-v-7b01b921><div class="sidebar-button" data-v-7b01b921><svg class="icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z" class></path></svg></div><a class="nav-bar-title" href="/" aria-label="Jogiter`s mind, back to home" data-v-7b01b921 data-v-19158655><!----> Jogiter`s mind</a><div class="flex-grow" data-v-7b01b921></div><div class="nav" data-v-7b01b921><nav class="nav-links" data-v-7b01b921 data-v-043d24b5><!--[--><div class="item" data-v-043d24b5><div class="nav-link" data-v-043d24b5 data-v-33cbaa06><a class="item" href="/about/" data-v-33cbaa06>个人简介 <!----></a></div></div><div class="item" data-v-043d24b5><div class="nav-link" data-v-043d24b5 data-v-33cbaa06><a class="item" href="/reading/" data-v-33cbaa06>Awesome 学习链接 <!----></a></div></div><div class="item" data-v-043d24b5><div class="nav-dropdown-link" data-v-043d24b5 data-v-15a3fdea><button class="button" data-v-15a3fdea><span class="button-text" data-v-15a3fdea>杂文</span><span class="right button-arrow" data-v-15a3fdea></span></button><ul class="dialog" data-v-15a3fdea><!--[--><li class="dialog-item" data-v-15a3fdea><div class="nav-dropdown-link-item" data-v-15a3fdea data-v-9e81def8><a class="item" href="/essay/books-to-read" data-v-9e81def8><span class="arrow" data-v-9e81def8></span><span class="text" data-v-9e81def8>books-to-read</span><span class="icon" data-v-9e81def8><!----></span></a></div></li><li class="dialog-item" data-v-15a3fdea><div class="nav-dropdown-link-item" data-v-15a3fdea data-v-9e81def8><a class="item" href="/essay/rework" data-v-9e81def8><span class="arrow" data-v-9e81def8></span><span class="text" data-v-9e81def8>rework</span><span class="icon" data-v-9e81def8><!----></span></a></div></li><li class="dialog-item" data-v-15a3fdea><div class="nav-dropdown-link-item" data-v-15a3fdea data-v-9e81def8><a class="item" href="/essay/the-21-laws-of-leadership" data-v-9e81def8><span class="arrow" data-v-9e81def8></span><span class="text" data-v-9e81def8>the-21-laws-of-leadership</span><span class="icon" data-v-9e81def8><!----></span></a></div></li><!--]--></ul></div></div><div class="item" data-v-043d24b5><div class="nav-dropdown-link" data-v-043d24b5 data-v-15a3fdea><button class="button" data-v-15a3fdea><span class="button-text" data-v-15a3fdea>情感</span><span class="right button-arrow" data-v-15a3fdea></span></button><ul class="dialog" data-v-15a3fdea><!--[--><li class="dialog-item" data-v-15a3fdea><div class="nav-dropdown-link-item" data-v-15a3fdea data-v-9e81def8><a class="item" href="/emotion/当人们让你失望时，有6种方法可以照顾好自己" data-v-9e81def8><span class="arrow" data-v-9e81def8></span><span class="text" data-v-9e81def8>当人们让你失望时，有6种方法可以照顾好自己</span><span class="icon" data-v-9e81def8><!----></span></a></div></li><!--]--></ul></div></div><div class="item" data-v-043d24b5><div class="nav-dropdown-link" data-v-043d24b5 data-v-15a3fdea><button class="button" data-v-15a3fdea><span class="button-text" data-v-15a3fdea>社交账号</span><span class="right button-arrow" data-v-15a3fdea></span></button><ul class="dialog" data-v-15a3fdea><!--[--><li class="dialog-item" data-v-15a3fdea><div class="nav-dropdown-link-item" data-v-15a3fdea data-v-9e81def8><a class="item isExternal" href="https://github.com/Jogiter" target="_blank" rel="noopener noreferrer" data-v-9e81def8><span class="arrow" data-v-9e81def8></span><span class="text" data-v-9e81def8>Github</span><span class="icon" data-v-9e81def8><svg class="icon outbound" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15" data-v-9e81def8><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></span></a></div></li><li class="dialog-item" data-v-15a3fdea><div class="nav-dropdown-link-item" data-v-15a3fdea data-v-9e81def8><a class="item isExternal" href="mailto:jogiter.g@gmail.com" target="_blank" rel="noopener noreferrer" data-v-9e81def8><span class="arrow" data-v-9e81def8></span><span class="text" data-v-9e81def8>邮箱</span><span class="icon" data-v-9e81def8><svg class="icon outbound" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15" data-v-9e81def8><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></span></a></div></li><!--]--></ul></div></div><!--]--><!----><div class="item" data-v-043d24b5><div class="nav-link" data-v-043d24b5 data-v-33cbaa06><a class="item isExternal" href="https://github.com/Jogiter/jogiter.github.com" target="_blank" rel="noopener noreferrer" data-v-33cbaa06>GitHub <svg class="icon outbound" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15" data-v-33cbaa06><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div></div></nav></div><!--[--><!--[--><div class="algolia-search-box" id="docsearch"></div><!--]--><!--]--></header><aside class="sidebar" data-v-219eda98><nav class="nav-links nav" data-v-219eda98 data-v-043d24b5><!--[--><div class="item" data-v-043d24b5><div class="nav-link" data-v-043d24b5 data-v-33cbaa06><a class="item" href="/about/" data-v-33cbaa06>个人简介 <!----></a></div></div><div class="item" data-v-043d24b5><div class="nav-link" data-v-043d24b5 data-v-33cbaa06><a class="item" href="/reading/" data-v-33cbaa06>Awesome 学习链接 <!----></a></div></div><div class="item" data-v-043d24b5><div class="nav-dropdown-link" data-v-043d24b5 data-v-15a3fdea><button class="button" data-v-15a3fdea><span class="button-text" data-v-15a3fdea>杂文</span><span class="right button-arrow" data-v-15a3fdea></span></button><ul class="dialog" data-v-15a3fdea><!--[--><li class="dialog-item" data-v-15a3fdea><div class="nav-dropdown-link-item" data-v-15a3fdea data-v-9e81def8><a class="item" href="/essay/books-to-read" data-v-9e81def8><span class="arrow" data-v-9e81def8></span><span class="text" data-v-9e81def8>books-to-read</span><span class="icon" data-v-9e81def8><!----></span></a></div></li><li class="dialog-item" data-v-15a3fdea><div class="nav-dropdown-link-item" data-v-15a3fdea data-v-9e81def8><a class="item" href="/essay/rework" data-v-9e81def8><span class="arrow" data-v-9e81def8></span><span class="text" data-v-9e81def8>rework</span><span class="icon" data-v-9e81def8><!----></span></a></div></li><li class="dialog-item" data-v-15a3fdea><div class="nav-dropdown-link-item" data-v-15a3fdea data-v-9e81def8><a class="item" href="/essay/the-21-laws-of-leadership" data-v-9e81def8><span class="arrow" data-v-9e81def8></span><span class="text" data-v-9e81def8>the-21-laws-of-leadership</span><span class="icon" data-v-9e81def8><!----></span></a></div></li><!--]--></ul></div></div><div class="item" data-v-043d24b5><div class="nav-dropdown-link" data-v-043d24b5 data-v-15a3fdea><button class="button" data-v-15a3fdea><span class="button-text" data-v-15a3fdea>情感</span><span class="right button-arrow" data-v-15a3fdea></span></button><ul class="dialog" data-v-15a3fdea><!--[--><li class="dialog-item" data-v-15a3fdea><div class="nav-dropdown-link-item" data-v-15a3fdea data-v-9e81def8><a class="item" href="/emotion/当人们让你失望时，有6种方法可以照顾好自己" data-v-9e81def8><span class="arrow" data-v-9e81def8></span><span class="text" data-v-9e81def8>当人们让你失望时，有6种方法可以照顾好自己</span><span class="icon" data-v-9e81def8><!----></span></a></div></li><!--]--></ul></div></div><div class="item" data-v-043d24b5><div class="nav-dropdown-link" data-v-043d24b5 data-v-15a3fdea><button class="button" data-v-15a3fdea><span class="button-text" data-v-15a3fdea>社交账号</span><span class="right button-arrow" data-v-15a3fdea></span></button><ul class="dialog" data-v-15a3fdea><!--[--><li class="dialog-item" data-v-15a3fdea><div class="nav-dropdown-link-item" data-v-15a3fdea data-v-9e81def8><a class="item isExternal" href="https://github.com/Jogiter" target="_blank" rel="noopener noreferrer" data-v-9e81def8><span class="arrow" data-v-9e81def8></span><span class="text" data-v-9e81def8>Github</span><span class="icon" data-v-9e81def8><svg class="icon outbound" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15" data-v-9e81def8><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></span></a></div></li><li class="dialog-item" data-v-15a3fdea><div class="nav-dropdown-link-item" data-v-15a3fdea data-v-9e81def8><a class="item isExternal" href="mailto:jogiter.g@gmail.com" target="_blank" rel="noopener noreferrer" data-v-9e81def8><span class="arrow" data-v-9e81def8></span><span class="text" data-v-9e81def8>邮箱</span><span class="icon" data-v-9e81def8><svg class="icon outbound" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15" data-v-9e81def8><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></span></a></div></li><!--]--></ul></div></div><!--]--><!----><div class="item" data-v-043d24b5><div class="nav-link" data-v-043d24b5 data-v-33cbaa06><a class="item isExternal" href="https://github.com/Jogiter/jogiter.github.com" target="_blank" rel="noopener noreferrer" data-v-33cbaa06>GitHub <svg class="icon outbound" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15" data-v-33cbaa06><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div></div></nav><!--[--><!--]--><ul class="sidebar-links" data-v-219eda98><!--[--><li class="sidebar-link"><p class="sidebar-link-item">文章</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/AIGC视频字幕">AIGC视频字幕</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/DDD">DDD</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/Nodejs-权威指南">Nodejs-权威指南</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/Typescript-guides">Typescript-guides</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/eventloop-task-and-microtasks">eventloop-task-and-microtasks</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/fetch-API">fetch-API</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/ffmpeg">ffmpeg</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/font-face">font-face</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/frontend-optimization">frontend-optimization</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/git-tutorial">git-tutorial</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/higher-order-function">higher-order-function</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/i18n">i18n</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/jsonp-vs-cors">jsonp-vs-cors</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/lerna-with-tsdx">lerna-with-tsdx</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/macbook-开发环境配置">macbook-开发环境配置</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/markdown 解析及语法高亮调研">markdown 解析及语法高亮调研</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/mediaSourceExtension">mediaSourceExtension</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/nest.js and typeOrm">nest.js and typeOrm</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/pwa">pwa</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/string-compare">string-compare</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/taro 小程序开发入门指北">taro 小程序开发入门指北</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/tdd">tdd</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/using-virtualbox-test-old-ie">using-virtualbox-test-old-ie</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/vue2-composition-api-faq">vue2-composition-api-faq</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/webpack-config">webpack-config</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/webrtc">webrtc</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/wechat-save-and-share-image">wechat-save-and-share-image</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/【译】CentOS 8 服务器初始化设置">【译】CentOS 8 服务器初始化设置</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/【译】什么是 Web3">【译】什么是 Web3</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/【译】在-centeros8-上部署Node-js应用程序">【译】在-centeros8-上部署Node-js应用程序</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/【转】Javascript中的8种常见数据结构">【转】Javascript中的8种常见数据结构</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/使用-uni-app-开发小程序">使用-uni-app-开发小程序</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/博客添加docSearch">博客添加docSearch</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/打造舒适高效的前端开发环境">打造舒适高效的前端开发环境</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/搭建私有-npm">搭建私有-npm</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/tech/移动端适配">移动端适配</a><!----></li></ul></li><!--]--></ul><!--[--><!--]--></aside><!-- TODO: make this button accessible --><div class="sidebar-mask"></div><main class="page" data-v-1881bce0><div class="container" data-v-1881bce0><!--[--><!--]--><div style="position:relative;" class="content" data-v-1881bce0><div><h1 id="frontmatter-title" tabindex="-1">【译】：在 centeros8 上部署Node.js应用程序 <a class="header-anchor" href="#frontmatter-title" aria-hidden="true">#</a></h1><p><div class="table-of-contents"><ul><li><a href="#install-git">install Git</a></li><li><a href="#install-nodejs">install Nodejs</a></li><li><a href="#install-nginx">install Nginx</a></li><li><a href="#installing-and-using-pm2">Installing and Using PM2</a></li><li><a href="#参考链接">参考链接</a></li></ul></div></p><h2 id="install-git" tabindex="-1">install Git <a class="header-anchor" href="#install-git" aria-hidden="true">#</a></h2><div class="language-sh"><pre><code><span class="token comment"># 使用DNF程序包管理工具来更新您的本地程序包索引</span>
+$ <span class="token function">sudo</span> dnf update <span class="token parameter variable">-y</span>
+
+<span class="token comment"># 安装 Git</span>
+$ <span class="token function">sudo</span> dnf <span class="token function">install</span> <span class="token function">git</span> <span class="token parameter variable">-y</span>
+
+<span class="token comment"># 减产是否安装成功</span>
+$ <span class="token function">git</span> <span class="token parameter variable">--version</span>
+<span class="token comment"># 输出</span>
+<span class="token comment"># git version 2.18.2</span>
+</code></pre></div><h2 id="install-nodejs" tabindex="-1">install Nodejs <a class="header-anchor" href="#install-nodejs" aria-hidden="true">#</a></h2><p><strong>使用 dnf 安装</strong></p><div class="language-sh"><pre><code>$ <span class="token function">sudo</span> dnf module list nodejs
+<span class="token comment"># Output</span>
+<span class="token comment">#   Name                     Stream                   Profiles                                                Summary</span>
+<span class="token comment">#   nodejs                   10 [d]                   common [d], development, minimal, s2i                   Javascript runtime</span>
+<span class="token comment">#   nodejs                   12                       common, development, minimal, s2i</span>
+<span class="token comment"># [d] 表示是默认是 Nodejs 10。</span>
+
+<span class="token comment"># 如果您想安装 Node.js 12，请立即切换模块流</span>
+$ <span class="token function">sudo</span> dnf module <span class="token builtin class-name">enable</span> nodejs:12
+
+<span class="token comment"># 安装 nodejs</span>
+$ <span class="token function">sudo</span> dnf <span class="token function">install</span> nodejs
+
+<span class="token comment"># 检查安装是否成功</span>
+$ <span class="token function">node</span> <span class="token parameter variable">--version</span>
+<span class="token comment"># Output</span>
+<span class="token comment"># v12.13.1</span>
+</code></pre></div><p><strong>使用 nvm 安装</strong></p><div class="language-sh"><pre><code><span class="token comment"># 访问 nvm 官方链接安装最新版</span>
+<span class="token comment"># https://github.com/nvm-sh/nvm#install--update-script</span>
+$ <span class="token function">curl</span> -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh <span class="token operator">|</span> <span class="token function">bash</span>
+
+<span class="token comment"># 获取.bash_profile文件</span>
+$ <span class="token builtin class-name">source</span> ~/.bash_profile
+
+<span class="token comment"># NVM哪些版本的Node可用</span>
+$ nvm list-remote
+<span class="token comment"># ...</span>
+<span class="token comment"># v12.13.0   (LTS: Erbium)</span>
+<span class="token comment"># v12.13.1   (LTS: Erbium)</span>
+<span class="token comment"># v12.14.0   (LTS: Erbium)</span>
+<span class="token comment"># ...</span>
+
+<span class="token comment"># 安装指定版本的 nodejs</span>
+$ nvm <span class="token function">install</span> v13.6.0
+
+<span class="token comment"># 检查安装是否成功</span>
+$ <span class="token function">node</span> <span class="token parameter variable">--version</span>
+<span class="token comment"># Output</span>
+<span class="token comment"># v13.6.0</span>
+</code></pre></div><h2 id="install-nginx" tabindex="-1">install Nginx <a class="header-anchor" href="#install-nginx" aria-hidden="true">#</a></h2><ol><li>安装 Nginx</li></ol><div class="language-sh"><pre><code><span class="token comment"># Install</span>
+$ <span class="token function">sudo</span> dnf <span class="token function">install</span> nginx
+<span class="token comment"># enable</span>
+$ <span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> nginx
+<span class="token comment"># start</span>
+$ <span class="token function">sudo</span> systemctl start nginx
+</code></pre></div><ol start="2"><li>调整防火墙规则</li></ol><div class="language-sh"><pre><code><span class="token comment"># 永久启用端口80上的HTTP连接</span>
+$ <span class="token function">sudo</span> firewall-cmd <span class="token parameter variable">--permanent</span> --add-service<span class="token operator">=</span>http
+
+<span class="token comment"># 验证是否正确添加了http防火墙服务</span>
+$ <span class="token function">sudo</span> firewall-cmd <span class="token parameter variable">--permanent</span> --list-all
+<span class="token comment"># Output</span>
+<span class="token comment"># public</span>
+<span class="token comment">#   target: default</span>
+<span class="token comment">#   icmp-block-inversion: no</span>
+<span class="token comment">#   interfaces:</span>
+<span class="token comment">#   sources:</span>
+<span class="token comment">#   services: cockpit dhcpv6-client http ssh</span>
+<span class="token comment">#   ports:</span>
+<span class="token comment">#   protocols:</span>
+<span class="token comment">#   masquerade: no</span>
+<span class="token comment">#   forward-ports:</span>
+<span class="token comment">#   source-ports:</span>
+<span class="token comment">#   icmp-blocks:</span>
+<span class="token comment">#   rich rules:</span>
+
+<span class="token comment"># 重启防火墙服务</span>
+$ <span class="token function">sudo</span> firewall-cmd <span class="token parameter variable">--reload</span>
+</code></pre></div><ol start="3"><li>检查 Web 服务器</li></ol><div class="language-sh"><pre><code><span class="token comment"># 查询服务器的公共IP地址</span>
+$ <span class="token function">ip</span> addr show eth0 <span class="token operator">|</span> <span class="token function">grep</span> inet <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&#39;{ print $2; }&#39;</span> <span class="token operator">|</span> <span class="token function">sed</span> <span class="token string">&#39;s/\/.*$//&#39;</span>
+<span class="token comment"># 172.18.4.110</span>
+<span class="token comment"># fe80::216:3eff:fe14:85b2</span>
+
+<span class="token comment"># 查看域名是否访问</span>
+$ <span class="token function">curl</span> <span class="token parameter variable">-4</span> icanhazip.com
+</code></pre></div><ol start="4"><li>管理 Nginx 流程</li></ol><div class="language-sh"><pre><code><span class="token comment"># 停止服务</span>
+$ <span class="token function">sudo</span> systemctl stop nginx
+<span class="token comment"># 启用服务</span>
+$ <span class="token function">sudo</span> systemctl start nginx
+<span class="token comment"># 重启服务</span>
+$ <span class="token function">sudo</span> systemctl restart nginx
+<span class="token comment"># 重新加载配置更改</span>
+$ <span class="token function">sudo</span> systemctl reload nginx
+<span class="token comment"># 默认情况下，Nginx配置为在服务器启动时自动启动。如果这不是您想要的，则可以通过键入以下内容来禁用此行为</span>
+$ <span class="token function">sudo</span> systemctl disable nginx
+<span class="token comment"># 要重新启用服务，并使Nginx再次在启动时启动</span>
+$ <span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> nginx
+</code></pre></div><blockquote><p>Nginx 开启 gzip &amp; cache-control 等等配置请参考官方文档</p></blockquote><h2 id="installing-and-using-pm2" tabindex="-1">Installing and Using PM2 <a class="header-anchor" href="#installing-and-using-pm2" aria-hidden="true">#</a></h2><div class="language-sh"><pre><code><span class="token comment"># install PM2:</span>
+$ <span class="token function">sudo</span> <span class="token function">npm</span> <span class="token function">install</span> pm2@latest <span class="token parameter variable">-g</span>
+
+<span class="token comment">#  run your application, hello.js, in the background</span>
+$ pm2 start hello.js
+<span class="token comment"># Output</span>
+<span class="token comment"># ┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────────────┬──────────┐</span>
+<span class="token comment"># │ App name │ id │ mode │ pid   │ status │ restart │ uptime │ memory      │ watching │</span>
+<span class="token comment"># ├──────────┼────┼──────┼───────┼────────┼─────────┼────────┼─────────────┼──────────┤</span>
+<span class="token comment"># │ hello    │ 0  │ fork │ 30099 │ online │ 0       │ 0s     │ 14.227 MB   │ disabled │</span>
+<span class="token comment"># └──────────┴────┴──────┴───────┴────────┴─────────┴────────┴─────────────┴──────────┘</span>
+
+<span class="token comment"># startup子命令生成并配置启动脚本，以在服务器启动时启动PM2及其托管进程</span>
+$ <span class="token function">sudo</span> pm2 startup systemd
+<span class="token comment"># Output</span>
+<span class="token comment"># [PM2] Generating system init script in /etc/systemd/system/pm2.service</span>
+<span class="token comment"># [PM2] Making script booting at startup...</span>
+<span class="token comment"># [PM2] -systemd- Using the command:</span>
+      <span class="token comment"># su root -c &quot;pm2 dump &amp;&amp; pm2 kill&quot; &amp;&amp; su root -c &quot;systemctl daemon-reload &amp;&amp; systemctl enable pm2 &amp;&amp; systemctl start pm2&quot;</span>
+<span class="token comment"># [PM2] Dumping processes</span>
+<span class="token comment"># [PM2] Stopping PM2...</span>
+<span class="token comment"># [PM2] All processes have been stopped and deleted</span>
+<span class="token comment"># [PM2] PM2 stopped</span>
+<span class="token comment"># [PM2] Done.</span>
+
+<span class="token comment"># 为了确保PM2知道要在启动时启动的应用程序，我们需要保存当前进程列表。要保存列表</span>
+$ pm2 save
+<span class="token comment"># Output</span>
+<span class="token comment"># [PM2] Saving current process list...</span>
+<span class="token comment"># [PM2] Successfully saved in /home/deployer/.pm2/dump.pm2</span>
+
+$ pm2 stop example
+$ pm2 restart example
+<span class="token comment"># 查看所有应用程序</span>
+$ pm2 list
+$ pm2 info example
+<span class="token comment"># 显示应用程序状态，CPU和内存使用情况</span>
+$ pm2 monit
+</code></pre></div><h2 id="参考链接" tabindex="-1">参考链接 <a class="header-anchor" href="#参考链接" aria-hidden="true">#</a></h2><ul><li><a href="https://www.digitalocean.com/community/tutorials/initial-server-setup-with-centos-8" target="_blank" rel="noopener noreferrer">https://www.digitalocean.com/community/tutorials/initial-server-setup-with-centos-8</a></li><li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-centos-8" target="_blank" rel="noopener noreferrer">https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-centos-8</a></li><li><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-centos-7" target="_blank" rel="noopener noreferrer">https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-centos-7</a></li></ul></div></div><footer class="page-footer" data-v-1881bce0 data-v-001a5369><div class="edit" data-v-001a5369><div class="edit-link" data-v-001a5369 data-v-6dc6f5be><a class="link" href="https://github.com/Jogiter/jogiter.github.com/edit/vitepress/docs/tech/【译】在-centeros8-上部署Node-js应用程序.md" target="_blank" rel="noopener noreferrer" data-v-6dc6f5be>在GitHub上编辑此页面 <svg class="icon outbound icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15" data-v-6dc6f5be><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div></div><div class="updated" data-v-001a5369><p class="last-updated" data-v-001a5369 data-v-6a1b94eb><span class="prefix" data-v-6a1b94eb>最后更新:</span><span class="datetime" data-v-6a1b94eb></span></p></div></footer><!----><!--[--><!--]--></div></main></div><!----><!--]--></div>
+    <script>__VP_HASH_MAP__ = JSON.parse("{\"about_index.md\":\"d55595f5\",\"emotion_当人们让你失望时，有6种方法可以照顾好自己.md\":\"7dfa4c4f\",\"essay_books-to-read.md\":\"b6f41046\",\"essay_rework.md\":\"7eb94c11\",\"essay_the-21-laws-of-leadership.md\":\"967cb692\",\"index.md\":\"7f17cfc4\",\"reading_index.md\":\"a0513ac5\",\"tech_aigc视频字幕.md\":\"871ee7c6\",\"tech_ddd.md\":\"bb89399c\",\"tech_nodejs-权威指南.md\":\"7660e35a\",\"tech_typescript-guides.md\":\"1ea40208\",\"tech_eventloop-task-and-microtasks.md\":\"3c630f35\",\"tech_fetch-api.md\":\"7095eb06\",\"tech_ffmpeg.md\":\"6069ea4f\",\"tech_font-face.md\":\"1a828ba5\",\"tech_frontend-optimization.md\":\"96710ebb\",\"tech_git-tutorial.md\":\"3bd599b0\",\"tech_higher-order-function.md\":\"24ed6853\",\"tech_i18n.md\":\"a6186cce\",\"tech_index.md\":\"5cccff1b\",\"tech_jsonp-vs-cors.md\":\"d48e5903\",\"tech_lerna-with-tsdx.md\":\"8042ae6c\",\"tech_macbook-开发环境配置.md\":\"98c14f2b\",\"tech_markdown 解析及语法高亮调研.md\":\"ec8b4dc8\",\"tech_mediasourceextension.md\":\"6e13e86e\",\"tech_nest.js and typeorm.md\":\"75fed2f2\",\"tech_pwa.md\":\"def529c2\",\"tech_string-compare.md\":\"e1abbf7e\",\"tech_taro 小程序开发入门指北.md\":\"2ca8479c\",\"tech_tdd.md\":\"4a5984e7\",\"tech_using-virtualbox-test-old-ie.md\":\"0eab56d5\",\"tech_vue2-composition-api-faq.md\":\"ff0d1c27\",\"tech_webpack-config.md\":\"65485614\",\"tech_webrtc.md\":\"e50576f2\",\"tech_wechat-save-and-share-image.md\":\"3e87f2ee\",\"tech_【译】centos 8 服务器初始化设置.md\":\"ef4643d0\",\"tech_【译】什么是 web3.md\":\"830bb3cb\",\"tech_【译】在-centeros8-上部署node-js应用程序.md\":\"f64f4864\",\"tech_【转】javascript中的8种常见数据结构.md\":\"5d216184\",\"tech_使用-uni-app-开发小程序.md\":\"e7f78bbd\",\"tech_博客添加docsearch.md\":\"ca15e5df\",\"tech_打造舒适高效的前端开发环境.md\":\"cbd52576\",\"tech_搭建私有-npm.md\":\"71461f0c\",\"tech_移动端适配.md\":\"48d0a999\"}")</script>
+    <script type="module" async src="/assets/app.9366d4db.js"></script>
+    
+  </body>
+</html>
